@@ -3,8 +3,14 @@ import { Tabs, Tab, Box } from "@mui/material";
 import LockImg from "../assets/Images/Lockimage.png";
 import { IoCheckmarkCircle } from "react-icons/io5";
 import signoutImg from "../assets/Images/signout.png";
+import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import { DatePicker } from "@mui/x-date-pickers/DatePicker";
+import dayjs from "dayjs";
+
 export default function Account() {
   const [tabIndex, setTabIndex] = useState(0);
+  const [dob, setDob] = useState(null);
 
   const handleTabChange = (event, newValue) => {
     setTabIndex(newValue);
@@ -12,7 +18,7 @@ export default function Account() {
 
   return (
     <div className="bg-white min-h-screen p-4">
-      <div className="max-w-6xl mx-auto mt-6">
+      <div className="max-w-6xl mx-auto mt-3">
         <div className="heading-section">
           <h2 className="text-2xl font-semibold mb-1">Account</h2>
           <p className="text-sm text-gray-600 mb-6">
@@ -59,19 +65,49 @@ export default function Account() {
                     />
                   </div>
                   <div>
-                    <label className="text-sm">Date of Birth</label>
-                    <input
-                      type="date"
-                      className="w-full px-4 py-3 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
-                    />
+                    <label className="text-sm block mb-1">Date of Birth</label>
+                    <LocalizationProvider dateAdapter={AdapterDayjs}>
+                      <DatePicker
+                        format="DD/MM/YYYY"
+                        value={dob}
+                        onChange={(newValue) => setDob(newValue)}
+                         slotProps={{
+                          textField: {
+                            variant: "standard",
+                            fullWidth: true,
+                            InputProps: {
+                              disableUnderline: true,
+                              sx: {
+                                height: "48px", 
+                                paddingLeft: "16px",
+                                paddingRight: "16px",
+                                border: "1px solid #D1D5DB", 
+                                borderRadius: "6px",
+                                fontSize: "0.875rem", 
+                              },
+                            },
+                            inputProps: {
+                              sx: {
+                                padding: 0, 
+                              },
+                            },
+                          },
+                        }}
+                      />
+                    </LocalizationProvider>
                   </div>
                   <div>
-                    <label className="text-sm">Gender</label>
-                    <select className="w-full px-4 py-3 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
-                      <option>Select gender</option>
-                      <option>Male</option>
-                      <option>Female</option>
-                      <option>Other</option>
+                    <label className="text-sm mb-1 block">Gender</label>
+                    <select
+                      className="w-full px-4 py-3 border border-gray-300 rounded-md text-sm bg-white text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-150"
+                      defaultValue=""
+                    >
+                      <option value="" disabled>
+                        Select gender
+                      </option>
+                      <option value="male">Male</option>
+                      <option value="female">Female</option>
+                      <option value="other">Other</option>
                     </select>
                   </div>
                 </div>
@@ -90,17 +126,22 @@ export default function Account() {
                     </div>
                   </div>
                   <div>
-                    <label className="text-sm">Phone Number</label>
-                    <div className="flex">
-                      <span className="inline-flex items-center px-4 py-3 border border-r-0 border-gray-300 text-sm rounded-l-md">
-                        +91
+                    <label className="text-sm mb-1 block">Phone Number</label>
+                    <div className="relative">
+                      <div className="flex">
+                        <span className="inline-flex items-center px-4 py-3 border border-r-0 border-gray-300 text-sm rounded-l-md ">
+                          +91
+                        </span>
+                        <input
+                          name="phone"
+                          type="tel"
+                          placeholder="Enter Phone Number"
+                          className="w-full px-4 py-3 border border-gray-300 text-sm rounded-r-md pr-16 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        />
+                      </div>
+                      <span className="absolute right-3 top-1/2 -translate-y-1/2 text-green-600 text-sm cursor-pointer hover:font-bold">
+                        Verify
                       </span>
-                      <input
-                        name="phone"
-                        type="tel"
-                        placeholder="Enter Phone Number"
-                        className="w-full px-4 py-2 border border-gray-300 rounded-r-md text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
-                      />
                     </div>
                   </div>
                 </div>
@@ -113,12 +154,30 @@ export default function Account() {
                       placeholder="Enter Your First Name"
                     />
                   </div>
-                  <input className="p-2 border rounded" placeholder="State" />
-                  <input className="p-2 border rounded" placeholder="Pincode" />
-                  <input className="p-2 border rounded" placeholder="Country" />
+                  <div>
+                    <label className="text-sm">State</label>
+                    <input
+                      className="w-full px-4 py-3 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+                      placeholder="Enter Address here"
+                    />
+                  </div>
+                  <div>
+                    <label className="text-sm">Pincode</label>
+                    <input
+                      className="w-full px-4 py-3 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+                      placeholder="Enter Pincode here"
+                    />
+                  </div>
+                  <div>
+                    <label className="text-sm">Country</label>
+                    <input
+                      className="w-full px-4 py-3 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+                      placeholder="Enter Country here"
+                    />
+                  </div>
                 </div>
 
-                <button className="mt-6 bg-yellow-400 hover:bg-yellow-500 text-white px-6 py-2 rounded">
+                <button className="mt-6 bg-[#FFD700] hover:bg-yellow-500 text-[#4B5563] font-bold px-12 py-2 rounded-lg">
                   Save
                 </button>
               </>
@@ -136,26 +195,29 @@ export default function Account() {
               <div className="h-16 w-16 bg-gradient-to-br from-red-400 to-orange-400 text-white rounded-full flex items-center justify-center text-xl font-bold">
                 AV
               </div>
-              <div className="text-sm font-semibold">
-                Aarav Mehta <span className="text-green-500">✔</span>
+              <div className="flex gap-1">
+                <p className="text-sm font-semibold">Aarav Mehta</p>
+                <span className="">
+                  <IoCheckmarkCircle className=" text-green-500 right-0 top-3 h-5 w-5" />
+                </span>
               </div>
-              <div className="text-xs text-gray-500">Global Ventures LLC</div>
-              <button className="w-full mt-4 border rounded px-3 py-2 text-sm text-blue-600">
+              <div className="text-xs text-[#4B5563]">Global Ventures LLC</div>
+              <button className="w-50 mt-4 border rounded-lg p-2.5 text-sm text-[#1A9FFF]">
                 Flight History
               </button>
-              <button className="w-full bg-blue-500 text-white py-2 rounded text-sm">
+              <button className="w-50 bg-[#1A9FFF] text-white p-2.5 rounded-lg text-sm">
                 My Flights
               </button>
             </div>
 
             <div className="button-section mt-4">
-              <button className="text-sm border cursor-pointer border-gray-300 p-2.5 rounded-lg text-gray-700 flex items-center justify-between w-full mb-2">
+              <button className="text-sm border cursor-pointer border-gray-300 p-3 rounded-lg text-gray-700 flex items-center justify-between w-full mb-2">
                 Change Password <img src={LockImg} alt="" className="h-5" />
               </button>
-              <button className="text-sm border cursor-pointer border-red-400 p-2.5 rounded-lg text-red-500 flex items-center justify-between w-full mb-2">
+              <button className="text-sm border cursor-pointer border-red-400 p-3 rounded-lg text-red-500 flex items-center justify-between w-full mb-2">
                 Log out <img src={signoutImg} alt="" className="h-4" />
               </button>
-              <button className="w-full bg-[#FF4D4F] text-white rounded-lg  py-2.5  text-sm">
+              <button className="w-full bg-[#FF4D4F] text-white rounded-lg  p-3  text-sm">
                 Delete Account
               </button>
             </div>
