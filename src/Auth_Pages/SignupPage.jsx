@@ -60,7 +60,7 @@ export default function SignupPage() {
       };
 
       const response = await axios.post(
-        "http://localhost:8272/auth/register",
+        "http://192.168.29.78:8272/auth/register",
         payload
       );
 
