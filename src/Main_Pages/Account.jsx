@@ -26,7 +26,7 @@ export default function Account() {
           </p>
         </div>
 
-        <div className="grid md:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           <div className="md:col-span-2 bg-white p-6 rounded-lg border border-gray-100 shadow-md">
             <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
               <Tabs
@@ -71,24 +71,24 @@ export default function Account() {
                         format="DD/MM/YYYY"
                         value={dob}
                         onChange={(newValue) => setDob(newValue)}
-                         slotProps={{
+                        slotProps={{
                           textField: {
                             variant: "standard",
                             fullWidth: true,
                             InputProps: {
                               disableUnderline: true,
                               sx: {
-                                height: "48px", 
+                                height: "48px",
                                 paddingLeft: "16px",
                                 paddingRight: "16px",
-                                border: "1px solid #D1D5DB", 
+                                border: "1px solid #D1D5DB",
                                 borderRadius: "6px",
-                                fontSize: "0.875rem", 
+                                fontSize: "0.875rem",
                               },
                             },
                             inputProps: {
                               sx: {
-                                padding: 0, 
+                                padding: 0,
                               },
                             },
                           },
@@ -184,9 +184,106 @@ export default function Account() {
             )}
 
             {tabIndex === 1 && (
-              <div className="mt-6 text-gray-600 text-sm">
-                <p>Professional Details content goes here...</p>
-              </div>
+              <>
+                <div className="mt-4 text-black text-sm">
+                  <p className="mt-6 text-md  font-semibold ">
+                    Company / Organization Name
+                  </p>
+                  <div className="grid md:grid-cols-2 gap-4 mt-2">
+                    <div>
+                      <label className="text-sm ">
+                        Company/ Organization Name
+                      </label>
+                      <input
+                        className="w-full mt-1 px-4 py-3 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        placeholder="Enter Company name here "
+                      />
+                    </div>
+                    <div>
+                      <label className="text-sm">Job Title / Role</label>
+                      <select
+                        className="w-full px-4  py-3 border border-gray-300 rounded-md text-sm bg-white text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-150"
+                        defaultValue=""
+                      >
+                        <option value="" className="text-gray-400" disabled>
+                          Enter job title here
+                        </option>
+                        <option value="Bussness Owner">Bussness Owner</option>
+                        <option value="Government Officer">
+                          Government Officer
+                        </option>
+                        <option value="Personal Assistant">
+                          Personal Assistant
+                        </option>
+                        <option value="Chief Executive Officer">
+                          Chief Executive Officer
+                        </option>
+                        <option value="Operation Manager">
+                          Operation Manager
+                        </option>
+                      </select>
+                    </div>
+                    <div>
+                      <label className="text-sm mb-1 block">Industry</label>
+                      <select
+                        className="w-full px-4 py-3 border border-gray-300 rounded-md text-sm bg-white text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-150"
+                        defaultValue=""
+                      >
+                        <option value="" disabled>
+                          Select Your Industry
+                        </option>
+                        <option value="Film Industry"> Film Industry</option>
+                        <option value="Bussness Industry">
+                          Bussness Industry
+                        </option>
+                        <option value="Government Sector">
+                          Government Sector
+                        </option>
+                        <option value="Other Sector">Other Sector</option>
+                      </select>
+                    </div>
+                    <div>
+                      <label className="text-sm ">
+                        Company/ Organization Website
+                      </label>
+                      <input
+                        className="w-full mt-1 px-4 py-3 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        placeholder="Enter Company Website here "
+                      />
+                    </div>
+                  </div>
+                  <p className="mt-6 text-md font-semibold">Contact Information</p>
+                  <div className="mt-4 grid md:grid-cols-2 gap-4">
+                    <div>
+                      <label className="text-sm mb-1 block">
+                        Bussness Email
+                      </label>
+                      <input
+                        type="email"
+                        placeholder="Enter email address here"
+                        className="w-full px-4 py-3 border border-gray-300 rounded-md text-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                      />
+                    </div>
+                    <div>
+                      <label className="text-sm mb-1 block">Phone Number</label>
+                      <div className="flex">
+                        <span className="inline-flex items-center px-4 py-3 border border-r-0 border-gray-300 text-sm rounded-l-md  text-gray-600">
+                          +91
+                        </span>
+                        <input
+                          type="tel"
+                          placeholder="1234567890"
+                          className="w-full px-4 py-3 border border-gray-300 rounded-r-md text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        />
+                      </div>
+                    </div>
+                  </div>
+
+                  <button className="mt-6 bg-[#FFD700] hover:bg-yellow-500 text-gray-800 font-bold px-12 py-2 rounded-lg">
+                    Save
+                  </button>
+                </div>
+              </>
             )}
           </div>
 

@@ -7,7 +7,7 @@ import Router from "./RouterFile/Router";
 import ResetPass from "./Auth_Pages/ResetPass";
 import Navbar from "./Components/Navbar";
 import Account from "./Main_Pages/Account";
-
+import "../src/Firebase/firebase"
 function App() {
   return (
     <>
@@ -15,10 +15,10 @@ function App() {
      {/* <VeryfyMobileNo/> */}
      {/* <VeryfyEmail/> */}
      {/* <ResetPass/> */}
-     {/* <Router/> */}
-     <Navbar/>
-     <br />
-     <Account/> 
+     <Router/>
+     {/* <Navbar/> */}
+     {/* <br /> */}
+     {/* <Account/>  */}
     </>
   );
 }

@@ -3,7 +3,8 @@ import planimage from "../assets/Images/Login&signup pagei image.png";
 import Logo from "../assets/Images/Logo.png";
 import GreenCheck from "../assets/Images/GreenCheck.png";
 import * as Yup from "yup";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import axios from "axios";
 
 const validationSchema = Yup.object().shape({
   email: Yup.string().email("Invalid email").required("Email is required"),
@@ -28,7 +29,6 @@ export default function SignupPage() {
     confirmPassword: "",
     marketing: false,
   });
-
   const [errors, setErrors] = useState({});
   const navigate = useNavigate();
 
@@ -45,16 +45,44 @@ export default function SignupPage() {
     try {
       await validationSchema.validate(formData, { abortEarly: false });
       setErrors({});
-      console.log("Form Submitted", formData);
+
+      const payload = {
+        email: formData.email,
+        phone_number: formData.phone,
+        country_code: 91,
+        first_name: formData.firstName,
+        last_name: formData.lastName,
+        password: formData.password,
+        type: "user",
+        deviceType: "web",
+        deviceToken: "abc",
+        deviceId: "chromev123",
+      };
+
+      const response = await axios.post(
+        "http://localhost:8272/auth/register",
+        payload
+      );
+
+      console.log("API Response:", response.data);
       navigate("/verifyemail");
-    } catch (validationErrors) {  
-      const newErrors = {};
-      validationErrors.inner.forEach((error) => {
-        newErrors[error.path] = error.message;
-      });
-      setErrors(newErrors);
+    } catch (err) {
+      if (err.name === "ValidationError") {
+        const newErrors = {};
+        err.inner.forEach((error) => {
+          newErrors[error.path] = error.message;
+        });
+        setErrors(newErrors);
+      } else if (err.response) {
+        console.error("API Error:", err.response.data);
+        alert(err.response.data.message || "Signup failed");
+      } else {
+        console.error("Unexpected Error:", err);
+        alert("An unexpected error occurred");
+      }
     }
   };
+
   return (
     <div className="h-screen flex flex-col md:flex-row overflow-hidden">
       <div className="hidden md:block md:w-1/2 h-full">
@@ -74,8 +102,8 @@ export default function SignupPage() {
           <h2 className="text-2xl font-bold text-black mb-6">
             Welcome to AceaAir
           </h2>
-         <form onSubmit={handleSubmit} className="space-y-4">
-          <div>
+          <form onSubmit={handleSubmit} className="space-y-4">
+            <div>
               <label className="text-sm text-gray-700">Email Address</label>
               <input
                 name="email"
@@ -85,9 +113,11 @@ export default function SignupPage() {
                 placeholder="Enter email here"
                 className="w-full mt-1 px-4 py-2 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
               />
-              {errors.email && <p className="text-red-500 text-xs">{errors.email}</p>}
+              {errors.email && (
+                <p className="text-red-500 text-xs">{errors.email}</p>
+              )}
             </div>
-          <div>
+            <div>
               <label className="text-sm text-gray-700">Phone Number</label>
               <div className="flex">
                 <span className="inline-flex items-center px-3 border border-r-0 border-gray-300 text-sm rounded-l-md">
@@ -102,7 +132,9 @@ export default function SignupPage() {
                   className="w-full px-4 py-2 border border-gray-300 rounded-r-md text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
                 />
               </div>
-              {errors.phone && <p className="text-red-500 text-xs">{errors.phone}</p>}
+              {errors.phone && (
+                <p className="text-red-500 text-xs">{errors.phone}</p>
+              )}
             </div>
             <div className="flex space-x-2">
               <div className="w-1/2">
@@ -115,7 +147,9 @@ export default function SignupPage() {
                   placeholder="Enter first name here"
                   className="w-full mt-1 px-4 py-2 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
                 />
-                {errors.firstName && <p className="text-red-500 text-xs">{errors.firstName}</p>}
+                {errors.firstName && (
+                  <p className="text-red-500 text-xs">{errors.firstName}</p>
+                )}
               </div>
               <div className="w-1/2">
                 <label className="text-sm text-gray-700">Last Name</label>
@@ -127,12 +161,16 @@ export default function SignupPage() {
                   placeholder="Enter last name here"
                   className="w-full mt-1 px-4 py-2 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
                 />
-                {errors.lastName && <p className="text-red-500 text-xs">{errors.lastName}</p>}
+                {errors.lastName && (
+                  <p className="text-red-500 text-xs">{errors.lastName}</p>
+                )}
               </div>
             </div>
             <div className="flex space-x-2">
               <div className="w-1/2">
-                <label className="text-sm text-gray-700">Create New Password</label>
+                <label className="text-sm text-gray-700">
+                  Create New Password
+                </label>
                 <input
                   name="password"
                   type="password"
@@ -141,10 +179,14 @@ export default function SignupPage() {
                   placeholder="Enter password here"
                   className="w-full mt-1 px-4 py-2 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
                 />
-                {errors.password && <p className="text-red-500 text-xs">{errors.password}</p>}
+                {errors.password && (
+                  <p className="text-red-500 text-xs">{errors.password}</p>
+                )}
               </div>
               <div className="w-1/2">
-                <label className="text-sm text-gray-700">Confirm Password</label>
+                <label className="text-sm text-gray-700">
+                  Confirm Password
+                </label>
                 <div className="relative mt-1">
                   <input
                     name="confirmPassword"
@@ -154,16 +196,23 @@ export default function SignupPage() {
                     placeholder="Enter password here"
                     className="w-full px-4 py-2 pr-10 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
                   />
-                  <img
-                    src={GreenCheck}
-                    alt="Checkmark"
-                    className="w-5 h-5 absolute right-3 top-1/2 transform -translate-y-1/2"
-                  />
+                  {formData.password === formData.confirmPassword &&
+                    formData.confirmPassword.length > 0 && (
+                      <img
+                        src={GreenCheck}
+                        alt="Checkmark"
+                        className="w-5 h-5 absolute right-3 top-1/2 transform -translate-y-1/2"
+                      />
+                    )}
                 </div>
-                {errors.confirmPassword && <p className="text-red-500 text-xs">{errors.confirmPassword}</p>}
+                {errors.confirmPassword && (
+                  <p className="text-red-500 text-xs">
+                    {errors.confirmPassword}
+                  </p>
+                )}
               </div>
             </div>
-              <div className="flex items-start space-x-2 mt-2">
+            <div className="flex items-start space-x-2 mt-2">
               <input
                 name="marketing"
                 type="checkbox"
@@ -172,13 +221,20 @@ export default function SignupPage() {
                 className="mt-1"
               />
               <span className="text-sm text-gray-700">
-               I want to receive emails about the product, feature updates, events, and marketing promotions.
+                I want to receive emails about the product, feature updates,
+                events, and marketing promotions.
               </span>
             </div>
             <p className="text-xs mt-2 text-gray-600">
               By creating an account, you agree to the{" "}
-              <a href="#" className="underline text-gray-800">Terms</a> of use and{" "}
-              <a href="#" className="underline text-gray-800">Privacy Policy</a>.
+              <a href="#" className="underline text-gray-800">
+                Terms
+              </a>{" "}
+              of use and{" "}
+              <a href="#" className="underline text-gray-800">
+                Privacy Policy
+              </a>
+              .
             </p>
             <button
               type="submit"
@@ -186,12 +242,12 @@ export default function SignupPage() {
             >
               Sign up
             </button>
-         
+
             <p className="text-sm mt-4">
-              Already have an account?{" "}
-              <a href="#" className="text-blue-600 underline">
+              Already have an account? 
+              <Link to="/Loginpage" className="text-blue-600 underline">
                 Log in
-              </a>
+              </Link>
             </p>
           </form>
         </div>
