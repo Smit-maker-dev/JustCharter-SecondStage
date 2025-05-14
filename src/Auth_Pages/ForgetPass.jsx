@@ -1,6 +1,6 @@
 import React from "react";
-import planimage from "../assets/Images/Login&signup pagei image.png";
-import Logo from "../assets/Images/Logo.png";
+// import planimage from "../assets/Images/privatejet.png";
+// import Logo from "../assets/Images/Logo.png";
 import { useNavigate } from "react-router-dom";
 export default function ForgetPass() {
   const navigate = useNavigate();
@@ -14,7 +14,8 @@ export default function ForgetPass() {
     <div className="h-screen flex flex-col md:flex-row overflow-hidden">
       <div className="hidden md:block md:w-1/2 h-full">
         <img
-          src={planimage}
+          // src={planimage}
+          src="/images/privatejet.png"
           alt="Plane"
           className="w-full h-full object-cover"
         />
@@ -23,7 +24,7 @@ export default function ForgetPass() {
       <div className="w-full md:w-1/2 pt-40 flex justify-center items-center bg-white p-5 md:p-10 overflow-y-auto">
         <div className="w-full max-w-lg">
           <div className="flex justify-start mb-6">
-            <img src={Logo} alt="AceaAir Logo" className="h-10" />
+            <img src="/images/Logo.png" alt="AceaAir Logo" className="h-10" />
           </div>
 
           <h2 className="text-2xl font-bold text-black mb-2">

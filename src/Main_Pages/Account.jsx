@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { Tabs, Tab, Box } from "@mui/material";
-import LockImg from "../assets/Images/Lockimage.png";
+// import LockImg from "../assets/images/lock.png";
 import { IoCheckmarkCircle } from "react-icons/io5";
-import signoutImg from "../assets/Images/signout.png";
+// import signoutImg from "../assets/images/logout.png";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
@@ -309,10 +309,10 @@ export default function Account() {
 
             <div className="button-section mt-4">
               <button className="text-sm border cursor-pointer border-gray-300 p-3 rounded-lg text-gray-700 flex items-center justify-between w-full mb-2">
-                Change Password <img src={LockImg} alt="" className="h-5" />
+                Change Password <img src="/images/lock.png" alt="" className="h-5" />
               </button>
               <button className="text-sm border cursor-pointer border-red-400 p-3 rounded-lg text-red-500 flex items-center justify-between w-full mb-2">
-                Log out <img src={signoutImg} alt="" className="h-4" />
+                Log out <img src="/images/logout.png" alt="" className="h-4" />
               </button>
               <button className="w-full bg-[#FF4D4F] text-white rounded-lg  p-3  text-sm">
                 Delete Account

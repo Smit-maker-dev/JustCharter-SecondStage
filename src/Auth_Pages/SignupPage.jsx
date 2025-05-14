@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import planimage from "../assets/Images/Login&signup pagei image.png";
-import Logo from "../assets/Images/Logo.png";
-import greenCheck from "../assets/Images/GreenCheck.png";
+// import planimage from "../assets/Images/privatejet.png";
+// import Logo from "../assets/Images/Logo.png";
+// import greenCheck from "../assets/Images/checkmark.png";
 import * as Yup from "yup";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
@@ -87,7 +87,8 @@ export default function SignupPage() {
     <div className="h-screen flex flex-col md:flex-row overflow-hidden">
       <div className="hidden md:block md:w-1/2 h-full">
         <img
-          src={planimage}
+          // src={planimage}
+          src="/images/privatejet.png"
           alt="Plane"
           className="w-full h-full object-cover"
         />
@@ -96,7 +97,7 @@ export default function SignupPage() {
       <div className="w-full md:w-1/2 flex justify-center items-center bg-white p-6 md:p-10 overflow-y-auto">
         <div className="w-full max-w-md">
           <div className="mb-4">
-            <img src={Logo} alt="AceaAir Logo" className="h-10" />
+            <img src="/images/Logo.png" alt="AceaAir Logo" className="h-10" />
           </div>
 
           <h2 className="text-2xl font-bold text-black mb-6">
@@ -199,7 +200,7 @@ export default function SignupPage() {
                   {formData.password === formData.confirmPassword &&
                     formData.confirmPassword.length > 0 && (
                       <img
-                        src={greenCheck}
+                        src="images/checkmark.png"
                         alt="Checkmark"
                         className="w-5 h-5 absolute right-3 top-1/2 transform -translate-y-1/2"
                       />

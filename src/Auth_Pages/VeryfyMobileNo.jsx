@@ -1,7 +1,7 @@
 import React from "react";
-import planimage from "../assets/Images/Login&signup pagei image.png";
-import Logo from "../assets/Images/Logo.png";
-import GreenCheck from "../assets/Images/GreenCheck.png";
+// import planimage from "../assets/images/privatejet.png";
+// import Logo from "../assets/images/Logo.png";
+// import GreenCheck from "../assets/images/checkmark.png";
 import { useNavigate } from "react-router-dom";
 
 export default function VeryfyMobileNo() {
@@ -16,7 +16,8 @@ export default function VeryfyMobileNo() {
     <div className="h-screen flex flex-col md:flex-row overflow-hidden">
       <div className="hidden md:block md:w-1/2 h-full">
         <img
-          src={planimage}
+          // src={planimage}
+          src="/images/privatejet.png"
           alt="Plane"
           className="w-full h-full object-cover"
         />
@@ -25,7 +26,7 @@ export default function VeryfyMobileNo() {
       <div className="w-full md:w-1/2 pt-40 flex justify-center items-center bg-white p-5 md:p-10 overflow-y-auto">
         <div className="w-full max-w-lg">
           <div className="flex justify-start mb-6">
-            <img src={Logo} alt="AceaAir Logo" className="h-10" />
+            <img src="/images/Logo.png" alt="AceaAir Logo" className="h-10" />
           </div>
 
           <h2 className="text-2xl font-bold text-black mb-1">
@@ -47,7 +48,8 @@ export default function VeryfyMobileNo() {
                   className="w-full px-4 py-3 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
                 />
                 <img
-                  src={GreenCheck}
+                  // src={GreenCheck}
+                  src="/images/checkmark.png"
                   alt="Verified"
                   className="absolute right-3 top-2.5 h-5 w-5"
                 />

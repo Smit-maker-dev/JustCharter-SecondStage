@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import logo from "../assets/Images/Logo.png";
+// import logo from "../assets/images/Logo.png";
 import { FaAngleDown, FaBars } from "react-icons/fa6";
 import { IoClose } from "react-icons/io5";
 
@@ -14,7 +14,7 @@ export default function Navbar() {
     <nav className="bg-white shadow-sm relative z-50">
       <div className="max-w-7xl mx-auto px-4 flex items-center justify-between h-16">
         <div className="flex items-center space-x-2">
-          <img src={logo} alt="AceaAir Logo" className="h-8" />
+          <img src="/images/Logo.png" alt="AceaAir Logo" className="h-8" />
         </div>
 
         <ul className="hidden md:flex space-x-6 text-sm relative">
