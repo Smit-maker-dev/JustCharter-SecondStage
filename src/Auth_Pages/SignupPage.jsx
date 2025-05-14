@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import planimage from "../assets/Images/Login&signup pagei image.png";
 import Logo from "../assets/Images/Logo.png";
-import GreenCheck from "../assets/Images/GreenCheck.png";
+import greenCheck from "../assets/Images/GreenCheck.png";
 import * as Yup from "yup";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
@@ -199,7 +199,7 @@ export default function SignupPage() {
                   {formData.password === formData.confirmPassword &&
                     formData.confirmPassword.length > 0 && (
                       <img
-                        src={GreenCheck}
+                        src={greenCheck}
                         alt="Checkmark"
                         className="w-5 h-5 absolute right-3 top-1/2 transform -translate-y-1/2"
                       />
