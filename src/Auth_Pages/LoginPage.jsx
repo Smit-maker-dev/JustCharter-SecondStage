@@ -1,14 +1,54 @@
-import React from "react";
-// import planimage from "../assets/images/privatejet.png";
-// import Logo from "../assets/images/Logo.png";
-import { Link } from "react-router-dom";
+import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
+import axios from "../api/axiosInstance";
+import Swal from "sweetalert2";
 
 export default function LoginPage() {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [passwordShown, setPasswordShown] = useState(false);
+
+  const navigate = useNavigate();
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    try {
+      const response = await axios.post("/auth/login", {
+        email,
+        password,
+        type: "user", 
+        deviceType: "web", 
+        deviceToken: "abc", 
+        deviceId: "chromev123", 
+      });
+
+      const { message, user } = response.data;
+
+      Swal.fire({
+        icon: "success",
+        title: "Login Successful",
+        text: message || "You have logged in successfully!",
+        confirmButtonColor: "#3085d6",
+      });
+
+    
+      navigate("/Home");
+    } catch (error) {
+      Swal.fire({
+        icon: "error",
+        title: "Login Failed",
+        text: error.response?.data?.message || "Invalid login credentials",
+        confirmButtonColor: "#d33",
+      });
+    }
+  };
+
   return (
     <div className="h-screen flex flex-col md:flex-row overflow-hidden font-sans">
       <div className="hidden md:block md:w-1/2 h-full">
         <img
-          // src={planimage}
           src="/images/privatejet.png"
           alt="Plane"
           className="w-full h-full object-cover"
@@ -25,7 +65,7 @@ export default function LoginPage() {
             Welcome to AceaAir
           </h2>
 
-          <form className="space-y-6">
+          <form className="space-y-6" onSubmit={handleSubmit}>
             <div>
               <label className="text-sm text-gray-800 mb-2 block">
                 Email Address
@@ -33,7 +73,10 @@ export default function LoginPage() {
               <input
                 type="email"
                 placeholder="Enter email here"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
                 className="w-full px-4 py-3 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+                required
               />
             </div>
 
@@ -41,11 +84,29 @@ export default function LoginPage() {
               <label className="text-sm text-gray-800 mb-2 block">
                 Password
               </label>
-              <input
-                type="password"
-                placeholder="Enter password here"
-                className="w-full px-4 py-3 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
-              />
+              <div className="relative">
+                <input
+                  type={passwordShown ? "text" : "password"}
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  placeholder="Enter password here"
+                  className="w-full px-4 py-3 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 pr-10"
+                  required
+                />
+                {password && (
+                  <button
+                    type="button"
+                    onClick={() => setPasswordShown((prev) => !prev)}
+                    className="absolute top-1/2 right-3 transform -translate-y-1/2 text-gray-600"
+                  >
+                    {passwordShown ? (
+                      <FaEye size={15} />
+                    ) : (
+                      <FaEyeSlash size={15} />
+                    )}
+                  </button>
+                )}
+              </div>
               <div className="text-right mt-1">
                 <Link
                   to="/forget_password"
@@ -58,13 +119,13 @@ export default function LoginPage() {
 
             <button
               type="submit"
-              className="w-full md:w-3/5 bg-blue-400 text-white py-2.5 mt-4 rounded-lg hover:bg-blue-700 transition"
+              className="w-full md:w-3/5 font-semibold bg-blue-400 text-white py-2.5 mt-4 rounded-lg hover:bg-blue-700 transition"
             >
               Login
             </button>
 
-            <p className="text-sm  mt-4">
-              Doesn't have an account?{" "}
+            <p className="text-sm mt-4">
+              Don't have an account?{" "}
               <Link to="/" className="text-blue-600 hover:underline">
                 Sign up
               </Link>

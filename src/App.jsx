@@ -8,6 +8,7 @@ import ResetPass from "./Auth_Pages/ResetPass";
 import Navbar from "./Components/Navbar";
 import Account from "./Main_Pages/Account";
 import "../src/Firebase/firebase"
+import Home from "./Main_Pages/Home";
 function App() {
   return (
     <>
@@ -17,6 +18,7 @@ function App() {
      {/* <ResetPass/> */}
      <Router/>
      {/* <Navbar/> */}
+     {/* <Home/> */}
      {/* <br /> */}
      {/* <Account/>  */}
     </>

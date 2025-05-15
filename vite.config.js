@@ -11,10 +11,15 @@ export default defineConfig({
     strictPort: true,
     cors: true, 
   },
-  base: './', 
-  build: {
+  // base: './', 
+  // build: {
+  //   outDir: 'dist',
+  //   assetsDir: 'assets',
+  //   emptyOutDir: true
+  // }
+    base: '', 
+    build: {
     outDir: 'dist',
-    assetsDir: 'assets',
-    emptyOutDir: true
+    assetsDir: './', 
   }
 })

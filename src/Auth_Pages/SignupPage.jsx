@@ -1,10 +1,8 @@
 import React, { useState } from "react";
-// import planimage from "../assets/Images/privatejet.png";
-// import Logo from "../assets/Images/Logo.png";
-// import greenCheck from "../assets/Images/checkmark.png";
 import * as Yup from "yup";
 import { Link, useNavigate } from "react-router-dom";
-import axios from "axios";
+import Swal from "sweetalert2";
+import axios from "../api/axiosInstance";
 
 const validationSchema = Yup.object().shape({
   email: Yup.string().email("Invalid email").required("Email is required"),
@@ -59,13 +57,17 @@ export default function SignupPage() {
         deviceId: "chromev123",
       };
 
-      const response = await axios.post(
-        "http://192.168.29.78:8272/auth/register",
-        payload
-      );
-
-      console.log("API Response:", response.data);
-      navigate("/verifyemail");
+      const response = await axios.post("/auth/register", payload);
+      const { id: userId, is_email_verified, is_phone_verified } = response.data.data;
+      Swal.fire({
+        icon: "success",
+        title: "Signup Successful",
+        text: "Please check your email to verify your account.",
+        confirmButtonColor: "#3085d6",
+      });
+      if (!is_email_verified || !is_phone_verified) {
+        navigate("/verifyemail", { state: { userId } });
+      }
     } catch (err) {
       if (err.name === "ValidationError") {
         const newErrors = {};
@@ -75,10 +77,22 @@ export default function SignupPage() {
         setErrors(newErrors);
       } else if (err.response) {
         console.error("API Error:", err.response.data);
-        alert(err.response.data.message || "Signup failed");
+        Swal.fire({
+          icon: "error",
+          title: "Signup Failed",
+          text:
+            err.response.data.message ||
+            "Something went wrong. Please try again.",
+          confirmButtonColor: "#d33",
+        });
       } else {
         console.error("Unexpected Error:", err);
-        alert("An unexpected error occurred");
+        Swal.fire({
+          icon: "error",
+          title: "Unexpected Error",
+          text: "An unexpected error occurred. Please try again later.",
+          confirmButtonColor: "#d33",
+        });
       }
     }
   };
@@ -87,7 +101,6 @@ export default function SignupPage() {
     <div className="h-screen flex flex-col md:flex-row overflow-hidden">
       <div className="hidden md:block md:w-1/2 h-full">
         <img
-          // src={planimage}
           src="/images/privatejet.png"
           alt="Plane"
           className="w-full h-full object-cover"
@@ -221,7 +234,7 @@ export default function SignupPage() {
                 onChange={handleChange}
                 className="mt-1"
               />
-              <span className="text-sm text-gray-700">
+              <span className="text-sm text-black">
                 I want to receive emails about the product, feature updates,
                 events, and marketing promotions.
               </span>
@@ -231,9 +244,9 @@ export default function SignupPage() {
               <a href="#" className="underline text-gray-800">
                 Terms
               </a>{" "}
-              of use and{" "}
+              and Condition{" "}
               <a href="#" className="underline text-gray-800">
-                Privacy Policy
+                Privacy & Policy
               </a>
               .
             </p>
@@ -245,7 +258,7 @@ export default function SignupPage() {
             </button>
 
             <p className="text-sm mt-4">
-              Already have an account? 
+              Already have an account?
               <Link to="/Loginpage" className="text-blue-600 underline">
                 Log in
               </Link>

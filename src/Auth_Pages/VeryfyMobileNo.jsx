@@ -1,22 +1,123 @@
-import React from "react";
-// import planimage from "../assets/images/privatejet.png";
-// import Logo from "../assets/images/Logo.png";
-// import GreenCheck from "../assets/images/checkmark.png";
-import { useNavigate } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
+import axios from "../api/axiosInstance";
+import Swal from "sweetalert2";
 
 export default function VeryfyMobileNo() {
-  const navigate = useNavigate();
+  const [code, setCode] = useState("");
+  const [otpId, setOtpId] = useState(null);
+  const [counter, setCounter] = useState(30);
+  const [initialOtpSent, setInitialOtpSent] = useState(false);
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-  
-    navigate('/Loginpage');
+  const navigate = useNavigate();
+  const location = useLocation();
+  const userId = location.state?.userId;
+
+  useEffect(() => {
+    if (userId && !initialOtpSent) {
+      sendOtp();
+      setInitialOtpSent(true);
+    }
+  }, [userId, initialOtpSent]);
+
+  useEffect(() => {
+    if (counter === 0) return;
+    const timer = setInterval(() => setCounter((prev) => prev - 1), 1000);
+    return () => clearInterval(timer);
+  }, [counter]);  
+const fetchLatestOtp = async () => {
+  try {
+    const res = await axios.post("/auth/get-last-otp", {
+      user_id: userId,
+    });
+    const otp = res.data?.data?.otp;
+    if (otp) setCode(otp.toString());
+  } catch (err) {
+    console.error("Dev OTP fetch failed", err.response?.data || err.message);
+  }
+};
+
+
+ const sendOtp = async () => {
+    try {
+      const response = await axios.post("/auth/send-auth-otp", {
+        user_id: userId,
+      });
+      const { otp_id, message } = response.data;
+      setOtpId(otp_id);
+
+      Swal.fire({
+        icon: "success",
+        title: "OTP Sent",
+        text: message || "OTP sent successfully!",
+        confirmButtonColor: "#3085d6",
+      });
+
+      setCounter(30);
+
+      // 🧪 Dev-only: Auto-fill OTP from server (REMOVE IN PRODUCTION)
+      await fetchLatestOtp();
+    } catch (error) {
+      console.error("OTP send failed:", error.response?.data || error.message);
+      Swal.fire({
+        icon: "error",
+        title: "Failed to send OTP",
+        text: error.response?.data?.message || "Sending OTP failed",
+        confirmButtonColor: "#d33",
+      });
+    }
   };
+
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    if (!otpId) {
+      Swal.fire({
+        icon: "error",
+        title: "Error",
+        text: "OTP ID missing. Please resend OTP.",
+        confirmButtonColor: "#d33",
+      });
+      return;
+    }
+
+    try {
+      const response = await axios.post("/auth/verify-auth-otp", {
+        otp_id: otpId,
+        otp: code,
+      });
+
+      const { message, is_phone_verified } = response.data;
+
+      Swal.fire({
+        icon: "success",
+        title: "Verified",
+        text: message || "Mobile number verified!",
+        confirmButtonColor: "#3085d6",
+      });
+
+      if (is_phone_verified) {
+        navigate("/Loginpage");
+      }
+    } catch (error) {
+      console.error(
+        "OTP verification failed:",
+        error.response?.data || error.message
+      );
+      Swal.fire({
+        icon: "error",
+        title: "Verification Failed",
+        text: error.response?.data?.message || "OTP verification failed",
+        confirmButtonColor: "#d33",
+      });
+    }
+  };
+
   return (
     <div className="h-screen flex flex-col md:flex-row overflow-hidden">
       <div className="hidden md:block md:w-1/2 h-full">
         <img
-          // src={planimage}
           src="/images/privatejet.png"
           alt="Plane"
           className="w-full h-full object-cover"
@@ -33,22 +134,26 @@ export default function VeryfyMobileNo() {
             Verify Your Mobile Number
           </h2>
           <p className="text-sm text-gray-600 mb-6">
-            We’ve sent a 4-digit code to your mobile number ending in 1234.
-            Enter it below.
+            We’ve sent a 6-digit code to your mobile number. Enter it below.
           </p>
+
           <form onSubmit={handleSubmit} className="space-y-6">
             <div>
               <label className="text-sm text-gray-800 mb-1 block">
                 Enter Verification Code
               </label>
               <div className="relative">
-                <input
+              <input
                   type="text"
-                  placeholder="4 - Digit code"
+                  placeholder="6 - Digit code"
+                  value={code}
+                  onChange={(e) => setCode(e.target.value)}
+                  autoComplete="one-time-code"
+                  inputMode="numeric"
                   className="w-full px-4 py-3 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
                 />
+
                 <img
-                  // src={GreenCheck}
                   src="/images/checkmark.png"
                   alt="Verified"
                   className="absolute right-3 top-2.5 h-5 w-5"
@@ -58,7 +163,17 @@ export default function VeryfyMobileNo() {
 
             <p className="text-sm text-gray-500">
               Didn’t receive the code?{" "}
-              <span className="text-gray-400">Resend in 30s</span>
+              {counter > 0 ? (
+                <span className="text-gray-400">Resend in {counter}s</span>
+              ) : (
+                <button
+                  type="button"
+                  onClick={sendOtp}
+                  className="text-blue-500 underline cursor-pointer"
+                >
+                  Resend OTP
+                </button>
+              )}
             </p>
 
             <button
@@ -66,7 +181,7 @@ export default function VeryfyMobileNo() {
               className="w-full md:w-3/5 bg-blue-400 text-white py-2.5 mt-4 rounded-lg hover:bg-blue-700 transition"
             >
               Verify
-            </button>   
+            </button>
           </form>
         </div>
       </div>

@@ -7,6 +7,7 @@ import LoginPage from '../Auth_Pages/LoginPage'
 import ForgetPass from '../Auth_Pages/ForgetPass'
 import ResetPass from '../Auth_Pages/ResetPass'
 import VeryfyOTP from '../Auth_Pages/VeryfyOTP'
+import Home from '../Main_Pages/Home'
 
 export default function Router() {
   return (
@@ -19,6 +20,7 @@ export default function Router() {
       <Route path="/forget_password" element={<ForgetPass/>} />
       <Route path="/reset_password" element={<ResetPass/>} />
       <Route path="/OTP_verification" element={<VeryfyOTP/>} />
+      <Route path="/Home" element={<Home/>} />
     </Routes>
     </BrowserRouter>
   )
