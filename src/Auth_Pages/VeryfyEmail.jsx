@@ -1,34 +1,30 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import axios from "../api/axiosInstance";
 import Swal from "sweetalert2";
-
+import Logo from "/images/Logo.png";
+import PrivateJet from "/images/privatejet.png";
+import Checkmark from "/images/checkmark.png";
 export default function VerifyEmail() {
   const [code, setCode] = useState("");
   const [otpId, setOtpId] = useState(null);
-  const [counter, setCounter] = useState(30);
+  const [counter, setCounter] = useState(60);
   const navigate = useNavigate();
   const location = useLocation();
   const userId = location.state?.userId;
-  
+  const otpSentRef = useRef(false);
   useEffect(() => {
-    if (!userId) {
-      Swal.fire({
-        icon: "error",
-        title: "Error",
-        text: "User ID not found. Please go back and sign up again.",
-        confirmButtonColor: "#d33",
-      });
-      return;
-    }
+    if (!userId || otpSentRef.current) return;
+
+    otpSentRef.current = true;
 
     const lastOtpTime = localStorage.getItem("lastOtpSentTime");
     const now = Date.now();
 
     if (lastOtpTime) {
       const elapsed = (now - parseInt(lastOtpTime, 10)) / 1000;
-      if (elapsed < 30) {
-        setCounter(30 - Math.floor(elapsed));
+      if (elapsed < 60) {
+        setCounter(60 - Math.floor(elapsed));
         return;
       }
     }
@@ -47,19 +43,21 @@ export default function VerifyEmail() {
   }, [counter]);
 
   const fetchLatestOtp = async () => {
-  try {
-    const response = await axios.post("/auth/get-last-otp", {
-      user_id: userId,
-    });
+    try {
+      const response = await axios.post("/auth/get-last-otp", {
+        user_id: userId,
+      });
 
-    const otp = response.data?.data?.otp;
-    if (otp) {
-      setCode(otp.toString());
+      const otp = response.data?.data?.otp;
+      if (otp) setCode(otp.toString());
+    } catch (error) {
+      console.error(
+        "Failed to fetch latest OTP:",
+        error.response?.data || error.message
+      );
     }
-  } catch (error) {
-    console.error("Failed to fetch latest OTP:", error.response?.data || error.message);
-  }
-};
+  };
+
   const sendOtp = async () => {
     try {
       const response = await axios.post("/auth/send-auth-otp", {
@@ -77,7 +75,7 @@ export default function VerifyEmail() {
       });
 
       localStorage.setItem("lastOtpSentTime", Date.now().toString());
-      setCounter(30);
+      setCounter(60);
 
       await fetchLatestOtp();
     } catch (error) {
@@ -90,7 +88,6 @@ export default function VerifyEmail() {
       });
     }
   };
-
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -140,18 +137,24 @@ export default function VerifyEmail() {
   };
   return (
     <div className="h-screen flex flex-col md:flex-row overflow-hidden">
-      <div className="hidden md:block md:w-1/2 h-full">
+      <div className="hidden md:block md:w-1/2 h-full bg-gray-100 relative">
         <img
-          src="/images/privatejet.png"
+          src={PrivateJet}
           alt="Plane"
-          className="w-full h-full object-cover"
+          className="absolute inset-0 w-full h-full object-cover"
         />
       </div>
 
       <div className="w-full md:w-1/2 pt-40 flex justify-center items-center bg-white p-5 md:p-10 overflow-y-auto">
         <div className="w-full max-w-lg">
-          <div className="flex justify-start mb-6">
-            <img src="/images/Logo.png" alt="AceaAir Logo" className="h-10" />
+          <div className="mb-4 h-10 w-full relative">
+            <div className="h-full w-full bg-transparent">
+              <img
+                src={Logo}
+                alt="AceaAir Logo"
+                className="h-full w-auto object-contain"
+              />
+            </div>
           </div>
 
           <h2 className="text-2xl font-bold text-black mb-1">
@@ -176,7 +179,7 @@ export default function VerifyEmail() {
                 />
 
                 <img
-                  src="/images/checkmark.png"
+                  src={Checkmark}
                   alt="Verified"
                   className="absolute right-3 top-2.5 h-5 w-5"
                 />

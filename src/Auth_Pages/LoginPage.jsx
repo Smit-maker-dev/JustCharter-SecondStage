@@ -18,22 +18,18 @@ export default function LoginPage() {
       const response = await axios.post("/auth/login", {
         email,
         password,
-        type: "user", 
-        deviceType: "web", 
-        deviceToken: "abc", 
-        deviceId: "chromev123", 
+        type: "user",
+        deviceType: "web",
+        deviceToken: "abc",
+        deviceId: "chromev123",
       });
 
-      const { message, user } = response.data;
+      const { access_token, user } = response.data;
 
-      Swal.fire({
-        icon: "success",
-        title: "Login Successful",
-        text: message || "You have logged in successfully!",
-        confirmButtonColor: "#3085d6",
-      });
+       localStorage.setItem("access_token", access_token);
+    localStorage.setItem("first_name", user.first_name);
+    localStorage.setItem("last_name", user.last_name);
 
-    
       navigate("/Home");
     } catch (error) {
       Swal.fire({
@@ -126,7 +122,7 @@ export default function LoginPage() {
 
             <p className="text-sm mt-4">
               Don't have an account?{" "}
-              <Link to="/" className="text-blue-600 hover:underline">
+              <Link to="/register" className="text-blue-600 hover:underline">
                 Sign up
               </Link>
             </p>

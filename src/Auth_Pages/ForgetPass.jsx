@@ -1,21 +1,54 @@
-import React from "react";
-// import planimage from "../assets/Images/privatejet.png";
-// import Logo from "../assets/Images/Logo.png";
+import React, { useState } from "react";
+import planimage from "/images/privatejet.png";
+import Logo from "/images/Logo.png";
 import { useNavigate } from "react-router-dom";
+import axios from "../api/axiosInstance";
+import Swal from "sweetalert2";
+
 export default function ForgetPass() {
+  const [email, setEmail] = useState("");
   const navigate = useNavigate();
-  const handleSubmit = (e) => {
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
-    navigate("/reset_password");
+    try {
+      const response = await axios.post("/auth/forgot-password", { email });
+
+      const otpId = response.data?.otp_id; 
+
+      if (!otpId) {
+        throw new Error("OTP ID not returned from server.");
+      }
+
+      Swal.fire({
+        icon: "success",
+        title: "Success",
+        text: response.data?.message || "OTP sent to your email!",
+        confirmButtonColor: "#3085d6",
+      });
+
+      
+      navigate("/OTP_verification", { state: { email, otpId } });
+    } catch (error) {
+      console.error(
+        "Forgot password error:",
+        error.response?.data || error.message
+      );
+      Swal.fire({
+        icon: "error",
+        title: "Error",
+        text: error.response?.data?.message || "Failed to send reset link",
+        confirmButtonColor: "#d33",
+      });
+    }
   };
 
   return (
     <div className="h-screen flex flex-col md:flex-row overflow-hidden">
       <div className="hidden md:block md:w-1/2 h-full">
         <img
-          // src={planimage}
-          src="/images/privatejet.png"
+          src={planimage}
           alt="Plane"
           className="w-full h-full object-cover"
         />
@@ -24,7 +57,7 @@ export default function ForgetPass() {
       <div className="w-full md:w-1/2 pt-40 flex justify-center items-center bg-white p-5 md:p-10 overflow-y-auto">
         <div className="w-full max-w-lg">
           <div className="flex justify-start mb-6">
-            <img src="/images/Logo.png" alt="AceaAir Logo" className="h-10" />
+            <img src={Logo} alt="AceaAir Logo" className="h-10" />
           </div>
 
           <h2 className="text-2xl font-bold text-black mb-2">
@@ -33,16 +66,20 @@ export default function ForgetPass() {
           <p className="text-sm text-gray-600 mb-6">
             Get back into your account
           </p>
+
           <form onSubmit={handleSubmit} className="space-y-6">
             <div>
               <label className="text-sm text-gray-800 mb-1 block">
                 Email Address
               </label>
-              <div className="">
+              <div>
                 <input
-                  type="text"
+                  type="email"
                   placeholder="Enter email here"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
                   className="w-full px-4 py-3 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  required
                 />
               </div>
             </div>

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import axios from "../api/axiosInstance";
 import Swal from "sweetalert2";
@@ -6,39 +6,38 @@ import Swal from "sweetalert2";
 export default function VeryfyMobileNo() {
   const [code, setCode] = useState("");
   const [otpId, setOtpId] = useState(null);
-  const [counter, setCounter] = useState(30);
+  const [counter, setCounter] = useState(60);
   const [initialOtpSent, setInitialOtpSent] = useState(false);
-
+  const otpSentRef = useRef(false);
   const navigate = useNavigate();
   const location = useLocation();
   const userId = location.state?.userId;
 
   useEffect(() => {
-    if (userId && !initialOtpSent) {
-      sendOtp();
-      setInitialOtpSent(true);
-    }
-  }, [userId, initialOtpSent]);
+    if (!userId || otpSentRef.current) return;
+
+    otpSentRef.current = true;
+    sendOtp();
+  }, [userId]);
 
   useEffect(() => {
     if (counter === 0) return;
     const timer = setInterval(() => setCounter((prev) => prev - 1), 1000);
     return () => clearInterval(timer);
-  }, [counter]);  
-const fetchLatestOtp = async () => {
-  try {
-    const res = await axios.post("/auth/get-last-otp", {
-      user_id: userId,
-    });
-    const otp = res.data?.data?.otp;
-    if (otp) setCode(otp.toString());
-  } catch (err) {
-    console.error("Dev OTP fetch failed", err.response?.data || err.message);
-  }
-};
+  }, [counter]);
+  const fetchLatestOtp = async () => {
+    try {
+      const res = await axios.post("/auth/get-last-otp", {
+        user_id: userId,
+      });
+      const otp = res.data?.data?.otp;
+      if (otp) setCode(otp.toString());
+    } catch (err) {
+      console.error("Dev OTP fetch failed", err.response?.data || err.message);
+    }
+  };
 
-
- const sendOtp = async () => {
+  const sendOtp = async () => {
     try {
       const response = await axios.post("/auth/send-auth-otp", {
         user_id: userId,
@@ -53,10 +52,8 @@ const fetchLatestOtp = async () => {
         confirmButtonColor: "#3085d6",
       });
 
-      setCounter(30);
-
-      // 🧪 Dev-only: Auto-fill OTP from server (REMOVE IN PRODUCTION)
-      await fetchLatestOtp();
+      setCounter(60);
+      await fetchLatestOtp(); 
     } catch (error) {
       console.error("OTP send failed:", error.response?.data || error.message);
       Swal.fire({
@@ -67,7 +64,6 @@ const fetchLatestOtp = async () => {
       });
     }
   };
-
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -98,7 +94,7 @@ const fetchLatestOtp = async () => {
       });
 
       if (is_phone_verified) {
-        navigate("/Loginpage");
+        navigate("/Home");
       }
     } catch (error) {
       console.error(
@@ -143,7 +139,7 @@ const fetchLatestOtp = async () => {
                 Enter Verification Code
               </label>
               <div className="relative">
-              <input
+                <input
                   type="text"
                   placeholder="6 - Digit code"
                   value={code}

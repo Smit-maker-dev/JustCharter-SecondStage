@@ -4,6 +4,9 @@ import { Link, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import axios from "../api/axiosInstance";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
+import Logo from "/images/Logo.png";
+import PrivateJet from "/images/privatejet.png";
+import Checkmark from "/images/checkmark.png";
 
 const validationSchema = Yup.object().shape({
   email: Yup.string().email("Invalid email").required("Email is required"),
@@ -30,7 +33,7 @@ export default function SignupPage() {
   });
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
-
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [errors, setErrors] = useState({});
   const navigate = useNavigate();
 
@@ -44,6 +47,10 @@ export default function SignupPage() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    if (isSubmitting) return;
+    setIsSubmitting(true);
+
     try {
       await validationSchema.validate(formData, { abortEarly: false });
       setErrors({});
@@ -67,12 +74,14 @@ export default function SignupPage() {
         is_email_verified,
         is_phone_verified,
       } = response.data.data;
+
       Swal.fire({
         icon: "success",
         title: "Signup Successful",
         text: "Please check your email to verify your account.",
         confirmButtonColor: "#3085d6",
       });
+
       if (!is_email_verified || !is_phone_verified) {
         navigate("/verifyemail", { state: { userId } });
       }
@@ -102,6 +111,8 @@ export default function SignupPage() {
           confirmButtonColor: "#d33",
         });
       }
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -109,7 +120,7 @@ export default function SignupPage() {
     <div className="h-screen flex flex-col md:flex-row overflow-hidden">
       <div className="hidden md:block md:w-1/2 h-full bg-gray-100 relative">
         <img
-          src="/images/privatejet.png"
+          src={PrivateJet}
           alt="Plane"
           className="absolute inset-0 w-full h-full object-cover"
         />
@@ -117,8 +128,14 @@ export default function SignupPage() {
 
       <div className="w-full md:w-1/2 flex justify-center items-center bg-white p-6 md:p-10 overflow-y-auto">
         <div className="w-full max-w-md">
-          <div className="mb-4">
-            <img src="/images/Logo.png" alt="AceaAir Logo" className="h-10" />
+        <div className="mb-4 h-10 w-full relative">
+            <div className="h-full w-full bg-transparent">
+              <img
+                src={Logo}
+                alt="AceaAir Logo"
+                className="h-full w-auto object-contain"
+              />
+            </div>
           </div>
 
           <h2 className="text-2xl font-bold text-black mb-6">
@@ -240,7 +257,8 @@ export default function SignupPage() {
                   {formData.password === formData.confirmPassword &&
                     formData.confirmPassword.length > 0 && (
                       <img
-                        src="images/checkmark.png"
+                        // src="images/checkmark.png"
+                        src={Checkmark}
                         alt="Checkmark"
                         className="w-5 h-5 absolute right-10 top-1/2 transform -translate-y-1/2"
                       />
