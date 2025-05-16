@@ -3,6 +3,7 @@ import * as Yup from "yup";
 import { Link, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import axios from "../api/axiosInstance";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
 
 const validationSchema = Yup.object().shape({
   email: Yup.string().email("Invalid email").required("Email is required"),
@@ -27,6 +28,9 @@ export default function SignupPage() {
     confirmPassword: "",
     marketing: false,
   });
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+
   const [errors, setErrors] = useState({});
   const navigate = useNavigate();
 
@@ -58,7 +62,11 @@ export default function SignupPage() {
       };
 
       const response = await axios.post("/auth/register", payload);
-      const { id: userId, is_email_verified, is_phone_verified } = response.data.data;
+      const {
+        id: userId,
+        is_email_verified,
+        is_phone_verified,
+      } = response.data.data;
       Swal.fire({
         icon: "success",
         title: "Signup Successful",
@@ -99,11 +107,11 @@ export default function SignupPage() {
 
   return (
     <div className="h-screen flex flex-col md:flex-row overflow-hidden">
-      <div className="hidden md:block md:w-1/2 h-full">
+      <div className="hidden md:block md:w-1/2 h-full bg-gray-100 relative">
         <img
           src="/images/privatejet.png"
           alt="Plane"
-          className="w-full h-full object-cover"
+          className="absolute inset-0 w-full h-full object-cover"
         />
       </div>
 
@@ -185,18 +193,29 @@ export default function SignupPage() {
                 <label className="text-sm text-gray-700">
                   Create New Password
                 </label>
-                <input
-                  name="password"
-                  type="password"
-                  value={formData.password}
-                  onChange={handleChange}
-                  placeholder="Enter password here"
-                  className="w-full mt-1 px-4 py-2 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
-                />
+                <div className="relative mt-1">
+                  <input
+                    name="password"
+                    type={showPassword ? "text" : "password"}
+                    value={formData.password}
+                    onChange={handleChange}
+                    placeholder="Enter password here"
+                    className="w-full px-4 py-2 pr-10 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  />
+                  {formData.password.length > 0 && (
+                    <span
+                      onClick={() => setShowPassword((prev) => !prev)}
+                      className="absolute right-3 top-1/2 transform -translate-y-1/2 cursor-pointer text-gray-500"
+                    >
+                      {showPassword ? <FaEyeSlash /> : <FaEye />}
+                    </span>
+                  )}
+                </div>
                 {errors.password && (
                   <p className="text-red-500 text-xs">{errors.password}</p>
                 )}
               </div>
+
               <div className="w-1/2">
                 <label className="text-sm text-gray-700">
                   Confirm Password
@@ -204,18 +223,26 @@ export default function SignupPage() {
                 <div className="relative mt-1">
                   <input
                     name="confirmPassword"
-                    type="password"
+                    type={showConfirmPassword ? "text" : "password"}
                     value={formData.confirmPassword}
                     onChange={handleChange}
                     placeholder="Enter password here"
                     className="w-full px-4 py-2 pr-10 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
                   />
+                  {formData.confirmPassword.length > 0 && (
+                    <span
+                      onClick={() => setShowConfirmPassword((prev) => !prev)}
+                      className="absolute right-3 top-1/2 transform -translate-y-1/2 cursor-pointer text-gray-500"
+                    >
+                      {showConfirmPassword ? <FaEyeSlash /> : <FaEye />}
+                    </span>
+                  )}
                   {formData.password === formData.confirmPassword &&
                     formData.confirmPassword.length > 0 && (
                       <img
                         src="images/checkmark.png"
                         alt="Checkmark"
-                        className="w-5 h-5 absolute right-3 top-1/2 transform -translate-y-1/2"
+                        className="w-5 h-5 absolute right-10 top-1/2 transform -translate-y-1/2"
                       />
                     )}
                 </div>
@@ -226,6 +253,7 @@ export default function SignupPage() {
                 )}
               </div>
             </div>
+
             <div className="flex items-start space-x-2 mt-2">
               <input
                 name="marketing"
