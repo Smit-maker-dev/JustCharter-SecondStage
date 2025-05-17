@@ -23,7 +23,7 @@ export default function Router() {
       <Route path="/reset_password" element={<ResetPass/>} />
       <Route path="/OTP_verification" element={<VeryfyOTP/>} />
       <Route element={<MainLayout />}>
-          <Route path="/Home" element={<Home />} />
+          <Route path="/home" element={<Home />} />
           <Route path="/account" element={<Account />} />
     </Route>
     </Routes>

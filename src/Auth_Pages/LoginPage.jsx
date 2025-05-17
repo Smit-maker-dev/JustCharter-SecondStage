@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import axios from "../api/axiosInstance";
-import Swal from "sweetalert2";
 
 export default function LoginPage() {
   const [email, setEmail] = useState("");
@@ -16,28 +17,35 @@ export default function LoginPage() {
 
     try {
       const response = await axios.post("/auth/login", {
-        email,
-        password,
+        email: email.trim(),
+        password: password.trim(),
         type: "user",
         deviceType: "web",
         deviceToken: "abc",
         deviceId: "chromev123",
       });
 
-      const { access_token, user } = response.data;
+      const { data } = response.data;
 
-       localStorage.setItem("access_token", access_token);
-    localStorage.setItem("first_name", user.first_name);
-    localStorage.setItem("last_name", user.last_name);
+      if (!data || !data.access_token) {
+        toast.error("Invalid login credentials");
+        return;
+      }
 
-      navigate("/Home");
+      const access_token = data.access_token;
+      const user = data;
+
+      toast.success("Login successful!", { autoClose: 1500 });
+
+      localStorage.setItem("access_token", access_token);
+      localStorage.setItem("first_name", user.first_name);
+      localStorage.setItem("last_name", user.last_name);
+
+      setTimeout(() => {
+        navigate("/home");
+      }, 1500);
     } catch (error) {
-      Swal.fire({
-        icon: "error",
-        title: "Login Failed",
-        text: error.response?.data?.message || "Invalid login credentials",
-        confirmButtonColor: "#d33",
-      });
+      toast.error(error.response?.data?.message || "Invalid login credentials");
     }
   };
 
@@ -129,6 +137,8 @@ export default function LoginPage() {
           </form>
         </div>
       </div>
+
+      <ToastContainer />
     </div>
   );
 }

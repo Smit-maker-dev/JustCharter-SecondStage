@@ -94,7 +94,7 @@ export default function VeryfyMobileNo() {
       });
 
       if (is_phone_verified) {
-        navigate("/Home");
+        navigate("/home");
       }
     } catch (error) {
       console.error(

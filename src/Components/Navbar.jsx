@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-// import logo from "../assets/images/Logo.png";
 import { FaAngleDown, FaBars } from "react-icons/fa6";
 import { IoClose } from "react-icons/io5";
 import { useNavigate } from "react-router-dom";
@@ -14,7 +13,7 @@ export default function Navbar() {
     const fName = localStorage.getItem("first_name");
     const lName = localStorage.getItem("last_name");
     if (fName && lName) {
-      W;
+      
       setFirstName(fName);
       setLastName(lName);
     }

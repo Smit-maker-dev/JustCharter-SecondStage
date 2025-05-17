@@ -3,14 +3,77 @@ import { Tabs, Tab, Box } from "@mui/material";
 // import LockImg from "../assets/images/lock.png";
 import { IoCheckmarkCircle } from "react-icons/io5";
 // import signoutImg from "../assets/images/logout.png";
+import axios from "../api/axiosInstance";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import dayjs from "dayjs";
 
 export default function Account() {
   const [tabIndex, setTabIndex] = useState(0);
   const [dob, setDob] = useState(null);
+  const [formData, setFormData] = useState({
+    firstName: "",
+    lastName: "",
+    dob: null,
+    gender: "",
+    email: "",
+    phoneNumber: "",
+    street: "",
+    stateName: "",
+    pincode: "",
+    country: "",
+  });
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  };
+
+  const handleSaveBasicInfo = async () => {
+    try {
+      const payload = {
+        first_name: formData.firstName,
+        last_name: formData.lastName,
+        gender: formData.gender,
+        dob: formData.dob ? formData.dob.format("YYYY-MM-DD") : null,
+        address: formData.street,
+        state: formData.stateName,
+        pincode: formData.pincode,
+        country: formData.country,
+      };
+
+      const response = await axios.patch("/user/update-profile", payload);
+
+      if (response.status === 200) {
+        toast.success("Profile updated successfully!");
+
+        setFormData({
+          firstName: "",
+          lastName: "",
+          dob: null,
+          gender: "",
+          email: "",
+          phoneNumber: "",
+          street: "",
+          stateName: "",
+          pincode: "",
+          country: "",
+        });
+      } else {
+        toast.error("Something went wrong!");
+      }
+    } catch (error) {
+      console.error("Error updating profile:", error);
+      const message =
+        error?.response?.data?.message || "Failed to update profile.";
+      toast.error(message);
+    }
+  };
 
   const handleTabChange = (event, newValue) => {
     setTabIndex(newValue);
@@ -53,15 +116,21 @@ export default function Account() {
                   <div>
                     <label className="text-sm">First Name</label>
                     <input
-                      className="w-full px-4 py-3 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+                      name="firstName"
+                      value={formData.firstName}
+                      onChange={handleChange}
                       placeholder="Enter Your First Name"
+                      className="w-full px-4 py-3 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
                     />
                   </div>
                   <div>
                     <label className="text-sm">Last Name</label>
                     <input
-                      className="w-full px-4 py-3 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+                      name="lastName"
+                      value={formData.lastName}
+                      onChange={handleChange}
                       placeholder="Enter Your Last Name"
+                      className="w-full px-4 py-3 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
                     />
                   </div>
                   <div>
@@ -69,8 +138,13 @@ export default function Account() {
                     <LocalizationProvider dateAdapter={AdapterDayjs}>
                       <DatePicker
                         format="DD/MM/YYYY"
-                        value={dob}
-                        onChange={(newValue) => setDob(newValue)}
+                        value={formData.dob}
+                        onChange={(newValue) => {
+                          setFormData((prev) => ({
+                            ...prev,
+                            dob: newValue,
+                          }));
+                        }}
                         slotProps={{
                           textField: {
                             variant: "standard",
@@ -99,8 +173,10 @@ export default function Account() {
                   <div>
                     <label className="text-sm mb-1 block">Gender</label>
                     <select
+                      name="gender"
+                      value={formData.gender}
+                      onChange={handleChange}
                       className="w-full px-4 py-3 border border-gray-300 rounded-md text-sm bg-white text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-150"
-                      defaultValue=""
                     >
                       <option value="" disabled>
                         Select gender
@@ -111,13 +187,16 @@ export default function Account() {
                     </select>
                   </div>
                 </div>
-                <p className="mt-4 text-md font-black">Contact Information</p>
 
+                <p className="mt-4 text-md font-black">Contact Information</p>
                 <div className="mt-4 grid md:grid-cols-2 gap-4 items-end">
                   <div>
                     <label className="text-sm">Email Address</label>
                     <div className="relative">
                       <input
+                        name="email"
+                        value={formData.email}
+                        onChange={handleChange}
                         type="text"
                         placeholder="Enter email"
                         className="w-full px-4 py-3 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
@@ -129,11 +208,13 @@ export default function Account() {
                     <label className="text-sm mb-1 block">Phone Number</label>
                     <div className="relative">
                       <div className="flex">
-                        <span className="inline-flex items-center px-4 py-3 border border-r-0 border-gray-300 text-sm rounded-l-md ">
+                        <span className="inline-flex items-center px-4 py-3 border border-r-0 border-gray-300 text-sm rounded-l-md">
                           +91
                         </span>
                         <input
-                          name="phone"
+                          name="phoneNumber"
+                          value={formData.phoneNumber}
+                          onChange={handleChange}
                           type="tel"
                           placeholder="Enter Phone Number"
                           className="w-full px-4 py-3 border border-gray-300 text-sm rounded-r-md pr-16 focus:outline-none focus:ring-2 focus:ring-blue-500"
@@ -145,39 +226,55 @@ export default function Account() {
                     </div>
                   </div>
                 </div>
+
                 <p className="mt-4 text-md font-black">Address</p>
                 <div className="mt-3 grid md:grid-cols-2 gap-4">
                   <div>
                     <label className="text-sm">Street/House</label>
                     <input
+                      name="street"
+                      value={formData.street}
+                      onChange={handleChange}
                       className="w-full px-4 py-3 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
-                      placeholder="Enter Your First Name"
+                      placeholder="Enter Street/House"
                     />
                   </div>
                   <div>
                     <label className="text-sm">State</label>
                     <input
+                      name="stateName"
+                      value={formData.stateName}
+                      onChange={handleChange}
                       className="w-full px-4 py-3 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
-                      placeholder="Enter Address here"
+                      placeholder="Enter State"
                     />
                   </div>
                   <div>
                     <label className="text-sm">Pincode</label>
                     <input
+                      name="pincode"
+                      value={formData.pincode}
+                      onChange={handleChange}
                       className="w-full px-4 py-3 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
-                      placeholder="Enter Pincode here"
+                      placeholder="Enter Pincode"
                     />
                   </div>
                   <div>
                     <label className="text-sm">Country</label>
                     <input
+                      name="country"
+                      value={formData.country}
+                      onChange={handleChange}
                       className="w-full px-4 py-3 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
-                      placeholder="Enter Country here"
+                      placeholder="Enter Country"
                     />
                   </div>
                 </div>
 
-                <button className="mt-6 bg-[#FFD700] hover:bg-yellow-500 text-[#4B5563] font-bold px-12 py-2 rounded-lg">
+                <button
+                  onClick={handleSaveBasicInfo}
+                  className="cursor-pointer mt-6 bg-[#FFD700] hover:bg-yellow-500 text-[#4B5563] font-bold px-12 py-2 rounded-lg"
+                >
                   Save
                 </button>
               </>
@@ -252,7 +349,9 @@ export default function Account() {
                       />
                     </div>
                   </div>
-                  <p className="mt-6 text-md font-semibold">Contact Information</p>
+                  <p className="mt-6 text-md font-semibold">
+                    Contact Information
+                  </p>
                   <div className="mt-4 grid md:grid-cols-2 gap-4">
                     <div>
                       <label className="text-sm mb-1 block">
@@ -309,7 +408,8 @@ export default function Account() {
 
             <div className="button-section mt-4">
               <button className="text-sm border cursor-pointer border-gray-300 p-3 rounded-lg text-gray-700 flex items-center justify-between w-full mb-2">
-                Change Password <img src="/images/lock.png" alt="" className="h-5" />
+                Change Password{" "}
+                <img src="/images/lock.png" alt="" className="h-5" />
               </button>
               <button className="text-sm border cursor-pointer border-red-400 p-3 rounded-lg text-red-500 flex items-center justify-between w-full mb-2">
                 Log out <img src="/images/logout.png" alt="" className="h-4" />
@@ -321,6 +421,17 @@ export default function Account() {
           </div>
         </div>
       </div>
+      <ToastContainer
+        position="top-right"
+        autoClose={3000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+      />
     </div>
   );
 }
