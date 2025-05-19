@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-// import planimage from "../assets/images/privatejet.png";
-// import Logo from "../assets/images/Logo.png";
-// import Chekmark from "../assets/images/checkmark.png";
+import planimage from "/images/privatejet.png";
+import Logo from "/images/Logo.png";
+import Chekmark from "/images/checkmark.png";
 import { useNavigate } from "react-router-dom";
 import axios from "../api/axiosInstance";
 import Swal from "sweetalert2";
@@ -13,6 +13,7 @@ export default function ResetPass() {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [showNewPass, setShowNewPass] = useState(false);
   const [showConfirmPass, setShowConfirmPass] = useState(false);
+  
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -79,7 +80,7 @@ export default function ResetPass() {
     <div className="h-screen flex flex-col md:flex-row overflow-hidden font-sans">
       <div className="hidden md:block md:w-1/2 h-full">
         <img
-          src="/images/privatejet.png"
+          src={planimage}
           alt="Plane"
           className="w-full h-full object-cover"
         />
@@ -88,7 +89,7 @@ export default function ResetPass() {
       <div className="w-full md:w-1/2 flex items-center justify-center bg-white p-6 md:p-12 pt-24">
         <div className="w-full max-w-md">
           <div className="mb-8">
-            <img src="/images/Logo.png" alt="AceaAir Logo" className="h-10" />
+            <img src={Logo} alt="AceaAir Logo" className="h-10" />
           </div>
 
           <h2 className="text-2xl md:text-3xl font-bold text-black mb-2">
@@ -151,12 +152,11 @@ export default function ResetPass() {
                 </span>
               )}
 
-              {/* ✅ Show checkmark only when passwords match and are non-empty */}
               {newPassword &&
                 confirmPassword &&
                 newPassword === confirmPassword && (
                   <img
-                    src="/images/checkmark.png"
+                    src={Chekmark}
                     alt="Verified"
                     className="absolute right-10 top-2.5 h-5 w-5"
                   />

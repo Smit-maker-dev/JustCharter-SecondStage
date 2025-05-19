@@ -1,8 +1,8 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Tabs, Tab, Box } from "@mui/material";
-// import LockImg from "../assets/images/lock.png";
+import LockImg from "/images/lock.png";
 import { IoCheckmarkCircle } from "react-icons/io5";
-// import signoutImg from "../assets/images/logout.png";
+import signoutImg from "/images/logout.png";
 import axios from "../api/axiosInstance";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
@@ -10,6 +10,43 @@ import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import dayjs from "dayjs";
+import * as yup from "yup";
+import AuthWrapper from "../Components/Dialogs/AuthWrapper";
+const basicInfoSchema = yup.object().shape({
+  firstName: yup.string().required("First Name is required"),
+  lastName: yup.string().required("Last Name is required"),
+  dob: yup.date().nullable().required("Date of Birth is required"),
+  gender: yup.string().required("Gender is required"),
+  email: yup
+    .string()
+    .email("Enter a valid email")
+    .required("Email is required"),
+  phoneNumber: yup
+    .string()
+    .matches(/^\d{10}$/, "Phone Number must be 10 digits")
+    .required("Phone Number is required"),
+  street: yup.string().required("Street is required"),
+  stateName: yup.string().required("State is required"),
+  pincode: yup
+    .string()
+    .matches(/^\d{6}$/, "Pincode must be 6 digits")
+    .required("Pincode is required"),
+  country: yup.string().required("Country is required"),
+});
+
+const professionalSchema = yup.object().shape({
+  companyName: yup.string().required("Company Name is required"),
+  jobTitle: yup.string().required("Job Title is required"),
+  industry: yup.string().required("Industry is required"),
+  website: yup
+    .string()
+    .url("Enter a valid URL")
+    .required("Website is required"),
+  businessEmail: yup
+    .string()
+    .email("Enter a valid email")
+    .required("Business Email is required"),
+});
 
 export default function Account() {
   const [tabIndex, setTabIndex] = useState(0);
@@ -26,6 +63,109 @@ export default function Account() {
     pincode: "",
     country: "",
   });
+  const [professionalData, setProfessionalData] = useState({
+    companyName: "",
+    jobTitle: "",
+    industry: "",
+    companyWebsite: "",
+    businessEmail: "",
+  });
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
+  const [errors, setErrors] = useState({});
+
+  useEffect(() => {
+    const fetchUserProfile = async () => {
+      try {
+        const res = await axios.get("/user");
+        const user = res.data.data;
+
+        setFormData({
+          firstName: user.first_name || "",
+          lastName: user.last_name || "",
+          phoneNumber: user.phone_number || "",
+          email: user.email || "",
+          dob: user.dob ? dayjs(user.dob) : null,
+          gender: user.gender || "",
+          street: user.address || "",
+          stateName: user.state || "",
+          pincode: user.pincode || "",
+          country: user.country || "",
+        });
+
+        if (user.profession) {
+          setProfessionalData({
+            companyName: user.profession.company_name || "",
+            jobTitle: user.profession.job_role || "",
+            industry: user.profession.industry || "",
+            website: user.profession.website || "",
+            businessEmail: user.profession.business_email || "",
+          });
+        }
+      } catch (err) {
+        console.error("Failed to fetch user data:", err);
+      }
+    };
+
+    fetchUserProfile();
+  }, []);
+
+  const handleProfessionalChange = (e) => {
+    const { name, value } = e.target;
+    setProfessionalData((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  };
+  const handleSaveProfessionalInfo = async () => {
+    try {
+      await professionalSchema.validate(professionalData, {
+        abortEarly: false,
+      });
+
+      const payload = {
+        company_name: professionalData.companyName,
+        job_role: professionalData.jobTitle,
+        industry: professionalData.industry,
+        website: professionalData.website,
+        business_email: professionalData.businessEmail,
+      };
+
+      const response = await axios.patch("/user/update-profession", payload);
+
+      if (response.status === 200) {
+        toast.success("Professional details updated successfully!");
+
+        setProfessionalData({
+          companyName: "",
+          jobTitle: "",
+          industry: "",
+          website: "",
+          businessEmail: "",
+          telephone: "",
+        });
+
+        setErrors({});
+      } else {
+        toast.error("Something went wrong!");
+      }
+    } catch (error) {
+      console.error("Error updating professional details:", error);
+
+      if (error.name === "ValidationError") {
+        const validationErrors = {};
+        error.inner.forEach((err) => {
+          validationErrors[err.path] = err.message;
+        });
+        setErrors(validationErrors);
+      } else {
+        const message =
+          error?.response?.data?.message ||
+          "Failed to update professional info.";
+        toast.error(message);
+      }
+    }
+  };
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({
@@ -36,6 +176,7 @@ export default function Account() {
 
   const handleSaveBasicInfo = async () => {
     try {
+      await basicInfoSchema.validate(formData, { abortEarly: false });
       const payload = {
         first_name: formData.firstName,
         last_name: formData.lastName,
@@ -64,14 +205,22 @@ export default function Account() {
           pincode: "",
           country: "",
         });
+        setErrors({});
       } else {
         toast.error("Something went wrong!");
       }
     } catch (error) {
-      console.error("Error updating profile:", error);
-      const message =
-        error?.response?.data?.message || "Failed to update profile.";
-      toast.error(message);
+      if (error.name === "ValidationError") {
+        const validationErrors = {};
+        error.inner.forEach((err) => {
+          validationErrors[err.path] = err.message;
+        });
+        setErrors(validationErrors);
+      } else {
+        const message =
+          error?.response?.data?.message || "Failed to update profile.";
+        toast.error(message);
+      }
     }
   };
 
@@ -122,6 +271,11 @@ export default function Account() {
                       placeholder="Enter Your First Name"
                       className="w-full px-4 py-3 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
                     />
+                    {errors.firstName && (
+                      <p className="text-red-500 text-xs mt-1">
+                        {errors.firstName}
+                      </p>
+                    )}
                   </div>
                   <div>
                     <label className="text-sm">Last Name</label>
@@ -132,6 +286,11 @@ export default function Account() {
                       placeholder="Enter Your Last Name"
                       className="w-full px-4 py-3 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
                     />
+                    {errors.lastName && (
+                      <p className="text-red-500 text-xs mt-1">
+                        {errors.lastName}
+                      </p>
+                    )}
                   </div>
                   <div>
                     <label className="text-sm block mb-1">Date of Birth</label>
@@ -169,6 +328,9 @@ export default function Account() {
                         }}
                       />
                     </LocalizationProvider>
+                    {errors.dob && (
+                      <p className="text-red-500 text-xs mt-1">{errors.dob}</p>
+                    )}
                   </div>
                   <div>
                     <label className="text-sm mb-1 block">Gender</label>
@@ -185,6 +347,11 @@ export default function Account() {
                       <option value="female">Female</option>
                       <option value="other">Other</option>
                     </select>
+                    {errors.gender && (
+                      <p className="text-red-500 text-xs mt-1">
+                        {errors.gender}
+                      </p>
+                    )}
                   </div>
                 </div>
 
@@ -203,6 +370,11 @@ export default function Account() {
                       />
                       <IoCheckmarkCircle className="absolute text-blue-400 right-3 top-3 h-5 w-5" />
                     </div>
+                    {errors.email && (
+                      <p className="text-red-500 text-xs mt-1">
+                        {errors.email}
+                      </p>
+                    )}
                   </div>
                   <div>
                     <label className="text-sm mb-1 block">Phone Number</label>
@@ -224,6 +396,11 @@ export default function Account() {
                         Verify
                       </span>
                     </div>
+                    {errors.phoneNumber && (
+                      <p className="text-red-500 text-xs mt-1">
+                        {errors.phoneNumber}
+                      </p>
+                    )}
                   </div>
                 </div>
 
@@ -238,6 +415,11 @@ export default function Account() {
                       className="w-full px-4 py-3 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
                       placeholder="Enter Street/House"
                     />
+                    {errors.street && (
+                      <p className="text-red-500 text-xs mt-1">
+                        {errors.street}
+                      </p>
+                    )}
                   </div>
                   <div>
                     <label className="text-sm">State</label>
@@ -248,6 +430,11 @@ export default function Account() {
                       className="w-full px-4 py-3 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
                       placeholder="Enter State"
                     />
+                    {errors.stateName && (
+                      <p className="text-red-500 text-xs mt-1">
+                        {errors.stateName}
+                      </p>
+                    )}
                   </div>
                   <div>
                     <label className="text-sm">Pincode</label>
@@ -258,6 +445,11 @@ export default function Account() {
                       className="w-full px-4 py-3 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
                       placeholder="Enter Pincode"
                     />
+                    {errors.pincode && (
+                      <p className="text-red-500 text-xs mt-1">
+                        {errors.pincode}
+                      </p>
+                    )}
                   </div>
                   <div>
                     <label className="text-sm">Country</label>
@@ -268,6 +460,11 @@ export default function Account() {
                       className="w-full px-4 py-3 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
                       placeholder="Enter Country"
                     />
+                    {errors.country && (
+                      <p className="text-red-500 text-xs mt-1">
+                        {errors.country}
+                      </p>
+                    )}
                   </div>
                 </div>
 
@@ -292,13 +489,24 @@ export default function Account() {
                         Company/ Organization Name
                       </label>
                       <input
+                        name="companyName"
+                        value={professionalData.companyName}
+                        onChange={handleProfessionalChange}
                         className="w-full mt-1 px-4 py-3 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
                         placeholder="Enter Company name here "
                       />
+                      {errors.companyName && (
+                        <p className="text-red-500 text-xs mt-1">
+                          {errors.companyName}
+                        </p>
+                      )}
                     </div>
                     <div>
                       <label className="text-sm">Job Title / Role</label>
                       <select
+                        name="jobTitle"
+                        value={professionalData.jobTitle}
+                        onChange={handleProfessionalChange}
                         className="w-full px-4  py-3 border border-gray-300 rounded-md text-sm bg-white text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-150"
                         defaultValue=""
                       >
@@ -319,16 +527,25 @@ export default function Account() {
                           Operation Manager
                         </option>
                       </select>
+                      {errors.jobTitle && (
+                        <p className="text-red-500 text-xs mt-1">
+                          {errors.jobTitle}
+                        </p>
+                      )}
                     </div>
                     <div>
                       <label className="text-sm mb-1 block">Industry</label>
                       <select
+                        name="industry"
+                        value={professionalData.industry}
+                        onChange={handleProfessionalChange}
                         className="w-full px-4 py-3 border border-gray-300 rounded-md text-sm bg-white text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-150"
                         defaultValue=""
                       >
                         <option value="" disabled>
                           Select Your Industry
                         </option>
+                        <option value="IT Industry"> IT Industry</option>
                         <option value="Film Industry"> Film Industry</option>
                         <option value="Bussness Industry">
                           Bussness Industry
@@ -338,15 +555,28 @@ export default function Account() {
                         </option>
                         <option value="Other Sector">Other Sector</option>
                       </select>
+                      {errors.industry && (
+                        <p className="text-red-500 text-xs mt-1">
+                          {errors.industry}
+                        </p>
+                      )}
                     </div>
                     <div>
                       <label className="text-sm ">
                         Company/ Organization Website
                       </label>
                       <input
+                        name="website"
+                        value={professionalData.website}
+                        onChange={handleProfessionalChange}
                         className="w-full mt-1 px-4 py-3 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
                         placeholder="Enter Company Website here "
                       />
+                      {errors.website && (
+                        <p className="text-red-500 text-xs mt-1">
+                          {errors.website}
+                        </p>
+                      )}
                     </div>
                   </div>
                   <p className="mt-6 text-md font-semibold">
@@ -358,10 +588,18 @@ export default function Account() {
                         Bussness Email
                       </label>
                       <input
+                        name="businessEmail"
+                        value={professionalData.businessEmail}
+                        onChange={handleProfessionalChange}
                         type="email"
                         placeholder="Enter email address here"
                         className="w-full px-4 py-3 border border-gray-300 rounded-md text-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
                       />
+                      {errors.businessEmail && (
+                        <p className="text-red-500 text-xs mt-1">
+                          {errors.businessEmail}
+                        </p>
+                      )}
                     </div>
                     <div>
                       <label className="text-sm mb-1 block">Phone Number</label>
@@ -378,7 +616,10 @@ export default function Account() {
                     </div>
                   </div>
 
-                  <button className="mt-6 bg-[#FFD700] hover:bg-yellow-500 text-gray-800 font-bold px-12 py-2 rounded-lg">
+                  <button
+                    onClick={handleSaveProfessionalInfo}
+                    className="cursor-pointer mt-6 bg-[#FFD700] hover:bg-yellow-500 text-gray-800 font-bold px-12 py-2 rounded-lg"
+                  >
                     Save
                   </button>
                 </div>
@@ -389,15 +630,18 @@ export default function Account() {
           <div className="bg-white border-gray-500  rounded-lg   text-center">
             <div className="flex flex-col items-center space-y-2 shadow-sm p-10 rounded-xl">
               <div className="h-16 w-16 bg-gradient-to-br from-red-400 to-orange-400 text-white rounded-full flex items-center justify-center text-xl font-bold">
-                AV
+                {formData?.firstName?.[0]?.toUpperCase()}
+                {formData?.lastName?.[0]?.toUpperCase()}
               </div>
-              <div className="flex gap-1">
-                <p className="text-sm font-semibold">Aarav Mehta</p>
-                <span className="">
-                  <IoCheckmarkCircle className=" text-green-500 right-0 top-3 h-5 w-5" />
-                </span>
+
+              <div className="flex gap-1 items-center">
+                <p className="text-sm font-semibold">
+                  {formData?.firstName} {formData?.lastName}
+                </p>
+                <IoCheckmarkCircle className="text-green-500 h-5 w-5" />
               </div>
-              <div className="text-xs text-[#4B5563]">Global Ventures LLC</div>
+
+              <div className="text-xs text-[#4B5563]">{professionalData?.companyName}</div>
               <button className="w-50 mt-4 border rounded-lg p-2.5 text-sm text-[#1A9FFF]">
                 Flight History
               </button>
@@ -407,12 +651,19 @@ export default function Account() {
             </div>
 
             <div className="button-section mt-4">
-              <button className="text-sm border cursor-pointer border-gray-300 p-3 rounded-lg text-gray-700 flex items-center justify-between w-full mb-2">
-                Change Password{" "}
-                <img src="/images/lock.png" alt="" className="h-5" />
+              <button
+                onClick={() => setIsDialogOpen(true)}
+                className="text-sm border cursor-pointer border-gray-300 p-3 rounded-lg text-gray-700 flex items-center justify-between w-full mb-2"
+              >
+                Change Password <img src={LockImg} alt="" className="h-5" />
               </button>
+              <AuthWrapper
+                open={isDialogOpen}
+                onClose={() => setIsDialogOpen(false)}
+                initialStep="changePassword"
+              />
               <button className="text-sm border cursor-pointer border-red-400 p-3 rounded-lg text-red-500 flex items-center justify-between w-full mb-2">
-                Log out <img src="/images/logout.png" alt="" className="h-4" />
+                Log out <img src={signoutImg} alt="" className="h-4" />
               </button>
               <button className="w-full bg-[#FF4D4F] text-white rounded-lg  p-3  text-sm">
                 Delete Account
@@ -421,6 +672,7 @@ export default function Account() {
           </div>
         </div>
       </div>
+
       <ToastContainer
         position="top-right"
         autoClose={3000}

@@ -2,32 +2,9 @@ import React from 'react';
 import { useState, useEffect } from 'react';
 
 export default function Home(){
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [activeTab, setActiveTab] = useState('flights');
-  const [departureDate, setDepartureDate] = useState('');
-  const [returnDate, setReturnDate] = useState('');
-  const [passengers, setPassengers] = useState(1);
-
-  
-  useEffect(() => {
-    const today = new Date();
-    const formattedDate = today.toISOString().split('T')[0];
-    setDepartureDate(formattedDate);
-  }, []);
-
-  const toggleMenu = () => {
-    setIsMenuOpen(!isMenuOpen);
-  };
-
-  const handleSearch = (e) => {
-    e.preventDefault();
-
-    console.log('Search submitted');
-  };
-
   return (
     <div className="min-h-screen bg-gray-50">
-      {/* Navigation */}
+   
 
 
       {/* Hero Section */}

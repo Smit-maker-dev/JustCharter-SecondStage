@@ -8,12 +8,25 @@ export default function Navbar() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
+  const [isScrolled, setIsScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 10) {
+        setIsScrolled(true);
+      } else {
+        setIsScrolled(false);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   useEffect(() => {
     const fName = localStorage.getItem("first_name");
     const lName = localStorage.getItem("last_name");
     if (fName && lName) {
-      
       setFirstName(fName);
       setLastName(lName);
     }
@@ -26,22 +39,37 @@ export default function Navbar() {
   const toggleMobileMenu = () => setIsMobileMenuOpen(!isMobileMenuOpen);
 
   return (
-    <nav className="bg-white shadow-sm relative z-50">
+    <nav
+      className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${
+        isScrolled ? "bg-white shadow-sm" : "bg-transparent"
+      }`}
+    >
       <div className="max-w-7xl mx-auto px-4 flex items-center justify-between h-16">
         <div className="flex items-center space-x-2">
           <img src="/images/Logo.png" alt="AceaAir Logo" className="h-8" />
         </div>
 
         <ul className="hidden md:flex space-x-6 text-sm relative">
-          <li className="cursor-pointer" onClick={() => navigate("/Home")}>
+          <li
+            className="cursor-pointer text-[#FFD700]"
+            onClick={() => navigate("/Home")}
+          >
             Home
           </li>
-          <li className="cursor-pointer">Bookings</li>
+          <li
+            className={`cursor-pointer transition-colors duration-300 ${
+              isScrolled ? "text-[#000000]" : "text-[#FFFFFF]"
+            }`}
+          >
+            Bookings
+          </li>
 
           <li className="relative">
             <div
               onClick={toggleServicesMenu}
-              className="flex items-center space-x-1 cursor-pointer"
+              className={`flex justify-center items-center space-x-1 cursor-pointer transition-colors duration-300 ${
+                isScrolled ? "text-gray-800" : "text-white"
+              }`}
             >
               <span>Services</span>
               <FaAngleDown />
@@ -61,18 +89,34 @@ export default function Navbar() {
               </ul>
             )}
           </li>
-          <li className="cursor-pointer">About</li>
-          <li className="cursor-pointer">Contact us</li>
+          <li
+            className={`cursor-pointer transition-colors duration-300 ${
+              isScrolled ? "text-[#000000]" : "text-[#FFFFFF]"
+            }`}
+          >
+            About
+          </li>
+          <li
+            className={`cursor-pointer transition-colors duration-300 ${
+              isScrolled ? "text-[#000000]" : "text-[#FFFFFF]"
+            }`}
+          >
+            Contact us
+          </li>
         </ul>
 
         <div
           onClick={() => navigate("/account")}
-          className="hidden md:flex items-center bg-gray-50 p-1.5 rounded space-x-2 cursor-pointer hover:bg-gray-100 transition"
+          className="hidden md:flex items-center  p-1.5 rounded space-x-2 cursor-pointer hover:bg-gray-100 transition"
         >
           <div className="h-8 w-8 bg-[#FF6B6B] rounded-full flex items-center justify-center text-white text-sm font-medium">
             {initials.toUpperCase()}
           </div>
-          <span className="text-sm text-[#FFD700]">
+          <span
+            className={`text-sm transition-colors duration-300 ${
+              isScrolled ? "text-[#FFD700]" : "text-[#FFFFFF]"
+            }`}
+          >
             {firstName} {lastName}
           </span>
         </div>
@@ -91,15 +135,26 @@ export default function Navbar() {
       >
         <div className="flex flex-col items-center text-sm space-y-4 py-6">
           <ul className="space-y-4 text-center">
-            <li className="cursor-pointer" onClick={() => navigate("/Home")}>
+            <li
+              className="cursor-pointer text-[#FFD700]"
+              onClick={() => navigate("/Home")}
+            >
               Home
             </li>
-            <li className="cursor-pointer">Bookings</li>
+            <li
+              className={`cursor-pointer transition-colors duration-300 ${
+                isScrolled ? "text-[#000000]" : "text-[#FFFFFF]"
+              }`}
+            >
+              Bookings
+            </li>
 
             <li>
               <div
                 onClick={toggleServicesMenu}
-                className="flex justify-center items-center space-x-1 cursor-pointer"
+                className={`flex justify-center items-center space-x-1 cursor-pointer transition-colors duration-300 ${
+                  isScrolled ? "text-gray-800" : "text-white"
+                }`}
               >
                 <span>Services</span>
                 <FaAngleDown />
@@ -113,8 +168,20 @@ export default function Navbar() {
               )}
             </li>
 
-            <li className="cursor-pointer">About</li>
-            <li className="cursor-pointer">Contact us</li>
+            <li
+              className={`cursor-pointer transition-colors duration-300 ${
+                isScrolled ? "text-[#000000]" : "text-[#FFFFFF]"
+              }`}
+            >
+              About
+            </li>
+            <li
+              className={`cursor-pointer transition-colors duration-300 ${
+                isScrolled ? "text-[#000000]" : "text-[#FFFFFF]"
+              }`}
+            >
+              Contact us
+            </li>
           </ul>
           <div className="profile-section">
             <div
@@ -122,12 +189,16 @@ export default function Navbar() {
                 setIsMobileMenuOpen(false);
                 navigate("/account");
               }}
-              className="flex items-center bg-gray-50 p-2 rounded space-x-2 cursor-pointer hover:bg-gray-100 transition"
+              className="flex items-center  p-2 rounded space-x-2 cursor-pointer hover:bg-gray-100 transition"
             >
               <div className="h-8 w-8 bg-[#FF6B6B] rounded-full flex items-center justify-center text-white text-sm font-medium">
                 {initials.toUpperCase()}
               </div>
-              <span className="text-sm text-[#FFD700]">
+              <span
+                className={`text-sm transition-colors duration-300 ${
+                  isScrolled ? "text-[#FFD700]" : "text-[#FFFFFF]"
+                }`}
+              >
                 {firstName} {lastName}
               </span>
             </div>
