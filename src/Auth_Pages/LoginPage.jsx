@@ -42,7 +42,7 @@ export default function LoginPage() {
       localStorage.setItem("last_name", user.last_name);
 
       setTimeout(() => {
-        navigate("/home");
+        navigate("/");
       }, 1500);
     } catch (error) {
       toast.error(error.response?.data?.message || "Invalid login credentials");

@@ -18,12 +18,12 @@ export default function Router() {
       <Route path="/register" element={<SignupPage/>} />
       <Route path="/verifyemail" element={<VeryfyEmail />} />
       <Route path="/verifymobile" element={<VeryfyMobileNo/>} />
-      <Route path="/" element={<LoginPage/>} />
+      <Route path="/Login" element={<LoginPage/>} />
       <Route path="/forget_password" element={<ForgetPass/>} />
       <Route path="/reset_password" element={<ResetPass/>} />
       <Route path="/OTP_verification" element={<VeryfyOTP/>} />
       <Route element={<MainLayout />}>
-          <Route path="/home" element={<Home />} />
+          <Route path="/" element={<Home />} />
           <Route path="/account" element={<Account />} />
     </Route>
     </Routes>

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { FaAngleDown, FaBars } from "react-icons/fa6";
 import { IoClose } from "react-icons/io5";
 import { useNavigate } from "react-router-dom";
-
+import axios from '../api/axiosInstance'
 export default function Navbar() {
   const [isServicesOpen, setIsServicesOpen] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -23,15 +23,31 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  useEffect(() => {
-    const fName = localStorage.getItem("first_name");
-    const lName = localStorage.getItem("last_name");
-    if (fName && lName) {
-      setFirstName(fName);
-      setLastName(lName);
-    }
-  }, []);
+  // useEffect(() => {
+  //   const fName = localStorage.getItem("first_name");
+  //   const lName = localStorage.getItem("last_name");
+  //   if (fName && lName) {
+  //     setFirstName(fName);
+  //     setLastName(lName);
+  //   }
+  // }, []);
+useEffect(() => {
+  const fetchUser = async () => {
+    try {
+      const response = await axios.get("/user"); 
+      const { first_name, last_name } = response.data;
 
+      if (first_name && last_name) {
+        setFirstName(first_name);
+        setLastName(last_name);
+      }
+    } catch (error) {
+      console.error("Failed to fetch user data:", error);
+    }
+  };
+
+  fetchUser();
+}, []);
   const initials = (firstName?.charAt(0) || "") + (lastName?.charAt(0) || "");
 
   const navigate = useNavigate();
@@ -52,7 +68,7 @@ export default function Navbar() {
         <ul className="hidden md:flex space-x-6 text-sm relative">
           <li
             className="cursor-pointer text-[#FFD700]"
-            onClick={() => navigate("/Home")}
+            onClick={() => navigate("/")}
           >
             Home
           </li>
@@ -94,35 +110,59 @@ export default function Navbar() {
               isScrolled ? "text-[#000000]" : "text-[#FFFFFF]"
             }`}
           >
-            About
+            Event
           </li>
           <li
             className={`cursor-pointer transition-colors duration-300 ${
               isScrolled ? "text-[#000000]" : "text-[#FFFFFF]"
             }`}
           >
-            Contact us
+            Buy & Sell
+          </li>
+          <li
+            className={`cursor-pointer transition-colors duration-300 ${
+              isScrolled ? "text-[#000000]" : "text-[#FFFFFF]"
+            }`}
+          >
+            About
           </li>
         </ul>
 
-        <div
-          onClick={() => navigate("/account")}
-          className="hidden md:flex items-center  p-1.5 rounded space-x-2 cursor-pointer hover:bg-gray-100 transition"
-        >
-          <div className="h-8 w-8 bg-[#FF6B6B] rounded-full flex items-center justify-center text-white text-sm font-medium">
-            {initials.toUpperCase()}
-          </div>
-          <span
-            className={`text-sm transition-colors duration-300 ${
-              isScrolled ? "text-[#FFD700]" : "text-[#FFFFFF]"
-            }`}
+        {firstName && lastName ? (
+          <div
+            onClick={() => navigate("/account")}
+            className="hidden md:flex items-center p-1.5 rounded space-x-2 cursor-pointer hover:bg-gray-400 transition"
           >
-            {firstName} {lastName}
-          </span>
-        </div>
+            <div className="h-8 w-8 bg-[#FF6B6B] rounded-full flex items-center justify-center text-white text-sm font-medium">
+              {initials.toUpperCase()}
+            </div>
+            <span
+              className={`text-sm transition-colors duration-300 ${
+                isScrolled ? "text-[#FFD700]" : "text-[#FFFFFF]"
+              }`}
+            >
+              {firstName} {lastName}
+            </span>
+          </div>
+        ) : (
+          <div className="hidden md:flex space-x-4">
+            <button
+              onClick={() => navigate("/register")}
+              className="text-sm px-4 py-2  text-white rounded hover:bg-yellow-400 hover:text-black transition "
+            >
+              Sign Up
+            </button>
+            <button
+              onClick={() => navigate("/login")}
+              className="text-sm px-10 py-2 bg-[#1A9FFF] text-white  rounded-md hover:bg-gray-100 transition"
+            >
+              Login
+            </button>
+          </div>
+        )}
 
         <div className="md:hidden">
-          <button onClick={toggleMobileMenu} className="text-xl">
+          <button onClick={toggleMobileMenu} className="text-xl ">
             {isMobileMenuOpen ? <IoClose /> : <FaBars />}
           </button>
         </div>
@@ -137,7 +177,7 @@ export default function Navbar() {
           <ul className="space-y-4 text-center">
             <li
               className="cursor-pointer text-[#FFD700]"
-              onClick={() => navigate("/Home")}
+              onClick={() => navigate("/")}
             >
               Home
             </li>
@@ -167,7 +207,20 @@ export default function Navbar() {
                 </ul>
               )}
             </li>
-
+            <li
+              className={`cursor-pointer transition-colors duration-300 ${
+                isScrolled ? "text-[#000000]" : "text-[#FFFFFF]"
+              }`}
+            >
+              Event
+            </li>
+            <li
+              className={`cursor-pointer transition-colors duration-300 ${
+                isScrolled ? "text-[#000000]" : "text-[#FFFFFF]"
+              }`}
+            >
+              Buy & Sell
+            </li>
             <li
               className={`cursor-pointer transition-colors duration-300 ${
                 isScrolled ? "text-[#000000]" : "text-[#FFFFFF]"
@@ -175,33 +228,49 @@ export default function Navbar() {
             >
               About
             </li>
-            <li
-              className={`cursor-pointer transition-colors duration-300 ${
-                isScrolled ? "text-[#000000]" : "text-[#FFFFFF]"
-              }`}
-            >
-              Contact us
-            </li>
           </ul>
           <div className="profile-section">
-            <div
-              onClick={() => {
-                setIsMobileMenuOpen(false);
-                navigate("/account");
-              }}
-              className="flex items-center  p-2 rounded space-x-2 cursor-pointer hover:bg-gray-100 transition"
-            >
-              <div className="h-8 w-8 bg-[#FF6B6B] rounded-full flex items-center justify-center text-white text-sm font-medium">
-                {initials.toUpperCase()}
-              </div>
-              <span
-                className={`text-sm transition-colors duration-300 ${
-                  isScrolled ? "text-[#FFD700]" : "text-[#FFFFFF]"
-                }`}
+            {firstName && lastName ? (
+              <div
+                onClick={() => {
+                  setIsMobileMenuOpen(false);
+                  navigate("/account");
+                }}
+                className="flex items-center p-2 rounded space-x-2 cursor-pointer hover:bg-gray-100 transition"
               >
-                {firstName} {lastName}
-              </span>
-            </div>
+                <div className="h-8 w-8 bg-[#FF6B6B] rounded-full flex items-center justify-center text-white text-sm font-medium">
+                  {initials.toUpperCase()}
+                </div>
+                <span
+                  className={`text-sm transition-colors duration-300 ${
+                    isScrolled ? "text-[#FFD700]" : "text-[#000000]"
+                  }`}
+                >
+                  {firstName} {lastName}
+                </span>
+              </div>
+            ) : (
+              <div className="flex space-x-4">
+                <button
+                  onClick={() => {
+                    setIsMobileMenuOpen(false);
+                    navigate("/register");
+                  }}
+                  className="text-sm px-4 py-2  text-black rounded hover:bg-yellow-400 transition"
+                >
+                  Sign Up
+                </button>
+                <button
+                  onClick={() => {
+                    setIsMobileMenuOpen(false);
+                    navigate("/login");
+                  }}
+                  className="text-sm px-4 py-2 bg-gray-200 text-black rounded hover:bg-gray-300 transition"
+                >
+                  Login
+                </button>
+              </div>
+            )}
           </div>
         </div>
       </div>

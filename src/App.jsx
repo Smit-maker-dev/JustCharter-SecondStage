@@ -7,7 +7,7 @@ import Router from "./RouterFile/Router";
 import Navbar from "./Components/Navbar";
 import Account from "./Main_Pages/Account";
 import "../src/Firebase/firebase"
-import Home from "./Main_Pages/Home";
+
 function App() {
   return (
     <>
@@ -16,7 +16,7 @@ function App() {
      {/* <VeryfyEmail/> */}
      <Router/>
      {/* <Navbar/> */}
-     {/* <Home/> */}
+     
      {/* <br /> */}
      {/* <Account/>  */}
     </>

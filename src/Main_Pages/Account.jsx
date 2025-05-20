@@ -229,7 +229,7 @@ export default function Account() {
   };
 
   return (
-    <div className="bg-white min-h-screen p-4">
+    <div className="bg-white min-h-screen p-4 mt-5">
       <div className="max-w-6xl mx-auto mt-3">
         <div className="heading-section">
           <h2 className="text-2xl font-semibold mb-1">Account</h2>
