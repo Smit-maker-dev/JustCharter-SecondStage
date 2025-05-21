@@ -257,7 +257,6 @@ export default function SignupPage() {
                   {formData.password === formData.confirmPassword &&
                     formData.confirmPassword.length > 0 && (
                       <img
-                        // src="images/checkmark.png"
                         src={Checkmark}
                         alt="Checkmark"
                         className="w-5 h-5 absolute right-10 top-1/2 transform -translate-y-1/2"

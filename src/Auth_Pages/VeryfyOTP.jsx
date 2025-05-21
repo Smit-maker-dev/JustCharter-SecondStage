@@ -38,38 +38,41 @@ export default function VeryfyOTP() {
         otp: code,
       });
 
-      const resetToken = response.data.reset_token; 
+      console.log("Full OTP Verify Response:", response);
 
-      if (!resetToken) {
-        Swal.fire({
-          icon: "error",
-          title: "Error",
-          text: "Reset token not received from server.",
-          confirmButtonColor: "#d33",
-        });
-        return;
+      const token = response.data?.token;
+
+      if (!token) {
+        console.error("Token not found in response:", response.data?.token);
+        throw new Error("Authentication token not received");
       }
 
-      
-      localStorage.setItem("resetToken", resetToken);
+      localStorage.setItem("authToken", token);
+      console.log("Token successfully saved to localStorage:", token);
 
-      Swal.fire({
+      await Swal.fire({
         icon: "success",
-        title: "Verified",
+        title: "Login Successful",
         text: response.data?.message || "OTP verified successfully!",
         confirmButtonColor: "#3085d6",
       });
 
-      navigate("/reset_password"); 
+      navigate("/"); // Navigate to home page
     } catch (error) {
       console.error(
         "OTP verification failed:",
         error.response?.data || error.message
       );
+
+      localStorage.removeItem("authToken");
+
       Swal.fire({
         icon: "error",
         title: "Verification Failed",
-        text: error.response?.data?.message || "OTP verification failed",
+        text:
+          error.response?.data?.message ||
+          error.message ||
+          "OTP verification failed",
         confirmButtonColor: "#d33",
       });
     }

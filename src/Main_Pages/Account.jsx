@@ -12,6 +12,7 @@ import "react-toastify/dist/ReactToastify.css";
 import dayjs from "dayjs";
 import * as yup from "yup";
 import AuthWrapper from "../Components/Dialogs/AuthWrapper";
+import { useNavigate } from "react-router-dom";
 const basicInfoSchema = yup.object().shape({
   firstName: yup.string().required("First Name is required"),
   lastName: yup.string().required("Last Name is required"),
@@ -72,7 +73,7 @@ export default function Account() {
   });
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [errors, setErrors] = useState({});
-
+  const navigate = useNavigate();
   useEffect(() => {
     const fetchUserProfile = async () => {
       try {
@@ -227,7 +228,17 @@ export default function Account() {
   const handleTabChange = (event, newValue) => {
     setTabIndex(newValue);
   };
-
+const handleLogout = () => {
+  localStorage.removeItem("first_name");
+    localStorage.removeItem("last_name");
+    localStorage.removeItem("access_token");
+  
+  delete axios.defaults.headers.common["Authorization"];
+  
+  navigate("/login");
+  
+  toast.success("Logged out successfully");
+};
   return (
     <div className="bg-white min-h-screen p-4 mt-5">
       <div className="max-w-6xl mx-auto mt-3">
@@ -662,7 +673,9 @@ export default function Account() {
                 onClose={() => setIsDialogOpen(false)}
                 initialStep="changePassword"
               />
-              <button className="text-sm border cursor-pointer border-red-400 p-3 rounded-lg text-red-500 flex items-center justify-between w-full mb-2">
+              <button className="text-sm border cursor-pointer border-red-400 p-3 rounded-lg text-red-500 flex items-center justify-between w-full mb-2"
+               onClick={handleLogout}
+              >
                 Log out <img src={signoutImg} alt="" className="h-4" />
               </button>
               <button className="w-full bg-[#FF4D4F] text-white rounded-lg  p-3  text-sm">

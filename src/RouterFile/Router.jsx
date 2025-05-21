@@ -10,6 +10,7 @@ import VeryfyOTP from '../Auth_Pages/VeryfyOTP'
 import Home from '../Main_Pages/Home'
 import MainLayout from '../Components/MainLayout'
 import Account from '../Main_Pages/Account'
+import Bookings from '../Main_Pages/Bookings'
 
 export default function Router() {
   return (
@@ -25,6 +26,7 @@ export default function Router() {
       <Route element={<MainLayout />}>
           <Route path="/" element={<Home />} />
           <Route path="/account" element={<Account />} />
+          <Route path="/bookings" element={<Bookings />} />
     </Route>
     </Routes>
     </BrowserRouter>
