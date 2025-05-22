@@ -504,8 +504,8 @@ export default function Home() {
             </div>
           ))}
         </div>
-        <div className="mt-16 bg-white rounded-xl shadow-md p-6 text-center max-w-7xl mx-auto  ">
-          <p className="text-lg sm:text-xl lg:text-2xl italic text-[#000000] leading-relaxed">
+        <div className="mt-16 bg-white rounded-xl shadow-md p-5 text-center max-w-[79rem] mx-auto">
+          <p className="text-[25px] sm:text-xl lg:text-[23px] italic text-[#000000] leading-relaxed">
             <span>
               "Aceaair consistently exceeds our expectations, setting the gold
               standard for luxury private aviation."
@@ -595,8 +595,9 @@ export default function Home() {
         <section className=" py-16 px-4 sm:px-6 lg:px-20 max-w-7xl mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
             <div>
-              <h2 className="text-2xl sm:text-3xl font-semibold text-gray-900 mb-4"
-              style={{ fontFamily: "'Playfair Display', serif" }}
+              <h2
+                className="text-2xl sm:text-3xl font-semibold text-gray-900 mb-4"
+                style={{ fontFamily: "'Playfair Display', serif" }}
               >
                 Membership Advantages
               </h2>
@@ -637,24 +638,22 @@ export default function Home() {
               </a>
             </div>
 
-
-           <div className="relative w-full max-w-[600px] mx-auto p-5">
-          <div className="aspect-[16/9] rounded-xl overflow-hidden shadow-lg ">
-            <img
-              src="/images/oskar-kadaksoo.jpg"
-              alt="Luxury interior"
-              className="w-full h-full object-cover "
-            />
+            <div className="relative w-full max-w-[600px] mx-auto p-5">
+              <div className="aspect-[16/9] rounded-xl overflow-hidden shadow-lg ">
+                <img
+                  src="/images/oskar-kadaksoo.jpg"
+                  alt="Luxury interior"
+                  className="w-full h-full object-cover "
+                />
+              </div>
+              <div className="absolute bottom-0 right-0  bg-[#1A1A1A] text-white px-10 py-4 rounded-lg shadow-md text-center">
+                <p className="text-sm">Starting at</p>
+                <p className="text-xl font-semibold">$4,500</p>
+              </div>
+            </div>
           </div>
-          <div className="absolute bottom-0 right-0  bg-[#1A1A1A] text-white px-10 py-4 rounded-lg shadow-md text-center">
-            <p className="text-sm">Starting at</p>
-            <p className="text-xl font-semibold">$4,500</p>
-          </div>
-        </div>
-      </div>
         </section>
       </div>
     </>
   );
 }
-
