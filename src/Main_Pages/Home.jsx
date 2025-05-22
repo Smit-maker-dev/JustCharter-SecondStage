@@ -504,8 +504,8 @@ export default function Home() {
             </div>
           ))}
         </div>
-        <div className="mt-16 bg-white rounded-xl shadow-md p-5 text-center max-w-[79rem] mx-auto">
-          <p className="text-[25px] sm:text-xl lg:text-[23px] italic text-[#000000] leading-relaxed">
+        <div className="mt-16 bg-white rounded-xl shadow-md p-5 text-c  enter max-w-[79rem] mx-auto">
+          <p className="text-[20px] sm:text-xl lg:text-[20px] italic text-[#000000] leading-relaxed">
             <span>
               "Aceaair consistently exceeds our expectations, setting the gold
               standard for luxury private aviation."
