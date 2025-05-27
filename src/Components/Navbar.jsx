@@ -25,7 +25,8 @@ export default function Navbar() {
   useEffect(() => {
     const fetchUser = async () => {
       try {
-        const response = await axios.get("/user");
+          const response = await axios.get("/user");
+
         const { first_name, last_name } = response.data.data;
 
         if (first_name && last_name) {

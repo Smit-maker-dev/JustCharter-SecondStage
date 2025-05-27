@@ -53,7 +53,7 @@ export default function VeryfyMobileNo() {
       });
 
       setCounter(60);
-      await fetchLatestOtp(); 
+      await fetchLatestOtp();
     } catch (error) {
       console.error("OTP send failed:", error.response?.data || error.message);
       Swal.fire({
@@ -84,7 +84,12 @@ export default function VeryfyMobileNo() {
         otp: code,
       });
 
-      const { message, is_phone_verified } = response.data;
+      const { message, is_phone_verified, data } = response.data;
+
+      
+      if (data?.token) {
+        localStorage.setItem("token", data.token);
+      }
 
       Swal.fire({
         icon: "success",
