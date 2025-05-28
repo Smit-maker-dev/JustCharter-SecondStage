@@ -7,41 +7,16 @@ const axiosInstance = axios.create({
   },
 });
 
-
-// axiosInstance.interceptors.request.use((config) => {
-//   const AccessToken = localStorage.getItem("access_token");
-//   if (AccessToken) {
-//     config.headers.Authorization = `Bearer ${AccessToken}`;
-//   }
-//   return config;
-// }, (error) => {
-//   return Promise.reject(error);
-// });
-
-// axiosInstance.interceptors.request.use((config) => {
-//   const Token = localStorage.getItem("token");
-//   if (Token) {
-//     config.headers.Authorization = `Bearer ${Token}`;
-//   }
-//   return config;
-// }, (error) => {
-//   return Promise.reject(error);
-// });
 axiosInstance.interceptors.request.use((config) => {
-  const token = localStorage.getItem('token');
-  if (token && !config.headers['Authorization']) {
+  const token = localStorage.getItem('access_token') || localStorage.getItem('token');
+
+  if (token) {
     config.headers['Authorization'] = `Bearer ${token}`;
   }
+
   return config;
+}, (error) => {
+  return Promise.reject(error);
 });
 
-
-axiosInstance.interceptors.request.use((config) => {
-  const accessToken = localStorage.getItem('access_token');
-  if (accessToken && config.useAccessToken) {
-    config.headers['Authorization'] = `Bearer ${accessToken}`;
-  }
-  delete config.useAccessToken;
-  return config;
-});
 export default axiosInstance;

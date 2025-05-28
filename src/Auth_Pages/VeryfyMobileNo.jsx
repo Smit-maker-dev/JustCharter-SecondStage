@@ -1,7 +1,9 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import axios from "../api/axiosInstance";
-import Swal from "sweetalert2";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import OTPInput from "../Components/OTPInput";
 
 export default function VeryfyMobileNo() {
   const [code, setCode] = useState("");
@@ -12,12 +14,14 @@ export default function VeryfyMobileNo() {
   const navigate = useNavigate();
   const location = useLocation();
   const userId = location.state?.userId;
-
+ const [loading, setLoading] = useState(false);
   useEffect(() => {
     if (!userId || otpSentRef.current) return;
 
     otpSentRef.current = true;
-    sendOtp();
+    setTimeout(() => {
+      sendOtp();
+    }, 1500);
   }, [userId]);
 
   useEffect(() => {
@@ -45,36 +49,24 @@ export default function VeryfyMobileNo() {
       const { otp_id, message } = response.data;
       setOtpId(otp_id);
 
-      Swal.fire({
-        icon: "success",
-        title: "OTP Sent",
-        text: message || "OTP sent successfully!",
-        confirmButtonColor: "#3085d6",
-      });
+      toast.success(message || "OTP sent successfully!");
 
       setCounter(60);
-      await fetchLatestOtp();
+
+      setTimeout(() => {
+        fetchLatestOtp();
+      }, 1200);
     } catch (error) {
       console.error("OTP send failed:", error.response?.data || error.message);
-      Swal.fire({
-        icon: "error",
-        title: "Failed to send OTP",
-        text: error.response?.data?.message || "Sending OTP failed",
-        confirmButtonColor: "#d33",
-      });
+      toast.error(error.response?.data?.message || "Sending OTP failed");
     }
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+     setLoading(true);
     if (!otpId) {
-      Swal.fire({
-        icon: "error",
-        title: "Error",
-        text: "OTP ID missing. Please resend OTP.",
-        confirmButtonColor: "#d33",
-      });
+      toast.error("OTP ID missing. Please resend OTP.");
       return;
     }
 
@@ -86,17 +78,11 @@ export default function VeryfyMobileNo() {
 
       const { message, is_phone_verified, data } = response.data;
 
-      
       if (data?.token) {
         localStorage.setItem("token", data.token);
       }
 
-      Swal.fire({
-        icon: "success",
-        title: "Verified",
-        text: message || "Mobile number verified!",
-        confirmButtonColor: "#3085d6",
-      });
+      toast.success(message || "Mobile number verified!");
 
       if (is_phone_verified) {
         navigate("/");
@@ -106,17 +92,15 @@ export default function VeryfyMobileNo() {
         "OTP verification failed:",
         error.response?.data || error.message
       );
-      Swal.fire({
-        icon: "error",
-        title: "Verification Failed",
-        text: error.response?.data?.message || "OTP verification failed",
-        confirmButtonColor: "#d33",
-      });
+      toast.error(error.response?.data?.message || "OTP verification failed");
+    }finally {
+      setLoading(false);
     }
   };
 
   return (
     <div className="h-screen flex flex-col md:flex-row overflow-hidden">
+       <ToastContainer  autoClose={3000} hideProgressBar />
       <div className="hidden md:block md:w-1/2 h-full">
         <img
           src="/images/privatejet.png"
@@ -143,7 +127,8 @@ export default function VeryfyMobileNo() {
               <label className="text-sm text-gray-800 mb-1 block">
                 Enter Verification Code
               </label>
-              <div className="relative">
+              <OTPInput code={code} setCode={setCode} />
+              {/* <div className="relative">
                 <input
                   type="text"
                   placeholder="6 - Digit code"
@@ -159,7 +144,7 @@ export default function VeryfyMobileNo() {
                   alt="Verified"
                   className="absolute right-3 top-2.5 h-5 w-5"
                 />
-              </div>
+              </div> */}
             </div>
 
             <p className="text-sm text-gray-500">
@@ -177,11 +162,19 @@ export default function VeryfyMobileNo() {
               )}
             </p>
 
-            <button
+            <button 
               type="submit"
-              className="w-full md:w-3/5 bg-blue-400 text-white py-2.5 mt-4 rounded-lg hover:bg-blue-700 transition"
+              disabled={loading}
+              className="cursor-pointer w-full md:w-3/5 bg-[#1A9FFF] text-white py-2.5 mt-4 rounded-lg hover:bg-blue-500 transition"
             >
-              Verify
+              {loading ? (
+                <div className="flex items-center justify-center gap-2">
+                  <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+                  <span>Please wait...</span>
+                </div>
+              ) : (
+                "Verify"
+              )}
             </button>
           </form>
         </div>

@@ -77,7 +77,12 @@ export default function Account() {
   useEffect(() => {
     const fetchUserProfile = async () => {
       try {
-        const res = await axios.get("/user");
+        const useAccessToken = Boolean(localStorage.getItem("access_token"));
+
+        const res = await axios.get("/user", {
+          useAccessToken: useAccessToken, // ✅ Triggers the correct interceptor
+        });
+
         const user = res.data.data;
 
         setFormData({
@@ -228,18 +233,18 @@ export default function Account() {
   const handleTabChange = (event, newValue) => {
     setTabIndex(newValue);
   };
-const handleLogout = () => {
-  localStorage.removeItem("first_name");
+  const handleLogout = () => {
+    localStorage.removeItem("first_name");
     localStorage.removeItem("last_name");
     localStorage.removeItem("access_token");
     localStorage.removeItem("token");
-    
-  delete axios.defaults.headers.common["Authorization"];
-  
-  navigate("/login", { replace: true });
-  
-  toast.success("Logged out successfully");
-};
+
+    delete axios.defaults.headers.common["Authorization"];
+
+    navigate("/login", { replace: true });
+
+    toast.success("Logged out successfully");
+  };
   return (
     <div className="bg-white min-h-screen p-4 mt-5">
       <div className="max-w-6xl mx-auto mt-3">
@@ -653,7 +658,9 @@ const handleLogout = () => {
                 <IoCheckmarkCircle className="text-green-500 h-5 w-5" />
               </div>
 
-              <div className="text-xs text-[#4B5563]">{professionalData?.companyName}</div>
+              <div className="text-xs text-[#4B5563]">
+                {professionalData?.companyName}
+              </div>
               <button className="w-50 mt-4 border rounded-lg p-2.5 text-sm text-[#1A9FFF]">
                 Flight History
               </button>
@@ -674,8 +681,9 @@ const handleLogout = () => {
                 onClose={() => setIsDialogOpen(false)}
                 initialStep="changePassword"
               />
-              <button className="text-sm border cursor-pointer border-red-400 p-3 rounded-lg text-red-500 flex items-center justify-between w-full mb-2"
-               onClick={handleLogout}
+              <button
+                className="text-sm border cursor-pointer border-red-400 p-3 rounded-lg text-red-500 flex items-center justify-between w-full mb-2"
+                onClick={handleLogout}
               >
                 Log out <img src={signoutImg} alt="" className="h-4" />
               </button>

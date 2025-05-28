@@ -1,12 +1,13 @@
 import React, { useState } from "react";
 import * as Yup from "yup";
 import { Link, useNavigate } from "react-router-dom";
-import Swal from "sweetalert2";
 import axios from "../api/axiosInstance";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import Logo from "/images/Logo.png";
 import PrivateJet from "/images/privatejet.png";
 import Checkmark from "/images/checkmark.png";
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const validationSchema = Yup.object().shape({
   email: Yup.string().email("Invalid email").required("Email is required"),
@@ -34,12 +35,13 @@ export default function SignupPage() {
     lastName: "",
     password: "",
     confirmPassword: "",
-    marketing: false,
+    marketing: true,
   });
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [errors, setErrors] = useState({});
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
   const handleChange = (e) => {
@@ -52,7 +54,7 @@ export default function SignupPage() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+    setLoading(true);
     if (isSubmitting) return;
     setIsSubmitting(true);
 
@@ -80,46 +82,32 @@ export default function SignupPage() {
         is_phone_verified,
       } = response.data.data;
 
-      Swal.fire({
-        icon: "success",
-        title: "Signup Successful",
-        text: "Please check your email to verify your account.",
-        confirmButtonColor: "#3085d6",
-      });
+      toast.success("Signup successful!");
 
       if (!is_email_verified || !is_phone_verified) {
         navigate("/verifyemail", { state: { userId } });
       }
     } catch (err) {
-      if (err.name === "ValidationError") {
-        const newErrors = {};
-        err.inner.forEach((error) => {
-          newErrors[error.path] = error.message;
-        });
-        setErrors(newErrors);
-      } else if (err.response) {
-        console.error("API Error:", err.response.data);
-        Swal.fire({
-          icon: "error",
-          title: "Signup Failed",
-          text:
-            err.response.data.message ||
-            "Something went wrong. Please try again.",
-          confirmButtonColor: "#d33",
-        });
-      } else {
-        console.error("Unexpected Error:", err);
-        Swal.fire({
-          icon: "error",
-          title: "Unexpected Error",
-          text: "An unexpected error occurred. Please try again later.",
-          confirmButtonColor: "#d33",
-        });
-      }
-    } finally {
-      setIsSubmitting(false);
+    if (err.name === "ValidationError") {
+      const newErrors = {};
+      err.inner.forEach((error) => {
+        newErrors[error.path] = error.message;
+        toast.error(error.message);  
+      });
+      setErrors(newErrors);
+    } else if (err.response && err.response.data && err.response.data.message) {
+      
+      toast.error(err.response.data.message);
+    } else {
+      
+      toast.error("An unexpected error occurred. Please try again later.");
+      console.error("Unexpected Error:", err);
     }
-  };
+  } finally {
+    setIsSubmitting(false);
+    setLoading(false);
+  }
+};
 
   return (
     <div className="h-screen flex flex-col md:flex-row overflow-hidden">
@@ -293,7 +281,7 @@ export default function SignupPage() {
                 type="checkbox"
                 checked={formData.marketing}
                 onChange={handleChange}
-                className="mt-1"
+                className="mt-1  accent-black"
               />
               <span className="text-sm text-black">
                 I want to receive emails about the product, feature updates,
@@ -313,13 +301,21 @@ export default function SignupPage() {
             </p>
             <button
               type="submit"
-              className="w-full md:w-3/5 bg-blue-400 text-white py-2.5 mt-4 rounded-lg hover:bg-blue-700 transition"
+              disabled={loading}
+              className="cursor-pointer w-full md:w-3/5 font-semibold bg-blue-400 text-white py-2.5 mt-4 rounded-lg hover:bg-blue-700 transition flex items-center justify-center gap-2"
             >
-              Sign up
+              {loading ? (
+                <span className="flex items-center gap-2">
+                  <span className="w-5 h-5 border-2 border-t-transparent border-white rounded-full animate-spin"></span>
+                  <span>Please wait...</span>
+                </span>
+              ) : (
+                "Sign up"
+              )}
             </button>
 
             <p className="text-sm mt-4">
-              Already have an account ? {" "}
+              Already have an account ?{" "}
               <Link to="/Loginpage" className="text-blue-600 underline">
                 Log in
               </Link>

@@ -22,29 +22,57 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  useEffect(() => {
-    const token =
-      localStorage.getItem("token") || localStorage.getItem("access_token");
-    if (!token) return; 
+  // useEffect(() => {
+  //   const token =
+  //     localStorage.getItem("token") || localStorage.getItem("access_token");
+  //   if (!token) return; 
 
-    const fetchUser = async () => {
-      try {
-        const response = await axios.get("/user"); 
-        const { first_name, last_name } = response.data.data;
+  //   const fetchUser = async () => {
+  //     try {
+  //       const response = await axios.get("/user"); 
+  //       const { first_name, last_name } = response.data.data;
 
-        if (first_name && last_name) {
-          setFirstName(first_name);
-          setLastName(last_name);
-        }
-      } catch (error) {
-        if (process.env.NODE_ENV === "development") {
-          console.error("Failed to fetch user data:", error);
-        }
+  //       if (first_name && last_name) {
+  //         setFirstName(first_name);
+  //         setLastName(last_name);
+  //       }
+  //     } catch (error) {
+  //       if (process.env.NODE_ENV === "development") {
+  //         console.error("Failed to fetch user data:", error);
+  //       }
+  //     }
+  //   };
+
+  //   fetchUser();
+  // }, []);
+useEffect(() => {
+  const token =
+    localStorage.getItem("token") || localStorage.getItem("access_token");
+  if (!token) return;
+
+  const fetchUser = async () => {
+    try {
+      const useAccessToken = Boolean(localStorage.getItem("access_token"));
+
+      const response = await axios.get("/user", {
+        useAccessToken: useAccessToken, 
+      });
+
+      const { first_name, last_name } = response.data.data;
+
+      if (first_name && last_name) {
+        setFirstName(first_name);
+        setLastName(last_name);
       }
-    };
+    } catch (error) {
+      if (process.env.NODE_ENV === "development") {
+        console.error("Failed to fetch user data:", error);
+      }
+    }
+  };
 
-    fetchUser();
-  }, []);
+  fetchUser();
+}, []);
 
   const location = useLocation();
   const isHome = location.pathname === "/";

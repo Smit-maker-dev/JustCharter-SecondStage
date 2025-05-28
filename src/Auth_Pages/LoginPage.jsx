@@ -123,11 +123,12 @@ export default function LoginPage() {
               </div>
             </div>
 
-            <button
+             <button
               type="submit"
-              className="cursor-pointer w-full md:w-3/5 font-semibold bg-[#1A9FFF] text-white py-2.5 mt-4 rounded-lg hover:bg-blue-600 transition"
+              disabled={loading}
+              className="cursor-pointer w-full md:w-3/5 font-semibold bg-blue-400 text-white py-2.5 mt-4 rounded-lg hover:bg-blue-700 transition flex items-center justify-center gap-2"
             >
-               {loading ? (
+              {loading ? (
                 <span className="flex items-center gap-2">
                   <span className="w-5 h-5 border-2 border-t-transparent border-white rounded-full animate-spin"></span>
                   <span>Please wait...</span>
@@ -136,7 +137,6 @@ export default function LoginPage() {
                 "Login"
               )}
             </button>
-
             <p className="text-sm mt-4">
               Don't have an account?{" "}
               <Link to="/register" className="text-blue-600 hover:underline">
