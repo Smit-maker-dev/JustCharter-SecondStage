@@ -9,12 +9,12 @@ export default function LoginPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [passwordShown, setPasswordShown] = useState(false);
-
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+    setLoading(true);
     try {
       const response = await axios.post("/auth/login", {
         email: email.trim(),
@@ -46,6 +46,8 @@ export default function LoginPage() {
       }, 1500);
     } catch (error) {
       toast.error(error.response?.data?.message || "Invalid login credentials");
+    }finally {
+      setLoading(false);
     }
   };
 
@@ -123,9 +125,16 @@ export default function LoginPage() {
 
             <button
               type="submit"
-              className="cursor-pointer w-full md:w-3/5 font-semibold bg-blue-400 text-white py-2.5 mt-4 rounded-lg hover:bg-blue-700 transition"
+              className="cursor-pointer w-full md:w-3/5 font-semibold bg-[#1A9FFF] text-white py-2.5 mt-4 rounded-lg hover:bg-blue-600 transition"
             >
-              Login
+               {loading ? (
+                <span className="flex items-center gap-2">
+                  <span className="w-5 h-5 border-2 border-t-transparent border-white rounded-full animate-spin"></span>
+                  <span>Please wait...</span>
+                </span>
+              ) : (
+                "Login"
+              )}
             </button>
 
             <p className="text-sm mt-4">

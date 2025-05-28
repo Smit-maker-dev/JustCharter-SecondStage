@@ -10,7 +10,12 @@ import Checkmark from "/images/checkmark.png";
 
 const validationSchema = Yup.object().shape({
   email: Yup.string().email("Invalid email").required("Email is required"),
-  phone: Yup.string().required("Phone number is required"),
+  phone: Yup.number()
+    .typeError("That doesn't look like a phone number")
+    .positive("A phone number can't start with a minus")
+    .integer("A phone number can't include a decimal point")
+    .min(10)
+    .required("Phone number is required"),
   firstName: Yup.string().required("First name is required"),
   lastName: Yup.string().required("Last name is required"),
   password: Yup.string()
@@ -128,7 +133,7 @@ export default function SignupPage() {
 
       <div className="w-full md:w-1/2 flex justify-center items-center bg-white p-6 md:p-10 overflow-y-auto">
         <div className="w-full max-w-md">
-        <div className="mb-4 h-10 w-full relative">
+          <div className="mb-4 h-10 w-full relative">
             <div className="h-full w-full bg-transparent">
               <img
                 src={Logo}
@@ -164,9 +169,20 @@ export default function SignupPage() {
                 </span>
                 <input
                   name="phone"
+                  inputMode="numeric"
+                  maxLength={10}
                   type="tel"
                   value={formData.phone}
-                  onChange={handleChange}
+                  onChange={(e) => {
+                    const rawValue = e.target.value;
+                    const cleanedValue = rawValue.replace(/\D/g, "");
+                    handleChange({
+                      target: {
+                        name: "phone",
+                        value: cleanedValue,
+                      },
+                    });
+                  }}
                   placeholder="Enter number here"
                   className="w-full px-4 py-2 border border-gray-300 rounded-r-md text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
                 />
@@ -303,7 +319,7 @@ export default function SignupPage() {
             </button>
 
             <p className="text-sm mt-4">
-              Already have an account?
+              Already have an account ? {" "}
               <Link to="/Loginpage" className="text-blue-600 underline">
                 Log in
               </Link>

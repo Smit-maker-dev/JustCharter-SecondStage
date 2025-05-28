@@ -23,10 +23,13 @@ export default function Navbar() {
   }, []);
 
   useEffect(() => {
+    const token =
+      localStorage.getItem("token") || localStorage.getItem("access_token");
+    if (!token) return; 
+
     const fetchUser = async () => {
       try {
-          const response = await axios.get("/user");
-
+        const response = await axios.get("/user"); 
         const { first_name, last_name } = response.data.data;
 
         if (first_name && last_name) {
@@ -34,7 +37,9 @@ export default function Navbar() {
           setLastName(last_name);
         }
       } catch (error) {
-        console.error("Failed to fetch user data:", error);
+        if (process.env.NODE_ENV === "development") {
+          console.error("Failed to fetch user data:", error);
+        }
       }
     };
 
@@ -81,7 +86,6 @@ export default function Navbar() {
 
             <li className="relative">
               <div
-                
                 className={`flex justify-center items-center space-x-1 cursor-pointer transition-colors duration-300 ${
                   showScrolledStyle ? "text-gray-800" : "text-white"
                 }`}
@@ -132,7 +136,7 @@ export default function Navbar() {
             <div className="hidden md:flex space-x-4">
               <button
                 onClick={() => navigate("/register")}
-                className={`cursor-pointer text-sm px-4 py-2 border rounded transition ${
+                className={`cursor-pointer text-sm px-6 py-2 border rounded-md transition ${
                   showScrolledStyle
                     ? "text-black hover:bg-yellow-400  hover:text-white"
                     : "text-white hover:bg-yellow-400  hover:text-black"
@@ -189,7 +193,6 @@ export default function Navbar() {
 
               <li>
                 <div
-                 
                   className={`flex justify-center items-center space-x-1 cursor-pointer transition-colors duration-300 ${
                     showScrolledStyle ? "text-gray-800" : "text-gray-800"
                   }`}

@@ -232,10 +232,11 @@ const handleLogout = () => {
   localStorage.removeItem("first_name");
     localStorage.removeItem("last_name");
     localStorage.removeItem("access_token");
-  
+    localStorage.removeItem("token");
+    
   delete axios.defaults.headers.common["Authorization"];
   
-  navigate("/login");
+  navigate("/login", { replace: true });
   
   toast.success("Logged out successfully");
 };
