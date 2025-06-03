@@ -1,7 +1,8 @@
 import axios from 'axios';
 
 const axiosInstance = axios.create({
-  baseURL: "http://ec2-3-111-53-105.ap-south-1.compute.amazonaws.com:8272",
+  // baseURL: "http://ec2-3-111-53-105.ap-south-1.compute.amazonaws.com:8272",
+  baseURL: "https://api.justcharter.in",
   headers: {
     'Content-Type': 'application/json',
   },
