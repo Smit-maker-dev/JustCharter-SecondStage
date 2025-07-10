@@ -134,13 +134,13 @@ const testimonials = [
     name: "Jonathan Harrington",
     title: "CEO, Harrington Industries",
     quote:
-      "The level of service provided by Aceaair is unmatched. From the moment we boarded to landing, every detail was handled flawlessly.",
+      "The level of service provided by JustCharter is unmatched. From the moment we boarded to landing, every detail was handled flawlessly.",
   },
   {
     name: "Sophia Williams",
     title: "Entertainment Executive",
     quote:
-      "As someone who flies privately over 40 times a year, I can confidently say Aceaair offers the most seamless and luxurious experience in the market.",
+      "As someone who flies privately over 40 times a year, I can confidently say JustCharter offers the most seamless and luxurious experience in the market.",
   },
   {
     name: "Alexander Chen",
@@ -179,8 +179,8 @@ export default function Home() {
 
   return (
     <>
-      {/* Section-1 */}
-      <div className="Hero-section">
+      {/* Old Section-1 */}
+      {/* <div className="Hero-section">
         <section
           className="relative h-screen bg-cover bg-center flex items-center justify-center"
           style={{ backgroundImage: "url('/images/Herosectionbg.jpeg')" }}
@@ -205,9 +205,10 @@ export default function Home() {
             </p>
 
             <div className="flex justify-center gap-4">
-              <button className="bg-white text-black px-6 py-2 rounded-full text-sm font-semibold hover:bg-gray-200 transition">
+              <button className="bg-white text-black px-6 py-2 cursor-pointer rounded-full text-sm font-semibold hover:bg-[#FFD700] transition">
                 Plan Flight
               </button>
+
               <button className="border border-white px-6 py-2 rounded-full text-sm font-semibold hover:bg-white hover:text-black transition">
                 Explore
               </button>
@@ -237,6 +238,132 @@ export default function Home() {
                 Plan Flight
               </button>
               <button className="border border-white px-6 py-2 rounded-full text-sm hover:bg-white hover:text-black transition">
+                Explore
+              </button>
+            </div>
+          </div>
+        </section>
+      </div> */}
+      {/* Section-1 - Fixed Hero Section */}
+      {/* <div className="Hero-section">
+        <section
+          className="relative h-screen bg-cover bg-center flex items-center justify-center"
+          style={{ backgroundImage: "url('/images/Herosectionbg.jpeg')" }}
+        >
+          <div className="absolute inset-0 bg-black/50"></div>
+
+          <div className="relative z-10 text-white text-center w-full px-6 md:hidden">
+            <h1
+              className="text-[36px] font-bold leading-snug mb-4"
+              style={{ fontFamily: "'Playfair Display', serif" }}
+            >
+              Private Aviation <br /> Made Simple
+            </h1>
+            <p className="text-base mb-2">
+              Experience seamless corporate travel <br />
+              with our premium fleet
+            </p>
+            <p className="text-sm mb-6 text-white/70">
+              Over 500+ destinations worldwide
+            </p>
+            <div className="flex justify-center gap-4">
+              <button className="bg-white text-black px-6 py-2 rounded-full text-sm font-semibold hover:bg-[#FFD700] transition-colors duration-200">
+                Plan Flight
+              </button>
+              <button className="border border-white px-6 py-2 rounded-full text-sm font-semibold hover:bg-white hover:text-black transition-colors duration-200">
+                Explore
+              </button>
+            </div>
+          </div>
+
+          <div className="relative z-10 text-white text-center max-w-2xl px-4 hidden md:block">
+            <h1
+              className="text-[48px] font-bold mb-4 leading-tight"
+              style={{ fontFamily: "'Playfair Display', serif" }}
+            >
+              Private Aviation Made Simple
+            </h1>
+            <p className="text-[24px] md:text-lg mb-3">
+              Experience seamless corporate travel with our premium fleet
+            </p>
+            <p className="text-sm md:text-base mb-6 text-gray-300">
+              Over 500+ destinations worldwide
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <button className="cursor-pointer bg-white text-black px-6 py-2 rounded-full text-sm font-semibold hover:bg-[#FFD700] transition-colors duration-200">
+                Plan Flight
+              </button>
+              <button className="border border-white px-6 py-2 rounded-full text-sm font-semibold hover:bg-white hover:text-black transition-colors duration-200">
+                Explore
+              </button>
+            </div>
+          </div>
+        </section>
+      </div> */}
+      {/* Section-1 - Hero Section with Video Background */}
+      <div className="Hero-section">
+        <section className="relative h-screen overflow-hidden flex items-center justify-center">
+          
+          <div className="absolute inset-0 z-0">
+            <video
+              autoPlay
+              muted
+              loop
+              playsInline
+              className="w-full h-full object-cover"
+            >
+              <source
+                src="/images/Paradigm Shift_ The Next-Gen Gulfstream Fleet (2023).mp4"
+                type="video/mp4"
+              />
+              Your browser does not support the video tag.
+            </video>
+            <div className="absolute inset-0 bg-black/50"></div>
+          </div>
+
+          {/* Content (same as before) */}
+          <div className="relative z-10 text-white text-center w-full px-6 md:hidden">
+            <h1
+              className="text-[36px] font-bold leading-snug mb-4"
+              style={{ fontFamily: "'Playfair Display', serif" }}
+            >
+              Private Aviation <br /> Made Simple
+            </h1>
+            <p className="text-base mb-2">
+              Experience seamless corporate travel <br />
+              with our premium fleet
+            </p>
+            <p className="text-sm mb-6 text-white/70">
+              Over 500+ destinations worldwide
+            </p>
+            <div className="flex justify-center gap-4">
+              <button className="cursor-pointer bg-white text-black px-6 py-2 rounded-full text-sm font-semibold hover:bg-yellow-500 transition-colors duration-200">
+                Plan Flight
+              </button>
+              <button className="border border-white px-6 py-2 rounded-full text-sm font-semibold hover:bg-white hover:text-black transition-colors duration-200">
+                Explore
+              </button>
+            </div>
+          </div>
+
+          <div className="relative z-10 text-white text-center max-w-2xl px-4 hidden md:block">
+            <h1
+              className="text-[48px] font-bold mb-4 leading-tight"
+              style={{ fontFamily: "'Playfair Display', serif" }}
+            >
+              Private Aviation Made Simple
+            </h1>
+            <p className="text-[24px] md:text-lg mb-3">
+              Experience seamless corporate travel with our premium fleet
+            </p>
+            <p className="text-sm md:text-base mb-6 text-gray-300">
+              Over 500+ destinations worldwide
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <button className="cursor-pointer bg-white text-black px-6 py-2 rounded-full text-sm font-semibold hover:bg-yellow-500 transition-colors duration-200">
+                Plan Flight
+              </button>
+              <button className="border border-white px-6 py-2 rounded-full text-sm font-semibold hover:bg-white hover:text-black transition-colors duration-200">
                 Explore
               </button>
             </div>
@@ -386,12 +513,11 @@ export default function Home() {
         </div>
       </div>
 
-      {/* Section-4 */}
-      <div className="About-AceaAir py-14 px-10 mb-7 md:px-20 bg-white">
+      <div className="About-JustCharter py-14 px-10 mb-7 md:px-20 bg-white">
         <section className="flex flex-col lg:flex-row items-center gap-10 px-6">
           <div className="lg:w-1/2 w-full">
             <p className="text-[18px] text-yellow-500 font-medium mb-1">
-              ABOUT Aceaair
+              ABOUT JUSTCHARTER
             </p>
             <h2
               className="text-[28px] md:text-3xl font-semibold text-gray-900 mb-4"
@@ -400,11 +526,11 @@ export default function Home() {
               The Premier Choice for Private Aviation
             </h2>
             <p className="text-gray-600 leading-relaxed text-[16px]">
-              With over 20 years of experience in luxury aviation, Aceaair has
-              established itself as the premier choice for discerning travelers
-              who demand nothing but the best. Our commitment to excellence,
-              safety, and personalized service sets us apart in the private
-              aviation industry.
+              With over 20 years of experience in luxury aviation, JustCharter
+              has established itself as the premier choice for discerning
+              travelers who demand nothing but the best. Our commitment to
+              excellence, safety, and personalized service sets us apart in the
+              private aviation industry.
             </p>
 
             <div className="grid text-center grid-cols-2 sm:grid-cols-4 gap-6 mt-8">
@@ -466,7 +592,7 @@ export default function Home() {
           </p>
           <p className="mt-4 text-[#374151] max-w-2xl mx-auto">
             See what our distinguished clientele have to say about their
-            experiences with Aceaair Luxury Journeys.
+            experiences with JustCharter Luxury Journeys.
           </p>
         </div>
 
@@ -507,8 +633,8 @@ export default function Home() {
         <div className="mt-16 bg-white rounded-xl shadow-md p-5 text-center max-w-[79rem] mx-auto">
           <p className="text-[20px] sm:text-xl lg:text-[20px] italic text-[#000000] leading-relaxed">
             <span>
-              "Aceaair consistently exceeds our expectations, setting the gold
-              standard for luxury private aviation."
+              "JustCharter consistently exceeds our expectations, setting the
+              gold standard for luxury private aviation."
             </span>
           </p>
           <p className="mt-4 text-sm sm:text-base text-[#000000]">
@@ -531,7 +657,7 @@ export default function Home() {
                 Uncompromising Safety Standards
               </h2>
               <p className="text-gray-700 mb-4">
-                At Aceaair, safety is our highest priority. Our rigorous
+                At JustCharter, safety is our highest priority. Our rigorous
                 maintenance protocols, experienced crew selection, and
                 continuous training programs ensure that every flight meets the
                 industry's most stringent safety requirements.

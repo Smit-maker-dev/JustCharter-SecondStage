@@ -64,11 +64,11 @@ export default function LoginPage() {
       <div className="w-full md:w-1/2 flex items-center justify-center bg-white p-6 md:p-12">
         <div className="w-full max-w-md">
           <div className="mb-8">
-            <img src="/images/Logo.png" alt="AceaAir Logo" className="h-10" />
+            <img src="/images/Logo.png" alt="JustCharter Logo" className="h-10" />
           </div>
 
           <h2 className="text-3xl font-bold text-black mb-8">
-            Welcome to AceaAir
+            Welcome to JustCharter
           </h2>
 
           <form className="space-y-6" onSubmit={handleSubmit}>

@@ -57,7 +57,7 @@ export default function ForgetPass() {
       <div className="w-full md:w-1/2 pt-40 flex justify-center items-center bg-white p-5 md:p-10 overflow-y-auto">
         <div className="w-full max-w-lg">
           <div className="flex justify-start mb-6">
-            <img src={Logo} alt="AceaAir Logo" className="h-10" />
+            <img src={Logo} alt="JustCharter Logo" className="h-10" />
           </div>
 
           <h2 className="text-2xl font-bold text-black mb-2">

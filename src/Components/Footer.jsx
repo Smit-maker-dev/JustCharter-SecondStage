@@ -13,7 +13,7 @@ export default function Footer() {
         <div className="mb-10 lg:mb-0 lg:w-1/4">
           <img
             src="/images/Logo.png"
-            alt="AceaAir Logo"
+            alt="JustCharter Logo"
             className="h-10 mb-4"
           />
           <p className="text-sm text-gray-400">
@@ -77,7 +77,7 @@ export default function Footer() {
       <hr className="my-8 border-gray-700" />
 
       <div className="flex flex-col md:flex-row justify-between items-center text-xs text-gray-500 space-y-2 md:space-y-0">
-        <p>© 2025 Aceaair. All rights reserved.</p>
+        <p>© 2025 JustCharter. All rights reserved.</p>
         <div className="flex gap-4">
           <span>ARG/US Platinum Rated</span>
           <span>Wyvern Wingman</span>

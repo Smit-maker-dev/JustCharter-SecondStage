@@ -89,7 +89,7 @@ export default function ResetPass() {
       <div className="w-full md:w-1/2 flex items-center justify-center bg-white p-6 md:p-12 pt-24">
         <div className="w-full max-w-md">
           <div className="mb-8">
-            <img src={Logo} alt="AceaAir Logo" className="h-10" />
+            <img src={Logo} alt="JustCharter Logo" className="h-10" />
           </div>
 
           <h2 className="text-2xl md:text-3xl font-bold text-black mb-2">

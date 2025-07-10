@@ -130,7 +130,7 @@ export default function VerifyEmail() {
             <div className="h-full w-full bg-transparent">
               <img
                 src={Logo}
-                alt="AceaAir Logo"
+                alt="JustCharter Logo"
                 className="h-full w-auto object-contain"
               />
             </div>

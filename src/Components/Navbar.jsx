@@ -25,11 +25,11 @@ export default function Navbar() {
   // useEffect(() => {
   //   const token =
   //     localStorage.getItem("token") || localStorage.getItem("access_token");
-  //   if (!token) return; 
+  //   if (!token) return;
 
   //   const fetchUser = async () => {
   //     try {
-  //       const response = await axios.get("/user"); 
+  //       const response = await axios.get("/user");
   //       const { first_name, last_name } = response.data.data;
 
   //       if (first_name && last_name) {
@@ -45,34 +45,34 @@ export default function Navbar() {
 
   //   fetchUser();
   // }, []);
-useEffect(() => {
-  const token =
-    localStorage.getItem("token") || localStorage.getItem("access_token");
-  if (!token) return;
+  useEffect(() => {
+    const token =
+      localStorage.getItem("token") || localStorage.getItem("access_token");
+    if (!token) return;
 
-  const fetchUser = async () => {
-    try {
-      const useAccessToken = Boolean(localStorage.getItem("access_token"));
+    const fetchUser = async () => {
+      try {
+        const useAccessToken = Boolean(localStorage.getItem("access_token"));
 
-      const response = await axios.get("/user", {
-        useAccessToken: useAccessToken, 
-      });
+        const response = await axios.get("/user", {
+          useAccessToken: useAccessToken,
+        });
 
-      const { first_name, last_name } = response.data.data;
+        const { first_name, last_name } = response.data.data;
 
-      if (first_name && last_name) {
-        setFirstName(first_name);
-        setLastName(last_name);
+        if (first_name && last_name) {
+          setFirstName(first_name);
+          setLastName(last_name);
+        }
+      } catch (error) {
+        if (process.env.NODE_ENV === "development") {
+          console.error("Failed to fetch user data:", error);
+        }
       }
-    } catch (error) {
-      if (process.env.NODE_ENV === "development") {
-        console.error("Failed to fetch user data:", error);
-      }
-    }
-  };
+    };
 
-  fetchUser();
-}, []);
+    fetchUser();
+  }, []);
 
   const location = useLocation();
   const isHome = location.pathname === "/";
@@ -93,7 +93,16 @@ useEffect(() => {
       >
         <div className="max-w-7xl mx-auto px-4 flex items-center justify-between h-16 ">
           <div className="flex items-center space-x-2">
-            <img src="/images/Logo.png" alt="AceaAir Logo" className="h-8" />
+            {/* <img src="/images/Logo.png" alt="JustCharter Logo" className="h-5" /> */}
+            <img
+              src={
+                showScrolledStyle
+                  ? "/images/Blacklogo.png"
+                  : "/images/WhiteLogo.png"
+              }
+              alt="JustCharter Logo"
+              className="h-8 w-full transition duration-300"
+            />
           </div>
 
           <ul className="hidden md:flex space-x-6 text-sm relative">
