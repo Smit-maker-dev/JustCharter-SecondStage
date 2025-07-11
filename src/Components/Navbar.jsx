@@ -105,7 +105,7 @@ export default function Navbar() {
             />
           </div>
 
-          <ul className="hidden md:flex space-x-6 text-sm relative">
+          <ul className="hidden lg:flex space-x-6 text-sm relative">
             <li
               className="cursor-pointer text-[#FFD700]"
               onClick={() => navigate("/")}
@@ -170,7 +170,7 @@ export default function Navbar() {
               </span>
             </div>
           ) : (
-            <div className="hidden md:flex space-x-4">
+            <div className="hidden lg:flex space-x-4">
               <button
                 onClick={() => navigate("/register")}
                 className={`cursor-pointer text-sm px-6 py-2 border rounded-md transition ${
@@ -194,7 +194,7 @@ export default function Navbar() {
             </div>
           )}
 
-          <div className="md:hidden">
+          <div className="lg:hidden">
             <button
               onClick={toggleMobileMenu}
               className={`text-xl transition-colors duration-300 ${
@@ -207,7 +207,7 @@ export default function Navbar() {
         </div>
 
         <div
-          className={`md:hidden fixed top-16 left-0 w-full bg-white transition-all duration-500 ease-in-out overflow-hidden shadow-md ${
+          className={`lg:hidden fixed top-16 left-0 w-full bg-white transition-all duration-500 ease-in-out overflow-hidden shadow-md ${
             isMobileMenuOpen ? "max-h-screen opacity-100" : "max-h-0 opacity-0"
           }`}
         >

@@ -303,8 +303,7 @@ export default function Home() {
       {/* Section-1 - Hero Section with Video Background */}
       <div className="Hero-section">
         <section className="relative h-screen overflow-hidden flex items-center justify-center">
-          
-          <div className="absolute inset-0 z-0">
+          {/* <div className="absolute inset-0 z-0">
             <video
               autoPlay
               muted
@@ -316,8 +315,24 @@ export default function Home() {
                 src="/images/Paradigm Shift_ The Next-Gen Gulfstream Fleet (2023).mp4"
                 type="video/mp4"
               />
-              Your browser does not support the video tag.
             </video>
+            <div className="absolute inset-0 bg-black/50"></div>
+          </div> */}
+          <div className="absolute inset-0 z-0">
+            <video
+              autoPlay
+              muted
+              loop
+              playsInline
+              className="w-full h-full object-cover object-center"
+            >
+              <source
+                src="/images/Paradigm Shift_ The Next-Gen Gulfstream Fleet (2023).mp4"
+                type="video/mp4"
+              />
+            </video>
+
+
             <div className="absolute inset-0 bg-black/50"></div>
           </div>
 
