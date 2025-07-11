@@ -12,7 +12,7 @@ import 'react-toastify/dist/ReactToastify.css';
 const validationSchema = Yup.object().shape({
   email: Yup.string().email("Invalid email").required("Email is required"),
   phone: Yup.number()
-    .typeError("That doesn't look like a phone number")
+    .typeError("Phone Number Is Required")
     .positive("A phone number can't start with a minus")
     .integer("A phone number can't include a decimal point")
     .min(10)

@@ -173,7 +173,7 @@ export default function Navbar() {
             <div className="hidden lg:flex space-x-4">
               <button
                 onClick={() => navigate("/register")}
-                className={`cursor-pointer text-sm px-6 py-2 border rounded-md transition ${
+                className={`cursor-pointer text-sm px-6 py-2  rounded-md transition ${
                   showScrolledStyle
                     ? "text-black hover:bg-yellow-400  hover:text-white"
                     : "text-white hover:bg-yellow-400  hover:text-black"

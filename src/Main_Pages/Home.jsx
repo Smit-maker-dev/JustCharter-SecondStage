@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Star,
   PlaneTakeoff,
@@ -8,6 +8,8 @@ import {
   Users,
   Check,
 } from "lucide-react";
+import { IoVolumeHighOutline } from "react-icons/io5";
+import { IoVolumeMuteOutline } from "react-icons/io5";
 const aircraftData = [
   {
     id: 1,
@@ -172,6 +174,21 @@ const advantages = [
 ];
 export default function Home() {
   const [activeFilter, setActiveFilter] = useState("All Aircraft");
+  const [isAudioMuted, setIsAudioMuted] = useState(true);
+  const [scrolled, setScrolled] = useState(false);
+
+useEffect(() => {
+  const handleScroll = () => {
+    if (window.scrollY > 50) {
+      setScrolled(true);
+    } else {
+      setScrolled(false);
+    }
+  };
+
+  window.addEventListener('scroll', handleScroll);
+  return () => window.removeEventListener('scroll', handleScroll);
+}, []);
   const filteredData =
     activeFilter === "All Aircraft"
       ? aircraftData.filter((a) => [1, 2, 3].includes(a.id))
@@ -318,10 +335,36 @@ export default function Home() {
             </video>
             <div className="absolute inset-0 bg-black/50"></div>
           </div> */}
+          {/* <button
+            onClick={() => setIsAudioMuted(!isAudioMuted)}
+            className="cursor-pointer fixed bottom-6 right-6 z-50 bg-black/30 border border-white text-white p-3 rounded-full shadow-md hover:bg-black/70 transition-all duration-200 backdrop-blur-sm"
+            aria-label={isAudioMuted ? "Unmute video" : "Mute video"}
+          >
+            {isAudioMuted ? (
+              <IoVolumeMuteOutline size={20} />
+            ) : (
+              <IoVolumeHighOutline size={20} />
+            )}
+          </button> */}
+          <button
+            onClick={() => setIsAudioMuted(!isAudioMuted)}
+            className={`cursor-pointer fixed bottom-6 right-6 z-50 p-3 rounded-full shadow-md hover:bg-black/70 transition-all duration-200 backdrop-blur-sm ${
+              scrolled
+                ? "bg-white/90 border-black/20 text-black hover:bg-white"
+                : "bg-black/30 border-white text-white"
+            }`}
+            aria-label={isAudioMuted ? "Unmute video" : "Mute video"}
+          >
+            {isAudioMuted ? (
+              <IoVolumeMuteOutline size={20} />
+            ) : (
+              <IoVolumeHighOutline size={20} />
+            )}
+          </button>
           <div className="absolute inset-0 z-0">
             <video
               autoPlay
-              muted
+              muted={isAudioMuted}
               loop
               playsInline
               className="w-full h-full object-cover object-center"
@@ -331,9 +374,7 @@ export default function Home() {
                 type="video/mp4"
               />
             </video>
-
-
-            <div className="absolute inset-0 bg-black/50"></div>
+            <div className="absolute inset-0 bg-black/10"></div>
           </div>
 
           {/* Content (same as before) */}
@@ -348,11 +389,11 @@ export default function Home() {
               Experience seamless corporate travel <br />
               with our premium fleet
             </p>
-            <p className="text-sm mb-6 text-white/70">
+            <p className="text-sm mb-6 text-white">
               Over 500+ destinations worldwide
             </p>
             <div className="flex justify-center gap-4">
-              <button className="cursor-pointer bg-white text-black px-6 py-2 rounded-full text-sm font-semibold hover:bg-yellow-500 transition-colors duration-200">
+              <button className="cursor-pointer bg-white text-black px-6 py-2 rounded-full text-sm font-semibold hover:text-yellow-500 hover:bg-[#FFD700] transition-colors duration-200">
                 Plan Flight
               </button>
               <button className="border border-white px-6 py-2 rounded-full text-sm font-semibold hover:bg-white hover:text-black transition-colors duration-200">
@@ -371,11 +412,11 @@ export default function Home() {
             <p className="text-[24px] md:text-lg mb-3">
               Experience seamless corporate travel with our premium fleet
             </p>
-            <p className="text-sm md:text-base mb-6 text-gray-300">
+            <p className="text-sm md:text-base mb-6 text-white">
               Over 500+ destinations worldwide
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <button className="cursor-pointer bg-white text-black px-6 py-2 rounded-full text-sm font-semibold hover:bg-yellow-500 transition-colors duration-200">
+              <button className="cursor-pointer bg-white text-black px-6 py-2 rounded-full text-sm font-semibold hover:bg-[#FFD700] transition-colors duration-200">
                 Plan Flight
               </button>
               <button className="border border-white px-6 py-2 rounded-full text-sm font-semibold hover:bg-white hover:text-black transition-colors duration-200">
@@ -390,7 +431,10 @@ export default function Home() {
         <section className="max-w-7xl mx-auto text-center">
           <h1
             className="text-[28px] font-bold mb-4 text-[#1A1F2C]"
-            style={{ fontFamily: "'Playfair Display', serif" }}
+            style={{
+              fontFamily: "'Playfair Display', serif",
+              textShadow: "0 2px 4px rgba(0, 0, 0, 0.7)",
+            }}
           >
             Premium Aviation Services
           </h1>
