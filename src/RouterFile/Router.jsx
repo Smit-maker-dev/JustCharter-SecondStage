@@ -11,6 +11,10 @@ import Home from '../Main_Pages/Home'
 import MainLayout from '../Components/MainLayout'
 import Account from '../Main_Pages/Account'
 import Bookings from '../Main_Pages/Bookings'
+import Services from '../Main_Pages/Services'
+import EventPage from '../Main_Pages/EventPage'
+import BuyAndSell from '../Main_Pages/BuyandSell'
+import AboutPage from '../Main_Pages/AboutPage'
 
 export default function Router() {
   return (
@@ -27,6 +31,10 @@ export default function Router() {
           <Route path="/" element={<Home />} />
           <Route path="/account" element={<Account />} />
           <Route path="/bookings" element={<Bookings />} />
+          <Route path="/services" element={<Services />} />
+          <Route path="/event" element={<EventPage />} />
+          <Route path="/buy_sell" element={<BuyAndSell />} />
+          <Route path="/about" element={<AboutPage />} />
     </Route>
     </Routes>
     </BrowserRouter>

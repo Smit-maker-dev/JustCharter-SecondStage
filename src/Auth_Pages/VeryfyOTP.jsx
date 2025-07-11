@@ -5,6 +5,7 @@ import Checkmark from "/images/checkmark.png";
 import { useLocation, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import axios from "../api/axiosInstance";
+import OTPInput from "../Components/OTPInput";
 
 export default function VeryfyOTP() {
   const [code, setCode] = useState("");
@@ -42,10 +43,10 @@ export default function VeryfyOTP() {
 
       const token = response.data?.token;
 
-      if (!token) {
-        console.error("Token not found in response:", response.data?.token);
-        throw new Error("Authentication token not received");
-      }
+      // if (!token) {
+      //   console.error("Token not found in response:", response.data?.token);
+      //   throw new Error("Authentication token not received");
+      // }
 
       localStorage.setItem("authToken", token);
       console.log("Token successfully saved to localStorage:", token);
@@ -57,7 +58,7 @@ export default function VeryfyOTP() {
         confirmButtonColor: "#3085d6",
       });
 
-      navigate("/"); // Navigate to home page
+      navigate("/"); 
     } catch (error) {
       console.error(
         "OTP verification failed:",
@@ -143,7 +144,7 @@ export default function VeryfyOTP() {
               <label className="text-sm text-gray-800 mb-1 block">
                 Enter Verification Code
               </label>
-              <div className="relative">
+              {/* <div className="relative">
                 <input
                   type="text"
                   placeholder="6 - Digit code"
@@ -159,7 +160,8 @@ export default function VeryfyOTP() {
                     className="absolute right-3 top-2.5 h-5 w-5"
                   />
                 )}
-              </div>
+              </div> */}
+              <OTPInput code={code} setCode={setCode} />
             </div>
 
             <p className="text-sm text-gray-500">

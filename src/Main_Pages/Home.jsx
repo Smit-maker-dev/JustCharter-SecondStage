@@ -381,7 +381,8 @@ useEffect(() => {
           <div className="relative z-10 text-white text-center w-full px-6 md:hidden">
             <h1
               className="text-[36px] font-bold leading-snug mb-4"
-              style={{ fontFamily: "'Playfair Display', serif" }}
+              style={{ fontFamily: "'Playfair Display', serif"
+               }}
             >
               Private Aviation <br /> Made Simple
             </h1>
@@ -432,8 +433,7 @@ useEffect(() => {
           <h1
             className="text-[28px] font-bold mb-4 text-[#1A1F2C]"
             style={{
-              fontFamily: "'Playfair Display', serif",
-              textShadow: "0 2px 4px rgba(0, 0, 0, 0.7)",
+              fontFamily: "'Playfair Display', serif"
             }}
           >
             Premium Aviation Services

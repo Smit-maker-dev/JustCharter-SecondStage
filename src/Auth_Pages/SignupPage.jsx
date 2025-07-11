@@ -92,7 +92,7 @@ export default function SignupPage() {
       const newErrors = {};
       err.inner.forEach((error) => {
         newErrors[error.path] = error.message;
-        // toast.error(error.message);  
+        toast.error(error.message);  
       });
       setErrors(newErrors);
     } else if (err.response && err.response.data && err.response.data.message) {
@@ -100,7 +100,7 @@ export default function SignupPage() {
       toast.error(err.response.data.message);
     } else {
       
-      // toast.error("An unexpected error occurred. Please try again later.");
+      toast.error("An unexpected error occurred. Please try again later.");
       console.error("Unexpected Error:", err);
     }
   } finally {

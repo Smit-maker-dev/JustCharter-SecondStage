@@ -85,9 +85,9 @@ export default function ForgetPass() {
             </div>
             <button
               type="submit"
-              className="w-full md:w-3/5 bg-blue-400 text-white py-2.5 mt-4 rounded-lg hover:bg-blue-700 transition"
+              className="cursor-pointer w-full md:w-3/5 bg-[#1A9FFF] text-white py-2.5 mt-4 rounded-lg hover:bg-blue-700 transition"
             >
-              SUBMIT
+              Submit
             </button>
           </form>
         </div>

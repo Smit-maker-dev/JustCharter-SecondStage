@@ -105,7 +105,7 @@ export default function Navbar() {
             />
           </div>
 
-          <ul className="hidden lg:flex space-x-6 text-sm relative">
+          {/* <ul className="hidden lg:flex space-x-6 text-sm relative">
             <li
               className="cursor-pointer text-[#FFD700]"
               onClick={() => navigate("/")}
@@ -151,6 +151,33 @@ export default function Navbar() {
             >
               About
             </li>
+          </ul> */}
+          <ul className="hidden lg:flex space-x-6 text-sm relative">
+            {[
+              { label: "Home", path: "/" },
+              { label: "Bookings", path: "/bookings" },
+              { label: "Services", path: "/services" },
+              { label: "Event", path: "/event" },
+              { label: "Buy & Sell", path: "/buy_sell" },
+              { label: "About", path: "/about" },
+            ].map((item) => {
+              const isActive = location.pathname === item.path;
+              return (
+                <li
+                  key={item.label}
+                  className={`cursor-pointer transition-colors duration-300 ${
+                    isActive
+                      ? "text-[#FFD700] font-semibold"
+                      : showScrolledStyle
+                      ? "text-black"
+                      : "text-white"
+                  }`}
+                  onClick={() => navigate(item.path)}
+                >
+                  {item.label}
+                </li>
+              );
+            })}
           </ul>
 
           {firstName && lastName ? (
@@ -212,7 +239,7 @@ export default function Navbar() {
           }`}
         >
           <div className="flex flex-col items-center text-sm space-y-4 py-6">
-            <ul className="space-y-4 text-center">
+            {/* <ul className="space-y-4 text-center">
               <li
                 className="cursor-pointer text-[#FFD700]"
                 onClick={() => navigate("/")}
@@ -258,7 +285,38 @@ export default function Navbar() {
               >
                 About
               </li>
+            </ul> */}
+            <ul className="space-y-4 text-center">
+              {[
+                { label: "Home", path: "/" },
+                { label: "Bookings", path: "/bookings" },
+                { label: "Services", path: "/services" },
+                { label: "Event", path: "/event" },
+                { label: "Buy & Sell", path: "/buy_sell" },
+                { label: "About", path: "/about" },
+              ].map((item) => {
+                const isActive = location.pathname === item.path;
+                return (
+                  <li
+                    key={item.label}
+                    className={`cursor-pointer transition-colors duration-300 ${
+                      isActive
+                        ? "text-[#FFD700] font-semibold"
+                        : showScrolledStyle
+                        ? "text-[#000000]"
+                        : "text-gray-800"
+                    }`}
+                    onClick={() => {
+                      setIsMobileMenuOpen(false);
+                      navigate(item.path);
+                    }}
+                  >
+                    {item.label}
+                  </li>
+                );
+              })}
             </ul>
+
             <div className="profile-section">
               {firstName && lastName ? (
                 <div
