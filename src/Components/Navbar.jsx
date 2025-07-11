@@ -101,7 +101,7 @@ export default function Navbar() {
                   : "/images/WhiteLogo.png"
               }
               alt="JustCharter Logo"
-              className="h-8 w-full transition duration-300"
+              className="h-8 w-auto max-w-[140px] object-contain transition duration-300"
             />
           </div>
 

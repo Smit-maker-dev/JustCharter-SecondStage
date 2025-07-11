@@ -92,7 +92,7 @@ export default function SignupPage() {
       const newErrors = {};
       err.inner.forEach((error) => {
         newErrors[error.path] = error.message;
-        toast.error(error.message);  
+        // toast.error(error.message);  
       });
       setErrors(newErrors);
     } else if (err.response && err.response.data && err.response.data.message) {
@@ -100,7 +100,7 @@ export default function SignupPage() {
       toast.error(err.response.data.message);
     } else {
       
-      toast.error("An unexpected error occurred. Please try again later.");
+      // toast.error("An unexpected error occurred. Please try again later.");
       console.error("Unexpected Error:", err);
     }
   } finally {
@@ -220,7 +220,7 @@ export default function SignupPage() {
                     type={showPassword ? "text" : "password"}
                     value={formData.password}
                     onChange={handleChange}
-                    placeholder="Enter password here"
+                    placeholder="Enter New password "
                     className="w-full px-4 py-2 pr-10 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
                   />
                   {formData.password.length > 0 && (
@@ -247,8 +247,8 @@ export default function SignupPage() {
                     type={showConfirmPassword ? "text" : "password"}
                     value={formData.confirmPassword}
                     onChange={handleChange}
-                    placeholder="Enter password here"
-                    className="w-full px-4 py-2 pr-10 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    placeholder="Enter Confirm password here"
+                    className="w-full px-3 py-2 pr-10 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
                   />
                   {formData.confirmPassword.length > 0 && (
                     <span
@@ -316,7 +316,7 @@ export default function SignupPage() {
 
             <p className="text-sm mt-4">
               Already have an account ?{" "}
-              <Link to="/Loginpage" className="text-blue-600 underline">
+              <Link to="/Login" className="text-blue-600 underline">
                 Log in
               </Link>
             </p>

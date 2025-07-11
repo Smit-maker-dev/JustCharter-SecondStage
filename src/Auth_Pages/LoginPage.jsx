@@ -41,7 +41,7 @@ export default function LoginPage() {
       localStorage.setItem("first_name", user.first_name);
       localStorage.setItem("last_name", user.last_name);
 
-      setTimeout(() => {
+      setTimeout(() => {  
         navigate("/");
       }, 1500);
     } catch (error) {
