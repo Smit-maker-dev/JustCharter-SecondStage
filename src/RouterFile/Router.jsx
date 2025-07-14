@@ -13,8 +13,8 @@ import Account from '../Main_Pages/Account'
 import Bookings from '../Main_Pages/Bookings'
 import Services from '../Main_Pages/Services'
 import EventPage from '../Main_Pages/EventPage'
-import BuyAndSell from '../Main_Pages/BuyandSell'
 import AboutPage from '../Main_Pages/AboutPage'
+import BuyAndSell from '../Main_Pages/BuyandSell'
 
 export default function Router() {
   return (
