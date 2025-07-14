@@ -175,6 +175,7 @@ const advantages = [
 export default function Home() {
   const [activeFilter, setActiveFilter] = useState("All Aircraft");
   const [isAudioMuted, setIsAudioMuted] = useState(true);
+
   const [scrolled, setScrolled] = useState(false);
 
 useEffect(() => {
@@ -224,7 +225,7 @@ useEffect(() => {
             <div className="flex justify-center gap-4">
               <button className="bg-white text-black px-6 py-2 cursor-pointer rounded-full text-sm font-semibold hover:bg-[#FFD700] transition">
                 Plan Flight
-              </button>
+              </button>,sdkajms,d
 
               <button className="border border-white px-6 py-2 rounded-full text-sm font-semibold hover:bg-white hover:text-black transition">
                 Explore
