@@ -33,7 +33,7 @@ export default function Router() {
           <Route path="/bookings" element={<Bookings />} />
           <Route path="/services" element={<Services />} />
           <Route path="/event" element={<EventPage />} />
-          <Route path="/buy_sell" element={<BuyAndSell />} />
+          <Route path="/buy_sell" element={<BuyAndSell/>} />
           <Route path="/about" element={<AboutPage />} />
     </Route>
     </Routes>
