@@ -3,7 +3,8 @@ import Logo from "/images/Logo.png";
 import PrivateJet from "/images/privatejet.png";
 import Checkmark from "/images/checkmark.png";
 import { useLocation, useNavigate } from "react-router-dom";
-import Swal from "sweetalert2";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import axios from "../api/axiosInstance";
 import OTPInput from "../Components/OTPInput";
 
@@ -20,16 +21,55 @@ export default function VeryfyOTP() {
     return () => clearInterval(timer);
   }, [counter]);
 
+  // const handleSubmit = async (e) => {
+  //   e.preventDefault();
+
+  //   if (!otpId) {
+  //     toast.error("OTP ID missing. Please resend OTP.");
+  //     return;
+  //   }
+
+  //   try {
+  //     const response = await axios.post("/auth/verify-auth-otp", {
+  //       otp_id: otpId,
+  //       otp: code,
+  //     });
+
+  //     console.log("Full OTP Verify Response:", response);
+
+  //     const token = response.data?.token;
+
+  //     // if (!token) {
+  //     //   console.error("Token not found in response:", response.data?.token);
+  //     //   throw new Error("Authentication token not received");
+  //     // }
+
+  //     localStorage.setItem("authToken", token);
+  //     console.log("Token successfully saved to localStorage:", token);
+
+  //     toast.success(response.data?.message || "OTP verified successfully!");
+
+  //     navigate("/reset_password");
+  //   } catch (error) {
+  //     console.error(
+  //       "OTP verification failed:",
+  //       error.response?.data || error.message
+  //     );
+
+  //     localStorage.removeItem("authToken");
+
+  //     toast.error(
+  //       error.response?.data?.message ||
+  //         error.message ||
+  //         "OTP verification failed"
+  //     );
+  //   }
+  // };
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     if (!otpId) {
-      Swal.fire({
-        icon: "error",
-        title: "Error",
-        text: "OTP ID missing. Please resend OTP.",
-        confirmButtonColor: "#d33",
-      });
+      toast.error("OTP ID missing. Please resend OTP.");
       return;
     }
 
@@ -42,23 +82,21 @@ export default function VeryfyOTP() {
       console.log("Full OTP Verify Response:", response);
 
       const token = response.data?.token;
+      const resetToken = response.data?.reset_token;
 
-      // if (!token) {
-      //   console.error("Token not found in response:", response.data?.token);
-      //   throw new Error("Authentication token not received");
-      // }
+      if (token) {
+        localStorage.setItem("authToken", token);
+        console.log("Auth token stored:", token);
+      }
 
-      localStorage.setItem("authToken", token);
-      console.log("Token successfully saved to localStorage:", token);
+      if (resetToken) {
+        localStorage.setItem("resetToken", resetToken);
+        console.log("Reset token stored:", resetToken);
+      }
 
-      await Swal.fire({
-        icon: "success",
-        title: "Login Successful",
-        text: response.data?.message || "OTP verified successfully!",
-        confirmButtonColor: "#3085d6",
-      });
+      toast.success(response.data?.message || "OTP verified successfully!");
 
-      navigate("/"); 
+      navigate("/reset_password");
     } catch (error) {
       console.error(
         "OTP verification failed:",
@@ -67,26 +105,17 @@ export default function VeryfyOTP() {
 
       localStorage.removeItem("authToken");
 
-      Swal.fire({
-        icon: "error",
-        title: "Verification Failed",
-        text:
-          error.response?.data?.message ||
+      toast.error(
+        error.response?.data?.message ||
           error.message ||
-          "OTP verification failed",
-        confirmButtonColor: "#d33",
-      });
+          "OTP verification failed"
+      );
     }
   };
 
   const sendOtp = async () => {
     if (!email) {
-      Swal.fire({
-        icon: "error",
-        title: "Error",
-        text: "Email not found. Please go back and enter your email.",
-        confirmButtonColor: "#d33",
-      });
+      toast.error("Email not found. Please go back and enter your email.");
       return;
     }
 
@@ -96,28 +125,19 @@ export default function VeryfyOTP() {
       const newOtpId = response.data?.otp_id;
       if (!newOtpId) throw new Error("Failed to get new OTP ID");
 
-      Swal.fire({
-        icon: "success",
-        title: "OTP Sent",
-        text: response.data?.message || "OTP resent to your email.",
-        confirmButtonColor: "#3085d6",
-      });
+      toast.success(response.data?.message || "OTP resent to your email.");
 
       setCounter(60);
       location.state.otpId = newOtpId;
     } catch (error) {
       console.error("Resend OTP error:", error.response?.data || error.message);
-      Swal.fire({
-        icon: "error",
-        title: "Error",
-        text: error.response?.data?.message || "Failed to resend OTP",
-        confirmButtonColor: "#d33",
-      });
+      toast.error(error.response?.data?.message || "Failed to resend OTP");
     }
   };
 
   return (
     <div className="h-screen flex flex-col md:flex-row overflow-hidden">
+      <ToastContainer />
       <div className="hidden md:block md:w-1/2 h-full">
         <img
           src={PrivateJet}
@@ -144,23 +164,7 @@ export default function VeryfyOTP() {
               <label className="text-sm text-gray-800 mb-1 block">
                 Enter Verification Code
               </label>
-              {/* <div className="relative">
-                <input
-                  type="text"
-                  placeholder="6 - Digit code"
-                  value={code}
-                  onChange={(e) => setCode(e.target.value)}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
-                  required
-                />
-                {code.length === 6 && (
-                  <img
-                    src={Checkmark}
-                    alt="Verified"
-                    className="absolute right-3 top-2.5 h-5 w-5"
-                  />
-                )}
-              </div> */}
+
               <OTPInput code={code} setCode={setCode} />
             </div>
 
@@ -181,7 +185,7 @@ export default function VeryfyOTP() {
 
             <button
               type="submit"
-              className="w-full md:w-3/5 bg-blue-400 text-white py-2.5 mt-4 rounded-lg hover:bg-blue-700 transition"
+              className="cursor-pointer w-full md:w-3/5 bg-blue-400 text-white py-2.5 mt-4 rounded-lg hover:bg-blue-700 transition"
             >
               Verify
             </button>

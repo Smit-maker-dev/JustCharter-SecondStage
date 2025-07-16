@@ -6,7 +6,7 @@ import { FaEye, FaEyeSlash } from "react-icons/fa";
 import Logo from "/images/Logo.png";
 import PrivateJet from "/images/privatejet.png";
 import Checkmark from "/images/checkmark.png";
-import { toast } from 'react-toastify';
+import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 const validationSchema = Yup.object().shape({
@@ -97,7 +97,7 @@ export default function SignupPage() {
       setErrors(newErrors);
     } else if (err.response && err.response.data && err.response.data.message) {
       
-      toast.error(err.response.data.message);
+     toast.error(err.response.data.message);
     } else {
       
       toast.error("An unexpected error occurred. Please try again later.");
@@ -111,6 +111,7 @@ export default function SignupPage() {
 
   return (
     <div className="h-screen flex flex-col md:flex-row overflow-hidden">
+      <ToastContainer/> 
       <div className="hidden md:block md:w-1/2 h-full bg-gray-100 relative">
         <img
           src={PrivateJet}

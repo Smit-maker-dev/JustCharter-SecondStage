@@ -61,8 +61,9 @@ export default function ResetPass() {
         confirmButtonColor: "#3085d6",
       });
 
+      // localStorage.getItem("resetToken");
       localStorage.removeItem("resetToken");
-      navigate("/");
+      navigate("/Login");
     } catch (error) {
       console.error(
         "Reset password failed:",
@@ -165,7 +166,7 @@ export default function ResetPass() {
 
             <button
               type="submit"
-              className="w-full md:w-3/5 bg-blue-400 text-white py-2.5 mt-4 rounded-lg hover:bg-blue-700 transition"
+              className="cursor-pointer w-full md:w-3/5 bg-blue-400 text-white py-2.5 mt-4 rounded-lg hover:bg-blue-700 transition"
             >
               Save
             </button>

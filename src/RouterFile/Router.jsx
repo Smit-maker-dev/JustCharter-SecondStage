@@ -15,6 +15,7 @@ import Services from '../Main_Pages/Services'
 import EventPage from '../Main_Pages/EventPage'
 import AboutPage from '../Main_Pages/AboutPage'
 import BuyAndSell from '../Main_Pages/BuyandSell'
+import NotFoundPage from '../Main_Pages/NotFoundPage'
 
 export default function Router() {
   return (
@@ -36,6 +37,7 @@ export default function Router() {
           <Route path="/buy_sell" element={<BuyAndSell/>} />
           <Route path="/about" element={<AboutPage />} />
     </Route>
+    <Route path="*" element={<NotFoundPage/>} />
     </Routes>
     </BrowserRouter>
   )
