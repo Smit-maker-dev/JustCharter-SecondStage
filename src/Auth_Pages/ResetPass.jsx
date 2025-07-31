@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import planimage from "/images/privatejet.png";
-import Logo from "/images/Logo.png";
+import Logo from "/images/Blacklogo.png";
 import Chekmark from "/images/checkmark.png";
 import { useNavigate } from "react-router-dom";
 import axios from "../api/axiosInstance";

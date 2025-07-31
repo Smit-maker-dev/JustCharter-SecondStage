@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import Logo from "/images/Logo.png";
+import Logo from "/images/Blacklogo.png";
 import PrivateJet from "/images/privatejet.png";
 import Checkmark from "/images/checkmark.png";
 import { useLocation, useNavigate } from "react-router-dom";

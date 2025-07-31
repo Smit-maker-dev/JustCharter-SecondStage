@@ -111,8 +111,8 @@ export default function VeryfyMobileNo() {
 
       <div className="w-full md:w-1/2 pt-40 flex justify-center items-center bg-white p-5 md:p-10 overflow-y-auto">
         <div className="w-full max-w-lg">
-          <div className="flex justify-start mb-6">
-            <img src="/images/Logo.png" alt="JustCharter Logo" className="h-10" />
+          <div className="flex justify-start mb-7">
+            <img src="/images/Blacklogo.png" alt="JustCharter Logo" className="h-10" />
           </div>
 
           <h2 className="text-2xl font-bold text-black mb-1">
