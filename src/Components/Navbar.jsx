@@ -101,7 +101,7 @@ export default function Navbar() {
                   : "/images/WhiteLogo.png"
               }
               alt="JustCharter Logo"
-              className="h-8 w-auto max-w-[140px] object-contain transition duration-300"
+              className="h-10 w-auto max-w-[140px] object-contain transition duration-300"
             />
           </div>
 
@@ -167,7 +167,7 @@ export default function Navbar() {
                   key={item.label}
                   className={`cursor-pointer transition-colors duration-300 ${
                     isActive
-                      ? "text-[#FFD700] font-semibold"
+                      ? "text-[#DFA93B] font-semibold"
                       : showScrolledStyle
                       ? "text-black"
                       : "text-white"

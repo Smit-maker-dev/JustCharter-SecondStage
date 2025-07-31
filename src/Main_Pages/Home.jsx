@@ -395,7 +395,7 @@ useEffect(() => {
               Over 500+ destinations worldwide
             </p>
             <div className="flex justify-center gap-4">
-              <button className="cursor-pointer bg-white text-black px-6 py-2 rounded-full text-sm font-semibold hover:text-yellow-500 hover:bg-[#FFD700] transition-colors duration-200">
+              <button className="cursor-pointer bg-white text-black px-6 py-2 rounded-full text-sm font-semibold hover:text-yellow-500 hover:bg-[#DFA93B] transition-colors duration-200">
                 Plan Flight
               </button>
               <button className="border border-white px-6 py-2 rounded-full text-sm font-semibold hover:bg-white hover:text-black transition-colors duration-200">
@@ -418,7 +418,7 @@ useEffect(() => {
               Over 500+ destinations worldwide
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <button className="cursor-pointer bg-white text-black px-6 py-2 rounded-full text-sm font-semibold hover:bg-[#FFD700] transition-colors duration-200">
+              <button className="cursor-pointer bg-white text-black px-6 py-2 rounded-full text-sm font-semibold hover:bg-[#DFA93B] transition-colors duration-200">
                 Plan Flight
               </button>
               <button className="border border-white px-6 py-2 rounded-full text-sm font-semibold hover:bg-white hover:text-black transition-colors duration-200">
