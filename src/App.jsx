@@ -8,15 +8,16 @@ import Router from "./RouterFile/Router";
 import Navbar from "./Components/Navbar";
 import Account from "./Main_Pages/Account";
 import "../src/Firebase/firebase"
+import PrivacyAndPolicy from "./Main_Pages/PrivacyAndPolicy";
 function App() {
   return (
     <>
+     <Router/>
      {/* <SignupPage/> */}
      {/* <VeryfyMobileNo/> */}
      {/* <VeryfyEmail/> */}
-     <Router/>
      {/* <Navbar/> */}
-     
+     {/* <PrivacyAndPolicy/> */}
      {/* <br /> */}
      {/* <Account/>  */}
      <ToastContainer />

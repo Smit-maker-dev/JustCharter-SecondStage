@@ -16,6 +16,7 @@ import EventPage from '../Main_Pages/EventPage'
 import AboutPage from '../Main_Pages/AboutPage'
 import BuyAndSell from '../Main_Pages/BuyandSell'
 import NotFoundPage from '../Main_Pages/NotFoundPage'
+import PrivacyAndPolicy from '../Main_Pages/PrivacyAndPolicy'
 
 export default function Router() {
   return (
@@ -36,6 +37,7 @@ export default function Router() {
           <Route path="/event" element={<EventPage />} />
           <Route path="/buy_sell" element={<BuyAndSell/>} />
           <Route path="/about" element={<AboutPage />} />
+          <Route path="/privacy_policy" element={<PrivacyAndPolicy />} />
     </Route>
     <Route path="*" element={<NotFoundPage/>} />
     </Routes>

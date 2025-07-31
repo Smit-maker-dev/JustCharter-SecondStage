@@ -12,7 +12,7 @@ export default function Footer() {
       <div className="flex flex-col lg:flex-row justify-between gap-5">
         <div className="mb-10 lg:mb-0 lg:w-1/4">
           <img
-            src="/images/Logo.png"
+            src="/images/WhiteLogo.png"
             alt="JustCharter Logo"
             className="h-10 mb-4"
           />
@@ -23,16 +23,16 @@ export default function Footer() {
          
           <div className="flex gap-4 mt-6">
             <span className=" bg-[#FFFFFF1A]  w-13 h-13 flex items-center justify-center rounded-full text-black hover:scale-105 transition">
-              <FaFacebook    size={28} className="font-bold h-10 w-10 text-[#FFD700]  p-1"  />
+              <FaFacebook    size={28} className="font-bold h-10 w-10 text-[#DFA93B]  p-1"  />
             </span>
             <span className="bg-[#FFFFFF1A]  w-13 h-13 flex items-center justify-center rounded-full text-black hover:scale-105 transition">
-              <IoLogoLinkedin   size={28} className="font-bold h-10 w-10 text-[#FFD700]  p-1" />
+              <IoLogoLinkedin   size={28} className="font-bold h-10 w-10 text-[#DFA93B]  p-1" />
             </span>
             <span className="bg-[#FFFFFF1A]  w-13 h-13 flex items-center justify-center rounded-full text-black hover:scale-105 transition">
-              <FaInstagram size={28} className="font-bold h-10 w-10 text-[#FFD700]  p-1"/>
+              <FaInstagram size={28} className="font-bold h-10 w-10 text-[#DFA93B]  p-1"/>
             </span>
             <span className="bg-[#FFFFFF1A]  w-13 h-13 flex items-center justify-center rounded-full text-black hover:scale-105 transition">
-              <FaEnvelope size={28} className="font-bold h-10 w-10 text-[#FFD700]  p-1"/>
+              <FaEnvelope size={28} className="font-bold h-10 w-10 text-[#DFA93B]  p-1"/>
             </span>
           </div>
         </div>
@@ -40,7 +40,7 @@ export default function Footer() {
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-20 text-sm">
           
           <div>
-            <h3 className="text-[#FFD700] font-semibold mb-3">Services</h3>
+            <h3 className="text-[#DFA93B] font-semibold mb-3">Services</h3>
             <ul className="space-y-2 text-gray-300">
               <li>Private Charter</li>
               <li>Membership Programs</li>
@@ -51,7 +51,7 @@ export default function Footer() {
           </div>
 
           <div>
-            <h3 className="text-[#FFD700] font-semibold mb-3">Company</h3>
+            <h3 className="text-[#DFA93B] font-semibold mb-3">Company</h3>
             <ul className="space-y-2 text-gray-300">
               <li>About Us</li>
               <li>Safety Standards</li>
@@ -62,7 +62,7 @@ export default function Footer() {
           </div>
 
           <div>
-            <h3 className="text-[#FFD700] font-semibold mb-3">Legal</h3>
+            <h3 className="text-[#DFA93B] font-semibold mb-3">Legal</h3>
             <ul className="space-y-2 text-gray-300">
               <li>Terms of Service</li>
               <li>Privacy Policy</li>

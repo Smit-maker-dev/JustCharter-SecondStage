@@ -101,7 +101,7 @@ export default function Navbar() {
                   : "/images/WhiteLogo.png"
               }
               alt="JustCharter Logo"
-              className="h-10 w-auto max-w-[140px] object-contain transition duration-300"
+              className="h-11 w-auto max-w-[150px] object-contain transition duration-300"
             />
           </div>
 
@@ -160,6 +160,7 @@ export default function Navbar() {
               { label: "Event", path: "/event" },
               { label: "Buy & Sell", path: "/buy_sell" },
               { label: "About", path: "/about" },
+              { label: "Privacy & Policy", path: "/privacy_policy" },
             ].map((item) => {
               const isActive = location.pathname === item.path;
               return (
@@ -294,6 +295,7 @@ export default function Navbar() {
                 { label: "Event", path: "/event" },
                 { label: "Buy & Sell", path: "/buy_sell" },
                 { label: "About", path: "/about" },
+                { label: "Privacy & Policy", path: "/privacy_policy" },
               ].map((item) => {
                 const isActive = location.pathname === item.path;
                 return (
@@ -372,3 +374,4 @@ export default function Navbar() {
     </>
   );
 }
+

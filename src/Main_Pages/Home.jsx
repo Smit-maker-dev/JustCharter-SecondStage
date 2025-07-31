@@ -448,7 +448,7 @@ useEffect(() => {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             <div className=" rounded-lg py-8 px-6 text-center shadow-sm hover:shadow-md transition">
               <PlaneTakeoff
-                className="mx-auto mb-4 text-yellow-400"
+                className="mx-auto mb-4 text-[#DFA93B]"
                 size={36}
               />
               <h3 className="font-semibold mb-2">Private Charter</h3>
@@ -459,7 +459,7 @@ useEffect(() => {
             </div>
 
             <div className=" rounded-lg py-8 px-6 text-center shadow-sm hover:shadow-md transition">
-              <Shield className="mx-auto mb-4 text-yellow-400" size={36} />
+              <Shield className="mx-auto mb-4 text-[#DFA93B]" size={36} />
               <h3 className="font-semibold mb-2">Safety First</h3>
               <p className="text-sm text-gray-600">
                 Our fleet meets the highest safety standards with rigorous
@@ -468,7 +468,7 @@ useEffect(() => {
             </div>
 
             <div className=" rounded-lg py-8 px-6 text-center shadow-sm hover:shadow-md transition">
-              <Calendar className="mx-auto mb-4 text-yellow-400" size={36} />
+              <Calendar className="mx-auto mb-4 text-[#DFA93B]" size={36} />
               <h3 className="font-semibold mb-2">Flexible Scheduling</h3>
               <p className="text-sm text-gray-600">
                 Fly on your terms with departure times that suit your schedule,
@@ -477,7 +477,7 @@ useEffect(() => {
             </div>
 
             <div className=" rounded-lg py-8 px-6 text-center shadow-sm hover:shadow-md transition">
-              <Clock className="mx-auto mb-4 text-yellow-400" size={36} />
+              <Clock className="mx-auto mb-4 text-[#DFA93B]" size={36} />
               <h3 className="font-semibold mb-2">Time Efficiency</h3>
               <p className="text-sm text-gray-600">
                 Skip long security lines and boarding processes, making your
@@ -542,7 +542,7 @@ useEffect(() => {
                       <ul className="mt-3 space-y-2">
                         {aircraft.specs.map((spec, idx) => (
                           <li key={idx} className="flex items-start">
-                            <span className="mt-1 w-2 h-2 bg-yellow-400 rounded-full flex-shrink-0 mr-2"></span>
+                            <span className="mt-1 w-2 h-2 bg-[#DFA93B] rounded-full flex-shrink-0 mr-2"></span>
                             <span className="text-gray-700 text-sm">
                               {spec.label}: {spec.value}
                             </span>
@@ -576,7 +576,7 @@ useEffect(() => {
       <div className="About-JustCharter py-14 px-10 mb-7 md:px-20 bg-white">
         <section className="flex flex-col lg:flex-row items-center gap-10 px-6">
           <div className="lg:w-1/2 w-full">
-            <p className="text-[18px] text-yellow-500 font-medium mb-1">
+            <p className="text-[18px] text-[#DFA93B] font-medium mb-1">
               ABOUT JUSTCHARTER
             </p>
             <h2
@@ -668,7 +668,7 @@ useEffect(() => {
                     <Star
                       key={i}
                       size={16}
-                      className="text-yellow-400 fill-yellow-400 mr-1"
+                      className="text-[#DFA93B] fill-[#DFA93B] mr-1"
                     />
                   ))}
                 </div>
@@ -735,7 +735,7 @@ useEffect(() => {
                     key={index}
                     className="flex items-center gap-2 border border-gray-200 px-3 py-1.5 rounded-sm text-sm bg-white "
                   >
-                    <Shield className="text-yellow-500 w-4 h-4" />
+                    <Shield className="text-[#DFA93B] w-4 h-4" />
                     {cert}
                   </div>
                 ))}
@@ -752,7 +752,7 @@ useEffect(() => {
                     key={index}
                     className="flex items-start gap-2 text-gray-700"
                   >
-                    <Star className="w-4 h-4 text-yellow-500 mt-1" />
+                    <Star className="w-4 h-4 text-[#DFA93B] mt-1" />
                     <span>{item}</span>
                   </li>
                 ))}
