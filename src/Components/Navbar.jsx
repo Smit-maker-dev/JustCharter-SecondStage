@@ -203,8 +203,8 @@ export default function Navbar() {
                 onClick={() => navigate("/register")}
                 className={`cursor-pointer text-sm px-6 py-2  rounded-md transition ${
                   showScrolledStyle
-                    ? "text-black hover:bg-yellow-400  hover:text-white"
-                    : "text-white hover:bg-yellow-400  hover:text-black"
+                    ? "text-black hover:bg-[#DFA93B]  hover:text-white"
+                    : "text-white hover:bg-[#DFA93B]  hover:text-black"
                 }`}
               >
                 Sign Up
@@ -345,8 +345,8 @@ export default function Navbar() {
                     onClick={() => navigate("/register")}
                     className={`text-sm px-4 py-2 rounded transition ${
                       showScrolledStyle
-                        ? "text-black hover:bg-yellow-400 border"
-                        : "text-gray-700 hover:bg-yellow-400 border hover:text-black"
+                        ? "text-black hover:bg-[#DFA93B] border"
+                        : "text-gray-700 hover:bg-[#DFA93B] border hover:text-black"
                     }`}
                   >
                     Sign Up
