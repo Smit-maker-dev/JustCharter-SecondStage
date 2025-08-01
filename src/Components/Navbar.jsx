@@ -91,7 +91,7 @@ export default function Navbar() {
           showScrolledStyle ? "bg-white shadow-sm" : "bg-transparent "
         }`}
       >
-        <div className="max-w-7xl mx-auto px-4 flex items-center justify-between h-16 ">
+        <div className=" mx-auto px-10 flex items-center justify-between h-16 ">
           <div className="flex items-center space-x-2">
             {/* <img src="/images/Logo.png" alt="JustCharter Logo" className="h-5" /> */}
             <img
@@ -101,7 +101,7 @@ export default function Navbar() {
                   : "/images/WhiteLogo.png"
               }
               alt="JustCharter Logo"
-              className="h-11 w-auto max-w-[150px] object-contain transition duration-300"
+              className="h-8 sm:h-8 md:h-8 lg:h-9 w-auto object-contain  transition duration-300 "
             />
           </div>
 
@@ -155,10 +155,10 @@ export default function Navbar() {
           <ul className="hidden lg:flex space-x-6 text-sm relative">
             {[
               { label: "Home", path: "/" },
-              { label: "Bookings", path: "/bookings" },
+              // { label: "Bookings", path: "/bookings" },
               { label: "Services", path: "/services" },
-              { label: "Event", path: "/event" },
-              { label: "Buy & Sell", path: "/buy_sell" },
+              // { label: "Event", path: "/event" },
+              // { label: "Buy & Sell", path: "/buy_sell" },
               { label: "About", path: "/about" },
               { label: "Privacy & Policy", path: "/privacy_policy" },
             ].map((item) => {
@@ -191,7 +191,7 @@ export default function Navbar() {
               </div>
               <span
                 className={`text-sm transition-colors duration-300 ${
-                  showScrolledStyle ? "text-[#FFD700]" : "text-[#FFFFFF]"
+                  showScrolledStyle ? "text-[#DFA93B]" : "text-[#FFFFFF]"
                 }`}
               >
                 {firstName} {lastName}
@@ -290,10 +290,10 @@ export default function Navbar() {
             <ul className="space-y-4 text-center">
               {[
                 { label: "Home", path: "/" },
-                { label: "Bookings", path: "/bookings" },
+                // { label: "Bookings", path: "/bookings" },
                 { label: "Services", path: "/services" },
-                { label: "Event", path: "/event" },
-                { label: "Buy & Sell", path: "/buy_sell" },
+                // { label: "Event", path: "/event" },
+                // { label: "Buy & Sell", path: "/buy_sell" },
                 { label: "About", path: "/about" },
                 { label: "Privacy & Policy", path: "/privacy_policy" },
               ].map((item) => {
@@ -374,4 +374,3 @@ export default function Navbar() {
     </>
   );
 }
-
