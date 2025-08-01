@@ -17,10 +17,14 @@ import AboutPage from '../Main_Pages/AboutPage'
 import BuyAndSell from '../Main_Pages/BuyandSell'
 import NotFoundPage from '../Main_Pages/NotFoundPage'
 import PrivacyAndPolicy from '../Main_Pages/PrivacyAndPolicy'
+import ScrollToTop from '../Components/ScrollToTop'
+import TermsOfServices from '../Main_Pages/TermsOfServices'
+import CanceletionPolicy from '../Main_Pages/CanceletionPolicy'
 
 export default function Router() {
   return (
     <BrowserRouter>
+      <ScrollToTop />
      <Routes>
       <Route path="/register" element={<SignupPage/>} />
       <Route path="/verifyemail" element={<VeryfyEmail />} />
@@ -38,6 +42,8 @@ export default function Router() {
           <Route path="/buy_sell" element={<BuyAndSell/>} />
           <Route path="/about" element={<AboutPage />} />
           <Route path="/privacy_policy" element={<PrivacyAndPolicy />} />
+          <Route path="/terms_conditions" element={<TermsOfServices />} />
+          <Route path="/cancellation-policy" element={<CanceletionPolicy />} />
     </Route>
     <Route path="*" element={<NotFoundPage/>} />
     </Routes>

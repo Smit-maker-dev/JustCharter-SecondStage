@@ -1,10 +1,7 @@
 import React from "react";
-import {
-  FaInstagram,
-  FaEnvelope,
-   FaFacebook
-} from "react-icons/fa";
+import { FaInstagram, FaEnvelope, FaFacebook } from "react-icons/fa";
 import { IoLogoLinkedin } from "react-icons/io5";
+import { Link } from "react-router-dom";
 
 export default function Footer() {
   return (
@@ -20,25 +17,36 @@ export default function Footer() {
             Redefining the private aviation experience with uncompromising
             safety, service, and luxury.
           </p>
-         
+
           <div className="flex gap-4 mt-6">
             <span className=" bg-[#FFFFFF1A]  w-13 h-13 flex items-center justify-center rounded-full text-black hover:scale-105 transition">
-              <FaFacebook    size={28} className="font-bold h-10 w-10 text-[#DFA93B]  p-1"  />
+              <FaFacebook
+                size={28}
+                className="font-bold h-10 w-10 text-[#DFA93B]  p-1"
+              />
             </span>
             <span className="bg-[#FFFFFF1A]  w-13 h-13 flex items-center justify-center rounded-full text-black hover:scale-105 transition">
-              <IoLogoLinkedin   size={28} className="font-bold h-10 w-10 text-[#DFA93B]  p-1" />
+              <IoLogoLinkedin
+                size={28}
+                className="font-bold h-10 w-10 text-[#DFA93B]  p-1"
+              />
             </span>
             <span className="bg-[#FFFFFF1A]  w-13 h-13 flex items-center justify-center rounded-full text-black hover:scale-105 transition">
-              <FaInstagram size={28} className="font-bold h-10 w-10 text-[#DFA93B]  p-1"/>
+              <FaInstagram
+                size={28}
+                className="font-bold h-10 w-10 text-[#DFA93B]  p-1"
+              />
             </span>
             <span className="bg-[#FFFFFF1A]  w-13 h-13 flex items-center justify-center rounded-full text-black hover:scale-105 transition">
-              <FaEnvelope size={28} className="font-bold h-10 w-10 text-[#DFA93B]  p-1"/>
+              <FaEnvelope
+                size={28}
+                className="font-bold h-10 w-10 text-[#DFA93B]  p-1"
+              />
             </span>
           </div>
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-20 text-sm">
-          
           <div>
             <h3 className="text-[#DFA93B] font-semibold mb-3">Services</h3>
             <ul className="space-y-2 text-gray-300">
@@ -53,7 +61,11 @@ export default function Footer() {
           <div>
             <h3 className="text-[#DFA93B] font-semibold mb-3">Company</h3>
             <ul className="space-y-2 text-gray-300">
-              <li>About Us</li>
+              <li>
+                <Link to="/about" className="hover:text-white transition">
+                  About Us
+                </Link>
+              </li>
               <li>Safety Standards</li>
               <li>Careers</li>
               <li>Press & Media</li>
@@ -64,11 +76,37 @@ export default function Footer() {
           <div>
             <h3 className="text-[#DFA93B] font-semibold mb-3">Legal</h3>
             <ul className="space-y-2 text-gray-300">
-              <li>Terms of Service</li>
-              <li>Privacy Policy</li>
-              <li>Cookie Policy</li>
-              <li>Accessibility</li>
-              <li>FAQs</li>
+              <li>
+                <Link to="/terms_conditions" className="hover:text-white transition">
+                  Terms of Service
+                </Link>
+              </li>
+              <li>
+                <Link to="/privacy_policy" className="hover:text-white transition">
+                  Privacy Policy
+                </Link>
+              </li>
+              <li>
+                <Link
+                  to="/cancellation-policy"
+                  className="hover:text-white transition"
+                >
+                  Cancellation Policy
+                </Link>
+              </li>
+              <li>
+                <Link
+                  to="/accessibility"
+                  className="hover:text-white transition"
+                >
+                  Accessibility
+                </Link>
+              </li>
+              <li>
+                <Link to="/faqs" className="hover:text-white transition">
+                  FAQs
+                </Link>
+              </li>
             </ul>
           </div>
         </div>
