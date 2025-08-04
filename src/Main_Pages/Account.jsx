@@ -80,7 +80,7 @@ export default function Account() {
         const useAccessToken = Boolean(localStorage.getItem("access_token"));
 
         const res = await axios.get("/user", {
-          useAccessToken: useAccessToken, // ✅ Triggers the correct interceptor
+          useAccessToken: useAccessToken, 
         });
 
         const user = res.data.data;
@@ -246,7 +246,7 @@ export default function Account() {
     toast.success("Logged out successfully");
   };
   return (
-    <div className="bg-white min-h-screen p-4 mt-5">
+    <div className="bg-white min-h-screen p-4 mt-14">
       <div className="max-w-6xl mx-auto mt-3">
         <div className="heading-section">
           <h2 className="text-2xl font-semibold mb-1">Account</h2>
