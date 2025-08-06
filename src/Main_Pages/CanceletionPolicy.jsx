@@ -59,12 +59,8 @@ export default function CanceletionPolicy() {
                   estimated flying cost will be charged.
                 </p>
                 <p className="text-gray-700">
-                  • Within 12 hours of departure or in case of no-show: 100% of
-                  the total flying cost will be charged.
-                </p>
-                <p className="text-gray-700">
                   • After aircraft departure: 100% of the cost is
-                  non-refundable, regardless of reason for cancellation.
+                  non-refundable.
                 </p>
               </div>
             </div>
