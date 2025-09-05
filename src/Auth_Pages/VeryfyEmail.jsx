@@ -77,7 +77,7 @@ export default function VerifyEmail() {
       localStorage.setItem("lastOtpSentTime", Date.now().toString());
       setCounter(60);
 
-      // await fetchLatestOtp();
+      ;
     } catch (error) {
       toast.error(error.response?.data?.message || "Sending OTP failed");
       console.error("Send OTP error:", error);

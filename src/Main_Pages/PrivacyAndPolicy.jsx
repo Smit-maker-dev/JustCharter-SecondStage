@@ -23,7 +23,7 @@ export default function PrivacyAndPolicy() {
         </div>
       </header>
 
-      <div className=" mx-20 px-4 sm:px-6 py-12">
+      <div className="md:mx-20 px-4 sm:px-6 py-12">
       <div className="bg-white rounded-lg shadow-sm p-6 sm:p-8">
         <h2 className="text-2xl font-semibold text-gray-800 mb-6 pb-2 border-b border-gray-200">
            Privacy Policy

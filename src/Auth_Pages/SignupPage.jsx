@@ -92,7 +92,7 @@ export default function SignupPage() {
       const newErrors = {};
       err.inner.forEach((error) => {
         newErrors[error.path] = error.message;
-        toast.error(error.message);  
+        // toast.error(error.message);  
       });
       setErrors(newErrors);
     } else if (err.response && err.response.data && err.response.data.message) {
