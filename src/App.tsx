@@ -1,5 +1,5 @@
 import { BrowserRouter, Routes, Route, Link, useLocation } from 'react-router-dom';
-import { ArrowRight, Plane, Users, Package, Clock, ShieldCheck, HeartPulse, ArrowUp } from 'lucide-react';
+import { ArrowRight, Plane, Users, Package, Clock, ShieldCheck, HeartPulse, ArrowUp, Search } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import ServicesPage from './pages/Services';
 import DestinationsPage from './pages/Destinations';
@@ -56,8 +56,16 @@ function Navbar() {
             About
           </Link>
         </div>
-        <div>
-          <button className="bg-black text-white text-base font-medium px-7 py-2.5 rounded-full hover:bg-gray-800 transition-colors duration-200">
+        <div className="flex items-center gap-4">
+          <div className="hidden lg:flex items-center bg-black/5 rounded-full px-4 py-2 border border-black/10 focus-within:bg-white focus-within:border-black/20 focus-within:shadow-sm transition-all duration-200">
+            <Search className="w-4 h-4 text-black/50 shrink-0" />
+            <input 
+              type="text" 
+              placeholder="Search destinations, fleet..." 
+              className="bg-transparent border-none focus:outline-none text-sm ml-2 w-48 placeholder:text-black/40 text-black"
+            />
+          </div>
+          <button className="bg-black text-white text-base font-medium px-7 py-2.5 rounded-full hover:bg-brand transition-colors duration-200">
             Book a Flight
           </button>
         </div>
@@ -101,7 +109,7 @@ function HeroSection() {
           <p className="text-black/80 text-base md:text-lg max-w-md mb-8 leading-relaxed" style={{ fontFamily: "'Inter', ui-sans-serif, system-ui, sans-serif" }}>
             An exclusive, on-demand charter network built for seamless bookings, absolute privacy, and unparalleled luxury travel.
           </p>
-          <button className="inline-flex items-center gap-3 bg-black text-white text-base md:text-lg font-medium pl-8 pr-2 py-2 rounded-full hover:bg-gray-800 transition-colors duration-200">
+          <button className="inline-flex items-center gap-3 bg-black text-white text-base md:text-lg font-medium pl-8 pr-2 py-2 rounded-full hover:bg-brand transition-colors duration-200">
             Explore Fleet
             <span className="bg-white rounded-full p-2 flex items-center justify-center">
               <ArrowRight className="w-5 h-5 text-black" />
@@ -133,7 +141,7 @@ function InfoSection() {
             <h2 className="text-black text-4xl md:text-5xl font-medium leading-tight mb-8" style={{ letterSpacing: '-0.03em' }}>
               Meet JustCharter.
             </h2>
-            <button className="inline-flex items-center gap-3 bg-black text-white text-base font-medium pl-6 pr-1.5 py-1.5 rounded-full hover:bg-gray-800 transition-colors duration-200 cursor-pointer">
+            <button className="inline-flex items-center gap-3 bg-black text-white text-base font-medium pl-6 pr-1.5 py-1.5 rounded-full hover:bg-brand transition-colors duration-200 cursor-pointer">
               Discover more
               <span className="bg-white rounded-full p-1.5 flex items-center justify-center">
                 <ArrowRight className="w-4 h-4 text-black" />
@@ -273,7 +281,7 @@ function ServicesSection() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-12 gap-y-16">
           {services.map((service, idx) => (
             <Link to="/services" key={idx} className="group block">
-              <div className="mb-6 w-16 h-16 rounded-2xl bg-[#F5F5F5] flex items-center justify-center text-black group-hover:bg-black group-hover:text-white transition-colors duration-300">
+              <div className="mb-6 w-16 h-16 rounded-2xl bg-[#F5F5F5] flex items-center justify-center text-black group-hover:bg-brand group-hover:text-white transition-colors duration-300">
                 {service.icon}
               </div>
               <h3 className="text-2xl font-medium mb-4 group-hover:text-black/80 transition-colors" style={{ letterSpacing: '-0.02em' }}>{service.title}</h3>
@@ -519,7 +527,7 @@ function YatrasSection() {
               Embark on a transcendent journey to sacred destinations. Experience absolute comfort, helicopter transfers, and VIP access to the holy shrines, curated entirely by our dedicated spiritual concierge.
             </p>
           </div>
-          <button className="inline-flex flex-shrink-0 items-center gap-3 bg-black text-white text-base font-medium px-6 py-2.5 rounded-full hover:bg-gray-800 transition-colors duration-200">
+          <button className="inline-flex flex-shrink-0 items-center gap-3 bg-black text-white text-base font-medium px-6 py-2.5 rounded-full hover:bg-brand transition-colors duration-200">
             Plan your Yatra
           </button>
         </div>
@@ -748,7 +756,7 @@ function ScrollToTopButton() {
       {isVisible && (
         <button
           onClick={scrollToTop}
-          className="bg-black text-white p-3 rounded-full shadow-lg hover:bg-gray-800 transition-colors duration-300"
+          className="bg-black text-white p-3 rounded-full shadow-lg hover:bg-brand transition-colors duration-300"
           aria-label="Scroll to top"
         >
           <ArrowUp className="w-6 h-6" />

@@ -103,7 +103,7 @@ export default function EmptyLegs() {
                   className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700 ease-out"
                   referrerPolicy="no-referrer"
                 />
-                <div className="absolute top-4 right-4 bg-white/90 backdrop-blur-sm px-3 py-1.5 rounded-full text-xs font-semibold tracking-wide uppercase shadow-sm">
+                <div className="absolute top-4 right-4 bg-brand text-white backdrop-blur-sm px-3 py-1.5 rounded-full text-xs font-semibold tracking-wide uppercase shadow-sm">
                   Save {Math.round((1 - parseInt(leg.price.replace(/[^\d]/g, '')) / parseInt(leg.originalPrice.replace(/[^\d]/g, ''))) * 100)}%
                 </div>
               </div>

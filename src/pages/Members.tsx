@@ -20,7 +20,7 @@ export default function Members() {
     },
     {
       name: "Gold",
-      icon: <Star className="w-6 h-6 text-yellow-600" />,
+      icon: <Star className="w-6 h-6 text-brand" />,
       description: "For frequent travelers requiring priority access and fixed hourly certainty.",
       price: "Fixed Hourly Rates",
       popular: true,
@@ -33,7 +33,7 @@ export default function Members() {
       ],
       color: "bg-black",
       textColor: "text-white",
-      buttonColor: "bg-white text-black hover:bg-gray-100"
+      buttonColor: "bg-brand text-white hover:bg-[#c99530]"
     },
     {
       name: "Platinum",
@@ -76,7 +76,7 @@ export default function Members() {
               className={`relative rounded-3xl p-10 flex flex-col \${plan.color} \${plan.textColor}`}
             >
               {plan.popular && (
-                <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-yellow-400 text-black text-xs font-semibold uppercase tracking-widest py-1.5 px-4 rounded-full">
+                <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-brand text-white text-xs font-semibold uppercase tracking-widest py-1.5 px-4 rounded-full">
                   Most Popular
                 </div>
               )}
