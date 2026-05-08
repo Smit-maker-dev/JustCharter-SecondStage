@@ -10,7 +10,7 @@ import {
   Check,
 } from "lucide-react";
 import { Link } from "react-router-dom";
-import { useState } from "react";
+import React, { useState } from "react";
 import BookingModal from "../components/BookingModal";
 
 interface Aircraft {
@@ -37,8 +37,17 @@ export default function Fleet() {
   const [notifyType, setNotifyType] = useState("both");
   const [notifySuccess, setNotifySuccess] = useState(false);
   const [notifyCategories, setNotifyCategories] = useState<string[]>([]);
-  
+
   const [zoomedImage, setZoomedImage] = useState<string | null>(null);
+  const [selectedCategoryFilter, setSelectedCategoryFilter] = useState("all");
+  const [isLoading, setIsLoading] = useState(true);
+
+  React.useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 1500);
+    return () => clearTimeout(timer);
+  }, []);
 
   const handleNotifySubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -217,132 +226,199 @@ export default function Fleet() {
         </p>
       </div>
 
-      <div className="max-w-[88rem] mx-auto px-4 sm:px-6 mb-24 md:mb-32 space-y-20 md:space-y-32">
-        {categories.map((category) => (
-          <div
-            key={category.id}
-            className="pt-8 border-t border-gray-200 dark:border-white/20"
+      {/* Filter Chips */}
+      <div className="max-w-[88rem] mx-auto px-4 sm:px-6 mb-12">
+        <div className="flex flex-wrap gap-2 md:gap-3">
+          <button
+            onClick={() => setSelectedCategoryFilter("all")}
+            className={`px-4 py-2 md:px-5 md:py-2.5 rounded-full text-sm font-medium transition-all duration-200 border ${
+              selectedCategoryFilter === "all"
+                ? "bg-black text-white border-black dark:bg-white dark:text-black dark:border-white shadow-sm"
+                : "bg-transparent text-black/70 border-gray-200 hover:border-black/30 dark:text-white/70 dark:border-white/10 dark:hover:border-white/30"
+            }`}
           >
-            <div className="flex flex-col md:flex-row justify-between items-start mb-8 md:mb-12 gap-4 md:gap-8">
-              <div className="max-w-xl">
-                <h2
-                  className="text-3xl md:text-4xl font-medium mb-3 md:mb-4"
-                  style={{ letterSpacing: "-0.03em" }}
-                >
-                  {category.title}
-                </h2>
-                <p className="text-black/60 dark:text-white/60 text-base md:text-lg leading-relaxed">
-                  {category.description}
-                </p>
+            All Aircraft
+          </button>
+          {categories.map((cat) => (
+            <button
+              key={cat.id}
+              onClick={() => setSelectedCategoryFilter(cat.id)}
+              className={`px-4 py-2 md:px-5 md:py-2.5 rounded-full text-sm font-medium transition-all duration-200 border ${
+                selectedCategoryFilter === cat.id
+                  ? "bg-black text-white border-black dark:bg-white dark:text-black dark:border-white shadow-sm"
+                  : "bg-transparent text-black/70 border-gray-200 hover:border-black/30 dark:text-white/70 dark:border-white/10 dark:hover:border-white/30"
+              }`}
+            >
+              {cat.title}
+            </button>
+          ))}
+        </div>
+      </div>
+
+      <div className="max-w-[88rem] mx-auto px-4 sm:px-6 mb-24 md:mb-32 space-y-20 md:space-y-32">
+        {categories
+          .filter(
+            (cat) =>
+              selectedCategoryFilter === "all" ||
+              cat.id === selectedCategoryFilter,
+          )
+          .map((category) => (
+            <div
+              key={category.id}
+              className="pt-8 border-t border-gray-200 dark:border-white/20"
+            >
+              <div className="flex flex-col md:flex-row justify-between items-start mb-8 md:mb-12 gap-4 md:gap-8">
+                <div className="max-w-xl">
+                  <h2
+                    className="text-3xl md:text-4xl font-medium mb-3 md:mb-4"
+                    style={{ letterSpacing: "-0.03em" }}
+                  >
+                    {category.title}
+                  </h2>
+                  <p className="text-black/60 dark:text-white/60 text-base md:text-lg leading-relaxed">
+                    {category.description}
+                  </p>
+                </div>
+              </div>
+
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                {isLoading ? (
+                  <>
+                    {[1, 2].map((i) => (
+                      <div
+                        key={i}
+                        className="bg-white dark:bg-neutral-950 rounded-3xl overflow-hidden border border-gray-100 dark:border-white/10 flex flex-col h-full animate-pulse"
+                      >
+                        <div className="relative aspect-[16/10] bg-gray-200 dark:bg-neutral-800" />
+                        <div className="p-6 md:p-8 flex-1 flex flex-col">
+                          <div className="h-6 bg-gray-200 dark:bg-neutral-800 rounded w-1/2 mb-8" />
+                          <div className="grid grid-cols-2 gap-y-6 gap-x-4 mb-8">
+                            {[1, 2, 3, 4].map((j) => (
+                              <div key={j}>
+                                <div className="h-3 bg-gray-200 dark:bg-neutral-800 rounded w-1/3 mb-2" />
+                                <div className="h-4 bg-gray-200 dark:bg-neutral-800 rounded w-1/2" />
+                              </div>
+                            ))}
+                          </div>
+                          <div className="mt-auto flex items-center justify-between pt-6 border-t border-gray-100 dark:border-white/10">
+                            <div>
+                              <div className="h-3 bg-gray-200 dark:bg-neutral-800 rounded w-1/3 mb-2" />
+                              <div className="h-5 bg-gray-200 dark:bg-neutral-800 rounded w-3/4" />
+                            </div>
+                            <div className="h-10 w-24 bg-gray-200 dark:bg-neutral-800 rounded-full" />
+                          </div>
+                        </div>
+                      </div>
+                    ))}
+                  </>
+                ) : (
+                  category.aircraft.map((jet, idx) => {
+                    const isSelected = selectedForComparison.some(
+                      (c) => c.name === jet.name,
+                    );
+                    return (
+                      <div
+                        key={idx}
+                        className={`bg-white dark:bg-neutral-950 rounded-3xl overflow-hidden group border flex flex-col transition-all duration-300 hover:shadow-xl hover:-translate-y-1 hover:scale-[1.01] ${isSelected ? "border-black dark:border-white ring-2 ring-black dark:ring-white/20" : "border-gray-100 dark:border-white/10"}`}
+                      >
+                        <div className="relative aspect-[16/10] overflow-hidden">
+                          <img
+                            src={jet.image}
+                            alt={jet.name}
+                            loading="lazy"
+                            referrerPolicy="no-referrer"
+                            className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700 ease-out"
+                          />
+                          <div
+                            className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-80 cursor-zoom-in"
+                            onClick={() => setZoomedImage(jet.image)}
+                          />
+
+                          {/* Compare Button */}
+                          <div className="absolute top-4 right-4 z-20">
+                            <button
+                              onClick={() => toggleCompare(jet)}
+                              className={`px-4 py-2 rounded-full text-xs font-semibold backdrop-blur-md transition-all duration-300 border focus:outline-none flex items-center gap-1.5 ${isSelected ? "bg-black/90 text-white border-black/90 dark:bg-white/90 dark:text-black dark:border-white/90" : "bg-black/30 text-white border-white/20 hover:bg-black/50"}`}
+                            >
+                              {isSelected ? "Added to Compare" : "+ Compare"}
+                            </button>
+                          </div>
+
+                          <div className="absolute bottom-6 left-6 text-white text-2xl font-medium tracking-tight">
+                            {jet.name}
+                          </div>
+                        </div>
+                        <div className="p-6 md:p-8">
+                          <div className="grid grid-cols-2 gap-y-6 gap-x-4 mb-8">
+                            <div className="flex flex-col gap-1.5">
+                              <div className="flex items-center gap-2 text-black/50 dark:text-white/50 text-sm font-medium tracking-wide uppercase">
+                                <Users className="w-4 h-4 shrink-0" />
+                                Passengers
+                              </div>
+                              <span className="text-lg font-medium">
+                                Up to {jet.passengers}
+                              </span>
+                            </div>
+
+                            <div className="flex flex-col gap-1.5">
+                              <div className="flex items-center gap-2 text-black/50 dark:text-white/50 text-sm font-medium tracking-wide uppercase">
+                                <MapPin className="w-4 h-4 shrink-0" />
+                                Range
+                              </div>
+                              <span className="text-lg font-medium">
+                                {jet.range}
+                              </span>
+                            </div>
+
+                            <div className="flex flex-col gap-1.5">
+                              <div className="flex items-center gap-2 text-black/50 dark:text-white/50 text-sm font-medium tracking-wide uppercase">
+                                <Gauge className="w-4 h-4 shrink-0" />
+                                Cruise Speed
+                              </div>
+                              <span className="text-lg font-medium">
+                                {jet.speed}
+                              </span>
+                            </div>
+
+                            <div className="flex flex-col gap-1.5">
+                              <div className="flex items-center gap-2 text-black/50 dark:text-white/50 text-sm font-medium tracking-wide uppercase">
+                                <Briefcase className="w-4 h-4 shrink-0" />
+                                Luggage
+                              </div>
+                              <span className="text-lg font-medium">
+                                {jet.luggage}
+                              </span>
+                            </div>
+                          </div>
+
+                          <div className="flex items-center justify-between mb-6 pt-6 border-t border-gray-100 dark:border-white/10">
+                            <span className="text-black/50 dark:text-white/50 font-medium tracking-wide uppercase text-sm">
+                              Estimated Price
+                            </span>
+                            <span className="text-xl font-medium">
+                              {jet.estPrice}
+                            </span>
+                          </div>
+
+                          <div className="flex flex-col xl:flex-row gap-3">
+                            <Link
+                              to={`/fleet/${jet.name.toLowerCase().replace(/ /g, "-")}`}
+                              className="flex-1 block py-4 text-center text-sm font-medium text-black dark:text-white bg-[#F5F5F5] dark:bg-neutral-900 rounded-full hover:bg-gray-200 transition-colors duration-200"
+                            >
+                              View Details
+                            </Link>
+                            <button className="flex-1 py-4 text-center text-sm font-medium text-white bg-black rounded-full hover:bg-gray-800 dark:hover:bg-neutral-200 transition-colors duration-200">
+                              Request Flight
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                    );
+                  })
+                )}
               </div>
             </div>
-
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-              {category.aircraft.map((jet, idx) => {
-                const isSelected = selectedForComparison.some(
-                  (c) => c.name === jet.name,
-                );
-                return (
-                  <div
-                    key={idx}
-                    className={`bg-white dark:bg-neutral-950 rounded-3xl overflow-hidden group border flex flex-col transition-all duration-300 hover:shadow-xl hover:-translate-y-1 hover:scale-[1.01] ${isSelected ? "border-black dark:border-white ring-2 ring-black dark:ring-white/20" : "border-gray-100 dark:border-white/10"}`}
-                  >
-                    <div className="relative aspect-[16/10] overflow-hidden">
-                      <img
-                        src={jet.image}
-                        alt={jet.name}
-                        referrerPolicy="no-referrer"
-                        className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700 ease-out"
-                      />
-                      <div 
-                        className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-80 cursor-zoom-in" 
-                        onClick={() => setZoomedImage(jet.image)}
-                      />
-
-                      {/* Compare Button */}
-                      <div className="absolute top-4 right-4 z-20">
-                        <button
-                          onClick={() => toggleCompare(jet)}
-                          className={`px-4 py-2 rounded-full text-xs font-semibold backdrop-blur-md transition-all duration-300 border focus:outline-none flex items-center gap-1.5 ${isSelected ? "bg-black/90 text-white border-black/90 dark:bg-white/90 dark:text-black dark:border-white/90" : "bg-black/30 text-white border-white/20 hover:bg-black/50"}`}
-                        >
-                          {isSelected ? "Added to Compare" : "+ Compare"}
-                        </button>
-                      </div>
-
-                      <div className="absolute bottom-6 left-6 text-white text-2xl font-medium tracking-tight">
-                        {jet.name}
-                      </div>
-                    </div>
-                    <div className="p-8">
-                      <div className="grid grid-cols-2 gap-y-6 gap-x-4 mb-8">
-                        <div className="flex flex-col gap-1.5">
-                          <div className="flex items-center gap-2 text-black/50 dark:text-white/50 text-sm font-medium tracking-wide uppercase">
-                            <Users className="w-4 h-4 shrink-0" />
-                            Passengers
-                          </div>
-                          <span className="text-lg font-medium">
-                            Up to {jet.passengers}
-                          </span>
-                        </div>
-
-                        <div className="flex flex-col gap-1.5">
-                          <div className="flex items-center gap-2 text-black/50 dark:text-white/50 text-sm font-medium tracking-wide uppercase">
-                            <MapPin className="w-4 h-4 shrink-0" />
-                            Range
-                          </div>
-                          <span className="text-lg font-medium">
-                            {jet.range}
-                          </span>
-                        </div>
-
-                        <div className="flex flex-col gap-1.5">
-                          <div className="flex items-center gap-2 text-black/50 dark:text-white/50 text-sm font-medium tracking-wide uppercase">
-                            <Gauge className="w-4 h-4 shrink-0" />
-                            Cruise Speed
-                          </div>
-                          <span className="text-lg font-medium">
-                            {jet.speed}
-                          </span>
-                        </div>
-
-                        <div className="flex flex-col gap-1.5">
-                          <div className="flex items-center gap-2 text-black/50 dark:text-white/50 text-sm font-medium tracking-wide uppercase">
-                            <Briefcase className="w-4 h-4 shrink-0" />
-                            Luggage
-                          </div>
-                          <span className="text-lg font-medium">
-                            {jet.luggage}
-                          </span>
-                        </div>
-                      </div>
-
-                      <div className="flex items-center justify-between mb-6 pt-6 border-t border-gray-100 dark:border-white/10">
-                        <span className="text-black/50 dark:text-white/50 font-medium tracking-wide uppercase text-sm">
-                          Estimated Price
-                        </span>
-                        <span className="text-xl font-medium">
-                          {jet.estPrice}
-                        </span>
-                      </div>
-
-                      <div className="flex flex-col xl:flex-row gap-3">
-                        <Link
-                          to={`/fleet/${jet.name.toLowerCase().replace(/ /g, "-")}`}
-                          className="flex-1 block py-4 text-center text-sm font-medium text-black dark:text-white bg-[#F5F5F5] dark:bg-neutral-900 rounded-full hover:bg-gray-200 transition-colors duration-200"
-                        >
-                          View Details
-                        </Link>
-                        <button className="flex-1 py-4 text-center text-sm font-medium text-white bg-black rounded-full hover:bg-gray-800 dark:hover:bg-neutral-200 transition-colors duration-200">
-                          Request Flight
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-                );
-              })}
-            </div>
-          </div>
-        ))}
+          ))}
       </div>
 
       {/* Floating Comparison Bar */}
@@ -416,6 +492,7 @@ export default function Fleet() {
                         <img
                           src={jet.image}
                           alt={jet.name}
+                          loading="lazy"
                           referrerPolicy="no-referrer"
                           className="w-full h-full object-cover"
                         />
@@ -630,19 +707,23 @@ export default function Fleet() {
 
       {/* Zoom Modal */}
       {zoomedImage && (
-        <div 
+        <div
           className="fixed inset-0 z-[100] flex items-center justify-center bg-black/90 p-4 sm:p-6 backdrop-blur-sm animate-in fade-in duration-300 cursor-zoom-out"
           onClick={() => setZoomedImage(null)}
         >
-          <button 
+          <button
             className="absolute top-6 right-6 p-2 rounded-full bg-white/10 hover:bg-white/20 text-white transition-colors cursor-pointer"
-            onClick={(e) => { e.stopPropagation(); setZoomedImage(null); }}
+            onClick={(e) => {
+              e.stopPropagation();
+              setZoomedImage(null);
+            }}
           >
             <X className="w-6 h-6" />
           </button>
-          <img 
-            src={zoomedImage} 
-            alt="Aircraft Zoomed" 
+          <img
+            src={zoomedImage}
+            alt="Aircraft Zoomed"
+            loading="lazy"
             className="w-full max-w-7xl max-h-[85vh] object-contain rounded-2xl shadow-2xl animate-in zoom-in-95 duration-300"
             onClick={(e) => e.stopPropagation()}
             referrerPolicy="no-referrer"
