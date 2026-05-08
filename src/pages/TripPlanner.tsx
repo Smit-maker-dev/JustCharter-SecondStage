@@ -1,9 +1,19 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { Plane, Calendar, Users, MapPin, Search, CheckCircle2, Navigation, ChevronDown, ChevronUp, Info, Coffee, ChevronLeft, ChevronRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import { ComposableMap, Geographies, Geography, Line, Marker } from 'react-simple-maps';
+import { MapContainer, TileLayer, Polyline, Marker, Popup, useMap } from 'react-leaflet';
+import 'leaflet/dist/leaflet.css';
+import L from 'leaflet';
 import { AIRPORTS, Airport } from '../data/airports';
 import { format, addMonths, subMonths, startOfMonth, endOfMonth, eachDayOfInterval, isSameDay, isToday, isBefore, startOfToday } from 'date-fns';
+
+// Fix for default marker icon in leaflet
+const icon = L.divIcon({
+  className: 'custom-leaflet-icon',
+  html: `<div style="background-color: black; width: 12px; height: 12px; border-radius: 50%; border: 2px solid white; box-shadow: 0 0 5px rgba(0,0,0,0.5);"></div>`,
+  iconSize: [12, 12],
+  iconAnchor: [6, 6]
+});
 
 // Mock data for suggested options
 const MOCK_OPTIONS = [
@@ -181,71 +191,50 @@ const TripOptionCard: React.FC<{ option: typeof MOCK_OPTIONS[0] }> = ({ option }
   );
 };
 
-const geoUrl = "https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json";
+const CenterMap = ({ bounds }: { bounds: L.LatLngBoundsExpression }) => {
+  const map = useMap();
+  useEffect(() => {
+    map.fitBounds(bounds, { padding: [50, 50] });
+  }, [map, bounds]);
+  return null;
+};
 
 const FlightRouteMap = ({ departure, arrival, departureCoords, arrivalCoords }: { departure: string, arrival: string, departureCoords: [number, number], arrivalCoords: [number, number] }) => {
-  const start = departureCoords;
-  const end = arrivalCoords;
-
-  const centerLongitude = (start[0] + end[0]) / 2;
-  const centerLatitude = (start[1] + end[1]) / 2;
-
-  const dx = Math.abs(start[0] - end[0]);
-  const dy = Math.abs(start[1] - end[1]);
-  // Adjust map scale according to the spanning distance (approximate approach)
-  const maxDiff = Math.max(dx, dy);
-  const computedScale = maxDiff > 0 ? Math.max(100, Math.min(1200, 15000 / maxDiff)) : 400;
+  // Leaflet uses [lat, lon], while d3-geo coords were [lon, lat]
+  const start: [number, number] = [departureCoords[1], departureCoords[0]];
+  const end: [number, number] = [arrivalCoords[1], arrivalCoords[0]];
+  
+  const bounds = L.latLngBounds(start, end);
 
   return (
-    <div className="w-full h-[250px] sm:h-[300px] bg-white dark:bg-neutral-900 border border-black/5 dark:border-white/5 rounded-3xl overflow-hidden shadow-sm relative mb-8">
-      <ComposableMap
-        projection="geoEqualEarth"
-        projectionConfig={{ scale: computedScale, center: [centerLongitude, centerLatitude] }}
+    <div className="w-full h-[250px] sm:h-[300px] bg-neutral-100 dark:bg-neutral-800 border border-black/5 dark:border-white/5 rounded-3xl overflow-hidden shadow-sm relative mb-8 z-0">
+      <MapContainer 
+        scrollWheelZoom={false}
         className="w-full h-full outline-none"
+        zoomControl={false}
       >
-        <Geographies geography={geoUrl}>
-          {({ geographies }) =>
-            geographies.map((geo) => (
-              <Geography
-                key={geo.rsmKey}
-                geography={geo}
-                fill="currentColor"
-                className="text-gray-100 dark:text-neutral-800 outline-none hover:text-gray-200 dark:hover:text-neutral-700 transition-colors"
-                stroke="currentColor"
-                strokeWidth={0.5}
-                style={{
-                  default: { outline: "none" },
-                  hover: { outline: "none" },
-                  pressed: { outline: "none" },
-                }}
-              />
-            ))
-          }
-        </Geographies>
-        <Line
-          from={start}
-          to={end}
-          strokeWidth={3}
-          strokeLinecap="round"
-          className="text-brand stroke-current opacity-100"
-          style={{ strokeDasharray: "6 6" }}
+        <TileLayer
+          url="https://{s}.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}{r}.png"
+          attribution='&copy; <a href="https://carto.com/">CARTO</a>'
         />
-        <Marker coordinates={start}>
-          <circle r={5} fill="currentColor" className="text-brand shadow-sm" />
-          <circle r={14} fill="currentColor" className="text-brand opacity-20 animate-ping" />
-          <text textAnchor="end" y={-10} x={-10} className="fill-black dark:fill-white text-[12px] font-bold">
-            {departure || 'New York'}
-          </text>
+        <CenterMap bounds={bounds} />
+        
+        <Polyline 
+          positions={[start, end]} 
+          color="black" 
+          weight={3} 
+          dashArray="6 6" 
+          opacity={0.5} 
+        />
+        
+        <Marker position={start} icon={icon}>
+          <Popup>{departure || 'New York'}</Popup>
         </Marker>
-        <Marker coordinates={end}>
-          <circle r={5} fill="currentColor" className="text-brand shadow-sm" />
-          <circle r={14} fill="currentColor" className="text-brand opacity-20 animate-ping" />
-          <text textAnchor="start" y={-10} x={10} className="fill-black dark:fill-white text-[12px] font-bold">
-            {arrival || 'London'}
-          </text>
+        <Marker position={end} icon={icon}>
+          <Popup>{arrival || 'London'}</Popup>
         </Marker>
-      </ComposableMap>
-      <div className="absolute top-4 left-4 right-4 sm:right-auto bg-white/90 dark:bg-black/80 backdrop-blur px-5 py-3 rounded-2xl border border-black/10 dark:border-white/10 shadow-sm flex flex-col gap-1">
+      </MapContainer>
+      <div className="absolute top-4 left-4 right-4 sm:right-auto bg-white/90 dark:bg-black/80 backdrop-blur px-5 py-3 rounded-2xl border border-black/10 dark:border-white/10 shadow-sm flex flex-col gap-1 z-[400]">
         <span className="text-[10px] font-bold tracking-widest uppercase text-black/50 dark:text-white/50">Flight Path Highlights</span>
         <span className="font-medium text-sm flex items-center gap-2">
           {departure || 'New York'}
@@ -539,7 +528,7 @@ export default function TripPlanner() {
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12">
           {/* Search Form */}
-          <div className="lg:col-span-4 h-fit sticky top-32">
+          <div className="lg:col-span-4 h-fit lg:sticky lg:top-32">
             <div className="bg-white dark:bg-neutral-900 border border-black/5 dark:border-white/5 rounded-3xl p-5 sm:p-8 shadow-sm">
               <h2 className="text-xl sm:text-2xl font-medium mb-6 flex items-center gap-2">
                 <Navigation className="w-5 h-5 text-black/50 dark:text-white/50" />

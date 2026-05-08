@@ -1,15 +1,17 @@
 import { ArrowRight, MapPin, X } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useState } from "react";
-import {
-  ComposableMap,
-  Geographies,
-  Geography,
-  Marker,
-  ZoomableGroup,
-} from "react-simple-maps";
+import { MapContainer, TileLayer, Marker, Popup, useMap } from 'react-leaflet';
+import 'leaflet/dist/leaflet.css';
+import L from 'leaflet';
 
-const geoUrl = "https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json";
+// Fix for default marker icon in leaflet
+const icon = L.divIcon({
+  className: 'custom-leaflet-icon',
+  html: `<div style="background-color: black; width: 12px; height: 12px; border-radius: 50%; border: 2px solid white; box-shadow: 0 0 5px rgba(0,0,0,0.5);"></div>`,
+  iconSize: [12, 12],
+  iconAnchor: [6, 6]
+});
 
 interface Destination {
   city: string;
@@ -146,59 +148,31 @@ export default function Destinations() {
           </h2>
         </div>
 
-        <div className="relative bg-white dark:bg-neutral-950 border border-gray-200 dark:border-white/10 rounded-3xl overflow-hidden shadow-xl aspect-square md:aspect-[21/9]">
-          <ComposableMap
-            projectionConfig={{ scale: 180 }}
+        <div className="relative bg-neutral-100 dark:bg-neutral-800 border border-gray-200 dark:border-white/10 rounded-3xl overflow-hidden shadow-xl aspect-square md:aspect-[21/9] z-0">
+          <MapContainer 
+            center={[20, 0]}
+            zoom={2}
+            scrollWheelZoom={false}
             className="w-full h-full outline-none"
-            style={{ width: "100%", height: "100%" }}
           >
-            <ZoomableGroup center={[0, 20]}>
-              <Geographies geography={geoUrl}>
-                {({ geographies }) =>
-                  geographies.map((geo) => (
-                    <Geography
-                      key={geo.rsmKey}
-                      geography={geo}
-                      fill="currentColor"
-                      className="text-gray-200 dark:text-neutral-800 outline-none hover:text-gray-300 dark:hover:text-neutral-700 transition-colors"
-                      stroke="currentColor"
-                      strokeWidth={0.5}
-                      style={{
-                        default: { outline: "none" },
-                        hover: { outline: "none" },
-                        pressed: { outline: "none" },
-                      }}
-                    />
-                  ))
-                }
-              </Geographies>
+            <TileLayer
+              url="https://{s}.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}{r}.png"
+              attribution='&copy; <a href="https://carto.com/">CARTO</a>'
+            />
 
-              {globalDestinations.map((dest) => (
-                <Marker
-                  key={dest.city}
-                  coordinates={dest.coordinates}
-                  onClick={() => setSelectedDest(dest)}
-                >
-                  <g className="cursor-pointer group flex items-center justify-center origin-center">
-                    <circle
-                      r={6}
-                      fill="currentColor"
-                      className={`text-black dark:text-white transition-all duration-300 ${selectedDest?.city === dest.city ? "scale-150" : "group-hover:scale-125"}`}
-                    />
-                    <circle
-                      r={14}
-                      fill="currentColor"
-                      className="text-black/20 dark:text-white/20 animate-ping opacity-50"
-                    />
-                  </g>
-                </Marker>
-              ))}
-            </ZoomableGroup>
-          </ComposableMap>
+            {globalDestinations.map((dest) => (
+              <Marker
+                key={dest.city}
+                position={[dest.coordinates[1], dest.coordinates[0]]}
+                icon={icon}
+                eventHandlers={{ click: () => setSelectedDest(dest) }}
+              />
+            ))}
+          </MapContainer>
 
           {/* Overlay Detail Card */}
           {selectedDest && (
-            <div className="absolute bottom-6 left-6 right-6 md:bottom-10 md:left-10 md:w-[400px] bg-white/90 dark:bg-black/80 backdrop-blur-xl border border-white/20 rounded-3xl p-6 shadow-2xl animate-in fade-in slide-in-from-bottom-4 duration-500">
+            <div className="absolute bottom-6 left-6 right-6 md:bottom-10 md:left-10 md:w-[400px] bg-white/90 dark:bg-black/80 backdrop-blur-xl border border-white/20 rounded-3xl p-6 shadow-2xl animate-in fade-in slide-in-from-bottom-4 duration-500 z-[400]">
               <button
                 onClick={() => setSelectedDest(null)}
                 className="absolute top-4 right-4 p-2 rounded-full hover:bg-black/5 dark:hover:bg-white/10 transition-colors"
