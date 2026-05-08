@@ -1,5 +1,5 @@
 import { BrowserRouter, Routes, Route, Link, useLocation } from 'react-router-dom';
-import { ArrowRight, Plane, Users, Package, Clock, ShieldCheck, HeartPulse, ArrowUp, Search } from 'lucide-react';
+import { ArrowRight, Plane, Users, Package, Clock, ShieldCheck, HeartPulse, ArrowUp, Search, Menu, X, Sun, Moon } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import ServicesPage from './pages/Services';
 import DestinationsPage from './pages/Destinations';
@@ -28,49 +28,89 @@ function ScrollToTop() {
   return null;
 }
 
+import BookingModal from './components/BookingModal';
+
 function Navbar() {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isBookingModalOpen, setIsBookingModalOpen] = useState(false);
+
   return (
-    <nav className="absolute top-0 left-0 right-0 z-20 px-6 py-5">
-      <div className="max-w-[88rem] mx-auto w-full flex items-center justify-between">
-        <Link to="/" className="flex items-center gap-2">
-          <LogoIcon className="w-7 h-7 text-black" />
-          <span className="text-2xl font-medium tracking-tight text-black">JustCharter</span>
-        </Link>
-        <div className="hidden md:flex items-center gap-8">
-          <Link to="/fleet" className="text-base text-gray-700 hover:text-black font-medium transition-colors duration-200">
-            Fleet
+    <>
+      <nav className="absolute top-0 left-0 right-0 z-50 px-4 sm:px-6 py-4 sm:py-5">
+        <div className="max-w-[88rem] mx-auto w-full flex items-center justify-between">
+          <Link to="/" className="flex items-center gap-2">
+            <LogoIcon className="w-7 h-7 text-black dark:text-white" />
+            <span className="text-2xl font-medium tracking-tight text-black dark:text-white">JustCharter</span>
           </Link>
-          <Link to="/destinations" className="text-base text-gray-700 hover:text-black font-medium transition-colors duration-200">
-            Destinations
-          </Link>
-          <Link to="/services" className="text-base text-gray-700 hover:text-black font-medium transition-colors duration-200">
-            Services
-          </Link>
-          <Link to="/empty-legs" className="text-base text-gray-700 hover:text-black font-medium transition-colors duration-200">
-            Empty Legs
-          </Link>
-          <Link to="/members" className="text-base text-gray-700 hover:text-black font-medium transition-colors duration-200">
-            Members
-          </Link>
-          <Link to="/about" className="text-base text-gray-700 hover:text-black font-medium transition-colors duration-200">
-            About
-          </Link>
-        </div>
-        <div className="flex items-center gap-4">
-          <div className="hidden lg:flex items-center bg-black/5 rounded-full px-4 py-2 border border-black/10 focus-within:bg-white focus-within:border-black/20 focus-within:shadow-sm transition-all duration-200">
-            <Search className="w-4 h-4 text-black/50 shrink-0" />
-            <input 
-              type="text" 
-              placeholder="Search destinations, fleet..." 
-              className="bg-transparent border-none focus:outline-none text-sm ml-2 w-48 placeholder:text-black/40 text-black"
-            />
+          <div className="hidden lg:flex items-center gap-8">
+            <Link to="/fleet" className="text-base text-gray-700 dark:text-gray-300 hover:text-black dark:text-white font-medium transition-colors duration-200">
+              Fleet
+            </Link>
+            <Link to="/destinations" className="text-base text-gray-700 dark:text-gray-300 hover:text-black dark:text-white font-medium transition-colors duration-200">
+              Destinations
+            </Link>
+            <Link to="/services" className="text-base text-gray-700 dark:text-gray-300 hover:text-black dark:text-white font-medium transition-colors duration-200">
+              Services
+            </Link>
+            <Link to="/empty-legs" className="text-base text-gray-700 dark:text-gray-300 hover:text-black dark:text-white font-medium transition-colors duration-200">
+              Empty Legs
+            </Link>
+            <Link to="/members" className="text-base text-gray-700 dark:text-gray-300 hover:text-black dark:text-white font-medium transition-colors duration-200">
+              Members
+            </Link>
+            <Link to="/about" className="text-base text-gray-700 dark:text-gray-300 hover:text-black dark:text-white font-medium transition-colors duration-200">
+              About
+            </Link>
           </div>
-          <button className="bg-black text-white text-base font-medium px-7 py-2.5 rounded-full hover:bg-brand transition-colors duration-200">
-            Book a Flight
-          </button>
+          <div className="flex items-center gap-4">
+            <div className="hidden lg:flex items-center bg-black/5 dark:bg-white/10 rounded-full px-4 py-2 border border-black/10 dark:border-white/20 focus-within:bg-white dark:bg-neutral-950 focus-within:border-black/20 dark:border-white/20 focus-within:shadow-sm transition-all duration-200">
+              <Search className="w-4 h-4 text-black/50 dark:text-white/50 shrink-0" />
+              <input 
+                type="text" 
+                placeholder="Search destinations, fleet..." 
+                className="bg-transparent border-none focus:outline-none text-sm ml-2 w-48 placeholder:text-black/40 dark:text-white/40 text-black dark:text-white"
+              />
+            </div>
+            <button 
+              onClick={() => setIsBookingModalOpen(true)}
+              className="hidden sm:block bg-black dark:bg-white text-white dark:text-black text-base font-medium px-7 py-2.5 rounded-full hover:bg-brand transition-colors duration-200"
+            >
+              Book a Flight
+            </button>
+            <button 
+              className="lg:hidden block p-2 text-black dark:text-white hover:bg-black/5 dark:hover:bg-white/10 dark:bg-white/10 rounded-full transition-colors"
+              onClick={() => setIsMenuOpen(!isMenuOpen)}
+            >
+              {isMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+            </button>
+          </div>
         </div>
-      </div>
-    </nav>
+
+        {/* Mobile Menu Dropdown */}
+        {isMenuOpen && (
+          <div className="lg:hidden absolute top-full left-0 right-0 bg-white dark:bg-neutral-950 shadow-xl border-t border-gray-100 dark:border-white/10 flex flex-col px-4 sm:px-6 py-4 gap-4 animate-fade-1 z-50">
+            <Link to="/fleet" onClick={() => setIsMenuOpen(false)} className="text-lg text-black dark:text-white font-medium py-2 border-b border-gray-50 dark:border-white/5">Fleet</Link>
+            <Link to="/destinations" onClick={() => setIsMenuOpen(false)} className="text-lg text-black dark:text-white font-medium py-2 border-b border-gray-50 dark:border-white/5">Destinations</Link>
+            <Link to="/services" onClick={() => setIsMenuOpen(false)} className="text-lg text-black dark:text-white font-medium py-2 border-b border-gray-50 dark:border-white/5">Services</Link>
+            <Link to="/empty-legs" onClick={() => setIsMenuOpen(false)} className="text-lg text-black dark:text-white font-medium py-2 border-b border-gray-50 dark:border-white/5">Empty Legs</Link>
+            <Link to="/members" onClick={() => setIsMenuOpen(false)} className="text-lg text-black dark:text-white font-medium py-2 border-b border-gray-50 dark:border-white/5">Members</Link>
+            <Link to="/about" onClick={() => setIsMenuOpen(false)} className="text-lg text-black dark:text-white font-medium py-2 mb-4">About</Link>
+            <button 
+              onClick={() => {
+                setIsMenuOpen(false);
+                setIsBookingModalOpen(true);
+              }}
+              className="w-full bg-black dark:bg-white text-white dark:text-black text-lg font-medium px-7 py-3 rounded-full hover:bg-brand transition-colors duration-200 mb-2"
+            >
+              Book a Flight
+            </button>
+          </div>
+        )}
+      </nav>
+
+      {/* Global Booking Modal */}
+      <BookingModal isOpen={isBookingModalOpen} onClose={() => setIsBookingModalOpen(false)} />
+    </>
   );
 }
 
@@ -86,8 +126,8 @@ function HeroSection() {
   ];
 
   return (
-    <div className="flex-1 px-6 pt-20 pb-6 flex items-end">
-      <div className="relative w-full max-w-[88rem] mx-auto rounded-2xl overflow-hidden" style={{ height: 'calc(100vh - 96px)' }}>
+    <div className="flex-1 px-4 md:px-6 pt-20 pb-4 md:pb-6 flex items-end">
+      <div className="relative w-full max-w-[88rem] mx-auto rounded-3xl md:rounded-2xl overflow-hidden min-h-[600px] md:min-h-0" style={{ height: 'calc(100vh - 96px)' }}>
         <div className="absolute inset-0 w-full h-full bg-black">
           <img
             referrerPolicy="no-referrer"
@@ -102,24 +142,24 @@ function HeroSection() {
             alt="Luxury Interior"
           />
         </div>
-        <div className="relative z-10 flex flex-col items-start justify-start h-full p-12 pt-36 bg-gradient-to-r from-white/60 to-transparent backdrop-blur-[2px]">
-          <h1 className="text-black text-5xl md:text-6xl font-medium leading-tight max-w-xl mb-4" style={{ letterSpacing: '-0.04em' }}>
+        <div className="relative z-10 flex flex-col items-start justify-start h-full p-6 sm:p-10 md:p-12 pt-28 sm:pt-36 bg-gradient-to-r from-white/90 sm:from-white/60 md:to-transparent backdrop-blur-[4px] sm:backdrop-blur-[2px]">
+          <h1 className="text-black dark:text-white text-4xl sm:text-5xl md:text-6xl font-medium leading-[1.1] md:leading-tight max-w-xl mb-4" style={{ letterSpacing: '-0.04em' }}>
             Your Journey,<br />Elevated.
           </h1>
-          <p className="text-black/80 text-base md:text-lg max-w-md mb-8 leading-relaxed" style={{ fontFamily: "'Inter', ui-sans-serif, system-ui, sans-serif" }}>
+          <p className="text-black/80 dark:text-white/80 text-base md:text-lg max-w-md mb-8 leading-relaxed" style={{ fontFamily: "'Inter', ui-sans-serif, system-ui, sans-serif" }}>
             An exclusive, on-demand charter network built for seamless bookings, absolute privacy, and unparalleled luxury travel.
           </p>
-          <button className="inline-flex items-center gap-3 bg-black text-white text-base md:text-lg font-medium pl-8 pr-2 py-2 rounded-full hover:bg-brand transition-colors duration-200">
+          <button className="inline-flex items-center gap-3 bg-black dark:bg-white text-white dark:text-black text-base md:text-lg font-medium pl-6 md:pl-8 pr-2 py-2 rounded-full hover:bg-brand transition-colors duration-200">
             Explore Fleet
-            <span className="bg-white rounded-full p-2 flex items-center justify-center">
-              <ArrowRight className="w-5 h-5 text-black" />
+            <span className="bg-white dark:bg-neutral-950 rounded-full p-2 flex items-center justify-center">
+              <ArrowRight className="w-5 h-5 text-black dark:text-white" />
             </span>
           </button>
 
-          <div className="mt-24 w-full max-w-md overflow-hidden mask-image-linear-gradient">
+          <div className="mt-auto md:mt-24 w-full max-w-md overflow-hidden mask-image-linear-gradient pt-8 md:pt-0">
             <div className="marquee-track">
               {[...brandList, ...brandList].map((brand, i) => (
-                <div key={i} className="mx-7 shrink-0 text-black/70 whitespace-nowrap" style={brand.style}>
+                <div key={i} className="mx-7 shrink-0 text-black/70 dark:text-white/70 whitespace-nowrap" style={brand.style}>
                   {brand.name}
                 </div>
               ))}
@@ -133,23 +173,23 @@ function HeroSection() {
 
 function InfoSection() {
   return (
-    <section className="bg-[#F5F5F5] px-6 py-24">
+    <section className="bg-[#F5F5F5] dark:bg-neutral-900 px-4 sm:px-6 py-16 md:py-24">
       <div className="max-w-[88rem] mx-auto w-full">
         {/* Row 1 */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12 mb-16 items-start">
           <div>
-            <h2 className="text-black text-4xl md:text-5xl font-medium leading-tight mb-8" style={{ letterSpacing: '-0.03em' }}>
+            <h2 className="text-black dark:text-white text-3xl md:text-4xl lg:text-5xl font-medium leading-tight mb-6 md:mb-8" style={{ letterSpacing: '-0.03em' }}>
               Meet JustCharter.
             </h2>
-            <button className="inline-flex items-center gap-3 bg-black text-white text-base font-medium pl-6 pr-1.5 py-1.5 rounded-full hover:bg-brand transition-colors duration-200 cursor-pointer">
+            <button className="inline-flex items-center gap-3 bg-black dark:bg-white text-white dark:text-black text-base font-medium pl-6 pr-1.5 py-1.5 rounded-full hover:bg-brand transition-colors duration-200 cursor-pointer">
               Discover more
-              <span className="bg-white rounded-full p-1.5 flex items-center justify-center">
-                <ArrowRight className="w-4 h-4 text-black" />
+              <span className="bg-white dark:bg-neutral-950 rounded-full p-1.5 flex items-center justify-center">
+                <ArrowRight className="w-4 h-4 text-black dark:text-white" />
               </span>
             </button>
           </div>
           <div>
-            <p className="text-black/70 text-2xl md:text-3xl leading-relaxed">
+            <p className="text-black/70 dark:text-white/70 text-2xl md:text-3xl leading-relaxed">
               JustCharter is your personal gateway to private aviation and luxury travel. Skip the commercial lines and fly on your own terms, completely stress-free.
             </p>
           </div>
@@ -211,17 +251,17 @@ function TrustedBySection() {
   ];
 
   return (
-    <section className="bg-[#F5F5F5] px-6 py-12">
-      <div className="max-w-[88rem] mx-auto grid grid-cols-1 md:grid-cols-4 gap-8 items-center border-y border-black/5 py-12">
-        <div className="md:col-span-1">
-          <p className="text-black/70 text-base leading-relaxed whitespace-pre-line">
+    <section className="bg-[#F5F5F5] dark:bg-neutral-900 px-4 sm:px-6 py-10 md:py-12">
+      <div className="max-w-[88rem] mx-auto grid grid-cols-1 lg:grid-cols-4 gap-8 items-center border-y border-black/5 dark:border-white/10 py-12">
+        <div className="lg:col-span-1 border-b lg:border-b-0 border-black/5 dark:border-white/10 pb-8 lg:pb-0">
+          <p className="text-black/70 dark:text-white/70 text-base leading-relaxed whitespace-pre-line text-center lg:text-left">
             {'Trusted by top executives\nand premium lifestyle brands.'}
           </p>
         </div>
-        <div className="md:col-span-3 overflow-hidden">
+        <div className="lg:col-span-3 overflow-hidden">
           <div className="backers-track">
             {[...partners, ...partners].map((partner, i) => (
-              <div key={i} className="mx-10 shrink-0 text-black/50 whitespace-nowrap" style={partner.style}>
+              <div key={i} className="mx-10 shrink-0 text-black/50 dark:text-white/50 whitespace-nowrap" style={partner.style}>
                 {partner.name}
               </div>
             ))}
@@ -267,10 +307,10 @@ function ServicesSection() {
   ];
 
   return (
-    <section className="bg-white px-6 py-24 border-t border-gray-100">
+    <section className="bg-white dark:bg-neutral-950 px-4 sm:px-6 py-16 md:py-24 border-t border-gray-100 dark:border-white/10">
       <div className="max-w-[88rem] mx-auto w-full">
         <div className="mb-16">
-           <h4 className="text-black/60 text-sm mb-3 font-medium tracking-wide uppercase">
+           <h4 className="text-black/60 dark:text-white/60 text-sm mb-3 font-medium tracking-wide uppercase">
             Our Services
           </h4>
           <h2 className="text-4xl md:text-5xl lg:text-6xl font-medium leading-tight mb-6" style={{ letterSpacing: '-0.04em' }}>
@@ -281,11 +321,11 @@ function ServicesSection() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-12 gap-y-16">
           {services.map((service, idx) => (
             <Link to="/services" key={idx} className="group block">
-              <div className="mb-6 w-16 h-16 rounded-2xl bg-[#F5F5F5] flex items-center justify-center text-black group-hover:bg-brand group-hover:text-white transition-colors duration-300">
+              <div className="mb-6 w-16 h-16 rounded-2xl bg-[#F5F5F5] dark:bg-neutral-900 flex items-center justify-center text-black dark:text-white group-hover:bg-brand group-hover:text-white transition-colors duration-300">
                 {service.icon}
               </div>
-              <h3 className="text-2xl font-medium mb-4 group-hover:text-black/80 transition-colors" style={{ letterSpacing: '-0.02em' }}>{service.title}</h3>
-              <p className="text-black/60 text-base leading-relaxed">
+              <h3 className="text-2xl font-medium mb-4 group-hover:text-black/80 dark:text-white/80 transition-colors" style={{ letterSpacing: '-0.02em' }}>{service.title}</h3>
+              <p className="text-black/60 dark:text-white/60 text-base leading-relaxed">
                 {service.description}
               </p>
             </Link>
@@ -298,16 +338,16 @@ function ServicesSection() {
 
 function UseCasesSection() {
   return (
-    <section className="bg-[#F5F5F5] px-6 py-24">
+    <section className="bg-[#F5F5F5] dark:bg-neutral-900 px-4 sm:px-6 py-16 md:py-24">
       <div className="max-w-[88rem] mx-auto w-full">
         <div className="mb-12 md:mb-16 max-w-2xl">
-          <h4 className="text-black/60 text-sm mb-3 font-medium tracking-wide uppercase">
+          <h4 className="text-black/60 dark:text-white/60 text-sm mb-3 font-medium tracking-wide uppercase">
             JustCharter in Practice
           </h4>
           <h2 className="text-4xl md:text-5xl lg:text-6xl font-medium leading-tight mb-6" style={{ letterSpacing: '-0.04em' }}>
             Tailored Journeys
           </h2>
-          <p className="text-black/60 text-base md:text-lg leading-relaxed">
+          <p className="text-black/60 dark:text-white/60 text-base md:text-lg leading-relaxed">
             Whether it's closing a crucial deal overseas, a spontaneous weekend getaway with family, or attending a major exclusive event, JustCharter adapts to your specific needs.
           </p>
         </div>
@@ -330,8 +370,8 @@ function UseCasesSection() {
                 Maximize efficiency with corporate charter solutions, offering total privacy to work and absolute schedule flexibility to keep you ahead of the competition.
               </p>
               <button className="inline-flex items-center gap-4 text-white text-base font-medium group/btn cursor-pointer w-fit">
-                <span className="w-10 h-10 rounded-full bg-white/20 backdrop-blur border border-white/20 flex items-center justify-center group-hover/btn:bg-white transition-colors duration-200">
-                  <ArrowRight className="w-4 h-4 text-white group-hover/btn:text-black transition-colors" />
+                <span className="w-10 h-10 rounded-full bg-white/20 backdrop-blur border border-white/20 flex items-center justify-center group-hover/btn:bg-white dark:bg-neutral-950 transition-colors duration-200">
+                  <ArrowRight className="w-4 h-4 text-white group-hover/btn:text-black dark:text-white transition-colors" />
                 </span>
                 View Corporate Solutions
               </button>
@@ -405,27 +445,41 @@ function FleetSection() {
       image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/c/cb/2010-07-08_BD700_Tyrolean_OE-IGS_EDDF_03.jpg/1280px-2010-07-08_BD700_Tyrolean_OE-IGS_EDDF_03.jpg',
       pax: 'up to 14 pax',
       range: '7,700 nm',
+    },
+    {
+      category: 'Helicopters',
+      name: 'Sikorsky S-76',
+      image: 'https://images.unsplash.com/photo-1549524570-5b565a049963?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80',
+      pax: 'up to 8 pax',
+      range: '400 nm',
+    },
+    {
+      category: 'Luxury Yachts',
+      name: 'Benetti Oasis 40M',
+      image: 'https://images.unsplash.com/photo-1605281317010-fe5ffe798166?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80',
+      pax: 'up to 12 pax',
+      range: '4,000 nm',
     }
   ];
 
   return (
-    <section className="bg-[#F5F5F5] px-6 py-24 border-y border-black/5">
+    <section className="bg-[#F5F5F5] dark:bg-neutral-900 px-4 sm:px-6 py-16 md:py-24 border-y border-black/5 dark:border-white/10">
       <div className="max-w-[88rem] mx-auto w-full">
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 mb-16">
           <div>
-            <h2 className="text-black text-4xl md:text-5xl font-medium leading-tight mb-4" style={{ letterSpacing: '-0.03em' }}>
+            <h2 className="text-black dark:text-white text-4xl md:text-5xl font-medium leading-tight mb-4" style={{ letterSpacing: '-0.03em' }}>
               The Fleet.
             </h2>
-            <p className="text-black/60 text-base md:text-lg max-w-md">
+            <p className="text-black/60 dark:text-white/60 text-base md:text-lg max-w-md">
               A meticulously curated selection of the world's most advanced private aircraft, ready for any journey.
             </p>
           </div>
-          <button className="inline-flex items-center gap-3 bg-white border border-black/10 text-black text-base font-medium px-6 py-2.5 rounded-full hover:bg-gray-50 transition-colors duration-200">
+          <button className="inline-flex items-center gap-3 bg-white dark:bg-neutral-950 border border-black/10 dark:border-white/20 text-black dark:text-white text-base font-medium px-6 py-2.5 rounded-full hover:bg-gray-50 dark:bg-neutral-900 dark:hover:bg-neutral-800 transition-colors duration-200">
             View full fleet
           </button>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {fleet.map((jet) => (
             <div key={jet.category} className="group cursor-pointer">
               <div className="relative rounded-2xl overflow-hidden aspect-[4/3] mb-6">
@@ -435,18 +489,18 @@ function FleetSection() {
                   referrerPolicy="no-referrer"
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out" 
                 />
-                <div className="absolute inset-0 bg-black/10 transition-opacity duration-300 group-hover:opacity-0" />
+                <div className="absolute inset-0 bg-black/10 dark:bg-white/10 transition-opacity duration-300 group-hover:opacity-0" />
               </div>
-              <p className="text-black/50 text-sm font-medium mb-1 tracking-wide uppercase">{jet.category}</p>
-              <h3 className="text-2xl font-medium text-black mb-4" style={{ letterSpacing: '-0.02em' }}>{jet.name}</h3>
-              <div className="flex items-center gap-6 border-t border-black/10 pt-4">
+              <p className="text-black/50 dark:text-white/50 text-sm font-medium mb-1 tracking-wide uppercase">{jet.category}</p>
+              <h3 className="text-2xl font-medium text-black dark:text-white mb-4" style={{ letterSpacing: '-0.02em' }}>{jet.name}</h3>
+              <div className="flex items-center gap-6 border-t border-black/10 dark:border-white/20 pt-4">
                 <div>
-                  <p className="text-black/50 text-xs mb-0.5">Capacity</p>
-                  <p className="text-black font-medium">{jet.pax}</p>
+                  <p className="text-black/50 dark:text-white/50 text-xs mb-0.5">Capacity</p>
+                  <p className="text-black dark:text-white font-medium">{jet.pax}</p>
                 </div>
                 <div>
-                  <p className="text-black/50 text-xs mb-0.5">Range</p>
-                  <p className="text-black font-medium">{jet.range}</p>
+                  <p className="text-black/50 dark:text-white/50 text-xs mb-0.5">Range</p>
+                  <p className="text-black dark:text-white font-medium">{jet.range}</p>
                 </div>
               </div>
             </div>
@@ -459,7 +513,7 @@ function FleetSection() {
 
 function AirAmbulanceSection() {
   return (
-    <section className="bg-[#111111] px-6 py-24 text-white">
+    <section className="bg-[#111111] px-4 sm:px-6 py-16 md:py-24 text-white">
       <div className="max-w-[88rem] mx-auto w-full">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
           <div className="relative rounded-3xl overflow-hidden aspect-[4/3] group">
@@ -475,7 +529,7 @@ function AirAmbulanceSection() {
             <h4 className="text-white/50 text-sm mb-3 font-medium tracking-wide uppercase">
               Critical Care Transport
             </h4>
-            <h2 className="text-4xl md:text-5xl font-medium leading-tight mb-6" style={{ letterSpacing: '-0.03em' }}>
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-medium leading-tight mb-4 md:mb-6" style={{ letterSpacing: '-0.03em' }}>
               Air Ambulance &<br />Medical Evacuation
             </h2>
             <p className="text-white/70 text-base leading-relaxed mb-8 max-w-md">
@@ -483,21 +537,21 @@ function AirAmbulanceSection() {
             </p>
             <ul className="space-y-3 mb-8">
               <li className="flex items-center gap-3 text-white/80">
-                <div className="w-1.5 h-1.5 rounded-full bg-white" />
+                <div className="w-1.5 h-1.5 rounded-full bg-white dark:bg-neutral-950" />
                 24/7 Global Dispatch
               </li>
               <li className="flex items-center gap-3 text-white/80">
-                <div className="w-1.5 h-1.5 rounded-full bg-white" />
+                <div className="w-1.5 h-1.5 rounded-full bg-white dark:bg-neutral-950" />
                 Bed-to-Bed Medical Care
               </li>
               <li className="flex items-center gap-3 text-white/80">
-                <div className="w-1.5 h-1.5 rounded-full bg-white" />
+                <div className="w-1.5 h-1.5 rounded-full bg-white dark:bg-neutral-950" />
                 Specialized Flight Nurses & Physicians
               </li>
             </ul>
-            <button className="inline-flex items-center gap-3 bg-white text-black text-base font-medium px-7 py-3 rounded-full hover:bg-gray-100 transition-colors duration-200">
+            <button className="inline-flex items-center gap-3 bg-white dark:bg-neutral-950 text-black dark:text-white text-base font-medium px-7 py-3 rounded-full hover:bg-gray-100 dark:hover:bg-neutral-800 transition-colors duration-200">
               Request Emergency Flight
-              <ArrowRight className="w-4 h-4 text-black" />
+              <ArrowRight className="w-4 h-4 text-black dark:text-white" />
             </button>
           </div>
         </div>
@@ -515,19 +569,19 @@ function YatrasSection() {
   ];
 
   return (
-    <section className="bg-[#FAF9F6] px-6 py-24 border-t border-black/5">
+    <section className="bg-[#FAF9F6] dark:bg-neutral-900 px-4 sm:px-6 py-16 md:py-24 border-t border-black/5 dark:border-white/10">
       <div className="max-w-[88rem] mx-auto w-full">
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 mb-16">
           <div className="max-w-2xl">
-            <h4 className="text-black/50 text-sm font-medium tracking-wide uppercase mb-3">Divine Journeys</h4>
-            <h2 className="text-black text-4xl md:text-5xl font-medium leading-tight mb-4" style={{ letterSpacing: '-0.03em' }}>
+            <h4 className="text-black/50 dark:text-white/50 text-sm font-medium tracking-wide uppercase mb-3">Divine Journeys</h4>
+            <h2 className="text-black dark:text-white text-4xl md:text-5xl font-medium leading-tight mb-4" style={{ letterSpacing: '-0.03em' }}>
               Spiritual Yatra's.
             </h2>
-            <p className="text-black/60 text-base md:text-lg">
+            <p className="text-black/60 dark:text-white/60 text-base md:text-lg">
               Embark on a transcendent journey to sacred destinations. Experience absolute comfort, helicopter transfers, and VIP access to the holy shrines, curated entirely by our dedicated spiritual concierge.
             </p>
           </div>
-          <button className="inline-flex flex-shrink-0 items-center gap-3 bg-black text-white text-base font-medium px-6 py-2.5 rounded-full hover:bg-brand transition-colors duration-200">
+          <button className="inline-flex flex-shrink-0 items-center gap-3 bg-black dark:bg-white text-white dark:text-black text-base font-medium px-6 py-2.5 rounded-full hover:bg-brand transition-colors duration-200">
             Plan your Yatra
           </button>
         </div>
@@ -542,11 +596,11 @@ function YatrasSection() {
                   referrerPolicy="no-referrer"
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out" 
                 />
-                <div className="absolute inset-0 bg-black/10 transition-opacity duration-300 group-hover:opacity-0" />
+                <div className="absolute inset-0 bg-black/10 dark:bg-white/10 transition-opacity duration-300 group-hover:opacity-0" />
               </div>
-              <h3 className="text-2xl font-medium text-black" style={{ letterSpacing: '-0.02em' }}>{yatra.city}</h3>
+              <h3 className="text-2xl font-medium text-black dark:text-white" style={{ letterSpacing: '-0.02em' }}>{yatra.city}</h3>
               <div className="flex items-center gap-2 mt-2">
-                <span className="text-black/50 text-sm">Helicopter + VIP Darshan</span>
+                <span className="text-black/50 dark:text-white/50 text-sm">Helicopter + VIP Darshan</span>
               </div>
             </Link>
           ))}
@@ -565,12 +619,12 @@ function DestinationsSection() {
   ];
 
   return (
-    <section className="bg-[#111111] px-6 py-24 text-white">
+    <section className="bg-[#111111] px-4 sm:px-6 py-16 md:py-24 text-white">
       <div className="max-w-[88rem] mx-auto w-full">
-        <h2 className="text-4xl md:text-5xl font-medium leading-tight mb-16 text-center" style={{ letterSpacing: '-0.03em' }}>
+        <h2 className="text-3xl md:text-4xl lg:text-5xl font-medium leading-tight mb-12 md:mb-16 text-center" style={{ letterSpacing: '-0.03em' }}>
           Fly anywhere.
         </h2>
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
           {destinations.map((dest) => (
             <Link to="/destinations" key={dest.city} className="relative rounded-2xl overflow-hidden aspect-[3/4] group cursor-pointer">
               <img 
@@ -595,8 +649,41 @@ function DestinationsSection() {
 }
 
 function Footer() {
+  const [isDark, setIsDark] = useState(() => {
+    const saved = localStorage.getItem('theme-preference');
+    if (saved !== null) {
+      return saved === 'dark';
+    }
+    const hour = new Date().getHours();
+    return hour >= 18 || hour < 6;
+  });
+
+  useEffect(() => {
+    if (isDark) {
+      document.documentElement.classList.add('dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+    }
+  }, [isDark]);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      if (localStorage.getItem('theme-preference') === null) {
+        const hour = new Date().getHours();
+        setIsDark(hour >= 18 || hour < 6);
+      }
+    }, 60000);
+    return () => clearInterval(interval);
+  }, []);
+
+  const toggleTheme = () => {
+    const newTheme = !isDark;
+    setIsDark(newTheme);
+    localStorage.setItem('theme-preference', newTheme ? 'dark' : 'light');
+  };
+
   return (
-    <footer className="bg-black text-white px-6 py-20">
+    <footer className="bg-black text-white px-4 sm:px-6 py-12 md:py-20">
       <div className="max-w-[88rem] mx-auto w-full">
         <div className="flex flex-col md:flex-row justify-between mb-24 gap-12">
           <div className="max-w-sm">
@@ -644,6 +731,14 @@ function Footer() {
         <div className="flex flex-col md:flex-row justify-between items-center pt-8 border-t border-white/10 text-white/40 text-sm">
           <p>&copy; {new Date().getFullYear()} JustCharter. All rights reserved.</p>
           <div className="flex items-center gap-6 mt-4 md:mt-0">
+            <button 
+              onClick={toggleTheme}
+              className="flex items-center gap-2 hover:text-white transition-colors"
+              aria-label="Toggle dark mode"
+            >
+              {isDark ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
+              <span>{isDark ? 'Light Mode' : 'Dark Mode'}</span>
+            </button>
             <a href="#" className="hover:text-white transition-colors">Privacy Policy</a>
             <a href="#" className="hover:text-white transition-colors">Terms of Service</a>
             <a href="#" className="hover:text-white transition-colors">Cookie Policy</a>
@@ -656,55 +751,94 @@ function Footer() {
 
 function MobileAppSection() {
   return (
-    <section className="bg-black text-white px-6 py-32 overflow-hidden relative border-t border-white/10">
-      <div className="max-w-[88rem] mx-auto w-full grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-        <div className="z-10">
-          <h4 className="text-white/50 text-sm mb-4 font-medium tracking-wide uppercase">
-            JustCharter App
+    <section className="bg-black text-white px-4 sm:px-6 py-24 md:py-40 overflow-hidden relative border-t border-white/5">
+      <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-brand/20 rounded-full blur-[150px] mix-blend-screen opacity-50 -translate-y-1/2 translate-x-1/3 pointer-events-none" />
+      <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-white/5 rounded-full blur-[120px] translate-y-1/2 -translate-x-1/3 pointer-events-none" />
+      
+      <div className="max-w-[88rem] mx-auto w-full grid grid-cols-1 lg:grid-cols-2 gap-16 md:gap-24 items-center">
+        <div className="z-20 relative text-center lg:text-left">
+          <h4 className="text-white/60 text-sm mb-6 font-medium tracking-[0.15em] uppercase pb-2 border-b border-white/10 inline-block">
+            Seamless Bookings
           </h4>
-          <h2 className="text-4xl md:text-5xl lg:text-5xl font-medium leading-tight mb-6" style={{ letterSpacing: '-0.04em' }}>
-            Aviation at your<br />fingertips.
+          <h2 className="text-4xl sm:text-5xl lg:text-6xl font-medium leading-[1.1] mb-6 md:mb-8 text-white" style={{ letterSpacing: '-0.04em' }}>
+            Aviation at your<br className="hidden sm:block" /> fingertips.
           </h2>
-          <p className="text-white/70 text-lg leading-relaxed mb-10 max-w-lg">
-            Book private jets, browse empty leg flights, and manage your itineraries seamlessly from your smartphone. Download the JustCharter app today for unparalleled control over your travel.
+          <p className="text-white/60 text-base sm:text-lg md:text-xl leading-relaxed mb-10 md:mb-12 max-w-lg mx-auto lg:mx-0 font-light">
+            Book private jets, browse empty leg flights, and manage your itineraries seamlessly from your smartphone. Download the JustCharter app today for unparalleled control.
           </p>
-          <div className="flex flex-wrap gap-4">
-            <a href="https://play.google.com/store/apps/details?id=com.justcharter.app&hl=en" target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 bg-white text-black px-6 py-3.5 rounded-2xl hover:bg-gray-100 transition-colors">
-              <svg viewBox="0 0 24 24" className="w-7 h-7 fill-current">
+          <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 md:gap-6">
+            <a href="https://play.google.com/store/apps/details?id=com.justcharter.app&hl=en" target="_blank" rel="noopener noreferrer" className="flex items-center gap-4 bg-white/5 backdrop-blur-md text-white px-8 py-4 rounded-2xl hover:bg-white/10 transition-all duration-300 border border-white/10 hover:border-white/20 w-full sm:w-auto overflow-hidden group">
+              <svg viewBox="0 0 24 24" className="w-8 h-8 fill-current group-hover:scale-110 transition-transform duration-300">
                 <path d="M5.5 3.5C5.2 3.8 5 4.3 5 5v14c0 .7.2 1.2.5 1.5l.1.1 7.2-7.2v-.8l-7.2-7.2-.1.1zm8 8.1l2.3 2.3-2.6 1.5-1.9-1.9 2.2-1.9zm-2.8-2l-5-5c-.4-.4-1.1-.1-1.1.5v3.1l6.1 1.4zm5.1 4.5l2.6-1.5c.8-.5.8-1.3 0-1.7l-2.6-1.5-2.2 1.9 2.2 2.8z"/>
               </svg>
               <div className="flex flex-col text-left">
-                <span className="text-[10px] uppercase font-bold tracking-wider opacity-70">Get it on</span>
-                <span className="text-sm font-bold -mt-1">Google Play</span>
+                <span className="text-[10px] uppercase font-bold tracking-widest text-white/50 group-hover:text-white/70 transition-colors">Get it on</span>
+                <span className="text-base font-semibold -mt-1 tracking-tight">Google Play</span>
               </div>
             </a>
-            <button className="flex items-center gap-3 bg-white/5 text-white px-6 py-3.5 rounded-2xl hover:bg-white/10 transition-colors border border-white/10">
-              <svg viewBox="0 0 24 24" className="w-7 h-7 fill-current">
+            <button className="flex items-center gap-4 bg-white/5 backdrop-blur-md text-white px-8 py-4 rounded-2xl hover:bg-white/10 transition-all duration-300 border border-white/10 hover:border-white/20 w-full sm:w-auto group">
+              <svg viewBox="0 0 24 24" className="w-8 h-8 fill-current group-hover:scale-110 transition-transform duration-300">
                 <path d="M17.6 13.9c-.1-2.9 2.4-4.3 2.5-4.4-1.3-1.9-3.4-2.2-4.1-2.3-1.7-.2-3.4 1-4.3 1-.9 0-2.3-1-3.7-1-1.9 0-3.6 1.1-4.5 2.7-2 3.4-.5 8.3 1.4 11 1 1.4 2.1 3 3.6 2.9 1.4-.1 2-1 3.7-1 1.7 0 2.2 1 3.7 1 1.6-.1 2.5-1.5 3.5-2.9 1.1-1.6 1.6-3.1 1.6-3.2-.1 0-2.8-1.1-2.9-4.3zM14.6 5.8c.8-1 1.3-2.3 1.1-3.6-1.1.1-2.5.7-3.3 1.7-.7.8-1.3 2.1-1.1 3.4 1.3.1 2.5-.6 3.3-1.5z"/>
               </svg>
               <div className="flex flex-col text-left">
-                <span className="text-[10px] uppercase font-bold tracking-wider opacity-70">Download on the</span>
-                <span className="text-sm font-bold -mt-1">App Store</span>
+                <span className="text-[10px] uppercase font-bold tracking-widest text-white/50 group-hover:text-white/70 transition-colors">Download on the</span>
+                <span className="text-base font-semibold -mt-1 tracking-tight">App Store</span>
               </div>
             </button>
           </div>
         </div>
-        <div className="relative h-[400px] lg:h-[500px] flex items-center justify-center lg:justify-end z-10 w-full mt-10 lg:mt-0">
-           <img 
-              referrerPolicy="no-referrer"
-              src="https://images.unsplash.com/photo-1611162617474-5b21e879e113?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" 
-              alt="JustCharter App" 
-              className="absolute w-[220px] md:w-[280px] rounded-[2.5rem] object-cover h-[450px] md:h-[560px] border-[6px] border-[#222] shadow-2xl z-20 top-1/2 -translate-y-1/2 rotate-[-5deg]" 
-            />
-             <img 
-              referrerPolicy="no-referrer"
-              src="https://images.unsplash.com/photo-1512428559087-560fa5ceab42?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" 
-              alt="Mobile App Interface" 
-              className="absolute w-[220px] md:w-[280px] rounded-[2.5rem] object-cover h-[450px] md:h-[560px] border-[6px] border-[#222] shadow-2xl z-10 top-1/2 -translate-y-1/2 translate-x-16 md:translate-x-32 rotate-[5deg] opacity-60 backdrop-blur-sm" 
-            />
+        <div className="relative h-[450px] sm:h-[550px] lg:h-[650px] flex items-center justify-center lg:justify-end z-20 w-full mt-12 lg:mt-0 px-4 sm:px-0">
+             {/* Main App Mockup Screen */}
+             <div className="relative w-[240px] sm:w-[280px] md:w-[320px] aspect-[9/19.5] rounded-[2.5rem] sm:rounded-[3rem] p-2 sm:p-2.5 bg-neutral-900 border border-white/20 shadow-2xl z-20 hover:-translate-y-4 transition-transform duration-500 will-change-transform group">
+                <div className="absolute top-0 inset-x-0 h-6 sm:h-7 bg-neutral-900 rounded-b-3xl w-[40%] mx-auto z-30" />
+                <div className="w-full h-full rounded-[2rem] sm:rounded-[2.5rem] overflow-hidden relative bg-black transform translate-z-0">
+                  <img 
+                    referrerPolicy="no-referrer"
+                    src="https://images.unsplash.com/photo-1621252178229-23e595eef9eb?auto=format&fit=crop&q=80&w=800" 
+                    alt="Flight Booking Screen" 
+                    className="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity duration-500 scale-105" 
+                  />
+                  {/* Mockup UI Overlay */}
+                  <div className="absolute inset-0 flex flex-col justify-end p-5 bg-gradient-to-t from-black via-black/40 to-transparent">
+                     <div className="bg-white/10 backdrop-blur-xl border border-white/20 rounded-2xl p-4 w-full">
+                       <div className="flex justify-between items-center mb-3">
+                         <div className="text-white">
+                           <p className="text-[10px] text-white/60 font-medium uppercase tracking-wider mb-0.5">Departure</p>
+                           <p className="text-xl font-medium">LHR</p>
+                           <p className="text-xs text-white/80">London</p>
+                         </div>
+                         <Plane className="w-5 h-5 text-white/50" />
+                         <div className="text-white text-right">
+                           <p className="text-[10px] text-white/60 font-medium uppercase tracking-wider mb-0.5">Arrival</p>
+                           <p className="text-xl font-medium">JFK</p>
+                           <p className="text-xs text-white/80">New York</p>
+                         </div>
+                       </div>
+                       <div className="w-full h-[1px] bg-white/10 my-3" />
+                       <div className="flex justify-between items-center">
+                         <p className="text-sm font-medium text-white/80">Global 7500</p>
+                         <div className="bg-white text-black px-3 py-1 rounded-full text-xs font-semibold">Book</div>
+                       </div>
+                     </div>
+                  </div>
+                </div>
+             </div>
+             
+             {/* Secondary screen to add depth */}
+             <div className="absolute w-[200px] sm:w-[240px] md:w-[280px] aspect-[9/19.5] rounded-[2.5rem] p-2 bg-neutral-900/80 border border-white/10 shadow-2xl z-10 
+               top-1/2 -translate-y-1/2 translate-x-12 sm:translate-x-20 md:translate-x-32 rotate-[8deg] opacity-70 backdrop-blur-md opacity-transition duration-500 hover:rotate-[6deg] hover:translate-x-10 sm:hover:translate-x-16 md:hover:translate-x-24 hover:opacity-90">
+               <div className="w-full h-full rounded-[2rem] overflow-hidden relative bg-black/50">
+                  <img 
+                    referrerPolicy="no-referrer"
+                    src="https://images.unsplash.com/photo-1540962351504-03099e0a754b?auto=format&fit=crop&q=80&w=800" 
+                    alt="Destinations Screen" 
+                    className="w-full h-full object-cover scale-110" 
+                  />
+                  <div className="absolute inset-0 bg-black/40" />
+               </div>
+             </div>
         </div>
       </div>
-      <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-white/5 rounded-full blur-[100px] -translate-y-1/2 translate-x-1/3" />
     </section>
   );
 }
@@ -756,7 +890,7 @@ function ScrollToTopButton() {
       {isVisible && (
         <button
           onClick={scrollToTop}
-          className="bg-black text-white p-3 rounded-full shadow-lg hover:bg-brand transition-colors duration-300"
+          className="bg-black dark:bg-white text-white dark:text-black p-3 rounded-full shadow-lg hover:bg-brand transition-colors duration-300 flex items-center justify-center animate-fade-in-up"
           aria-label="Scroll to top"
         >
           <ArrowUp className="w-6 h-6" />
@@ -770,7 +904,7 @@ export default function App() {
   return (
     <BrowserRouter>
       <ScrollToTop />
-      <div className="flex flex-col bg-[#F5F5F5] min-h-screen relative">
+      <div className="flex flex-col bg-[#F5F5F5] dark:bg-neutral-900 min-h-screen relative transition-colors duration-300">
         <Navbar />
         <Routes>
           <Route path="/" element={<HomePage />} />

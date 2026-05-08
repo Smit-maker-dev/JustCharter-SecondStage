@@ -16,7 +16,7 @@ export default function Members() {
       ],
       color: "bg-gray-100",
       textColor: "text-gray-800",
-      buttonColor: "bg-black text-white hover:bg-gray-800"
+      buttonColor: "bg-black text-white hover:bg-gray-800 dark:hover:bg-neutral-200"
     },
     {
       name: "Gold",
@@ -48,28 +48,28 @@ export default function Members() {
         "Premium Custom Catering Included",
         "Priority on Empty Leg Flights"
       ],
-      color: "bg-[#F5F5F5]",
-      textColor: "text-black",
-      buttonColor: "bg-black text-white hover:bg-gray-800"
+      color: "bg-[#F5F5F5] dark:bg-neutral-900",
+      textColor: "text-black dark:text-white",
+      buttonColor: "bg-black text-white hover:bg-gray-800 dark:hover:bg-neutral-200"
     }
   ];
 
   return (
-    <div className="bg-white min-h-screen pt-24 pb-24">
-      <div className="max-w-[88rem] mx-auto px-6 mt-16 mb-24 text-center">
-        <h4 className="text-black/50 text-sm mb-4 font-medium tracking-wide uppercase">
+    <div className="bg-white dark:bg-neutral-950 min-h-screen pt-20 md:pt-24 pb-16 md:pb-24">
+      <div className="max-w-[88rem] mx-auto px-4 sm:px-6 mt-8 md:mt-16 mb-12 md:mb-24 text-center">
+        <h4 className="text-black/50 dark:text-white/50 text-sm mb-4 font-medium tracking-wide uppercase">
           JustCharter Membership
         </h4>
-        <h1 className="text-5xl md:text-7xl font-medium leading-tight mb-6" style={{ letterSpacing: '-0.04em' }}>
+        <h1 className="text-4xl md:text-5xl lg:text-7xl font-medium leading-[1.1] md:leading-tight mb-6 md:mb-8" style={{ letterSpacing: '-0.04em' }}>
           Elevate Your<br/>Travel Status.
         </h1>
-        <p className="text-black/60 text-xl max-w-2xl mx-auto leading-relaxed">
+        <p className="text-black/60 dark:text-white/60 text-lg md:text-xl max-w-2xl mx-auto leading-relaxed">
           Join an exclusive network of global travelers. Choose the membership tier that aligns perfectly with your lifestyle and flying requirements.
         </p>
       </div>
 
-      <div className="max-w-[88rem] mx-auto px-6 mb-32">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+      <div className="max-w-[88rem] mx-auto px-4 sm:px-6 mb-24 md:mb-32">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 max-w-lg lg:max-w-none mx-auto">
           {plans.map((plan, idx) => (
             <div 
               key={idx} 
@@ -82,7 +82,7 @@ export default function Members() {
               )}
               
               <div className="mb-8">
-                <div className={`w-12 h-12 rounded-2xl flex items-center justify-center mb-6 \${plan.name === 'Gold' ? 'bg-white/10' : 'bg-white shadow-sm'}`}>
+                <div className={`w-12 h-12 rounded-2xl flex items-center justify-center mb-6 \${plan.name === 'Gold' ? 'bg-white/10' : 'bg-white dark:bg-neutral-950 shadow-sm'}`}>
                   {plan.icon}
                 </div>
                 <h3 className="text-3xl font-medium mb-3" style={{ letterSpacing: '-0.02em' }}>
@@ -116,19 +116,19 @@ export default function Members() {
         </div>
       </div>
 
-      <div className="max-w-[88rem] mx-auto px-6">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
+      <div className="max-w-[88rem] mx-auto px-4 sm:px-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-16 items-center">
           <div>
-            <h2 className="text-4xl md:text-5xl font-medium leading-tight mb-6" style={{ letterSpacing: '-0.03em' }}>
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-medium leading-tight mb-4 md:mb-6" style={{ letterSpacing: '-0.03em' }}>
               Why become a member?
             </h2>
-            <p className="text-black/60 text-lg leading-relaxed mb-8">
+            <p className="text-black/60 dark:text-white/60 text-lg leading-relaxed mb-8">
               A JustCharter membership isn't just about booking flights—it's about gaining unparalleled control over your time and travel experience. Our dedicated team works around the clock to understand your preferences, anticipate your needs, and deliver flawless execution on every journey.
             </p>
-            <button className="inline-flex items-center gap-3 text-black text-lg font-medium group cursor-pointer">
+            <button className="inline-flex items-center gap-3 text-black dark:text-white text-lg font-medium group cursor-pointer">
               Speak with a Membership Advisor
-              <span className="w-10 h-10 rounded-full bg-[#F5F5F5] flex items-center justify-center group-hover:bg-black transition-colors duration-200">
-                <ArrowRight className="w-4 h-4 text-black group-hover:text-white transition-colors" />
+              <span className="w-10 h-10 rounded-full bg-[#F5F5F5] dark:bg-neutral-900 flex items-center justify-center group-hover:bg-black transition-colors duration-200">
+                <ArrowRight className="w-4 h-4 text-black dark:text-white group-hover:text-white transition-colors" />
               </span>
             </button>
           </div>

@@ -77,25 +77,25 @@ export default function EmptyLegs() {
   ];
 
   return (
-    <div className="bg-[#F5F5F5] min-h-screen pt-24 pb-24">
+    <div className="bg-[#F5F5F5] dark:bg-neutral-900 min-h-screen pt-20 md:pt-24 pb-16 md:pb-24">
       {/* Hero Section */}
-      <div className="max-w-[88rem] mx-auto px-6 mt-16 mb-20 text-center">
-        <h4 className="text-black/50 text-sm mb-4 font-medium tracking-wide uppercase">
+      <div className="max-w-[88rem] mx-auto px-4 sm:px-6 mt-8 md:mt-16 mb-12 md:mb-20 text-center">
+        <h4 className="text-black/50 dark:text-white/50 text-sm mb-4 font-medium tracking-wide uppercase">
           Spontaneous Luxury
         </h4>
-        <h1 className="text-5xl md:text-7xl font-medium leading-tight mb-8" style={{ letterSpacing: '-0.04em' }}>
+        <h1 className="text-4xl md:text-5xl lg:text-7xl font-medium leading-[1.1] md:leading-tight mb-6 md:mb-8" style={{ letterSpacing: '-0.04em' }}>
           Empty Leg Flights.
         </h1>
-        <p className="text-black/60 text-xl max-w-2xl mx-auto leading-relaxed">
+        <p className="text-black/60 dark:text-white/60 text-lg md:text-xl max-w-2xl mx-auto leading-relaxed">
           Experience the pinnacle of private aviation at a fraction of the cost. Book repositioning flights and enjoy up to 75% off standard charter rates.
         </p>
       </div>
 
       {/* Flight Grid */}
-      <div className="max-w-[88rem] mx-auto px-6 mb-32">
+      <div className="max-w-[88rem] mx-auto px-4 sm:px-6 mb-24 md:mb-32">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {emptyLegs.map((leg) => (
-            <div key={leg.id} className="bg-white rounded-3xl overflow-hidden border border-gray-100 group flex flex-col">
+            <div key={leg.id} className="bg-white dark:bg-neutral-950 rounded-3xl overflow-hidden border border-gray-100 dark:border-white/10 group flex flex-col">
               <div className="relative aspect-[16/9] overflow-hidden">
                 <img 
                   src={leg.image} 
@@ -111,30 +111,30 @@ export default function EmptyLegs() {
               <div className="p-8 flex-1 flex flex-col">
                 <div className="flex items-center justify-between mb-6">
                   <div className="flex-1">
-                    <div className="text-sm text-black/50 font-medium tracking-wide uppercase mb-1">From</div>
-                    <div className="text-lg font-medium tracking-tight text-black truncate">{leg.from}</div>
+                    <div className="text-sm text-black/50 dark:text-white/50 font-medium tracking-wide uppercase mb-1">From</div>
+                    <div className="text-lg font-medium tracking-tight text-black dark:text-white truncate">{leg.from}</div>
                   </div>
                   <div className="px-4">
                     <Plane className="w-5 h-5 text-black/20 shrink-0" />
                   </div>
                   <div className="flex-1 text-right">
-                    <div className="text-sm text-black/50 font-medium tracking-wide uppercase mb-1">To</div>
-                    <div className="text-lg font-medium tracking-tight text-black truncate">{leg.to}</div>
+                    <div className="text-sm text-black/50 dark:text-white/50 font-medium tracking-wide uppercase mb-1">To</div>
+                    <div className="text-lg font-medium tracking-tight text-black dark:text-white truncate">{leg.to}</div>
                   </div>
                 </div>
 
                 <div className="h-px bg-gray-100 w-full mb-6" />
 
                 <div className="space-y-3 mb-8 flex-1">
-                  <div className="flex items-center gap-3 text-black/70">
+                  <div className="flex items-center gap-3 text-black/70 dark:text-white/70">
                     <Calendar className="w-4 h-4 shrink-0" />
                     <span className="text-sm font-medium">{leg.date}</span>
                   </div>
-                  <div className="flex items-center gap-3 text-black/70">
+                  <div className="flex items-center gap-3 text-black/70 dark:text-white/70">
                     <Plane className="w-4 h-4 shrink-0" />
                     <span className="text-sm font-medium">{leg.aircraft} <span className="opacity-60">({leg.type})</span></span>
                   </div>
-                  <div className="flex items-center gap-3 text-black/70">
+                  <div className="flex items-center gap-3 text-black/70 dark:text-white/70">
                     <Users className="w-4 h-4 shrink-0" />
                     <span className="text-sm font-medium">Up to {leg.passengers} Passengers</span>
                   </div>
@@ -142,10 +142,10 @@ export default function EmptyLegs() {
 
                 <div className="flex items-end justify-between mt-auto">
                   <div>
-                    <div className="text-sm text-black/50 line-through mb-1">{leg.originalPrice}</div>
-                    <div className="text-2xl font-medium text-black tracking-tight">{leg.price}</div>
+                    <div className="text-sm text-black/50 dark:text-white/50 line-through mb-1">{leg.originalPrice}</div>
+                    <div className="text-2xl font-medium text-black dark:text-white tracking-tight">{leg.price}</div>
                   </div>
-                  <button className="bg-black text-white px-5 py-2.5 rounded-full text-sm font-medium hover:bg-gray-800 transition-colors">
+                  <button className="bg-black dark:bg-white text-white dark:text-black px-5 py-2.5 rounded-full text-sm font-medium hover:bg-gray-800 dark:hover:bg-neutral-200 transition-colors">
                     Request Flight
                   </button>
                 </div>
@@ -156,21 +156,21 @@ export default function EmptyLegs() {
       </div>
 
       {/* Info Section */}
-      <div className="max-w-[88rem] mx-auto px-6">
-        <div className="bg-black text-white rounded-3xl p-12 md:p-20 text-center flex flex-col items-center">
-           <h2 className="text-4xl md:text-5xl font-medium leading-tight mb-6 max-w-2xl" style={{ letterSpacing: '-0.03em' }}>
+      <div className="max-w-[88rem] mx-auto px-4 sm:px-6">
+        <div className="bg-black text-white rounded-[2rem] md:rounded-3xl p-8 sm:p-12 md:p-20 text-center flex flex-col items-center">
+           <h2 className="text-3xl md:text-4xl lg:text-5xl font-medium leading-tight mb-4 md:mb-6 max-w-2xl" style={{ letterSpacing: '-0.03em' }}>
             Be the first to know about new empty legs.
           </h2>
-          <p className="text-white/70 text-lg max-w-xl mx-auto mb-10">
+          <p className="text-white/70 text-base md:text-lg max-w-xl mx-auto mb-8 md:mb-10">
             Sign up for our newsletter to receive weekly updates on available repositioning flights from your preferred departure airports.
           </p>
-          <div className="flex w-full max-w-md gap-2">
+          <div className="flex flex-col sm:flex-row w-full max-w-md gap-3">
             <input 
               type="email" 
               placeholder="Enter your email address" 
-              className="flex-1 bg-white/10 border border-white/20 rounded-full px-6 py-3.5 text-white placeholder:text-white/50 focus:outline-none focus:border-white/50 transition-colors"
+              className="flex-1 bg-white/10 border border-white/20 rounded-full px-6 py-3.5 text-white placeholder:text-white/50 focus:outline-none focus:border-white/50 transition-colors text-center sm:text-left"
             />
-            <button className="bg-white text-black px-8 py-3.5 rounded-full font-medium hover:bg-gray-100 transition-colors shrink-0">
+            <button className="bg-white dark:bg-neutral-950 text-black dark:text-white px-8 py-3.5 rounded-full font-medium hover:bg-gray-100 dark:hover:bg-neutral-800 transition-colors shrink-0">
               Subscribe
             </button>
           </div>

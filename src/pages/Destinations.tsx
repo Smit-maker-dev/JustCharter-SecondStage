@@ -57,19 +57,19 @@ export default function Destinations() {
   ];
 
   return (
-    <div className="bg-[#F5F5F5] min-h-screen pt-24 pb-24">
+    <div className="bg-[#F5F5F5] dark:bg-neutral-900 min-h-screen pt-20 md:pt-24 pb-16 md:pb-24">
       {/* Hero Section */}
-      <div className="max-w-[88rem] mx-auto px-6 mt-16 mb-20">
-        <h1 className="text-5xl md:text-7xl font-medium leading-tight mb-6" style={{ letterSpacing: '-0.04em' }}>
+      <div className="max-w-[88rem] mx-auto px-4 sm:px-6 mt-8 md:mt-16 mb-12 md:mb-20">
+        <h1 className="text-4xl md:text-5xl lg:text-7xl font-medium leading-[1.1] md:leading-tight mb-6 md:mb-8" style={{ letterSpacing: '-0.04em' }}>
           Fly Anywhere,<br/>On Your Terms.
         </h1>
-        <p className="text-black/60 text-xl max-w-2xl leading-relaxed mb-8">
+        <p className="text-black/60 dark:text-white/60 text-lg md:text-xl max-w-2xl leading-relaxed mb-8">
           From the world's most bustling business capitals to remote spiritual sanctuaries, JustCharter ensures you arrive refreshed and on schedule. Explore our most popular routes.
         </p>
       </div>
 
       {/* Global Destinations */}
-      <div className="max-w-[88rem] mx-auto px-6 mb-32">
+      <div className="max-w-[88rem] mx-auto px-4 sm:px-6 mb-24 md:mb-32">
         <div className="flex items-center gap-4 mb-10">
           <div className="w-12 h-12 rounded-full bg-black text-white flex items-center justify-center">
              <MapPin className="w-5 h-5" />
@@ -99,8 +99,8 @@ export default function Destinations() {
                 <p className="text-white/80 text-base max-w-md mb-6 opacity-0 translate-y-4 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300">
                   {dest.description}
                 </p>
-                <div className="w-10 h-10 rounded-full bg-white/20 backdrop-blur border border-white/20 flex items-center justify-center group-hover:bg-white transition-colors duration-300">
-                  <ArrowRight className="w-4 h-4 text-white group-hover:text-black transition-colors" />
+                <div className="w-10 h-10 rounded-full bg-white/20 backdrop-blur border border-white/20 flex items-center justify-center group-hover:bg-white dark:bg-neutral-950 transition-colors duration-300">
+                  <ArrowRight className="w-4 h-4 text-white group-hover:text-black dark:text-white transition-colors" />
                 </div>
               </div>
             </div>
@@ -109,17 +109,17 @@ export default function Destinations() {
       </div>
 
       {/* Spiritual Yatras */}
-      <div className="max-w-[88rem] mx-auto px-6 mb-32">
+      <div className="max-w-[88rem] mx-auto px-4 sm:px-6 mb-24 md:mb-32">
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">
           <div>
-            <h4 className="text-black/50 text-sm mb-3 font-medium tracking-wide uppercase">
+            <h4 className="text-black/50 dark:text-white/50 text-sm mb-3 font-medium tracking-wide uppercase">
               Sacred Journeys
             </h4>
              <h2 className="text-3xl md:text-4xl lg:text-5xl font-medium leading-tight" style={{ letterSpacing: '-0.03em' }}>
               Spiritual Yatras
             </h2>
           </div>
-          <p className="text-black/60 max-w-md text-base leading-relaxed">
+          <p className="text-black/60 dark:text-white/60 max-w-md text-base leading-relaxed">
             Experience profound peace of mind with our exclusive helicopter and jet charters designed specifically for India's holiest pilgrimage sites.
           </p>
         </div>
@@ -151,15 +151,15 @@ export default function Destinations() {
       </div>
 
       {/* CTA */}
-      <div className="max-w-[88rem] mx-auto px-6">
-        <div className="bg-white border border-gray-100 rounded-3xl p-12 md:p-20 text-center flex flex-col items-center">
-           <h2 className="text-4xl md:text-5xl font-medium leading-tight mb-6" style={{ letterSpacing: '-0.03em' }}>
+      <div className="max-w-[88rem] mx-auto px-4 sm:px-6">
+        <div className="bg-white dark:bg-neutral-950 border border-gray-100 dark:border-white/10 rounded-[2rem] md:rounded-3xl p-8 sm:p-12 md:p-20 text-center flex flex-col items-center">
+           <h2 className="text-3xl md:text-4xl lg:text-5xl font-medium leading-tight mb-4 md:mb-6" style={{ letterSpacing: '-0.03em' }}>
             Can't find your destination?
           </h2>
-          <p className="text-black/60 text-lg max-w-xl mx-auto mb-10">
+          <p className="text-black/60 dark:text-white/60 text-base md:text-lg max-w-xl mx-auto mb-8 md:mb-10">
             We fly to over 7,000 airports globally. Request a quote for any route, and our team will arrange the perfect charter for you.
           </p>
-          <button className="inline-flex items-center gap-3 bg-black text-white text-lg font-medium px-8 py-3.5 rounded-full hover:bg-gray-800 transition-colors duration-200">
+          <button className="inline-flex items-center gap-3 bg-black dark:bg-white text-white dark:text-black text-lg font-medium px-8 py-3.5 rounded-full hover:bg-gray-800 dark:hover:bg-neutral-200 transition-colors duration-200">
             Request Custom Route
             <ArrowRight className="w-5 h-5 text-white" />
           </button>
