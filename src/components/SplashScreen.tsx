@@ -11,7 +11,7 @@ export default function SplashScreen({
   const [progress, setProgress] = useState(0);
   const [loaderStatus, setLoaderStatus] = useState("INITIALIZING SYSTEMS");
 
-  const customEase = [0.76, 0, 0.24, 1]; // Premium cubic-bezier for sophisticated motion
+  const customEase: [number, number, number, number] = [0.76, 0, 0.24, 1]; // Premium cubic-bezier for sophisticated motion
 
   useEffect(() => {
     document.body.style.overflow = "hidden";
