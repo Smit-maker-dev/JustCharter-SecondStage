@@ -8,6 +8,14 @@ import AboutPage from './pages/About';
 import EmptyLegsPage from './pages/EmptyLegs';
 import FleetPage from './pages/Fleet';
 import AircraftDetailsPage from './pages/AircraftDetails';
+import ContactPage from './pages/Contact';
+import SafetyFirstPage from './pages/SafetyFirst';
+import CareersPage from './pages/Careers';
+import CorporateAccountsPage from './pages/CorporateAccounts';
+import LoginPage from './pages/Login';
+import PrivacyPolicyPage from './pages/PrivacyPolicy';
+import TermsPage from './pages/Terms';
+import CookiePolicyPage from './pages/CookiePolicy';
 
 const LogoIcon = ({ className }: { className?: string }) => (
   <svg
@@ -711,18 +719,18 @@ function Footer() {
             <div>
               <h4 className="text-white font-medium mb-6">Company</h4>
               <ul className="space-y-4 text-white/60">
-                <li><a href="#" className="hover:text-white transition-colors">About Us</a></li>
-                <li><a href="#" className="hover:text-white transition-colors">Safety First</a></li>
-                <li><a href="#" className="hover:text-white transition-colors">Careers</a></li>
-                <li><a href="#" className="hover:text-white transition-colors">Contact</a></li>
+                <li><Link to="/about" className="hover:text-white transition-colors">About Us</Link></li>
+                <li><Link to="/safety-first" className="hover:text-white transition-colors">Safety First</Link></li>
+                <li><Link to="/careers" className="hover:text-white transition-colors">Careers</Link></li>
+                <li><Link to="/contact" className="hover:text-white transition-colors">Contact</Link></li>
               </ul>
             </div>
             <div className="col-span-2 md:col-span-1">
               <h4 className="text-white font-medium mb-6">Members</h4>
               <ul className="space-y-4 text-white/60">
-                <li><a href="#" className="hover:text-white transition-colors">Jet Card</a></li>
-                <li><a href="#" className="hover:text-white transition-colors">Corporate Accounts</a></li>
-                <li><a href="#" className="hover:text-white transition-colors">Log In</a></li>
+                <li><Link to="/members" className="hover:text-white transition-colors">Jet Card</Link></li>
+                <li><Link to="/corporate-accounts" className="hover:text-white transition-colors">Corporate Accounts</Link></li>
+                <li><Link to="/login" className="hover:text-white transition-colors">Log In</Link></li>
               </ul>
             </div>
           </div>
@@ -739,9 +747,9 @@ function Footer() {
               {isDark ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
               <span>{isDark ? 'Light Mode' : 'Dark Mode'}</span>
             </button>
-            <a href="#" className="hover:text-white transition-colors">Privacy Policy</a>
-            <a href="#" className="hover:text-white transition-colors">Terms of Service</a>
-            <a href="#" className="hover:text-white transition-colors">Cookie Policy</a>
+            <Link to="/privacy-policy" className="hover:text-white transition-colors">Privacy Policy</Link>
+            <Link to="/terms" className="hover:text-white transition-colors">Terms of Service</Link>
+            <Link to="/cookie-policy" className="hover:text-white transition-colors">Cookie Policy</Link>
           </div>
         </div>
       </div>
@@ -915,6 +923,14 @@ export default function App() {
           <Route path="/empty-legs" element={<EmptyLegsPage />} />
           <Route path="/fleet" element={<FleetPage />} />
           <Route path="/fleet/:id" element={<AircraftDetailsPage />} />
+          <Route path="/contact" element={<ContactPage />} />
+          <Route path="/safety-first" element={<SafetyFirstPage />} />
+          <Route path="/careers" element={<CareersPage />} />
+          <Route path="/corporate-accounts" element={<CorporateAccountsPage />} />
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/privacy-policy" element={<PrivacyPolicyPage />} />
+          <Route path="/terms" element={<TermsPage />} />
+          <Route path="/cookie-policy" element={<CookiePolicyPage />} />
         </Routes>
         <Footer />
         <ScrollToTopButton />
