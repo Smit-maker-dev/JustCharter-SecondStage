@@ -1,8 +1,9 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { Plane, Calendar, Users, MapPin, Search, CheckCircle2, Navigation, ChevronDown, ChevronUp, Info, Coffee } from 'lucide-react';
+import { Plane, Calendar, Users, MapPin, Search, CheckCircle2, Navigation, ChevronDown, ChevronUp, Info, Coffee, ChevronLeft, ChevronRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { ComposableMap, Geographies, Geography, Line, Marker } from 'react-simple-maps';
 import { AIRPORTS, Airport } from '../data/airports';
+import { format, addMonths, subMonths, startOfMonth, endOfMonth, eachDayOfInterval, isSameDay, isToday, isBefore, startOfToday } from 'date-fns';
 
 // Mock data for suggested options
 const MOCK_OPTIONS = [
@@ -318,6 +319,153 @@ const AirportAutocomplete = ({ name, placeholder, onSelect }: { name: string, pl
   );
 };
 
+const CustomDatePicker = ({ date, setDate, placeholder = "Select date" }: { date: Date | null, setDate: (d: Date) => void, placeholder?: string }) => {
+  const [open, setOpen] = useState(false);
+  const [currentMonth, setCurrentMonth] = useState(startOfMonth(date || startOfToday()));
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (containerRef.current && !containerRef.current.contains(event.target as Node)) {
+        setOpen(false);
+      }
+    };
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, []);
+
+  const daysInMonth = eachDayOfInterval({
+    start: startOfMonth(currentMonth),
+    end: endOfMonth(currentMonth)
+  });
+
+  const nextMonth = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    setCurrentMonth(addMonths(currentMonth, 1));
+  };
+  const prevMonth = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    if (!isBefore(startOfMonth(subMonths(currentMonth, 1)), startOfMonth(startOfToday()))) {
+      setCurrentMonth(subMonths(currentMonth, 1));
+    }
+  };
+
+  const handleDateClick = (d: Date) => {
+    if (!isBefore(d, startOfToday())) {
+      setDate(d);
+      setOpen(false);
+    }
+  };
+
+  return (
+    <div className="relative" ref={containerRef}>
+      <Calendar className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-black/40 dark:text-white/40 pointer-events-none" />
+      <div 
+        onClick={() => setOpen(!open)}
+        className="w-full bg-gray-50 dark:bg-black/50 border border-black/10 dark:border-white/10 rounded-2xl px-12 py-3.5 sm:py-4 focus:outline-none focus:ring-2 focus:ring-black/5 dark:focus:ring-white/5 transition-all text-black dark:text-white cursor-pointer select-none flex items-center"
+      >
+        <span className={date ? "" : "text-black/50 dark:text-white/50 w-full"}>{date ? format(date, 'MMM dd, yyyy') : placeholder}</span>
+        <ChevronDown className="absolute right-4 w-5 h-5 text-black/40 dark:text-white/40 pointer-events-none" />
+      </div>
+      
+      {open && (
+        <div className="absolute z-50 top-full left-0 mt-2 bg-white dark:bg-neutral-900 border border-black/10 dark:border-white/10 rounded-3xl shadow-xl p-4 w-full sm:w-[320px]">
+          <div className="flex justify-between items-center mb-4 px-2">
+            <button type="button" onClick={prevMonth} className={`p-1.5 rounded-full transition-colors ${!isBefore(startOfMonth(subMonths(currentMonth, 1)), startOfMonth(startOfToday())) ? 'hover:bg-gray-100 dark:hover:bg-neutral-800' : 'opacity-30 cursor-not-allowed'}`}>
+              <ChevronLeft className="w-5 h-5" />
+            </button>
+            <div className="font-medium">{format(currentMonth, 'MMMM yyyy')}</div>
+            <button type="button" onClick={nextMonth} className="p-1.5 rounded-full hover:bg-gray-100 dark:hover:bg-neutral-800 transition-colors">
+              <ChevronRight className="w-5 h-5" />
+            </button>
+          </div>
+          
+          <div className="grid grid-cols-7 gap-1 text-center mb-2 px-1">
+            {['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'].map(day => (
+              <div key={day} className="text-[11px] font-semibold text-black/40 dark:text-white/40 uppercase tracking-widest">{day}</div>
+            ))}
+          </div>
+          
+          <div className="grid grid-cols-7 gap-1 px-1">
+            {Array.from({ length: startOfMonth(currentMonth).getDay() }).map((_, i) => (
+              <div key={`empty-${i}`} />
+            ))}
+            {daysInMonth.map(d => {
+              const isPast = isBefore(d, startOfToday()) && !isToday(d);
+              const isSelected = date ? isSameDay(d, date) : false;
+              return (
+                <button
+                  type="button"
+                  key={d.toISOString()}
+                  onClick={(e) => { e.preventDefault(); e.stopPropagation(); handleDateClick(d); }}
+                  disabled={isPast}
+                  className={`
+                    w-full aspect-square rounded-full flex items-center justify-center text-sm md:text-[15px] transition-all relative group
+                    ${isPast ? 'opacity-30 cursor-not-allowed' : 'hover:bg-brand/10 hover:text-brand'}
+                    ${isSelected ? 'bg-brand text-white hover:bg-brand hover:text-white shadow-md' : ''}
+                    ${isToday(d) && !isSelected ? 'text-brand font-bold' : ''}
+                  `}
+                >
+                  <span className="relative z-10">{format(d, 'd')}</span>
+                  {isToday(d) && !isSelected && <span className="absolute bottom-1 w-1 h-1 bg-brand rounded-full"></span>}
+                </button>
+              )
+            })}
+          </div>
+        </div>
+      )}
+    </div>
+  );
+};
+
+const CustomDropdown = ({ options, value, onChange, icon: Icon, placeholder }: { options: {label: string, value: string}[], value: string, onChange: (val: string) => void, icon?: any, placeholder?: string }) => {
+  const [open, setOpen] = useState(false);
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (containerRef.current && !containerRef.current.contains(event.target as Node)) {
+        setOpen(false);
+      }
+    };
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, []);
+
+  const selectedOption = options.find(o => o.value === value);
+
+  return (
+    <div className="relative" ref={containerRef}>
+      {Icon && <Icon className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-black/40 dark:text-white/40 pointer-events-none" />}
+      <div 
+        onClick={() => setOpen(!open)}
+        className="w-full bg-gray-50 dark:bg-black/50 border border-black/10 dark:border-white/10 rounded-2xl px-12 py-3.5 sm:py-4 focus:outline-none focus:ring-2 focus:ring-black/5 dark:focus:ring-white/5 transition-all text-black dark:text-white cursor-pointer select-none flex items-center"
+      >
+        <span className={selectedOption ? "" : "text-black/50 dark:text-white/50 w-full"}>{selectedOption ? selectedOption.label : placeholder}</span>
+        <ChevronDown className={`absolute right-4 w-5 h-5 text-black/40 dark:text-white/40 pointer-events-none transition-transform duration-200 ${open ? "rotate-180" : ""}`} />
+      </div>
+      
+      {open && (
+        <div className="absolute z-50 top-full left-0 right-0 mt-2 bg-white dark:bg-neutral-900 border border-black/10 dark:border-white/10 rounded-2xl shadow-xl max-h-60 overflow-y-auto py-2">
+          {options.map(option => (
+            <div 
+              key={option.value}
+              className={`px-4 py-3 hover:bg-gray-50 dark:hover:bg-neutral-800 cursor-pointer flex items-center justify-between transition-colors ${option.value === value ? 'text-brand font-medium bg-brand/5 dark:bg-brand/10' : ''}`}
+              onClick={() => {
+                onChange(option.value);
+                setOpen(false);
+              }}
+            >
+              <span>{option.label}</span>
+              {option.value === value && <CheckCircle2 className="w-4 h-4 text-brand" />}
+            </div>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+};
+
 export default function TripPlanner() {
   const [isSearching, setIsSearching] = useState(false);
   const [hasSearched, setHasSearched] = useState(false);
@@ -328,9 +476,17 @@ export default function TripPlanner() {
 
   const [selectedDepAirport, setSelectedDepAirport] = useState<Airport | null>(null);
   const [selectedArrAirport, setSelectedArrAirport] = useState<Airport | null>(null);
+  const [flightDate, setFlightDate] = useState<Date | null>(null);
+  const [passengers, setPassengers] = useState<string>("1");
+  const [aircraftClass, setAircraftClass] = useState<string>("any");
 
   const handleSearch = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    if (!flightDate) {
+      alert("Please select a date");
+      return;
+    }
+
     setIsSearching(true);
 
     const formData = new FormData(e.currentTarget);
@@ -412,44 +568,43 @@ export default function TripPlanner() {
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div className="space-y-1.5">
                     <label className="text-sm font-medium text-black/70 dark:text-white/70 ml-1">Date</label>
-                    <div className="relative">
-                      <Calendar className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-black/40 dark:text-white/40" />
-                      <input
-                        required
-                        type="date"
-                        className="w-full bg-gray-50 dark:bg-black/50 border border-black/10 dark:border-white/10 rounded-2xl px-11 py-3.5 sm:py-4 focus:outline-none focus:ring-2 focus:ring-black/5 dark:focus:ring-white/5 transition-all text-black dark:text-white [&::-webkit-calendar-picker-indicator]:dark:invert"
-                      />
-                    </div>
+                    <CustomDatePicker date={flightDate} setDate={setFlightDate} placeholder="Departure Date" />
                   </div>
                   
                   <div className="space-y-1.5">
                     <label className="text-sm font-medium text-black/70 dark:text-white/70 ml-1">Passengers</label>
-                    <div className="relative">
-                      <Users className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-black/40 dark:text-white/40" />
-                      <input
-                        required
-                        type="number"
-                        min="1"
-                        max="19"
-                        placeholder="1-19"
-                        className="w-full bg-gray-50 dark:bg-black/50 border border-black/10 dark:border-white/10 rounded-2xl px-12 py-3.5 sm:py-4 focus:outline-none focus:ring-2 focus:ring-black/5 dark:focus:ring-white/5 transition-all text-black dark:text-white"
-                      />
-                    </div>
+                    <CustomDropdown
+                      icon={Users}
+                      value={passengers}
+                      onChange={setPassengers}
+                      options={[
+                        { label: '1 Passenger', value: '1' },
+                        { label: '2 Passengers', value: '2' },
+                        { label: '3 Passengers', value: '3' },
+                        { label: '4 Passengers', value: '4' },
+                        { label: '5 Passengers', value: '5' },
+                        { label: '6 Passengers', value: '6' },
+                        { label: '7 Passengers', value: '7' },
+                        { label: '8+ Passengers', value: '8' },
+                      ]}
+                    />
                   </div>
                 </div>
 
                 <div className="space-y-1.5">
                   <label className="text-sm font-medium text-black/70 dark:text-white/70 ml-1">Aircraft Class</label>
-                  <div className="relative">
-                    <Plane className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-black/40 dark:text-white/40" />
-                    <select className="w-full bg-gray-50 dark:bg-black/50 border border-black/10 dark:border-white/10 rounded-2xl pl-12 pr-4 py-3.5 sm:py-4 focus:outline-none focus:ring-2 focus:ring-black/5 dark:focus:ring-white/5 transition-all text-black dark:text-white appearance-none">
-                      <option value="any">Any Class</option>
-                      <option value="light">Light Jet</option>
-                      <option value="midsize">Midsize Jet</option>
-                      <option value="heavy">Heavy Jet</option>
-                      <option value="ultra-long">Ultra Long Range</option>
-                    </select>
-                  </div>
+                  <CustomDropdown
+                    icon={Plane}
+                    value={aircraftClass}
+                    onChange={setAircraftClass}
+                    options={[
+                      { label: 'Any Class', value: 'any' },
+                      { label: 'Light Jet', value: 'light' },
+                      { label: 'Midsize Jet', value: 'midsize' },
+                      { label: 'Heavy Jet', value: 'heavy' },
+                      { label: 'Ultra Long Range', value: 'ultra-long' },
+                    ]}
+                  />
                 </div>
 
                 <button
