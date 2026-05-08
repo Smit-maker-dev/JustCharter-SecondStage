@@ -1,6 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { Plane, Calendar, Users, MapPin, Search, CheckCircle2, Navigation, ChevronDown, ChevronUp, Info, Coffee } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { ComposableMap, Geographies, Geography, Line, Marker } from 'react-simple-maps';
+import { AIRPORTS, Airport } from '../data/airports';
 
 // Mock data for suggested options
 const MOCK_OPTIONS = [
@@ -178,18 +180,193 @@ const TripOptionCard: React.FC<{ option: typeof MOCK_OPTIONS[0] }> = ({ option }
   );
 };
 
+const geoUrl = "https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json";
+
+const FlightRouteMap = ({ departure, arrival, departureCoords, arrivalCoords }: { departure: string, arrival: string, departureCoords: [number, number], arrivalCoords: [number, number] }) => {
+  const start = departureCoords;
+  const end = arrivalCoords;
+
+  const centerLongitude = (start[0] + end[0]) / 2;
+  const centerLatitude = (start[1] + end[1]) / 2;
+
+  const dx = Math.abs(start[0] - end[0]);
+  const dy = Math.abs(start[1] - end[1]);
+  // Adjust map scale according to the spanning distance (approximate approach)
+  const maxDiff = Math.max(dx, dy);
+  const computedScale = maxDiff > 0 ? Math.max(100, Math.min(1200, 15000 / maxDiff)) : 400;
+
+  return (
+    <div className="w-full h-[250px] sm:h-[300px] bg-white dark:bg-neutral-900 border border-black/5 dark:border-white/5 rounded-3xl overflow-hidden shadow-sm relative mb-8">
+      <ComposableMap
+        projection="geoEqualEarth"
+        projectionConfig={{ scale: computedScale, center: [centerLongitude, centerLatitude] }}
+        className="w-full h-full outline-none"
+      >
+        <Geographies geography={geoUrl}>
+          {({ geographies }) =>
+            geographies.map((geo) => (
+              <Geography
+                key={geo.rsmKey}
+                geography={geo}
+                fill="currentColor"
+                className="text-gray-100 dark:text-neutral-800 outline-none hover:text-gray-200 dark:hover:text-neutral-700 transition-colors"
+                stroke="currentColor"
+                strokeWidth={0.5}
+                style={{
+                  default: { outline: "none" },
+                  hover: { outline: "none" },
+                  pressed: { outline: "none" },
+                }}
+              />
+            ))
+          }
+        </Geographies>
+        <Line
+          from={start}
+          to={end}
+          strokeWidth={3}
+          strokeLinecap="round"
+          className="text-brand stroke-current opacity-100"
+          style={{ strokeDasharray: "6 6" }}
+        />
+        <Marker coordinates={start}>
+          <circle r={5} fill="currentColor" className="text-brand shadow-sm" />
+          <circle r={14} fill="currentColor" className="text-brand opacity-20 animate-ping" />
+          <text textAnchor="end" y={-10} x={-10} className="fill-black dark:fill-white text-[12px] font-bold">
+            {departure || 'New York'}
+          </text>
+        </Marker>
+        <Marker coordinates={end}>
+          <circle r={5} fill="currentColor" className="text-brand shadow-sm" />
+          <circle r={14} fill="currentColor" className="text-brand opacity-20 animate-ping" />
+          <text textAnchor="start" y={-10} x={10} className="fill-black dark:fill-white text-[12px] font-bold">
+            {arrival || 'London'}
+          </text>
+        </Marker>
+      </ComposableMap>
+      <div className="absolute top-4 left-4 right-4 sm:right-auto bg-white/90 dark:bg-black/80 backdrop-blur px-5 py-3 rounded-2xl border border-black/10 dark:border-white/10 shadow-sm flex flex-col gap-1">
+        <span className="text-[10px] font-bold tracking-widest uppercase text-black/50 dark:text-white/50">Flight Path Highlights</span>
+        <span className="font-medium text-sm flex items-center gap-2">
+          {departure || 'New York'}
+          <Plane className="w-3 h-3 text-black/40 dark:text-white/40" />
+          {arrival || 'London'}
+        </span>
+      </div>
+    </div>
+  );
+};
+
+const AirportAutocomplete = ({ name, placeholder, onSelect }: { name: string, placeholder: string, onSelect: (airport: Airport) => void }) => {
+  const [query, setQuery] = useState('');
+  const [open, setOpen] = useState(false);
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  const filtered = AIRPORTS.filter(a => 
+    a.city.toLowerCase().includes(query.toLowerCase()) || 
+    a.code.toLowerCase().includes(query.toLowerCase()) || 
+    a.name.toLowerCase().includes(query.toLowerCase())
+  ).slice(0, 50);
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (containerRef.current && !containerRef.current.contains(event.target as Node)) {
+        setOpen(false);
+      }
+    };
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, []);
+
+  return (
+    <div className="relative" ref={containerRef}>
+      <MapPin className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-black/40 dark:text-white/40" />
+      <input
+        required
+        name={name}
+        type="text"
+        placeholder={placeholder}
+        value={query}
+        onChange={(e) => {
+          setQuery(e.target.value);
+          setOpen(true);
+        }}
+        onFocus={() => setOpen(true)}
+        className="w-full bg-gray-50 dark:bg-black/50 border border-black/10 dark:border-white/10 rounded-2xl px-12 py-3.5 sm:py-4 focus:outline-none focus:ring-2 focus:ring-black/5 dark:focus:ring-white/5 transition-all text-black dark:text-white"
+      />
+      {open && filtered.length > 0 && (
+        <div className="absolute z-50 top-full left-0 right-0 mt-2 bg-white dark:bg-neutral-900 border border-black/10 dark:border-white/10 rounded-2xl shadow-xl max-h-60 overflow-y-auto">
+          {filtered.map(a => (
+            <div 
+              key={a.code}
+              className="px-4 py-3 hover:bg-gray-50 dark:hover:bg-neutral-800 cursor-pointer flex justify-between items-center"
+              onClick={() => {
+                setQuery(`${a.city} (${a.code})`);
+                setOpen(false);
+                onSelect(a);
+              }}
+            >
+              <div>
+                <div className="font-medium text-sm">{a.city}</div>
+                <div className="text-xs text-black/50 dark:text-white/50">{a.name}</div>
+              </div>
+              <div className="font-bold text-sm tracking-widest">{a.code}</div>
+            </div>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+};
+
 export default function TripPlanner() {
   const [isSearching, setIsSearching] = useState(false);
   const [hasSearched, setHasSearched] = useState(false);
+  const [departure, setDeparture] = useState('');
+  const [arrival, setArrival] = useState('');
+  const [departureCoords, setDepartureCoords] = useState<[number, number]>([-74.006, 40.7128]);
+  const [arrivalCoords, setArrivalCoords] = useState<[number, number]>([-0.1276, 51.5072]);
 
-  const handleSearch = (e: React.FormEvent) => {
+  const [selectedDepAirport, setSelectedDepAirport] = useState<Airport | null>(null);
+  const [selectedArrAirport, setSelectedArrAirport] = useState<Airport | null>(null);
+
+  const handleSearch = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsSearching(true);
-    // Simulate API call
+
+    const formData = new FormData(e.currentTarget);
+    const dep = (formData.get('departure') as string) || 'New York';
+    const arr = (formData.get('arrival') as string) || 'London';
+    setDeparture(dep);
+    setArrival(arr);
+
+    const fetchCoords = async (place: string): Promise<[number, number] | null> => {
+      // Find exactly in AIRPORTS first, checking by city/code combination string 
+      const matched = AIRPORTS.find(a => `${a.city} (${a.code})` === place);
+      if (matched) return [matched.lon, matched.lat];
+
+      try {
+        const res = await fetch(`https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(place)}`);
+        const data = await res.json();
+        if (data && data.length > 0) {
+          return [parseFloat(data[0].lon), parseFloat(data[0].lat)];
+        }
+      } catch (e) {
+        console.error("Geocoding error", e);
+      }
+      return null;
+    };
+
+    const [c1, c2] = await Promise.all([
+      selectedDepAirport ? Promise.resolve([selectedDepAirport.lon, selectedDepAirport.lat] as [number, number]) : fetchCoords(dep), 
+      selectedArrAirport ? Promise.resolve([selectedArrAirport.lon, selectedArrAirport.lat] as [number, number]) : fetchCoords(arr)
+    ]);
+    if (c1) setDepartureCoords(c1);
+    if (c2) setArrivalCoords(c2);
+
     setTimeout(() => {
       setIsSearching(false);
       setHasSearched(true);
-    }, 1500);
+    }, 500);
   };
 
   return (
@@ -216,28 +393,20 @@ export default function TripPlanner() {
               <form onSubmit={handleSearch} className="space-y-4 sm:space-y-5">
                 <div className="space-y-1.5">
                   <label className="text-sm font-medium text-black/70 dark:text-white/70 ml-1">Departure</label>
-                  <div className="relative">
-                    <MapPin className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-black/40 dark:text-white/40" />
-                    <input
-                      required
-                      type="text"
-                      placeholder="City or Airport Code"
-                      className="w-full bg-gray-50 dark:bg-black/50 border border-black/10 dark:border-white/10 rounded-2xl px-12 py-3.5 sm:py-4 focus:outline-none focus:ring-2 focus:ring-black/5 dark:focus:ring-white/5 transition-all text-black dark:text-white"
-                    />
-                  </div>
+                  <AirportAutocomplete 
+                    name="departure" 
+                    placeholder="City or Airport Code" 
+                    onSelect={setSelectedDepAirport}
+                  />
                 </div>
 
                 <div className="space-y-1.5">
                   <label className="text-sm font-medium text-black/70 dark:text-white/70 ml-1">Arrival</label>
-                  <div className="relative">
-                    <MapPin className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-black/40 dark:text-white/40" />
-                    <input
-                      required
-                      type="text"
-                      placeholder="City or Airport Code"
-                      className="w-full bg-gray-50 dark:bg-black/50 border border-black/10 dark:border-white/10 rounded-2xl px-12 py-3.5 sm:py-4 focus:outline-none focus:ring-2 focus:ring-black/5 dark:focus:ring-white/5 transition-all text-black dark:text-white"
-                    />
-                  </div>
+                  <AirportAutocomplete 
+                    name="arrival" 
+                    placeholder="City or Airport Code" 
+                    onSelect={setSelectedArrAirport}
+                  />
                 </div>
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -313,6 +482,7 @@ export default function TripPlanner() {
               </div>
             ) : (
               <div className="space-y-6">
+                <FlightRouteMap departure={departure} arrival={arrival} departureCoords={departureCoords} arrivalCoords={arrivalCoords} />
                 <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-8">
                   <div>
                     <h3 className="text-2xl font-medium">Recommended Options</h3>

@@ -568,7 +568,7 @@ export default function Fleet() {
               className="text-3xl md:text-4xl font-medium mb-4"
               style={{ letterSpacing: "-0.02em" }}
             >
-              Stay Updated
+              Fleet Updates & Alerts
             </h2>
             <p className="text-black/60 dark:text-white/60 text-lg max-w-xl mx-auto lg:mx-0 leading-relaxed">
               Sign up for notifications and be the first to know when new
