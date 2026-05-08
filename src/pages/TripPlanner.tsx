@@ -210,6 +210,8 @@ const FlightRouteMap = ({ departure, arrival, departureCoords, arrivalCoords }: 
     <div className="w-full h-[250px] sm:h-[300px] bg-neutral-100 dark:bg-neutral-800 border border-black/5 dark:border-white/5 rounded-3xl overflow-hidden shadow-sm relative mb-8 z-0">
       <MapContainer 
         scrollWheelZoom={false}
+        dragging={false}
+        touchZoom={false}
         className="w-full h-full outline-none"
         zoomControl={false}
       >
@@ -246,16 +248,27 @@ const FlightRouteMap = ({ departure, arrival, departureCoords, arrivalCoords }: 
   );
 };
 
-const AirportAutocomplete = ({ name, placeholder, onSelect }: { name: string, placeholder: string, onSelect: (airport: Airport) => void }) => {
+const getDistance = (lat1: number, lon1: number, lat2: number, lon2: number) => {
+  const p = 0.017453292519943295;
+  const c = Math.cos;
+  const a = 0.5 - c((lat2 - lat1) * p)/2 + 
+            c(lat1 * p) * c(lat2 * p) * 
+            (1 - c((lon2 - lon1) * p))/2;
+  return 12742 * Math.asin(Math.sqrt(a));
+};
+
+const AirportAutocomplete = ({ name, placeholder, onSelect, error, onChange }: { name: string, placeholder: string, onSelect: (airport: Airport | null) => void, error?: string, onChange?: () => void }) => {
   const [query, setQuery] = useState('');
   const [open, setOpen] = useState(false);
+  const [isSearchingNearby, setIsSearchingNearby] = useState(false);
+  const [nearbyAirports, setNearbyAirports] = useState<{airport: Airport, distance: number}[]>([]);
   const containerRef = useRef<HTMLDivElement>(null);
 
-  const filtered = AIRPORTS.filter(a => 
+  const filtered = query.length > 0 ? AIRPORTS.filter(a => 
     a.city.toLowerCase().includes(query.toLowerCase()) || 
     a.code.toLowerCase().includes(query.toLowerCase()) || 
     a.name.toLowerCase().includes(query.toLowerCase())
-  ).slice(0, 50);
+  ).slice(0, 50) : [];
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -267,11 +280,44 @@ const AirportAutocomplete = ({ name, placeholder, onSelect }: { name: string, pl
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
 
+  useEffect(() => {
+    let active = true;
+    if (query.length > 2 && filtered.length === 0) {
+      setIsSearchingNearby(true);
+      const timer = setTimeout(async () => {
+        try {
+          const res = await fetch(`https://nominatim.openstreetmap.org/search?q=${encodeURIComponent(query)}&format=json&limit=1`);
+          if (!res.ok) throw new Error('API Error');
+          const data = await res.json();
+          if (data && data.length > 0 && active) {
+            const lat = parseFloat(data[0].lat);
+            const lon = parseFloat(data[0].lon);
+            const airportsWithDist = AIRPORTS.map(a => ({
+              airport: a,
+              distance: getDistance(lat, lon, a.lat, a.lon)
+            })).sort((a, b) => a.distance - b.distance).slice(0, 5);
+            setNearbyAirports(airportsWithDist);
+          } else if (active) {
+            setNearbyAirports([]);
+          }
+        } catch (e) {
+          if (active) setNearbyAirports([]);
+        } finally {
+          if (active) setIsSearchingNearby(false);
+        }
+      }, 700);
+      return () => { active = false; clearTimeout(timer); };
+    } else {
+      setNearbyAirports([]);
+      setIsSearchingNearby(false);
+    }
+    return () => { active = false; };
+  }, [query, filtered.length]);
+
   return (
     <div className="relative" ref={containerRef}>
       <MapPin className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-black/40 dark:text-white/40" />
       <input
-        required
         name={name}
         type="text"
         placeholder={placeholder}
@@ -279,36 +325,73 @@ const AirportAutocomplete = ({ name, placeholder, onSelect }: { name: string, pl
         onChange={(e) => {
           setQuery(e.target.value);
           setOpen(true);
+          onSelect(null);
+          onChange?.();
         }}
         onFocus={() => setOpen(true)}
-        className="w-full bg-gray-50 dark:bg-black/50 border border-black/10 dark:border-white/10 rounded-2xl px-12 py-3.5 sm:py-4 focus:outline-none focus:ring-2 focus:ring-black/5 dark:focus:ring-white/5 transition-all text-black dark:text-white"
+        className={`w-full bg-gray-50 dark:bg-black/50 border ${error ? 'border-red-500/50 focus:ring-red-500/20 text-red-900 dark:text-red-100 placeholder:text-red-500/50' : 'border-black/10 dark:border-white/10 focus:ring-black/5 dark:focus:ring-white/5 text-black dark:text-white'} rounded-2xl px-12 py-3.5 sm:py-4 focus:outline-none focus:ring-2 transition-all`}
       />
-      {open && filtered.length > 0 && (
-        <div className="absolute z-50 top-full left-0 right-0 mt-2 bg-white dark:bg-neutral-900 border border-black/10 dark:border-white/10 rounded-2xl shadow-xl max-h-60 overflow-y-auto">
-          {filtered.map(a => (
-            <div 
-              key={a.code}
-              className="px-4 py-3 hover:bg-gray-50 dark:hover:bg-neutral-800 cursor-pointer flex justify-between items-center"
-              onClick={() => {
-                setQuery(`${a.city} (${a.code})`);
-                setOpen(false);
-                onSelect(a);
-              }}
-            >
-              <div>
-                <div className="font-medium text-sm">{a.city}</div>
-                <div className="text-xs text-black/50 dark:text-white/50">{a.name}</div>
+      {error && <p className="text-red-500 text-xs font-medium mt-1.5 ml-2 absolute -bottom-5">{error}</p>}
+      {open && query.length > 0 && (
+        <div className="absolute z-50 top-full left-0 right-0 mt-2 bg-white dark:bg-neutral-900 border border-black/10 dark:border-white/10 rounded-2xl shadow-xl max-h-[300px] overflow-y-auto">
+          {filtered.length > 0 ? (
+            filtered.map(a => (
+              <div 
+                key={a.code}
+                className="px-4 py-3 hover:bg-gray-50 dark:hover:bg-neutral-800 cursor-pointer flex justify-between items-center border-b border-black/5 dark:border-white/5 last:border-0"
+                onClick={() => {
+                  setQuery(`${a.city} (${a.code})`);
+                  setOpen(false);
+                  onSelect(a);
+                }}
+              >
+                <div>
+                  <div className="font-medium text-sm">{a.city}</div>
+                  <div className="text-xs text-black/50 dark:text-white/50">{a.name}</div>
+                </div>
+                <div className="font-bold text-sm tracking-widest bg-black/5 dark:bg-white/10 px-2 py-1 rounded-md">{a.code}</div>
               </div>
-              <div className="font-bold text-sm tracking-widest">{a.code}</div>
+            ))
+          ) : isSearchingNearby ? (
+             <div className="px-4 py-5 text-center text-sm text-black/50 dark:text-white/50">
+               <div className="w-5 h-5 mx-auto mb-2 border-2 border-black/30 dark:border-white/30 border-t-black dark:border-t-white rounded-full animate-spin" />
+               Searching for nearby airports...
+             </div>
+          ) : nearbyAirports.length > 0 ? (
+             <div>
+               <div className="px-4 py-2 bg-black/5 dark:bg-white/5 text-xs font-semibold text-black/50 dark:text-white/50 uppercase tracking-widest">
+                 Suggested nearby airports
+               </div>
+               {nearbyAirports.map(({airport: a, distance}) => (
+                 <div 
+                   key={a.code}
+                   className="px-4 py-3 hover:bg-gray-50 dark:hover:bg-neutral-800 cursor-pointer flex justify-between items-center border-b border-black/5 dark:border-white/5 last:border-0"
+                   onClick={() => {
+                     setQuery(`${a.city} (${a.code})`);
+                     setOpen(false);
+                     onSelect(a);
+                   }}
+                 >
+                   <div>
+                     <div className="font-medium text-sm">{a.city}</div>
+                     <div className="text-xs text-black/50 dark:text-white/50">{a.name} <span className="inline-block ml-1 px-1.5 py-0.5 bg-brand/10 text-brand rounded text-[10px]">{Math.round(distance)} km</span></div>
+                   </div>
+                   <div className="font-bold text-sm tracking-widest bg-black/5 dark:bg-white/10 px-2 py-1 rounded-md">{a.code}</div>
+                 </div>
+               ))}
+             </div>
+          ) : (
+            <div className="px-4 py-5 text-center text-sm text-black/50 dark:text-white/50">
+               No airports found. Try another location.
             </div>
-          ))}
+          )}
         </div>
       )}
     </div>
   );
 };
 
-const CustomDatePicker = ({ date, setDate, placeholder = "Select date" }: { date: Date | null, setDate: (d: Date) => void, placeholder?: string }) => {
+const CustomDatePicker = ({ date, setDate, placeholder = "Select date", error }: { date: Date | null, setDate: (d: Date) => void, placeholder?: string, error?: string }) => {
   const [open, setOpen] = useState(false);
   const [currentMonth, setCurrentMonth] = useState(startOfMonth(date || startOfToday()));
   const containerRef = useRef<HTMLDivElement>(null);
@@ -348,14 +431,15 @@ const CustomDatePicker = ({ date, setDate, placeholder = "Select date" }: { date
 
   return (
     <div className="relative" ref={containerRef}>
-      <Calendar className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-black/40 dark:text-white/40 pointer-events-none" />
+      <Calendar className={`absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 ${error ? 'text-red-500/50' : 'text-black/40 dark:text-white/40'} pointer-events-none`} />
       <div 
         onClick={() => setOpen(!open)}
-        className="w-full bg-gray-50 dark:bg-black/50 border border-black/10 dark:border-white/10 rounded-2xl px-12 py-3.5 sm:py-4 focus:outline-none focus:ring-2 focus:ring-black/5 dark:focus:ring-white/5 transition-all text-black dark:text-white cursor-pointer select-none flex items-center"
+        className={`w-full bg-gray-50 dark:bg-black/50 border ${error ? 'border-red-500/50 ring-red-500/20' : 'border-black/10 dark:border-white/10 focus:ring-black/5 dark:focus:ring-white/5'} rounded-2xl px-12 py-3.5 sm:py-4 focus:outline-none focus:ring-2 transition-all cursor-pointer select-none flex items-center ${error ? 'text-red-900 dark:text-red-100' : 'text-black dark:text-white'}`}
       >
-        <span className={date ? "" : "text-black/50 dark:text-white/50 w-full"}>{date ? format(date, 'MMM dd, yyyy') : placeholder}</span>
+        <span className={date ? "" : (error ? "text-red-500/50 w-full" : "text-black/50 dark:text-white/50 w-full")}>{date ? format(date, 'MMM dd, yyyy') : placeholder}</span>
         <ChevronDown className="absolute right-4 w-5 h-5 text-black/40 dark:text-white/40 pointer-events-none" />
       </div>
+      {error && <p className="text-red-500 text-xs font-medium mt-1.5 ml-2 absolute -bottom-5">{error}</p>}
       
       {open && (
         <div className="absolute z-50 top-full left-0 mt-2 bg-white dark:bg-neutral-900 border border-black/10 dark:border-white/10 rounded-3xl shadow-xl p-4 w-full sm:w-[320px]">
@@ -468,19 +552,27 @@ export default function TripPlanner() {
   const [flightDate, setFlightDate] = useState<Date | null>(null);
   const [passengers, setPassengers] = useState<string>("1");
   const [aircraftClass, setAircraftClass] = useState<string>("any");
+  const [formErrors, setFormErrors] = useState<{departure?: string; arrival?: string; date?: string}>({});
 
   const handleSearch = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (!flightDate) {
-      alert("Please select a date");
+    const formData = new FormData(e.currentTarget);
+    const dep = formData.get('departure') as string;
+    const arr = formData.get('arrival') as string;
+
+    const newErrors: {departure?: string; arrival?: string; date?: string} = {};
+    if (!dep || dep.trim() === '') newErrors.departure = "Departure location is required";
+    if (!arr || arr.trim() === '') newErrors.arrival = "Arrival location is required";
+    if (!flightDate) newErrors.date = "Please select a departure date";
+
+    if (Object.keys(newErrors).length > 0) {
+      setFormErrors(newErrors);
       return;
     }
 
+    setFormErrors({});
     setIsSearching(true);
 
-    const formData = new FormData(e.currentTarget);
-    const dep = (formData.get('departure') as string) || 'New York';
-    const arr = (formData.get('arrival') as string) || 'London';
     setDeparture(dep);
     setArrival(arr);
 
@@ -536,28 +628,37 @@ export default function TripPlanner() {
               </h2>
               
               <form onSubmit={handleSearch} className="space-y-4 sm:space-y-5">
-                <div className="space-y-1.5">
+                <div className="space-y-1.5 pb-2">
                   <label className="text-sm font-medium text-black/70 dark:text-white/70 ml-1">Departure</label>
                   <AirportAutocomplete 
                     name="departure" 
                     placeholder="City or Airport Code" 
                     onSelect={setSelectedDepAirport}
+                    error={formErrors.departure}
+                    onChange={() => setFormErrors(prev => ({...prev, departure: undefined}))}
                   />
                 </div>
 
-                <div className="space-y-1.5">
+                <div className="space-y-1.5 pb-2">
                   <label className="text-sm font-medium text-black/70 dark:text-white/70 ml-1">Arrival</label>
                   <AirportAutocomplete 
                     name="arrival" 
                     placeholder="City or Airport Code" 
                     onSelect={setSelectedArrAirport}
+                    error={formErrors.arrival}
+                    onChange={() => setFormErrors(prev => ({...prev, arrival: undefined}))}
                   />
                 </div>
 
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pb-2">
                   <div className="space-y-1.5">
                     <label className="text-sm font-medium text-black/70 dark:text-white/70 ml-1">Date</label>
-                    <CustomDatePicker date={flightDate} setDate={setFlightDate} placeholder="Departure Date" />
+                    <CustomDatePicker 
+                      date={flightDate} 
+                      setDate={(d) => { setFlightDate(d); setFormErrors(prev => ({...prev, date: undefined})); }} 
+                      placeholder="Departure Date" 
+                      error={formErrors.date}
+                    />
                   </div>
                   
                   <div className="space-y-1.5">

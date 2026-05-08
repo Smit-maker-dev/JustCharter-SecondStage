@@ -66,85 +66,136 @@ import SplashScreen from "./components/SplashScreen";
 function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isBookingModalOpen, setIsBookingModalOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+  const [isHovered, setIsHovered] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 20);
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  const isMinimal = scrolled && !isHovered && !isMenuOpen;
 
   return (
     <>
-      <nav className="absolute top-0 left-0 right-0 z-50 px-4 sm:px-6 py-4 sm:py-5">
-        <div className="max-w-[88rem] mx-auto w-full flex items-center justify-between">
-          <Link to="/" className="flex items-center gap-2">
-            <LogoIcon className="w-7 h-7 text-black dark:text-white" />
-            <span className="text-2xl font-medium tracking-tight text-black dark:text-white">
-              JustCharter
-            </span>
+      <nav 
+        onMouseEnter={() => setIsHovered(true)}
+        onMouseLeave={() => setIsHovered(false)}
+        className={`fixed left-0 right-0 z-50 flex justify-center transition-all duration-[600ms] ease-[cubic-bezier(0.16,1,0.3,1)] ${
+          scrolled ? "top-4 px-4 sm:px-6" : "top-0 px-4 sm:px-6 py-4 sm:py-5"
+        }`}
+      >
+        <div 
+          className={`w-full mx-auto flex items-center justify-between transition-all duration-[600ms] ease-[cubic-bezier(0.16,1,0.3,1)] overflow-visible ${
+             scrolled
+              ? isMinimal 
+                ? "bg-white/80 dark:bg-black/90 backdrop-blur-md shadow-lg border border-black/10 dark:border-white/10 rounded-full px-5 py-2.5 max-w-[14rem] sm:max-w-[18rem]"
+                : "bg-white/95 dark:bg-black/95 backdrop-blur-xl shadow-xl border border-black/10 dark:border-white/10 rounded-full px-6 py-3.5 max-w-[88rem]"
+              : "bg-transparent max-w-[88rem]"
+          }`}
+        >
+          <Link to="/" className="flex items-center gap-2 shrink-0">
+            <LogoIcon className={`transition-all duration-[600ms] ease-[cubic-bezier(0.16,1,0.3,1)] text-black dark:text-white shrink-0 ${isMinimal ? "w-6 h-6" : "w-7 h-7"}`} />
+            
+            <div className={`flex items-center overflow-hidden transition-all duration-[600ms] origin-left ease-[cubic-bezier(0.16,1,0.3,1)] ${isMinimal ? "w-4 sm:w-6 opacity-100" : "w-[6.5rem] opacity-100"}`}>
+              <span className={`font-medium tracking-tight text-black dark:text-white transition-all duration-[600ms] absolute whitespace-nowrap ${isMinimal ? "opacity-0 -translate-x-4 pointer-events-none text-xl" : "opacity-100 translate-x-0 text-2xl"}`}>
+                JustCharter
+              </span>
+              <span className={`font-medium tracking-tight text-black dark:text-white transition-all duration-[600ms] absolute text-xl sm:text-2xl whitespace-nowrap ${isMinimal ? "opacity-100 translate-x-0" : "opacity-0 translate-x-4 pointer-events-none"}`}>
+                JC
+              </span>
+            </div>
           </Link>
-          <div className="hidden lg:flex items-center gap-6 xl:gap-8">
-            <Link
-              to="/fleet"
-              className="text-base text-gray-700 dark:text-gray-300 hover:text-black dark:text-white font-medium transition-colors duration-200"
-            >
-              Fleet
-            </Link>
-            <Link
-              to="/destinations"
-              className="text-base text-gray-700 dark:text-gray-300 hover:text-black dark:text-white font-medium transition-colors duration-200"
-            >
-              Destinations
-            </Link>
-            <Link
-              to="/services"
-              className="text-base text-gray-700 dark:text-gray-300 hover:text-black dark:text-white font-medium transition-colors duration-200"
-            >
-              Services
-            </Link>
-            <Link
-              to="/planner"
-              className="text-base text-gray-700 dark:text-gray-300 hover:text-black dark:text-white font-medium transition-colors duration-200"
-            >
-              Trip Planner
-            </Link>
-            <div className="group relative">
-              <button className="flex items-center gap-1 text-base text-gray-700 dark:text-gray-300 hover:text-black dark:text-white font-medium transition-colors duration-200 pb-2 -mb-2">
-                Discover <ChevronDown className="w-4 h-4 transition-transform group-hover:rotate-180" />
-              </button>
-              <div className="absolute top-full right-0 mt-2 w-48 bg-white dark:bg-neutral-900 border border-black/5 dark:border-white/10 rounded-2xl shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 overflow-hidden flex flex-col py-2 z-50">
-                <Link to="/empty-legs" className="block px-4 py-2.5 text-sm text-gray-700 dark:text-gray-300 hover:bg-black/5 dark:hover:bg-white/10 hover:text-black dark:text-white transition-colors">
-                  Empty Legs
-                </Link>
-                <Link to="/members" className="block px-4 py-2.5 text-sm text-gray-700 dark:text-gray-300 hover:bg-black/5 dark:hover:bg-white/10 hover:text-black dark:text-white transition-colors">
-                  Members
-                </Link>
-                <Link to="/about" className="block px-4 py-2.5 text-sm text-gray-700 dark:text-gray-300 hover:bg-black/5 dark:hover:bg-white/10 hover:text-black dark:text-white transition-colors">
-                  About Us
-                </Link>
-                <Link to="/history" className="block px-4 py-2.5 text-sm text-gray-700 dark:text-gray-300 hover:bg-black/5 dark:hover:bg-white/10 hover:text-black dark:text-white transition-colors">
-                  History
-                </Link>
+          
+          <div className={`hidden lg:flex items-center justify-center transition-all duration-[600ms] ease-[cubic-bezier(0.16,1,0.3,1)] whitespace-nowrap ${
+            isMinimal ? "max-w-0 opacity-0 pointer-events-none px-0 overflow-hidden" : "max-w-[800px] opacity-100 flex-1 px-8 overflow-visible"
+          }`}>
+            <div className="flex items-center gap-6 xl:gap-8">
+              <Link
+                to="/fleet"
+                className="text-base text-gray-700 dark:text-gray-300 hover:text-black dark:text-white font-medium transition-colors duration-200"
+              >
+                Fleet
+              </Link>
+              <Link
+                to="/destinations"
+                className="text-base text-gray-700 dark:text-gray-300 hover:text-black dark:text-white font-medium transition-colors duration-200"
+              >
+                Destinations
+              </Link>
+              <Link
+                to="/services"
+                className="text-base text-gray-700 dark:text-gray-300 hover:text-black dark:text-white font-medium transition-colors duration-200"
+              >
+                Services
+              </Link>
+              <Link
+                to="/planner"
+                className="text-base text-gray-700 dark:text-gray-300 hover:text-black dark:text-white font-medium transition-colors duration-200"
+              >
+                Trip Planner
+              </Link>
+              <div className="group relative">
+                <button className="flex items-center gap-1 text-base text-gray-700 dark:text-gray-300 hover:text-black dark:text-white font-medium transition-colors duration-200 pb-2 -mb-2">
+                  Discover <ChevronDown className="w-4 h-4 transition-transform group-hover:rotate-180" />
+                </button>
+                <div className="absolute top-full left-1/2 -translate-x-1/2 mt-3 w-48 bg-white dark:bg-neutral-900 border border-black/5 dark:border-white/10 rounded-2xl shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 overflow-hidden flex flex-col py-2 z-50">
+                  <Link to="/empty-legs" className="block px-4 py-2.5 text-sm text-gray-700 dark:text-gray-300 hover:bg-black/5 dark:hover:bg-white/10 hover:text-black dark:text-white transition-colors">
+                    Empty Legs
+                  </Link>
+                  <Link to="/members" className="block px-4 py-2.5 text-sm text-gray-700 dark:text-gray-300 hover:bg-black/5 dark:hover:bg-white/10 hover:text-black dark:text-white transition-colors">
+                    Members
+                  </Link>
+                  <Link to="/about" className="block px-4 py-2.5 text-sm text-gray-700 dark:text-gray-300 hover:bg-black/5 dark:hover:bg-white/10 hover:text-black dark:text-white transition-colors">
+                    About Us
+                  </Link>
+                  <Link to="/history" className="block px-4 py-2.5 text-sm text-gray-700 dark:text-gray-300 hover:bg-black/5 dark:hover:bg-white/10 hover:text-black dark:text-white transition-colors">
+                    History
+                  </Link>
+                </div>
               </div>
             </div>
           </div>
-          <div className="flex items-center gap-4">
-            <div className="hidden lg:flex items-center bg-black/5 dark:bg-white/10 rounded-full px-4 py-2 border border-black/10 dark:border-white/20 focus-within:bg-white dark:bg-neutral-950 focus-within:border-black/20 dark:border-white/20 focus-within:shadow-sm transition-all duration-200">
-              <Search className="w-4 h-4 text-black/50 dark:text-white/50 shrink-0" />
-              <input
-                type="text"
-                placeholder="Search destinations, fleet..."
-                className="bg-transparent border-none focus:outline-none text-sm ml-2 w-48 placeholder:text-black/40 dark:text-white/40 text-black dark:text-white"
-              />
+
+          <div className="flex items-center shrink-0">
+            <div className={`hidden lg:flex transition-all duration-[600ms] ease-[cubic-bezier(0.16,1,0.3,1)] overflow-hidden items-center ${
+              isMinimal ? "max-w-0 opacity-0 pointer-events-none mr-0" : "max-w-[400px] opacity-100 mr-4"
+            }`}>
+              <div className="flex items-center bg-black/5 dark:bg-white/10 rounded-full px-4 py-2 border border-black/10 dark:border-white/20 focus-within:bg-white dark:bg-neutral-950 focus-within:border-black/20 dark:border-white/20 focus-within:shadow-sm transition-all duration-200">
+                <Search className="w-4 h-4 text-black/50 dark:text-white/50 shrink-0" />
+                <input
+                  type="text"
+                  placeholder="Search..."
+                  className="bg-transparent border-none focus:outline-none text-sm ml-2 w-24 xl:w-48 placeholder:text-black/40 dark:text-white/40 text-black dark:text-white"
+                />
+              </div>
             </div>
+            
             <button
               onClick={() => setIsBookingModalOpen(true)}
-              className="hidden sm:block bg-black dark:bg-white text-white dark:text-black text-base font-medium px-7 py-2.5 rounded-full hover:bg-brand transition-colors duration-200"
+              className={`hidden sm:flex items-center justify-center bg-black dark:bg-white text-white dark:text-black font-medium rounded-full hover:bg-brand transition-all duration-[600ms] ease-[cubic-bezier(0.16,1,0.3,1)] whitespace-nowrap overflow-hidden ${
+                isMinimal ? "w-10 h-10 p-0 text-transparent ml-2" : "px-7 py-2.5 text-base w-auto"
+              }`}
             >
-              Book a Flight
+              <div className="relative flex items-center justify-center pointer-events-none">
+                <Plane className={`absolute transition-all duration-[600ms] ${isMinimal ? "opacity-100 text-white dark:text-black w-4 h-4" : "opacity-0 w-0 h-0"}`} />
+                <span className={`transition-all duration-[600ms] ${isMinimal ? "opacity-0" : "opacity-100"}`}>Book a Flight</span>
+              </div>
             </button>
+            
             <button
-              className="lg:hidden block p-2 text-black dark:text-white hover:bg-black/5 dark:hover:bg-white/10 dark:bg-white/10 rounded-full transition-colors"
+              className={`lg:hidden block p-2 text-black dark:text-white hover:bg-black/5 dark:hover:bg-white/10 dark:bg-white/10 rounded-full transition-all duration-[600ms] ${
+                isMinimal ? "ml-1 sm:ml-2" : "ml-4"
+              }`}
               onClick={() => setIsMenuOpen(!isMenuOpen)}
             >
               {isMenuOpen ? (
-                <X className="w-6 h-6" />
+                <X className="w-6 h-6 shrink-0" />
               ) : (
-                <Menu className="w-6 h-6" />
+                <Menu className="w-6 h-6 shrink-0" />
               )}
             </button>
           </div>
@@ -152,60 +203,60 @@ function Navbar() {
 
         {/* Mobile Menu Dropdown */}
         {isMenuOpen && (
-          <div className="lg:hidden absolute top-full left-0 right-0 bg-white dark:bg-neutral-950 shadow-xl border-t border-gray-100 dark:border-white/10 flex flex-col px-4 sm:px-6 py-4 gap-4 animate-fade-1 z-50">
+          <div className="absolute top-full left-4 right-4 lg:hidden mt-2 bg-white/95 dark:bg-neutral-900/95 backdrop-blur-xl shadow-2xl border border-black/10 dark:border-white/10 rounded-3xl flex flex-col p-6 gap-2 animate-fade-1 z-50 origin-top">
             <Link
               to="/fleet"
               onClick={() => setIsMenuOpen(false)}
-              className="text-lg text-black dark:text-white font-medium py-2 border-b border-gray-50 dark:border-white/5"
+              className="text-xl text-black dark:text-white font-medium py-2 border-b border-black/5 dark:border-white/5"
             >
               Fleet
             </Link>
             <Link
               to="/destinations"
               onClick={() => setIsMenuOpen(false)}
-              className="text-lg text-black dark:text-white font-medium py-2 border-b border-gray-50 dark:border-white/5"
+              className="text-xl text-black dark:text-white font-medium py-2 border-b border-black/5 dark:border-white/5"
             >
               Destinations
             </Link>
             <Link
               to="/services"
               onClick={() => setIsMenuOpen(false)}
-              className="text-lg text-black dark:text-white font-medium py-2 border-b border-gray-50 dark:border-white/5"
+              className="text-xl text-black dark:text-white font-medium py-2 border-b border-black/5 dark:border-white/5"
             >
               Services
             </Link>
             <Link
               to="/empty-legs"
               onClick={() => setIsMenuOpen(false)}
-              className="text-lg text-black dark:text-white font-medium py-2 border-b border-gray-50 dark:border-white/5"
+              className="text-xl text-black dark:text-white font-medium py-2 border-b border-black/5 dark:border-white/5"
             >
               Empty Legs
             </Link>
             <Link
               to="/members"
               onClick={() => setIsMenuOpen(false)}
-              className="text-lg text-black dark:text-white font-medium py-2 border-b border-gray-50 dark:border-white/5"
+              className="text-xl text-black dark:text-white font-medium py-2 border-b border-black/5 dark:border-white/5"
             >
               Members
             </Link>
             <Link
               to="/about"
               onClick={() => setIsMenuOpen(false)}
-              className="text-lg text-black dark:text-white font-medium py-2 border-b border-gray-50 dark:border-white/5"
+              className="text-xl text-black dark:text-white font-medium py-2 border-b border-black/5 dark:border-white/5"
             >
               About
             </Link>
             <Link
               to="/planner"
               onClick={() => setIsMenuOpen(false)}
-              className="text-lg text-black dark:text-white font-medium py-2 border-b border-gray-50 dark:border-white/5"
+              className="text-xl text-black dark:text-white font-medium py-2 border-b border-black/5 dark:border-white/5"
             >
               Trip Planner
             </Link>
             <Link
               to="/history"
               onClick={() => setIsMenuOpen(false)}
-              className="text-lg text-black dark:text-white font-medium py-2 mb-4"
+              className="text-xl text-black dark:text-white font-medium py-2 mb-4"
             >
               History
             </Link>
@@ -214,7 +265,7 @@ function Navbar() {
                 setIsMenuOpen(false);
                 setIsBookingModalOpen(true);
               }}
-              className="w-full bg-black dark:bg-white text-white dark:text-black text-lg font-medium px-7 py-3 rounded-full hover:bg-brand transition-colors duration-200 mb-2"
+              className="w-full bg-black dark:bg-white text-white dark:text-black text-lg font-medium px-7 py-3 rounded-full hover:bg-brand transition-colors duration-200 mb-2 mt-2"
             >
               Book a Flight
             </button>

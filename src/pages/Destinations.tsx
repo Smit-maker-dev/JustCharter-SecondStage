@@ -153,6 +153,8 @@ export default function Destinations() {
             center={[20, 0]}
             zoom={2}
             scrollWheelZoom={false}
+            dragging={false}
+            touchZoom={false}
             className="w-full h-full outline-none"
           >
             <TileLayer
