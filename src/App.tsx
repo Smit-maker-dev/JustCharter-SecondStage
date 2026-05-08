@@ -5,6 +5,7 @@ import {
   Link,
   useLocation,
 } from "react-router-dom";
+import { Helmet } from "react-helmet-async";
 import {
   ArrowRight,
   Plane,
@@ -21,24 +22,25 @@ import {
   Moon,
   ChevronDown,
 } from "lucide-react";
-import { useEffect, useState } from "react";
-import ServicesPage from "./pages/Services";
-import DestinationsPage from "./pages/Destinations";
-import MembersPage from "./pages/Members";
-import AboutPage from "./pages/About";
-import EmptyLegsPage from "./pages/EmptyLegs";
-import FleetPage from "./pages/Fleet";
-import AircraftDetailsPage from "./pages/AircraftDetails";
-import ContactPage from "./pages/Contact";
-import SafetyFirstPage from "./pages/SafetyFirst";
-import CareersPage from "./pages/Careers";
-import CorporateAccountsPage from "./pages/CorporateAccounts";
-import LoginPage from "./pages/Login";
-import PrivacyPolicyPage from "./pages/PrivacyPolicy";
-import TermsPage from "./pages/Terms";
-import CookiePolicyPage from "./pages/CookiePolicy";
-import HistoryPage from "./pages/History";
-import TripPlannerPage from "./pages/TripPlanner";
+import { Suspense, lazy, useEffect, useState } from "react";
+const ServicesPage = lazy(() => import("./pages/Services"));
+const DestinationsPage = lazy(() => import("./pages/Destinations"));
+const MembersPage = lazy(() => import("./pages/Members"));
+const AboutPage = lazy(() => import("./pages/About"));
+const EmptyLegsPage = lazy(() => import("./pages/EmptyLegs"));
+const FleetPage = lazy(() => import("./pages/Fleet"));
+const AircraftDetailsPage = lazy(() => import("./pages/AircraftDetails"));
+const ContactPage = lazy(() => import("./pages/Contact"));
+const SafetyFirstPage = lazy(() => import("./pages/SafetyFirst"));
+const CareersPage = lazy(() => import("./pages/Careers"));
+const CorporateAccountsPage = lazy(() => import("./pages/CorporateAccounts"));
+const LoginPage = lazy(() => import("./pages/Login"));
+const PrivacyPolicyPage = lazy(() => import("./pages/PrivacyPolicy"));
+const TermsPage = lazy(() => import("./pages/Terms"));
+const CookiePolicyPage = lazy(() => import("./pages/CookiePolicy"));
+const HistoryPage = lazy(() => import("./pages/History"));
+const TripPlannerPage = lazy(() => import("./pages/TripPlanner"));
+
 
 const LogoIcon = ({ className }: { className?: string }) => (
   <svg
@@ -1116,9 +1118,11 @@ function DestinationsSection() {
 
 function Footer() {
   const [isDark, setIsDark] = useState(() => {
-    const saved = localStorage.getItem("theme-preference");
-    if (saved !== null) {
-      return saved === "dark";
+    if (typeof localStorage !== "undefined") {
+      const saved = localStorage.getItem("theme-preference");
+      if (saved !== null) {
+        return saved === "dark";
+      }
     }
     const hour = new Date().getHours();
     return hour >= 18 || hour < 6;
@@ -1134,7 +1138,7 @@ function Footer() {
 
   useEffect(() => {
     const interval = setInterval(() => {
-      if (localStorage.getItem("theme-preference") === null) {
+      if (typeof localStorage !== "undefined" && localStorage.getItem("theme-preference") === null) {
         const hour = new Date().getHours();
         setIsDark(hour >= 18 || hour < 6);
       }
@@ -1145,7 +1149,9 @@ function Footer() {
   const toggleTheme = () => {
     const newTheme = !isDark;
     setIsDark(newTheme);
-    localStorage.setItem("theme-preference", newTheme ? "dark" : "light");
+    if (typeof localStorage !== "undefined") {
+      localStorage.setItem("theme-preference", newTheme ? "dark" : "light");
+    }
   };
 
   return (
@@ -1475,6 +1481,10 @@ function MobileAppSection() {
 function HomePage() {
   return (
     <>
+      <Helmet>
+        <title>JustCharter - Private Aviation & Luxury Travel</title>
+        <meta name="description" content="JustCharter is your personal gateway to private aviation and luxury travel. Skip the commercial lines and fly on your own terms." />
+      </Helmet>
       <div className="h-screen flex flex-col overflow-hidden relative">
         <HeroSection />
       </div>
@@ -1533,37 +1543,39 @@ export default function App() {
   const [showSplash, setShowSplash] = useState(true);
 
   return (
-    <BrowserRouter>
+    <>
       {showSplash && <SplashScreen onComplete={() => setShowSplash(false)} />}
       <ScrollToTop />
       <div className={`flex flex-col bg-[#F5F5F5] dark:bg-neutral-900 min-h-screen relative transition-colors duration-300 ${showSplash ? 'h-screen overflow-hidden' : ''}`}>
         <Navbar />
-        <Routes>
-          <Route path="/" element={<HomePage />} />
-          <Route path="/services" element={<ServicesPage />} />
-          <Route path="/destinations" element={<DestinationsPage />} />
-          <Route path="/members" element={<MembersPage />} />
-          <Route path="/about" element={<AboutPage />} />
-          <Route path="/planner" element={<TripPlannerPage />} />
-          <Route path="/empty-legs" element={<EmptyLegsPage />} />
-          <Route path="/fleet" element={<FleetPage />} />
-          <Route path="/fleet/:id" element={<AircraftDetailsPage />} />
-          <Route path="/contact" element={<ContactPage />} />
-          <Route path="/safety-first" element={<SafetyFirstPage />} />
-          <Route path="/careers" element={<CareersPage />} />
-          <Route
-            path="/corporate-accounts"
-            element={<CorporateAccountsPage />}
-          />
-          <Route path="/login" element={<LoginPage />} />
-          <Route path="/privacy-policy" element={<PrivacyPolicyPage />} />
-          <Route path="/terms" element={<TermsPage />} />
-          <Route path="/cookie-policy" element={<CookiePolicyPage />} />
-          <Route path="/history" element={<HistoryPage />} />
-        </Routes>
+        <Suspense fallback={<div className="min-h-screen flex items-center justify-center"><div className="w-8 h-8 border-4 border-black/20 dark:border-white/20 border-t-black dark:border-t-white rounded-full animate-spin"></div></div>}>
+          <Routes>
+            <Route path="/" element={<HomePage />} />
+            <Route path="/services" element={<ServicesPage />} />
+            <Route path="/destinations" element={<DestinationsPage />} />
+            <Route path="/members" element={<MembersPage />} />
+            <Route path="/about" element={<AboutPage />} />
+            <Route path="/planner" element={<TripPlannerPage />} />
+            <Route path="/empty-legs" element={<EmptyLegsPage />} />
+            <Route path="/fleet" element={<FleetPage />} />
+            <Route path="/fleet/:id" element={<AircraftDetailsPage />} />
+            <Route path="/contact" element={<ContactPage />} />
+            <Route path="/safety-first" element={<SafetyFirstPage />} />
+            <Route path="/careers" element={<CareersPage />} />
+            <Route
+              path="/corporate-accounts"
+              element={<CorporateAccountsPage />}
+            />
+            <Route path="/login" element={<LoginPage />} />
+            <Route path="/privacy-policy" element={<PrivacyPolicyPage />} />
+            <Route path="/terms" element={<TermsPage />} />
+            <Route path="/cookie-policy" element={<CookiePolicyPage />} />
+            <Route path="/history" element={<HistoryPage />} />
+          </Routes>
+        </Suspense>
         <Footer />
         <ScrollToTopButton />
       </div>
-    </BrowserRouter>
+    </>
   );
 }
