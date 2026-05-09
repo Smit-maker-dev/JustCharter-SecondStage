@@ -1,3 +1,4 @@
+import { Helmet } from 'react-helmet-async';
 import { ArrowRight, ShieldCheck, EyeOff, Diamond, Globe } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
@@ -26,7 +27,8 @@ export default function About() {
   ];
 
   return (
-    <div className="bg-[#F5F5F5] dark:bg-neutral-900 min-h-screen pt-20 md:pt-24 pb-16 md:pb-24">
+<div className="bg-[#F5F5F5] dark:bg-neutral-900 min-h-screen pt-20 md:pt-24 pb-16 md:pb-24">
+<Helmet><title>About JustCharter | Our Story, Fleet & Mission</title><meta name="description" content="About JustCharter | Our Story, Fleet & Mission" /><script type="application/ld+json">{`{ "@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{ "@type": "ListItem", "position": 1, "name": "Home", "item": "https://just-charter-second-stage.vercel.app/" }, { "@type": "ListItem", "position": 2, "name": "About", "item": "https://just-charter-second-stage.vercel.app/about" }]}`}</script></Helmet>
       {/* Hero Section */}
       <div className="max-w-[88rem] mx-auto px-4 sm:px-6 mt-8 md:mt-16 mb-12 md:mb-24">
         <h4 className="text-black/50 dark:text-white/50 text-sm mb-4 font-medium tracking-wide uppercase">
@@ -45,7 +47,7 @@ export default function About() {
         <div className="relative rounded-3xl overflow-hidden aspect-[21/9]">
           <img 
             src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5f/Gulfstream_G650ER%2C_EBACE_2018%2C_Le_Grand-Saconnex_%28BL7C0749%29.jpg/1280px-Gulfstream_G650ER%2C_EBACE_2018%2C_Le_Grand-Saconnex_%28BL7C0749%29.jpg" 
-            alt="Private Jet Flying" 
+            alt="Gulfstream G650ER — up to 19 seats, 7,500 nm range" 
             className="absolute inset-0 w-full h-full object-cover"
             referrerPolicy="no-referrer"
           />
@@ -113,19 +115,19 @@ export default function About() {
               quote: "JustCharter fundamentally changed how our executive team travels. Their attention to detail and ability to source exactly what we need on short notice is unmatched.",
               name: "Sarah Jenkins",
               role: "CEO, TechNova Solutions",
-              image: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&q=80&w=200&h=200"
+              image: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=1200&q=75&fm=webp&auto=format"
             },
             {
               quote: "As someone whose schedule changes by the hour, I need an aviation partner that is as flexible as I am. JustCharter consistently delivers flawless execution.",
               name: "Marcus Thorne",
               role: "Managing Partner, Thorne Capital",
-              image: "https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&q=80&w=200&h=200"
+              image: "https://images.unsplash.com/photo-1560250097-0b93528c311a?w=1200&q=75&fm=webp&auto=format"
             },
             {
               quote: "We used JustCharter for a complex multi-leg European roadshow. The logistics were handled with absolute precision, and the crew was phenomenally professional.",
               name: "Elena Rodriguez",
               role: "Director of Investor Relations",
-              image: "https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&q=80&w=200&h=200"
+              image: "https://images.unsplash.com/photo-1580489944761-15a19d654956?w=1200&q=75&fm=webp&auto=format"
             }
           ].map((testimonial, idx) => (
             <div key={idx} className="bg-white dark:bg-neutral-950 rounded-3xl p-8 md:p-10 border border-black/5 dark:border-white/5 shadow-sm hover:shadow-md transition-shadow duration-300 flex flex-col justify-between">
@@ -135,7 +137,7 @@ export default function About() {
               <div className="flex items-center gap-4">
                 <img 
                   src={testimonial.image} 
-                  alt={testimonial.name} 
+                  alt={`${testimonial.name}, ${testimonial.role} at JustCharter`} 
                   className="w-12 h-12 rounded-full object-cover"
                   referrerPolicy="no-referrer"
                 />

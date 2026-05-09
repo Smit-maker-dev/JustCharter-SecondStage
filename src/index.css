@@ -6,6 +6,35 @@
 @theme {
   --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
   --color-brand: #DFA93C;
+  --color-brand-dark: #9D721A;
+}
+
+@layer base {
+  .text-brand {
+    color: var(--color-brand-dark);
+  }
+  
+  .dark .text-brand {
+    color: var(--color-brand);
+  }
+
+  button:focus-visible, 
+  a:focus-visible, 
+  input:focus-visible, 
+  textarea:focus-visible, 
+  select:focus-visible {
+    outline: 2px solid var(--color-brand-dark);
+    outline-offset: 2px;
+  }
+  
+  .dark button:focus-visible, 
+  .dark a:focus-visible, 
+  .dark input:focus-visible, 
+  .dark textarea:focus-visible, 
+  .dark select:focus-visible {
+    outline: 2px solid var(--color-brand);
+    outline-offset: 2px;
+  }
 }
 
 html, body {
@@ -62,4 +91,12 @@ html.dark body {
 
 .animate-fade-2 {
   animation: crossFadeIn 24s infinite ease-in-out;
+}
+
+@keyframes fadeIn { 
+  from { opacity: 0; transform: translateY(12px); } 
+  to { opacity: 1; transform: translateY(0); } 
+}
+.animate-fadeIn { 
+  animation: fadeIn 0.4s ease-out forwards; 
 }

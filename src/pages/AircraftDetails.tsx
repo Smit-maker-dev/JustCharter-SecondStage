@@ -1,6 +1,7 @@
+import { Helmet } from 'react-helmet-async';
 import { useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
-import { ArrowRight, ArrowLeft, Users, Gauge, MapPin, Briefcase, Wifi, Utensils, BedDouble, Tv, CheckCircle2, X } from 'lucide-react';
+import { ArrowRight, ArrowLeft, Users, Gauge, MapPin, Briefcase, Wifi, Utensils, BedDouble, Tv, CheckCircle2, X, ChevronRight } from 'lucide-react';
 
 import BookingModal from '../components/BookingModal';
 
@@ -48,13 +49,30 @@ export default function AircraftDetails() {
   };
 
   return (
-    <div className="bg-[#F5F5F5] dark:bg-neutral-900 min-h-screen pt-20 md:pt-24 pb-16 md:pb-24">
-      {/* Navigation */}
-      <div className="max-w-[88rem] mx-auto px-4 sm:px-6 mb-6 mt-6 md:mb-8 md:mt-8">
+<div className="bg-[#F5F5F5] dark:bg-neutral-900 min-h-screen pt-20 md:pt-24 pb-16 md:pb-24">
+<Helmet><title>Aircraft Details | JustCharter</title><meta name="description" content="Aircraft Details | JustCharter" /><script type="application/ld+json">{`{ "@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{ "@type": "ListItem", "position": 1, "name": "Home", "item": "https://just-charter-second-stage.vercel.app/" }, { "@type": "ListItem", "position": 2, "name": "AircraftDetails", "item": "https://just-charter-second-stage.vercel.app/aircraftdetails" }]}`}</script></Helmet>
+      {/* Navigation & Breadcrumbs */}
+      <div className="max-w-[88rem] mx-auto px-4 sm:px-6 mb-6 mt-6 md:mb-8 md:mt-8 flex flex-wrap items-center justify-between gap-4">
         <Link to="/fleet" className="inline-flex items-center gap-2 text-black/60 dark:text-white/60 hover:text-black dark:text-white transition-colors font-medium text-sm tracking-wide uppercase">
           <ArrowLeft className="w-4 h-4" />
           Back to Fleet
         </Link>
+        
+        <nav aria-label="Breadcrumb" className="text-sm font-medium">
+          <ol className="flex items-center space-x-2 text-black/40 dark:text-white/40">
+            <li>
+              <Link to="/" className="hover:text-black dark:hover:text-white transition-colors">Home</Link>
+            </li>
+            <li className="flex items-center space-x-2">
+              <ChevronRight className="w-4 h-4" />
+              <Link to="/fleet" className="hover:text-black dark:hover:text-white transition-colors">Fleet</Link>
+            </li>
+            <li className="flex items-center space-x-2 text-black/60 dark:text-white/60">
+              <ChevronRight className="w-4 h-4" />
+              <span aria-current="page">{aircraft.name}</span>
+            </li>
+          </ol>
+        </nav>
       </div>
 
       {/* Hero Section */}
@@ -71,19 +89,19 @@ export default function AircraftDetails() {
               {aircraft.tagline}
             </p>
             <div className="flex gap-4">
-               <button 
-                 onClick={() => setIsBookingModalOpen(true)}
+               <Link 
+                 to={`/contact?aircraft=${encodeURIComponent(aircraft.name)}`}
                  className="bg-black dark:bg-white text-white dark:text-black px-8 py-3.5 rounded-full text-lg font-medium hover:bg-gray-800 dark:hover:bg-neutral-200 transition-colors"
                >
                  Request Quote
-               </button>
+               </Link>
             </div>
           </div>
           <div className="relative rounded-3xl overflow-hidden aspect-[4/3] w-full">
             <img 
               referrerPolicy="no-referrer"
               src={aircraft.heroImage} 
-              alt={aircraft.name} 
+              alt={`${aircraft.name} — ${aircraft.specs.passengers} seats, ${aircraft.specs.range} range`} 
               className="absolute inset-0 w-full h-full object-cover" 
             />
           </div>
@@ -201,7 +219,7 @@ export default function AircraftDetails() {
                <img 
                  referrerPolicy="no-referrer"
                  src={image} 
-                 alt={`Gallery item ${idx + 1}`} 
+                 alt={`Interior view ${idx + 1} of ${aircraft.name}`} 
                  className="absolute inset-0 w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700 ease-out" 
                />
                <div className="absolute inset-0 bg-black/10 dark:bg-white/10 group-hover:bg-transparent transition-colors duration-300" />
@@ -219,13 +237,13 @@ export default function AircraftDetails() {
           <p className="text-white/70 text-base md:text-lg max-w-xl mx-auto mb-8 md:mb-10">
             Contact our dedicated charter team to verify availability, receive a custom quote, and finalize your itinerary.
           </p>
-          <button 
-            onClick={() => setIsBookingModalOpen(true)}
+          <Link 
+            to={`/contact?aircraft=${encodeURIComponent(aircraft.name)}`}
             className="inline-flex items-center gap-3 bg-white dark:bg-neutral-950 text-black dark:text-white text-lg font-medium px-8 py-3.5 rounded-full hover:bg-gray-100 dark:hover:bg-neutral-800 transition-colors duration-200 cursor-pointer"
           >
             Inquire Now
             <ArrowRight className="w-5 h-5 text-black dark:text-white" />
-          </button>
+          </Link>
         </div>
       </div>
 
@@ -237,6 +255,7 @@ export default function AircraftDetails() {
         >
           <button 
             className="absolute top-6 right-6 text-white/70 hover:text-white transition-colors bg-black/20 hover:bg-black/40 rounded-full p-2"
+            aria-label="Close image zoom"
             onClick={(e) => {
               e.stopPropagation();
               setSelectedImage(null);

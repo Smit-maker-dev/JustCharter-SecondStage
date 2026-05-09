@@ -1,9 +1,11 @@
+import { Helmet } from 'react-helmet-async';
 import { Lock } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 export default function Login() {
   return (
-    <div className="bg-[#F5F5F5] dark:bg-neutral-900 min-h-screen pt-20 md:pt-24 pb-16 md:pb-24 flex items-center justify-center">
+<div className="bg-[#F5F5F5] dark:bg-neutral-900 min-h-screen pt-20 md:pt-24 pb-16 md:pb-24 flex items-center justify-center">
+<Helmet><title>Login | JustCharter Member Portal</title><meta name="description" content="Login | JustCharter Member Portal" /><script type="application/ld+json">{`{ "@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{ "@type": "ListItem", "position": 1, "name": "Home", "item": "https://just-charter-second-stage.vercel.app/" }, { "@type": "ListItem", "position": 2, "name": "Login", "item": "https://just-charter-second-stage.vercel.app/login" }]}`}</script></Helmet>
       <div className="max-w-md w-full mx-4 bg-white dark:bg-neutral-950 p-10 rounded-3xl border border-black/5 dark:border-white/5 shadow-xl">
         <div className="w-12 h-12 bg-black dark:bg-white text-white dark:text-black rounded-2xl flex items-center justify-center mb-8 mx-auto">
           <Lock className="w-6 h-6" />

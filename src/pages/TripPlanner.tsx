@@ -1,6 +1,11 @@
+import { Helmet } from 'react-helmet-async';
 import React, { useState, useRef, useEffect } from 'react';
-import { Plane, Calendar, Users, MapPin, Search, CheckCircle2, Navigation, ChevronDown, ChevronUp, Info, Coffee, ChevronLeft, ChevronRight } from 'lucide-react';
+import { GoogleGenAI } from "@google/genai";
+import ReactMarkdown from 'react-markdown';
+import { Plane, Calendar, Users, MapPin, Search, CheckCircle2, Navigation, ChevronDown, ChevronUp, Info, Coffee, ChevronLeft, ChevronRight, Sparkles, Wand2, Share2, Bookmark } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { Suspense } from 'react';
+import { ClientOnly } from '../components/ClientOnly';
 import { MapContainer, TileLayer, Polyline, Marker, Popup, useMap } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 import L from 'leaflet';
@@ -24,7 +29,7 @@ const MOCK_OPTIONS = [
     duration: '2h 45m',
     price: '$18,500',
     seats: 9,
-    image: 'https://images.unsplash.com/photo-1540962351504-03099e0a754b?auto=format&fit=crop&q=80',
+    image: 'https://images.unsplash.com/photo-1540962351504-03099e0a754b?w=1200&q=75&fm=webp&auto=format',
     features: ['Wi-Fi', 'Refreshments', 'Enclosed Lavatory'],
     specifications: {
       speed: '446 knots',
@@ -41,7 +46,7 @@ const MOCK_OPTIONS = [
     duration: '2h 30m',
     price: '$24,000',
     seats: 10,
-    image: 'https://images.unsplash.com/photo-1583072233615-5858cf818af0?auto=format&fit=crop&q=80',
+    image: 'https://images.unsplash.com/photo-1583072233615-5858cf818af0?w=1200&q=75&fm=webp&auto=format',
     features: ['High-Speed Wi-Fi', 'Hot Catering', 'Flight Attendant'],
     specifications: {
       speed: '450 knots',
@@ -58,7 +63,7 @@ const MOCK_OPTIONS = [
     duration: '3h 10m',
     price: '$14,200',
     seats: 7,
-    image: 'https://images.unsplash.com/photo-1599839619722-39751411ea63?auto=format&fit=crop&q=80',
+    image: 'https://images.unsplash.com/photo-1599839619722-39751411ea63?w=1200&q=75&fm=webp&auto=format',
     features: ['Refreshments', 'Enclosed Lavatory'],
     specifications: {
       speed: '453 knots',
@@ -74,7 +79,8 @@ const TripOptionCard: React.FC<{ option: typeof MOCK_OPTIONS[0] }> = ({ option }
   const [isExpanded, setIsExpanded] = useState(false);
 
   return (
-    <div className="bg-white dark:bg-neutral-900 border border-black/5 dark:border-white/5 rounded-3xl overflow-hidden hover:shadow-xl transition-shadow duration-300 flex flex-col">
+<div className="bg-white dark:bg-neutral-900 border border-black/5 dark:border-white/5 rounded-3xl overflow-hidden hover:shadow-xl transition-shadow duration-300 flex flex-col">
+<Helmet><title>AI Trip Planner | Plan Your Private Jet Trip | JustCharter</title><meta name="description" content="AI Trip Planner | Plan Your Private Jet Trip | JustCharter" /><script type="application/ld+json">{`{ "@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{ "@type": "ListItem", "position": 1, "name": "Home", "item": "https://just-charter-second-stage.vercel.app/" }, { "@type": "ListItem", "position": 2, "name": "TripPlanner", "item": "https://just-charter-second-stage.vercel.app/tripplanner" }]}`}</script></Helmet>
       <div className="flex flex-col sm:flex-row">
         <div className="w-full sm:w-2/5 md:w-1/3 aspect-[4/3] sm:aspect-auto">
           <img 
@@ -208,34 +214,38 @@ const FlightRouteMap = ({ departure, arrival, departureCoords, arrivalCoords }: 
 
   return (
     <div className="w-full h-[250px] sm:h-[300px] bg-neutral-100 dark:bg-neutral-800 border border-black/5 dark:border-white/5 rounded-3xl overflow-hidden shadow-sm relative mb-8 z-0">
-      <MapContainer 
-        scrollWheelZoom={false}
-        dragging={false}
-        touchZoom={false}
-        className="w-full h-full outline-none"
-        zoomControl={false}
-      >
-        <TileLayer
-          url="https://{s}.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}{r}.png"
-          attribution='&copy; <a href="https://carto.com/">CARTO</a>'
-        />
-        <CenterMap bounds={bounds} />
-        
-        <Polyline 
-          positions={[start, end]} 
-          color="black" 
-          weight={3} 
-          dashArray="6 6" 
-          opacity={0.5} 
-        />
-        
-        <Marker position={start} icon={icon}>
-          <Popup>{departure || 'New York'}</Popup>
-        </Marker>
-        <Marker position={end} icon={icon}>
-          <Popup>{arrival || 'London'}</Popup>
-        </Marker>
-      </MapContainer>
+      <ClientOnly fallback={<div className="h-64 bg-gray-100 animate-pulse rounded-lg" />}>
+        <Suspense>
+          <MapContainer 
+            scrollWheelZoom={false}
+            dragging={false}
+            touchZoom={false}
+            className="w-full h-full outline-none"
+            zoomControl={false}
+          >
+            <TileLayer
+              url="https://{s}.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}{r}.png"
+              attribution='&copy; <a href="https://carto.com/">CARTO</a>'
+            />
+            <CenterMap bounds={bounds} />
+            
+            <Polyline 
+              positions={[start, end]} 
+              color="black" 
+              weight={3} 
+              dashArray="6 6" 
+              opacity={0.5} 
+            />
+            
+            <Marker position={start} icon={icon}>
+              <Popup>{departure || 'New York'}</Popup>
+            </Marker>
+            <Marker position={end} icon={icon}>
+              <Popup>{arrival || 'London'}</Popup>
+            </Marker>
+          </MapContainer>
+        </Suspense>
+      </ClientOnly>
       <div className="absolute top-4 left-4 right-4 sm:right-auto bg-white/90 dark:bg-black/80 backdrop-blur px-5 py-3 rounded-2xl border border-black/10 dark:border-white/10 shadow-sm flex flex-col gap-1 z-[400]">
         <span className="text-[10px] font-bold tracking-widest uppercase text-black/50 dark:text-white/50">Flight Path Highlights</span>
         <span className="font-medium text-sm flex items-center gap-2">
@@ -257,7 +267,7 @@ const getDistance = (lat1: number, lon1: number, lat2: number, lon2: number) => 
   return 12742 * Math.asin(Math.sqrt(a));
 };
 
-const AirportAutocomplete = ({ name, placeholder, onSelect, error, onChange }: { name: string, placeholder: string, onSelect: (airport: Airport | null) => void, error?: string, onChange?: () => void }) => {
+const AirportAutocomplete = ({ name, id, placeholder, onSelect, error, onChange }: { name: string, id?: string, placeholder: string, onSelect: (airport: Airport | null) => void, error?: string, onChange?: () => void }) => {
   const [query, setQuery] = useState('');
   const [open, setOpen] = useState(false);
   const [isSearchingNearby, setIsSearchingNearby] = useState(false);
@@ -318,6 +328,7 @@ const AirportAutocomplete = ({ name, placeholder, onSelect, error, onChange }: {
     <div className="relative" ref={containerRef}>
       <MapPin className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-black/40 dark:text-white/40" />
       <input
+        id={id}
         name={name}
         type="text"
         placeholder={placeholder}
@@ -391,7 +402,7 @@ const AirportAutocomplete = ({ name, placeholder, onSelect, error, onChange }: {
   );
 };
 
-const CustomDatePicker = ({ date, setDate, placeholder = "Select date", error }: { date: Date | null, setDate: (d: Date) => void, placeholder?: string, error?: string }) => {
+const CustomDatePicker = ({ id, date, setDate, placeholder = "Select date", error }: { id?: string, date: Date | null, setDate: (d: Date) => void, placeholder?: string, error?: string }) => {
   const [open, setOpen] = useState(false);
   const [currentMonth, setCurrentMonth] = useState(startOfMonth(date || startOfToday()));
   const containerRef = useRef<HTMLDivElement>(null);
@@ -433,6 +444,7 @@ const CustomDatePicker = ({ date, setDate, placeholder = "Select date", error }:
     <div className="relative" ref={containerRef}>
       <Calendar className={`absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 ${error ? 'text-red-500/50' : 'text-black/40 dark:text-white/40'} pointer-events-none`} />
       <div 
+        id={id}
         onClick={() => setOpen(!open)}
         className={`w-full bg-gray-50 dark:bg-black/50 border ${error ? 'border-red-500/50 ring-red-500/20' : 'border-black/10 dark:border-white/10 focus:ring-black/5 dark:focus:ring-white/5'} rounded-2xl px-12 py-3.5 sm:py-4 focus:outline-none focus:ring-2 transition-all cursor-pointer select-none flex items-center ${error ? 'text-red-900 dark:text-red-100' : 'text-black dark:text-white'}`}
       >
@@ -444,11 +456,11 @@ const CustomDatePicker = ({ date, setDate, placeholder = "Select date", error }:
       {open && (
         <div className="absolute z-50 top-full left-0 mt-2 bg-white dark:bg-neutral-900 border border-black/10 dark:border-white/10 rounded-3xl shadow-xl p-4 w-full sm:w-[320px]">
           <div className="flex justify-between items-center mb-4 px-2">
-            <button type="button" onClick={prevMonth} className={`p-1.5 rounded-full transition-colors ${!isBefore(startOfMonth(subMonths(currentMonth, 1)), startOfMonth(startOfToday())) ? 'hover:bg-gray-100 dark:hover:bg-neutral-800' : 'opacity-30 cursor-not-allowed'}`}>
+            <button aria-label="Previous month" type="button" onClick={prevMonth} className={`p-1.5 rounded-full transition-colors ${!isBefore(startOfMonth(subMonths(currentMonth, 1)), startOfMonth(startOfToday())) ? 'hover:bg-gray-100 dark:hover:bg-neutral-800' : 'opacity-30 cursor-not-allowed'}`}>
               <ChevronLeft className="w-5 h-5" />
             </button>
             <div className="font-medium">{format(currentMonth, 'MMMM yyyy')}</div>
-            <button type="button" onClick={nextMonth} className="p-1.5 rounded-full hover:bg-gray-100 dark:hover:bg-neutral-800 transition-colors">
+            <button aria-label="Next month" type="button" onClick={nextMonth} className="p-1.5 rounded-full hover:bg-gray-100 dark:hover:bg-neutral-800 transition-colors">
               <ChevronRight className="w-5 h-5" />
             </button>
           </div>
@@ -491,7 +503,7 @@ const CustomDatePicker = ({ date, setDate, placeholder = "Select date", error }:
   );
 };
 
-const CustomDropdown = ({ options, value, onChange, icon: Icon, placeholder }: { options: {label: string, value: string}[], value: string, onChange: (val: string) => void, icon?: any, placeholder?: string }) => {
+const CustomDropdown = ({ id, options, value, onChange, icon: Icon, placeholder }: { id?: string, options: {label: string, value: string}[], value: string, onChange: (val: string) => void, icon?: any, placeholder?: string }) => {
   const [open, setOpen] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
 
@@ -511,6 +523,7 @@ const CustomDropdown = ({ options, value, onChange, icon: Icon, placeholder }: {
     <div className="relative" ref={containerRef}>
       {Icon && <Icon className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-black/40 dark:text-white/40 pointer-events-none" />}
       <div 
+        id={id}
         onClick={() => setOpen(!open)}
         className="w-full bg-gray-50 dark:bg-black/50 border border-black/10 dark:border-white/10 rounded-2xl px-12 py-3.5 sm:py-4 focus:outline-none focus:ring-2 focus:ring-black/5 dark:focus:ring-white/5 transition-all text-black dark:text-white cursor-pointer select-none flex items-center"
       >
@@ -543,12 +556,8 @@ export default function TripPlanner() {
   const [mounted, setMounted] = useState(false);
   const [isSearching, setIsSearching] = useState(false);
   const [hasSearched, setHasSearched] = useState(false);
-
-  useEffect(() => {
-    setMounted(true);
-  }, []);
-
-  if (!mounted) return null;
+  const [aiText, setAiText] = useState('');
+  const [aiError, setAiError] = useState('');
   const [departure, setDeparture] = useState('');
   const [arrival, setArrival] = useState('');
   const [departureCoords, setDepartureCoords] = useState<[number, number]>([-74.006, 40.7128]);
@@ -561,27 +570,36 @@ export default function TripPlanner() {
   const [aircraftClass, setAircraftClass] = useState<string>("any");
   const [formErrors, setFormErrors] = useState<{departure?: string; arrival?: string; date?: string}>({});
 
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  if (!mounted) return null;
+
   const handleSearch = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
     const dep = formData.get('departure') as string;
     const arr = formData.get('arrival') as string;
+    const aiPrompt = formData.get('aiPrompt') as string;
 
     const newErrors: {departure?: string; arrival?: string; date?: string} = {};
-    if (!dep || dep.trim() === '') newErrors.departure = "Departure location is required";
-    if (!arr || arr.trim() === '') newErrors.arrival = "Arrival location is required";
-    if (!flightDate) newErrors.date = "Please select a departure date";
+    if (!aiPrompt?.trim()) {
+      if (!dep || dep.trim() === '') newErrors.departure = "Departure location is required";
+      if (!arr || arr.trim() === '') newErrors.arrival = "Arrival location is required";
+      if (!flightDate) newErrors.date = "Please select a departure date";
 
-    if (Object.keys(newErrors).length > 0) {
-      setFormErrors(newErrors);
-      return;
+      if (Object.keys(newErrors).length > 0) {
+        setFormErrors(newErrors);
+        return;
+      }
     }
 
     setFormErrors({});
     setIsSearching(true);
 
-    setDeparture(dep);
-    setArrival(arr);
+    if (dep) setDeparture(dep);
+    if (arr) setArrival(arr);
 
     const fetchCoords = async (place: string): Promise<[number, number] | null> => {
       // Find exactly in AIRPORTS first, checking by city/code combination string 
@@ -600,17 +618,46 @@ export default function TripPlanner() {
       return null;
     };
 
-    const [c1, c2] = await Promise.all([
-      selectedDepAirport ? Promise.resolve([selectedDepAirport.lon, selectedDepAirport.lat] as [number, number]) : fetchCoords(dep), 
-      selectedArrAirport ? Promise.resolve([selectedArrAirport.lon, selectedArrAirport.lat] as [number, number]) : fetchCoords(arr)
-    ]);
-    if (c1) setDepartureCoords(c1);
-    if (c2) setArrivalCoords(c2);
+    if (dep && arr) {
+      const [c1, c2] = await Promise.all([
+        selectedDepAirport ? Promise.resolve([selectedDepAirport.lon, selectedDepAirport.lat] as [number, number]) : fetchCoords(dep), 
+        selectedArrAirport ? Promise.resolve([selectedArrAirport.lon, selectedArrAirport.lat] as [number, number]) : fetchCoords(arr)
+      ]);
+      if (c1) setDepartureCoords(c1);
+      if (c2) setArrivalCoords(c2);
+    }
 
-    setTimeout(() => {
+    setAiText('');
+    setAiError('');
+    setHasSearched(true);
+    
+    try {
+      const prompt = aiPrompt?.trim() ? aiPrompt : `Act as an expert private aviation charter broker. Provide top aircraft options for a flight from ${dep} to ${arr} on ${flightDate ? format(flightDate, 'MMM do, yyyy') : 'an upcoming date'} for ${passengers} passengers, preferring ${aircraftClass} class aircraft. 
+
+Format your response using Markdown:
+- Use ## for headers
+- Use bold **text** for key details (aircraft names, speeds, ranges)
+- Use bullet points for features
+- Include a section for "Estimated Flight Time" and "Approximate Cost"
+- Keep descriptions professional yet engaging.`;
+      
+      const ai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY });
+      const response = await ai.models.generateContentStream({
+        model: 'gemini-3-flash-preview',
+        contents: prompt,
+      });
+
+      let text = '';
+      for await (const chunk of response) {
+        text += chunk.text;
+        setAiText(text);
+      }
+    } catch (err) {
+      console.error(err);
+      setAiError('Failed to fetch AI recommendations. Please try again.');
+    } finally {
       setIsSearching(false);
-      setHasSearched(true);
-    }, 500);
+    }
   };
 
   return (
@@ -636,9 +683,45 @@ export default function TripPlanner() {
               
               <form onSubmit={handleSearch} className="space-y-4 sm:space-y-5">
                 <div className="space-y-1.5 pb-2">
-                  <label className="text-sm font-medium text-black/70 dark:text-white/70 ml-1">Departure</label>
+                  <label htmlFor="aiPrompt" className="text-sm font-medium text-black/70 dark:text-white/70 ml-1">Describe your trip</label>
+                  <textarea 
+                    id="aiPrompt"
+                    name="aiPrompt"
+                    rows={3}
+                    placeholder="E.g., Plan a weekend in Monaco next month for 4 people..."
+                    className="w-full bg-gray-50 dark:bg-black/50 border border-black/10 dark:border-white/10 focus:ring-black/5 dark:focus:ring-white/5 rounded-2xl px-5 py-4 focus:outline-none focus:ring-2 transition-all text-black dark:text-white"
+                  />
+                  <div className="flex flex-wrap gap-2 mt-2 ml-1">
+                    {["Plan a weekend in Monaco", "Business trip London to Dubai", "European city hopping"].map((chip, idx) => (
+                      <button 
+                        key={idx}
+                        type="button"
+                        onClick={(e) => {
+                          const form = e.currentTarget.closest('form');
+                          if (form) {
+                            const textarea = form.querySelector('textarea[name="aiPrompt"]') as HTMLTextAreaElement;
+                            if (textarea) textarea.value = chip;
+                          }
+                        }}
+                        className="text-xs bg-black/5 dark:bg-white/5 hover:bg-black/10 dark:hover:bg-white/10 rounded-full px-3 py-1.5 transition-colors text-black/70 dark:text-white/70"
+                      >
+                        {chip}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+
+                <div className="flex items-center gap-4 my-2">
+                  <div className="flex-1 h-px bg-black/5 dark:bg-white/5" />
+                  <span className="text-xs font-medium text-black/40 dark:text-white/40 uppercase tracking-widest">OR USE FORM</span>
+                  <div className="flex-1 h-px bg-black/5 dark:bg-white/5" />
+                </div>
+
+                <div className="space-y-1.5 pb-2">
+                  <label htmlFor="departure" className="text-sm font-medium text-black/70 dark:text-white/70 ml-1">Departure</label>
                   <AirportAutocomplete 
                     name="departure" 
+                    id="departure"
                     placeholder="City or Airport Code" 
                     onSelect={setSelectedDepAirport}
                     error={formErrors.departure}
@@ -647,9 +730,10 @@ export default function TripPlanner() {
                 </div>
 
                 <div className="space-y-1.5 pb-2">
-                  <label className="text-sm font-medium text-black/70 dark:text-white/70 ml-1">Arrival</label>
+                  <label htmlFor="arrival" className="text-sm font-medium text-black/70 dark:text-white/70 ml-1">Arrival</label>
                   <AirportAutocomplete 
                     name="arrival" 
+                    id="arrival"
                     placeholder="City or Airport Code" 
                     onSelect={setSelectedArrAirport}
                     error={formErrors.arrival}
@@ -659,8 +743,9 @@ export default function TripPlanner() {
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pb-2">
                   <div className="space-y-1.5">
-                    <label className="text-sm font-medium text-black/70 dark:text-white/70 ml-1">Date</label>
+                    <label htmlFor="flightDate" className="text-sm font-medium text-black/70 dark:text-white/70 ml-1">Date</label>
                     <CustomDatePicker 
+                      id="flightDate"
                       date={flightDate} 
                       setDate={(d) => { setFlightDate(d); setFormErrors(prev => ({...prev, date: undefined})); }} 
                       placeholder="Departure Date" 
@@ -669,8 +754,9 @@ export default function TripPlanner() {
                   </div>
                   
                   <div className="space-y-1.5">
-                    <label className="text-sm font-medium text-black/70 dark:text-white/70 ml-1">Passengers</label>
+                    <label htmlFor="passengers" className="text-sm font-medium text-black/70 dark:text-white/70 ml-1">Passengers</label>
                     <CustomDropdown
+                      id="passengers"
                       icon={Users}
                       value={passengers}
                       onChange={setPassengers}
@@ -689,8 +775,9 @@ export default function TripPlanner() {
                 </div>
 
                 <div className="space-y-1.5">
-                  <label className="text-sm font-medium text-black/70 dark:text-white/70 ml-1">Aircraft Class</label>
+                  <label htmlFor="aircraftClass" className="text-sm font-medium text-black/70 dark:text-white/70 ml-1">Aircraft Class</label>
                   <CustomDropdown
+                    id="aircraftClass"
                     icon={Plane}
                     value={aircraftClass}
                     onChange={setAircraftClass}
@@ -735,9 +822,87 @@ export default function TripPlanner() {
             ) : (
               <div className="space-y-6">
                 <FlightRouteMap departure={departure} arrival={arrival} departureCoords={departureCoords} arrivalCoords={arrivalCoords} />
+                
+                {/* AI Recommendations */}
+                {(aiText || isSearching || aiError) && (
+                  <div className="bg-white dark:bg-neutral-900 border border-black/5 dark:border-white/5 rounded-3xl p-6 sm:p-8 shadow-sm relative overflow-hidden group">
+                    <div className="absolute top-0 right-0 p-8 pointer-events-none opacity-[0.03] dark:opacity-[0.05]">
+                      <Sparkles className="w-32 h-32" />
+                    </div>
+                    
+                    <div className="flex items-center gap-3 mb-6">
+                      <div className="p-2.5 bg-black/5 dark:bg-white/10 rounded-xl">
+                        <Wand2 className="w-6 h-6 text-black dark:text-white" />
+                      </div>
+                      <div>
+                        <h3 className="text-2xl font-medium">AI Broker Recommendations</h3>
+                        <p className="text-sm text-black/50 dark:text-white/50">Personalized aircraft & route analysis</p>
+                      </div>
+                    </div>
+                    
+                    {aiError ? (
+                      <div className="bg-red-50 dark:bg-red-900/10 text-red-800 dark:text-red-400 p-4 rounded-xl text-sm mb-4">
+                        {aiError}
+                      </div>
+                    ) : null}
+
+                    {aiText ? (
+                      <div className="markdown-body">
+                        <div className="prose dark:prose-invert max-w-none text-black/80 dark:text-white/80">
+                          <ReactMarkdown>{aiText}</ReactMarkdown>
+                          {isSearching && <span className="inline-block w-2 h-4 ml-1 bg-black/40 dark:bg-white/40 animate-pulse" />}
+                        </div>
+                        
+                        {!isSearching && (
+                          <div className="mt-10 pt-8 border-t border-black/10 dark:border-white/10 flex flex-wrap gap-4 items-center">
+                            <button className="flex items-center gap-2 px-5 py-2.5 rounded-full border border-black/20 dark:border-white/20 hover:bg-black/5 dark:hover:bg-white/5 font-medium transition-colors text-sm">
+                              <Bookmark className="w-4 h-4" />
+                              Save Itinerary
+                            </button>
+                            <button className="flex items-center gap-2 px-5 py-2.5 rounded-full border border-black/20 dark:border-white/20 hover:bg-black/5 dark:hover:bg-white/5 font-medium transition-colors text-sm">
+                              <Share2 className="w-4 h-4" />
+                              Share
+                            </button>
+                            <Link 
+                              to={`/contact?trip=${encodeURIComponent(aiText.substring(0, 100))}`}
+                              className="px-8 py-2.5 rounded-full bg-black text-white dark:bg-white dark:text-black font-medium hover:bg-black/80 dark:hover:bg-white/80 transition-colors text-sm ml-auto"
+                            >
+                              Finalize Booking
+                            </Link>
+                          </div>
+                        )}
+                      </div>
+                    ) : isSearching && !aiText && !aiError ? (
+                      <div className="space-y-4">
+                        <div className="flex items-center gap-3 text-black/60 dark:text-white/60 py-4">
+                          <div className="w-5 h-5 border-2 border-current rounded-full border-t-transparent animate-spin" />
+                          <span>Generating personalized recommendations...</span>
+                        </div>
+                        <div className="space-y-2">
+                          <div className="h-4 bg-black/5 dark:bg-white/5 rounded-full w-full animate-pulse" />
+                          <div className="h-4 bg-black/5 dark:bg-white/5 rounded-full w-[90%] animate-pulse" />
+                          <div className="h-4 bg-black/5 dark:bg-white/5 rounded-full w-[95%] animate-pulse" />
+                        </div>
+                      </div>
+                    ) : null}
+
+                    {aiError && (
+                      <button 
+                        onClick={() => {
+                          const form = document.querySelector('form');
+                          if (form) form.requestSubmit();
+                        }}
+                        className="px-6 py-2.5 bg-black text-white dark:bg-white dark:text-black rounded-full text-sm font-medium hover:bg-black/80 dark:hover:bg-white/80 transition-colors mt-4"
+                      >
+                        Try Again
+                      </button>
+                    )}
+                  </div>
+                )}
+                
                 <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-8">
                   <div>
-                    <h3 className="text-2xl font-medium">Recommended Options</h3>
+                    <h3 className="text-2xl font-medium">Standard Fleet Options</h3>
                     <p className="text-black/50 dark:text-white/50">Found {MOCK_OPTIONS.length} aircraft matching your criteria</p>
                   </div>
                   <div className="px-4 py-2 bg-black/5 dark:bg-white/10 rounded-full text-sm font-medium">

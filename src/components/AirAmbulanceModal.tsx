@@ -70,6 +70,7 @@ export default function AirAmbulanceModal({
           </div>
           <button
             onClick={onClose}
+            aria-label="Close emergency modal"
             className="p-2 text-black/50 dark:text-white/50 hover:text-black dark:text-white hover:bg-black/5 dark:hover:bg-white/10 rounded-full transition-colors self-start"
           >
             <X className="w-6 h-6" />
@@ -86,11 +87,12 @@ export default function AirAmbulanceModal({
               </h3>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                 <div className="md:col-span-2">
-                  <label className="block text-xs font-semibold text-black/60 dark:text-white/60 mb-1.5 ml-1">
+                  <label htmlFor="patientName" className="block text-xs font-semibold text-black/60 dark:text-white/60 mb-1.5 ml-1">
                     Patient Full Name
                   </label>
                   <input
                     type="text"
+                    id="patientName"
                     name="patientName"
                     required
                     value={formData.patientName}
@@ -100,11 +102,12 @@ export default function AirAmbulanceModal({
                   />
                 </div>
                 <div>
-                  <label className="block text-xs font-semibold text-black/60 dark:text-white/60 mb-1.5 ml-1">
+                  <label htmlFor="patientAge" className="block text-xs font-semibold text-black/60 dark:text-white/60 mb-1.5 ml-1">
                     Age
                   </label>
                   <input
                     type="number"
+                    id="patientAge"
                     name="patientAge"
                     required
                     min="0"
@@ -115,10 +118,11 @@ export default function AirAmbulanceModal({
                   />
                 </div>
                 <div className="md:col-span-3">
-                  <label className="block text-xs font-semibold text-black/60 dark:text-white/60 mb-1.5 ml-1">
+                  <label htmlFor="medicalCondition" className="block text-xs font-semibold text-black/60 dark:text-white/60 mb-1.5 ml-1">
                     Primary Medical Condition / Diagnosis
                   </label>
                   <textarea
+                    id="medicalCondition"
                     name="medicalCondition"
                     required
                     rows={2}
@@ -139,11 +143,12 @@ export default function AirAmbulanceModal({
               </h3>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-xs font-semibold text-black/60 dark:text-white/60 mb-1.5 ml-1">
+                  <label htmlFor="currentLocation" className="block text-xs font-semibold text-black/60 dark:text-white/60 mb-1.5 ml-1">
                     Current Location (Hospital/City)
                   </label>
                   <input
                     type="text"
+                    id="currentLocation"
                     name="currentLocation"
                     required
                     value={formData.currentLocation}
@@ -153,11 +158,12 @@ export default function AirAmbulanceModal({
                   />
                 </div>
                 <div>
-                  <label className="block text-xs font-semibold text-black/60 dark:text-white/60 mb-1.5 ml-1">
+                  <label htmlFor="destinationLocation" className="block text-xs font-semibold text-black/60 dark:text-white/60 mb-1.5 ml-1">
                     Destination Facility & City
                   </label>
                   <input
                     type="text"
+                    id="destinationLocation"
                     name="destinationLocation"
                     required
                     value={formData.destinationLocation}
@@ -167,7 +173,7 @@ export default function AirAmbulanceModal({
                   />
                 </div>
                 <div className="md:col-span-2">
-                  <label className="block text-xs font-semibold text-black/60 dark:text-white/60 mb-1.5 ml-1">
+                  <label htmlFor="urgency" className="block text-xs font-semibold text-black/60 dark:text-white/60 mb-1.5 ml-1">
                     Urgency of Transfer
                   </label>
                   <div className="relative">
@@ -175,6 +181,7 @@ export default function AirAmbulanceModal({
                       <Clock className="w-4 h-4 text-black/40 dark:text-white/40" />
                     </div>
                     <select
+                      id="urgency"
                       name="urgency"
                       value={formData.urgency}
                       onChange={handleChange}
@@ -202,11 +209,12 @@ export default function AirAmbulanceModal({
               </h3>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-xs font-semibold text-black/60 dark:text-white/60 mb-1.5 ml-1">
+                  <label htmlFor="requestorName" className="block text-xs font-semibold text-black/60 dark:text-white/60 mb-1.5 ml-1">
                     Your Full Name
                   </label>
                   <input
                     type="text"
+                    id="requestorName"
                     name="requestorName"
                     required
                     value={formData.requestorName}
@@ -216,11 +224,12 @@ export default function AirAmbulanceModal({
                   />
                 </div>
                 <div>
-                  <label className="block text-xs font-semibold text-black/60 dark:text-white/60 mb-1.5 ml-1">
+                  <label htmlFor="relation" className="block text-xs font-semibold text-black/60 dark:text-white/60 mb-1.5 ml-1">
                     Relation to Patient
                   </label>
                   <input
                     type="text"
+                    id="relation"
                     name="relation"
                     required
                     value={formData.relation}
@@ -230,7 +239,7 @@ export default function AirAmbulanceModal({
                   />
                 </div>
                 <div>
-                  <label className="block text-xs font-semibold text-black/60 dark:text-white/60 mb-1.5 ml-1">
+                  <label htmlFor="patientPhone" className="block text-xs font-semibold text-black/60 dark:text-white/60 mb-1.5 ml-1">
                     Phone Number
                   </label>
                   <div className="relative">
@@ -239,6 +248,7 @@ export default function AirAmbulanceModal({
                     </div>
                     <input
                       type="tel"
+                      id="patientPhone"
                       name="phone"
                       required
                       value={formData.phone}
@@ -249,7 +259,7 @@ export default function AirAmbulanceModal({
                   </div>
                 </div>
                 <div>
-                  <label className="block text-xs font-semibold text-black/60 dark:text-white/60 mb-1.5 ml-1">
+                  <label htmlFor="patientEmail" className="block text-xs font-semibold text-black/60 dark:text-white/60 mb-1.5 ml-1">
                     Email Address
                   </label>
                   <div className="relative">
@@ -258,6 +268,7 @@ export default function AirAmbulanceModal({
                     </div>
                     <input
                       type="email"
+                      id="patientEmail"
                       name="email"
                       required
                       value={formData.email}

@@ -1,3 +1,4 @@
+import { Helmet } from 'react-helmet-async';
 import { ArrowRight, Check, Shield, Star, Crown, ChevronRight } from 'lucide-react';
 import { motion } from 'motion/react';
 
@@ -56,11 +57,12 @@ export default function Members() {
   ];
 
   return (
-    <motion.div 
+<motion.div 
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       className="bg-white dark:bg-neutral-950 min-h-screen pt-24 md:pt-32 pb-24 md:pb-32"
     >
+<Helmet><title>JustCharter Members Club | Exclusive Benefits</title><meta name="description" content="JustCharter Members Club | Exclusive Benefits" /><script type="application/ld+json">{`{ "@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{ "@type": "ListItem", "position": 1, "name": "Home", "item": "https://just-charter-second-stage.vercel.app/" }, { "@type": "ListItem", "position": 2, "name": "Members", "item": "https://just-charter-second-stage.vercel.app/members" }]}`}</script></Helmet>
       <div className="max-w-[88rem] mx-auto px-4 sm:px-6 mb-16 md:mb-24 text-center">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -155,7 +157,7 @@ export default function Members() {
           </div>
           <div className="order-1 md:order-2 relative rounded-[3rem] overflow-hidden aspect-square md:aspect-[4/5] shadow-2xl group">
             <img 
-              src="https://images.unsplash.com/photo-1540962351504-03099e0a754b?auto=format&fit=crop&q=80&w=1200" 
+              src="https://images.unsplash.com/photo-1540962351504-03099e0a754b?w=1200&q=75&fm=webp&auto=format" 
               alt="Luxury Interior" 
               className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000 ease-out"
               referrerPolicy="no-referrer"

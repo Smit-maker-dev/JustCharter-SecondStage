@@ -1,3 +1,4 @@
+import { Helmet } from 'react-helmet-async';
 import {
   ArrowRight,
   Users,
@@ -157,7 +158,7 @@ export default function Fleet() {
         {
           name: "Sikorsky S-76",
           image:
-            "https://images.unsplash.com/photo-1549524570-5b565a049963?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
+            "https://images.unsplash.com/photo-1549524570-5b565a049963?w=1200&q=75&fm=webp&auto=format",
           passengers: "6-8",
           speed: "155 knots",
           range: "400 nm",
@@ -167,7 +168,7 @@ export default function Fleet() {
         {
           name: "Airbus H145",
           image:
-            "https://images.unsplash.com/photo-1627953258757-ad6d2ee178db?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
+            "https://images.unsplash.com/photo-1627953258757-ad6d2ee178db?w=1200&q=75&fm=webp&auto=format",
           passengers: "8",
           speed: "135 knots",
           range: "350 nm",
@@ -185,7 +186,7 @@ export default function Fleet() {
         {
           name: "Sunseeker 95",
           image:
-            "https://images.unsplash.com/photo-1567899378494-47b22a2ae96a?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
+            "https://images.unsplash.com/photo-1567899378494-47b22a2ae96a?w=1200&q=75&fm=webp&auto=format",
           passengers: "10-12",
           speed: "26 knots",
           range: "1,250 nm",
@@ -195,7 +196,7 @@ export default function Fleet() {
         {
           name: "Benetti Oasis 40M",
           image:
-            "https://images.unsplash.com/photo-1605281317010-fe5ffe798166?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
+            "https://images.unsplash.com/photo-1605281317010-fe5ffe798166?w=1200&q=75&fm=webp&auto=format",
           passengers: "10",
           speed: "16 knots",
           range: "4,000 nm",
@@ -207,7 +208,8 @@ export default function Fleet() {
   ];
 
   return (
-    <div className="bg-[#F5F5F5] dark:bg-neutral-900 min-h-screen pt-20 md:pt-24 pb-16 md:pb-24">
+<div className="bg-[#F5F5F5] dark:bg-neutral-900 min-h-screen pt-20 md:pt-24 pb-16 md:pb-24">
+<Helmet><title>Our Private Jet Fleet | Turboprops to Heavy Jets | JustCharter</title><meta name="description" content="Our Private Jet Fleet | Turboprops to Heavy Jets | JustCharter" /><script type="application/ld+json">{`{ "@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{ "@type": "ListItem", "position": 1, "name": "Home", "item": "https://just-charter-second-stage.vercel.app/" }, { "@type": "ListItem", "position": 2, "name": "Fleet", "item": "https://just-charter-second-stage.vercel.app/fleet" }]}`}</script></Helmet>
       {/* Hero Section */}
       <div className="max-w-[88rem] mx-auto px-4 sm:px-6 mt-8 md:mt-16 mb-12 md:mb-20">
         <h4 className="text-black/50 dark:text-white/50 text-sm mb-4 font-medium tracking-wide uppercase">
@@ -324,7 +326,7 @@ export default function Fleet() {
                         <div className="relative aspect-[16/10] overflow-hidden">
                           <img
                             src={jet.image}
-                            alt={jet.name}
+                            alt={`${jet.name} — ${jet.passengers} seats, ${jet.range} range`}
                             loading="lazy"
                             referrerPolicy="no-referrer"
                             className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700 ease-out"
@@ -336,12 +338,16 @@ export default function Fleet() {
 
                           {/* Compare Button */}
                           <div className="absolute top-4 right-4 z-20">
-                            <button
-                              onClick={() => toggleCompare(jet)}
-                              className={`px-4 py-2 rounded-full text-xs font-semibold backdrop-blur-md transition-all duration-300 border focus:outline-none flex items-center gap-1.5 ${isSelected ? "bg-black/90 text-white border-black/90 dark:bg-white/90 dark:text-black dark:border-white/90" : "bg-black/30 text-white border-white/20 hover:bg-black/50"}`}
-                            >
-                              {isSelected ? "Added to Compare" : "+ Compare"}
-                            </button>
+                            <label htmlFor={`compare-${jet.name.replace(/\s+/g, '-')}`} className={`flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-semibold backdrop-blur-md transition-all duration-300 border cursor-pointer ${isSelected ? "bg-black/90 text-white border-black/90 dark:bg-white/90 dark:text-black dark:border-white/90" : "bg-black/30 text-white border-white/20 hover:bg-black/50"}`}>
+                              <input 
+                                type="checkbox"
+                                id={`compare-${jet.name.replace(/\s+/g, '-')}`}
+                                checked={isSelected}
+                                onChange={() => toggleCompare(jet)}
+                                className="w-4 h-4 rounded-sm border-gray-300 text-black dark:text-white focus:ring-black dark:focus:ring-white bg-transparent"
+                              />
+                              {isSelected ? "Comparing" : "Compare"}
+                            </label>
                           </div>
 
                           <div className="absolute bottom-6 left-6 text-white text-2xl font-medium tracking-tight">
@@ -466,6 +472,7 @@ export default function Fleet() {
           <div className="relative bg-white dark:bg-neutral-950 w-full xl:max-w-[80rem] rounded-3xl shadow-2xl p-6 sm:p-8 lg:p-12 overflow-hidden flex flex-col max-h-full">
             <button
               onClick={() => setShowComparisonDialog(false)}
+              aria-label="Close comparison dialog"
               className="absolute top-6 right-6 p-2 rounded-full hover:bg-gray-100 dark:hover:bg-neutral-800 transition-colors z-10 text-black dark:text-white bg-white dark:bg-neutral-900 shadow-md"
             >
               <X className="w-6 h-6" />
@@ -491,7 +498,7 @@ export default function Fleet() {
                       <div className="relative aspect-video rounded-2xl overflow-hidden mb-2">
                         <img
                           src={jet.image}
-                          alt={jet.name}
+                          alt={`${jet.name} — ${jet.passengers} seats, ${jet.range} range`}
                           loading="lazy"
                           referrerPolicy="no-referrer"
                           className="w-full h-full object-cover"
@@ -598,14 +605,14 @@ export default function Fleet() {
                 <div className="flex flex-col gap-5">
                   <div>
                     <label
-                      htmlFor="email"
+                      htmlFor="notifyEmail"
                       className="block text-sm font-medium text-black/80 dark:text-white/80 mb-2"
                     >
                       Email Address
                     </label>
                     <input
                       type="email"
-                      id="email"
+                      id="notifyEmail"
                       required
                       value={notifyEmail}
                       onChange={(e) => setNotifyEmail(e.target.value)}
@@ -713,6 +720,7 @@ export default function Fleet() {
         >
           <button
             className="absolute top-6 right-6 p-2 rounded-full bg-white/10 hover:bg-white/20 text-white transition-colors cursor-pointer"
+            aria-label="Close image zoom"
             onClick={(e) => {
               e.stopPropagation();
               setZoomedImage(null);

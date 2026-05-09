@@ -1,10 +1,15 @@
 global.window = global;
-global.window.addEventListener = () => {};
-global.window.removeEventListener = () => {};
-global.window.matchMedia = () => ({ matches: false, addListener: () => {}, removeListener: () => {} });
-global.document = { createElement: () => ({}), getElementById: () => null };
-global.localStorage = { getItem: () => null, setItem: () => {} };
-global.matchMedia = () => ({ matches: false });
+global.document = { createElement: () => ({}), getElementById: () => null, querySelector: () => null };
+
+Object.defineProperty(global, 'navigator', {
+  value: { userAgent: 'node', platform: 'node' },
+  writable: true,
+  configurable: true
+});
+
+global.localStorage = { getItem: () => null, setItem: () => {}, removeItem: () => {} };
+global.matchMedia = () => ({ matches: false, addEventListener: () => {}, removeEventListener: () => {} });
+global.requestAnimationFrame = (cb) => setTimeout(cb, 16);
 
 import fs from 'node:fs';
 import path from 'node:path';
@@ -41,7 +46,7 @@ const routesToPrerender = [
 (async () => {
   for (const url of routesToPrerender) {
     try {
-      const { html: appHtml } = await render(url);
+      const { html: appHtml, helmet } = await render(url);
 
       // React 19 might hoist tags to the start of the SSR output.
       // We look for any <title>, <meta>, or <link> at the very beginning of the string.
@@ -49,8 +54,14 @@ const routesToPrerender = [
       const hoistedTags = hoistedMatch ? hoistedMatch[0] : '';
       const cleanAppHtml = hoistedMatch ? appHtml.slice(hoistedTags.length) : appHtml;
 
+      const helmetTags = helmet ? `
+        ${helmet.title.toString()}
+        ${helmet.meta.toString()}
+        ${helmet.link.toString()}
+      ` : '';
+
       let html = template.replace(`<!--app-html-->`, cleanAppHtml);
-      html = html.replace(`</head>`, `${hoistedTags}\n</head>`);
+      html = html.replace(`</head>`, `${hoistedTags}\n${helmetTags}\n</head>`);
 
       const filePath = `dist${url === '/' ? '/index' : url}.html`;
       fs.writeFileSync(toAbsolute(filePath), html);

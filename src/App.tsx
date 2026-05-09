@@ -21,7 +21,8 @@ import {
   Moon,
   ChevronDown,
 } from "lucide-react";
-import { Suspense, lazy, useEffect, useState } from "react";
+import { Helmet } from 'react-helmet-async';
+import { Suspense, lazy, useEffect, useState, useRef } from "react";
 const ServicesPage = lazy(() => import("./pages/Services"));
 const DestinationsPage = lazy(() => import("./pages/Destinations"));
 const MembersPage = lazy(() => import("./pages/Members"));
@@ -39,6 +40,7 @@ const TermsPage = lazy(() => import("./pages/Terms"));
 const CookiePolicyPage = lazy(() => import("./pages/CookiePolicy"));
 const HistoryPage = lazy(() => import("./pages/History"));
 const TripPlannerPage = lazy(() => import("./pages/TripPlanner"));
+const NotFoundPage = lazy(() => import("./pages/NotFound"));
 
 
 const LogoIcon = ({ className }: { className?: string }) => (
@@ -66,23 +68,83 @@ import SplashScreen from "./components/SplashScreen";
 
 function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isDiscoverOpen, setIsDiscoverOpen] = useState(false);
   const [isBookingModalOpen, setIsBookingModalOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
+  const mobileMenuRef = useRef<HTMLDivElement>(null);
+  const discoverRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 20);
     };
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        setIsMenuOpen(false);
+        setIsDiscoverOpen(false);
+      }
+    };
+    const handleClickOutside = (event: MouseEvent) => {
+      if (mobileMenuRef.current && !mobileMenuRef.current.contains(event.target as Node)) {
+        setIsMenuOpen(false);
+      }
+      if (discoverRef.current && !discoverRef.current.contains(event.target as Node)) {
+        setIsDiscoverOpen(false);
+      }
+    };
     window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
+    window.addEventListener("keydown", handleKeyDown);
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener("keydown", handleKeyDown);
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
   }, []);
+
+  // Focus trapping for mobile menu
+  useEffect(() => {
+    if (isMenuOpen && mobileMenuRef.current) {
+      const focusableElements = mobileMenuRef.current.querySelectorAll(
+        'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+      );
+      const firstElement = focusableElements[0] as HTMLElement;
+      const lastElement = focusableElements[focusableElements.length - 1] as HTMLElement;
+
+      const handleTabKey = (e: KeyboardEvent) => {
+        if (e.key === 'Tab') {
+          if (e.shiftKey) {
+            if (document.activeElement === firstElement) {
+              e.preventDefault();
+              lastElement.focus();
+            }
+          } else {
+            if (document.activeElement === lastElement) {
+              e.preventDefault();
+              firstElement.focus();
+            }
+          }
+        }
+      };
+
+      document.addEventListener('keydown', handleTabKey);
+      return () => document.removeEventListener('keydown', handleTabKey);
+    }
+  }, [isMenuOpen]);
 
   const isMinimal = scrolled && !isHovered && !isMenuOpen;
 
   return (
     <>
+      <a 
+        href="#main-content" 
+        className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 bg-black dark:bg-white text-white dark:text-black px-6 py-3 z-[60] rounded-full font-medium shadow-2xl transition-all"
+      >
+        Skip to main content
+      </a>
       <nav 
+        aria-label="Main navigation"
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
         className={`fixed left-0 right-0 z-50 flex justify-center transition-all duration-[600ms] ease-[cubic-bezier(0.16,1,0.3,1)] ${
@@ -139,21 +201,27 @@ function Navbar() {
               >
                 Trip Planner
               </Link>
-              <div className="group relative">
-                <button className="flex items-center gap-1 text-base text-gray-700 dark:text-gray-300 hover:text-black dark:text-white font-medium transition-colors duration-200 pb-2 -mb-2">
-                  Discover <ChevronDown className="w-4 h-4 transition-transform group-hover:rotate-180" />
+              <div className="relative" ref={discoverRef}>
+                <button 
+                  aria-expanded={isDiscoverOpen}
+                  aria-haspopup="true"
+                  aria-label="Discover more links"
+                  onClick={() => setIsDiscoverOpen(!isDiscoverOpen)}
+                  className="flex items-center gap-1 text-base text-gray-700 dark:text-gray-300 hover:text-black dark:text-white font-medium transition-colors duration-200"
+                >
+                  Discover <ChevronDown className={`w-4 h-4 transition-transform ${isDiscoverOpen ? "rotate-180" : ""}`} />
                 </button>
-                <div className="absolute top-full left-1/2 -translate-x-1/2 mt-3 w-48 bg-white dark:bg-neutral-900 border border-black/5 dark:border-white/10 rounded-2xl shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 overflow-hidden flex flex-col py-2 z-50">
-                  <Link to="/empty-legs" className="block px-4 py-2.5 text-sm text-gray-700 dark:text-gray-300 hover:bg-black/5 dark:hover:bg-white/10 hover:text-black dark:text-white transition-colors">
+                <div className={`absolute top-full left-1/2 -translate-x-1/2 mt-3 w-48 bg-white dark:bg-neutral-900 border border-black/5 dark:border-white/10 rounded-2xl shadow-xl transition-all duration-200 overflow-hidden flex flex-col py-2 z-50 ${isDiscoverOpen ? "opacity-100 visible h-auto" : "opacity-0 invisible h-0"}`}>
+                  <Link to="/empty-legs" onClick={() => setIsDiscoverOpen(false)} className="block px-4 py-2.5 text-sm text-gray-700 dark:text-gray-300 hover:bg-black/5 dark:hover:bg-white/10 hover:text-black dark:text-white transition-colors">
                     Empty Legs
                   </Link>
-                  <Link to="/members" className="block px-4 py-2.5 text-sm text-gray-700 dark:text-gray-300 hover:bg-black/5 dark:hover:bg-white/10 hover:text-black dark:text-white transition-colors">
+                  <Link to="/members" onClick={() => setIsDiscoverOpen(false)} className="block px-4 py-2.5 text-sm text-gray-700 dark:text-gray-300 hover:bg-black/5 dark:hover:bg-white/10 hover:text-black dark:text-white transition-colors">
                     Members
                   </Link>
-                  <Link to="/about" className="block px-4 py-2.5 text-sm text-gray-700 dark:text-gray-300 hover:bg-black/5 dark:hover:bg-white/10 hover:text-black dark:text-white transition-colors">
+                  <Link to="/about" onClick={() => setIsDiscoverOpen(false)} className="block px-4 py-2.5 text-sm text-gray-700 dark:text-gray-300 hover:bg-black/5 dark:hover:bg-white/10 hover:text-black dark:text-white transition-colors">
                     About Us
                   </Link>
-                  <Link to="/history" className="block px-4 py-2.5 text-sm text-gray-700 dark:text-gray-300 hover:bg-black/5 dark:hover:bg-white/10 hover:text-black dark:text-white transition-colors">
+                  <Link to="/history" onClick={() => setIsDiscoverOpen(false)} className="block px-4 py-2.5 text-sm text-gray-700 dark:text-gray-300 hover:bg-black/5 dark:hover:bg-white/10 hover:text-black dark:text-white transition-colors">
                     History
                   </Link>
                 </div>
@@ -166,8 +234,10 @@ function Navbar() {
               isMinimal ? "max-w-0 opacity-0 pointer-events-none mr-0" : "max-w-[400px] opacity-100 mr-4"
             }`}>
               <div className="flex items-center bg-black/5 dark:bg-white/10 rounded-full px-4 py-2 border border-black/10 dark:border-white/20 focus-within:bg-white dark:bg-neutral-950 focus-within:border-black/20 dark:border-white/20 focus-within:shadow-sm transition-all duration-200">
+                <label htmlFor="search-input" className="sr-only">Search site</label>
                 <Search className="w-4 h-4 text-black/50 dark:text-white/50 shrink-0" />
                 <input
+                  id="search-input"
                   type="text"
                   placeholder="Search..."
                   className="bg-transparent border-none focus:outline-none text-sm ml-2 w-24 xl:w-48 placeholder:text-black/40 dark:text-white/40 text-black dark:text-white"
@@ -188,10 +258,12 @@ function Navbar() {
             </button>
             
             <button
-              className={`lg:hidden block p-2 text-black dark:text-white hover:bg-black/5 dark:hover:bg-white/10 dark:bg-white/10 rounded-full transition-all duration-[600ms] ${
+              className={`lg:hidden block p-2 text-black dark:text-white hover:bg-black/5 dark:hover:bg-white/10 dark:bg-white/10 rounded-full transition-all duration-[600ms] focus-visible:outline-2 focus-visible:outline-black dark:focus-visible:outline-white ${
                 isMinimal ? "ml-1 sm:ml-2" : "ml-4"
               }`}
               onClick={() => setIsMenuOpen(!isMenuOpen)}
+              aria-expanded={isMenuOpen}
+              aria-label={isMenuOpen ? "Close menu" : "Open menu"}
             >
               {isMenuOpen ? (
                 <X className="w-6 h-6 shrink-0" />
@@ -204,7 +276,10 @@ function Navbar() {
 
         {/* Mobile Menu Dropdown */}
         {isMenuOpen && (
-          <div className="absolute top-full left-4 right-4 lg:hidden mt-2 bg-white/95 dark:bg-neutral-900/95 backdrop-blur-xl shadow-2xl border border-black/10 dark:border-white/10 rounded-3xl flex flex-col p-6 gap-2 animate-fade-1 z-50 origin-top">
+          <div 
+            ref={mobileMenuRef}
+            className="absolute top-full left-4 right-4 lg:hidden mt-2 bg-white/95 dark:bg-neutral-900/95 backdrop-blur-xl shadow-2xl border border-black/10 dark:border-white/10 rounded-3xl flex flex-col p-6 gap-2 animate-fade-1 z-50 origin-top"
+          >
             <Link
               to="/fleet"
               onClick={() => setIsMenuOpen(false)}
@@ -360,17 +435,17 @@ function HeroSection() {
         style={{ height: "calc(100vh - 96px)" }}
       >
         <div className="absolute inset-0 w-full h-full bg-black">
-          <img
+            <img
             referrerPolicy="no-referrer"
             className="object-cover absolute inset-0 w-full h-full animate-fade-1"
             src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/69/N975QS_2002_Cessna_750_C-N_750-0175_Citation_X_%287039507775%29.jpg/1280px-N975QS_2002_Cessna_750_C-N_750-0175_Citation_X_%287039507775%29.jpg"
-            alt="Private Jet Flying"
+            alt="Luxury private jet on runway at sunset"
           />
           <img
             referrerPolicy="no-referrer"
             className="object-cover absolute inset-0 w-full h-full animate-fade-2"
             src="https://upload.wikimedia.org/wikipedia/commons/4/4d/BBJ_interior_2011.jpg"
-            alt="Luxury Interior"
+            alt="Private jet cabin with luxury leather seating"
           />
         </div>
         <div className="relative z-10 flex flex-col items-start justify-start h-full p-6 sm:p-10 md:p-12 pt-28 sm:pt-36 bg-gradient-to-r from-white/90 sm:from-white/60 md:to-transparent backdrop-blur-[4px] sm:backdrop-blur-[2px]">
@@ -451,7 +526,7 @@ function InfoSection() {
           <div className="rounded-2xl sm:col-span-2 relative overflow-hidden">
             <img
               src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5f/Gulfstream_G650ER%2C_EBACE_2018%2C_Le_Grand-Saconnex_%28BL7C0749%29.jpg/1280px-Gulfstream_G650ER%2C_EBACE_2018%2C_Le_Grand-Saconnex_%28BL7C0749%29.jpg"
-              alt="Travel that inspires"
+              alt="Gulfstream G650ER private jet in flight above the clouds"
               className="absolute inset-0 w-full h-full object-cover"
               referrerPolicy="no-referrer"
             />
@@ -712,7 +787,7 @@ function UseCasesSection() {
               referrerPolicy="no-referrer"
               className="object-cover absolute inset-0 w-full h-full transform group-hover:scale-105 transition-transform duration-700 ease-out"
               src="https://upload.wikimedia.org/wikipedia/commons/4/4d/BBJ_interior_2011.jpg"
-              alt="Business Travel"
+              alt="Business executives meeting in a spacious private jet cabin"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent" />
             <div className="relative z-10 p-8 md:p-12 h-full flex flex-col justify-end items-start">
@@ -743,7 +818,7 @@ function UseCasesSection() {
                 referrerPolicy="no-referrer"
                 className="object-cover absolute inset-0 w-full h-full transform group-hover:scale-105 transition-transform duration-700 ease-out"
                 src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6d/Panoramic_view_of_Oia%2C_Santorini_island_%28Thira%29%2C_Greece.jpg/1280px-Panoramic_view_of_Oia%2C_Santorini_island_%28Thira%29%2C_Greece.jpg"
-                alt="Leisure Travel"
+                alt="Scenic view of Santorini, a popular luxury destination"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent" />
               <div className="relative z-10 p-8 h-full flex flex-col justify-end">
@@ -766,7 +841,7 @@ function UseCasesSection() {
                 referrerPolicy="no-referrer"
                 className="object-cover absolute inset-0 w-full h-full transform group-hover:scale-105 transition-transform duration-700 ease-out"
                 src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f5/Monte_Carlo_Port_Hercules_b.jpg/1280px-Monte_Carlo_Port_Hercules_b.jpg"
-                alt="Group Charters"
+                alt="Aerial view of Monte Carlo Harbor, a premier private aviation destination"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent" />
               <div className="relative z-10 p-8 h-full flex flex-col justify-end">
@@ -819,7 +894,7 @@ function FleetSection() {
       category: "Helicopters",
       name: "Sikorsky S-76",
       image:
-        "https://images.unsplash.com/photo-1549524570-5b565a049963?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
+        "https://images.unsplash.com/photo-1549524570-5b565a049963?w=1200&q=75&fm=webp&auto=format",
       pax: "up to 8 pax",
       range: "400 nm",
     },
@@ -827,7 +902,7 @@ function FleetSection() {
       category: "Luxury Yachts",
       name: "Benetti Oasis 40M",
       image:
-        "https://images.unsplash.com/photo-1605281317010-fe5ffe798166?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
+        "https://images.unsplash.com/photo-1605281317010-fe5ffe798166?w=1200&q=75&fm=webp&auto=format",
       pax: "up to 12 pax",
       range: "4,000 nm",
     },
@@ -1122,12 +1197,8 @@ function Footer() {
   useEffect(() => {
     setMounted(true);
     const saved = localStorage.getItem("theme-preference");
-    if (saved !== null) {
-      setIsDark(saved === "dark");
-    } else {
-      const hour = new Date().getHours();
-      setIsDark(hour >= 18 || hour < 6);
-    }
+    const prefersDark = typeof window !== 'undefined' && window.matchMedia ? window.matchMedia('(prefers-color-scheme: dark)').matches : false;
+    setIsDark(saved === "dark" || (!saved && prefersDark));
   }, []);
 
   useEffect(() => {
@@ -1421,7 +1492,7 @@ function MobileAppSection() {
             <div className="w-full h-full rounded-[2rem] sm:rounded-[2.5rem] overflow-hidden relative bg-black transform translate-z-0">
               <img
                 referrerPolicy="no-referrer"
-                src="https://images.unsplash.com/photo-1621252178229-23e595eef9eb?auto=format&fit=crop&q=80&w=800"
+                src="https://images.unsplash.com/photo-1621252178229-23e595eef9eb?w=1200&q=75&fm=webp&auto=format"
                 alt="Flight Booking Screen"
                 className="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity duration-500 scale-105"
               />
@@ -1467,7 +1538,7 @@ function MobileAppSection() {
             <div className="w-full h-full rounded-[2rem] overflow-hidden relative bg-black/50">
               <img
                 referrerPolicy="no-referrer"
-                src="https://images.unsplash.com/photo-1540962351504-03099e0a754b?auto=format&fit=crop&q=80&w=800"
+                src="https://images.unsplash.com/photo-1540962351504-03099e0a754b?w=1200&q=75&fm=webp&auto=format"
                 alt="Destinations Screen"
                 className="w-full h-full object-cover scale-110"
               />
@@ -1537,6 +1608,9 @@ function ScrollToTopButton() {
   );
 }
 
+import { ErrorBoundary } from "./components/ErrorBoundary";
+import { ProtectedRoute } from "./components/ProtectedRoute";
+
 export default function App() {
   const [mounted, setMounted] = useState(false);
   const [showSplash, setShowSplash] = useState(true);
@@ -1548,7 +1622,7 @@ export default function App() {
   if (!mounted) return null;
 
   return (
-    <>
+    <ErrorBoundary>
       {showSplash && <SplashScreen onComplete={() => setShowSplash(false)} />}
       <ScrollToTop />
       <div 
@@ -1556,34 +1630,65 @@ export default function App() {
         className={`flex flex-col bg-[#F5F5F5] dark:bg-neutral-900 min-h-screen relative transition-colors duration-300 ${showSplash ? 'h-screen overflow-hidden' : ''}`}
       >
         <Navbar />
-        <Suspense fallback={<div className="min-h-screen flex items-center justify-center"><div className="w-8 h-8 border-4 border-black/20 dark:border-white/20 border-t-black dark:border-t-white rounded-full animate-spin"></div></div>}>
-          <Routes>
-            <Route path="/" element={<HomePage />} />
-            <Route path="/services" element={<ServicesPage />} />
-            <Route path="/destinations" element={<DestinationsPage />} />
-            <Route path="/members" element={<MembersPage />} />
-            <Route path="/about" element={<AboutPage />} />
-            <Route path="/planner" element={<TripPlannerPage />} />
-            <Route path="/empty-legs" element={<EmptyLegsPage />} />
-            <Route path="/fleet" element={<FleetPage />} />
-            <Route path="/fleet/:id" element={<AircraftDetailsPage />} />
-            <Route path="/contact" element={<ContactPage />} />
-            <Route path="/safety-first" element={<SafetyFirstPage />} />
-            <Route path="/careers" element={<CareersPage />} />
-            <Route
-              path="/corporate-accounts"
-              element={<CorporateAccountsPage />}
-            />
-            <Route path="/login" element={<LoginPage />} />
-            <Route path="/privacy-policy" element={<PrivacyPolicyPage />} />
-            <Route path="/terms" element={<TermsPage />} />
-            <Route path="/cookie-policy" element={<CookiePolicyPage />} />
-            <Route path="/history" element={<HistoryPage />} />
-          </Routes>
-        </Suspense>
+        <main id="main-content" className="flex-1 flex flex-col">
+          <Suspense fallback={<div className="min-h-screen flex items-center justify-center"><div className="w-8 h-8 border-4 border-black/20 dark:border-white/20 border-t-black dark:border-t-white rounded-full animate-spin"></div></div>}>
+            <Routes>
+              <Route path="/" element={<HomePage />} />
+              <Route path="/services" element={<ServicesPage />} />
+              <Route path="/destinations" element={
+                <Suspense fallback={<div className="flex items-center justify-center h-96"><div className="animate-spin w-8 h-8 border-2 border-current rounded-full border-t-transparent" /></div>}>
+                  <DestinationsPage />
+                </Suspense>
+              } />
+              <Route path="/members" element={
+                <Suspense fallback={<div className="flex items-center justify-center h-96"><div className="animate-spin w-8 h-8 border-2 border-current rounded-full border-t-transparent" /></div>}>
+                  <ProtectedRoute>
+                    <MembersPage />
+                  </ProtectedRoute>
+                </Suspense>
+              } />
+              <Route path="/about" element={<AboutPage />} />
+              <Route path="/planner" element={
+                <ErrorBoundary>
+                  <Suspense fallback={<div className="flex items-center justify-center h-96"><div className="animate-spin w-8 h-8 border-2 border-current rounded-full border-t-transparent" /></div>}>
+                    <TripPlannerPage />
+                  </Suspense>
+                </ErrorBoundary>
+              } />
+              <Route path="/empty-legs" element={<EmptyLegsPage />} />
+              <Route path="/fleet" element={
+                <Suspense fallback={<div className="flex items-center justify-center h-96"><div className="animate-spin w-8 h-8 border-2 border-current rounded-full border-t-transparent" /></div>}>
+                  <FleetPage />
+                </Suspense>
+              } />
+              <Route path="/fleet/:id" element={
+                <Suspense fallback={<div className="flex items-center justify-center h-96"><div className="animate-spin w-8 h-8 border-2 border-current rounded-full border-t-transparent" /></div>}>
+                  <AircraftDetailsPage />
+                </Suspense>
+              } />
+              <Route path="/contact" element={<ContactPage />} />
+              <Route path="/safety-first" element={<SafetyFirstPage />} />
+              <Route path="/careers" element={<CareersPage />} />
+              <Route
+                path="/corporate-accounts"
+                element={<CorporateAccountsPage />}
+              />
+              <Route path="/login" element={<LoginPage />} />
+              <Route path="/privacy-policy" element={<PrivacyPolicyPage />} />
+              <Route path="/terms" element={<TermsPage />} />
+              <Route path="/cookie-policy" element={<CookiePolicyPage />} />
+              <Route path="/history" element={
+                <Suspense fallback={<div className="flex items-center justify-center h-96"><div className="animate-spin w-8 h-8 border-2 border-current rounded-full border-t-transparent" /></div>}>
+                  <HistoryPage />
+                </Suspense>
+              } />
+              <Route path="*" element={<NotFoundPage />} />
+            </Routes>
+          </Suspense>
+        </main>
         <Footer />
         <ScrollToTopButton />
       </div>
-    </>
+    </ErrorBoundary>
   );
 }

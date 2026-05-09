@@ -1,0 +1,5 @@
+User-agent: *
+Disallow: /login
+Disallow: /cookie-policy
+Allow: /
+Sitemap: https://just-charter-second-stage.vercel.app/sitemap.xml

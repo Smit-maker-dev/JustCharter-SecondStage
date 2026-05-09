@@ -1,6 +1,6 @@
 {
-  "name": "",
-  "description": "",
+  "name": "JustCharter",
+  "description": "Private jet charter booking platform with AI-powered trip planning",
   "requestFramePermissions": [],
-  "majorCapabilities": []
+  "majorCapabilities": ["gemini_api"]
 }

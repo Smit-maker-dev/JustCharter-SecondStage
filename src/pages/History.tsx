@@ -1,3 +1,4 @@
+import { Helmet } from 'react-helmet-async';
 import {
   Clock,
   Plane,
@@ -117,7 +118,8 @@ export default function History() {
   };
 
   return (
-    <div className="pt-24 md:pt-32 min-h-screen">
+<div className="pt-24 md:pt-32 min-h-screen">
+<Helmet><title>Our History | JustCharter Aviation Heritage</title><meta name="description" content="Our History | JustCharter Aviation Heritage" /><script type="application/ld+json">{`{ "@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{ "@type": "ListItem", "position": 1, "name": "Home", "item": "https://just-charter-second-stage.vercel.app/" }, { "@type": "ListItem", "position": 2, "name": "History", "item": "https://just-charter-second-stage.vercel.app/history" }]}`}</script></Helmet>
       <div className="max-w-[88rem] mx-auto px-4 sm:px-6 mb-12 md:mb-20">
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-8 gap-6">
           <div>

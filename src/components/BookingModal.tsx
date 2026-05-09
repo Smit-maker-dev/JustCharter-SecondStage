@@ -51,6 +51,7 @@ export default function BookingModal({ isOpen, onClose, aircraftName }: BookingM
           </div>
           <button 
             onClick={onClose}
+            aria-label="Close booking modal"
             className="p-2 text-black/50 dark:text-white/50 hover:text-black dark:text-white hover:bg-black/5 dark:hover:bg-white/10 dark:bg-white/10 rounded-full transition-colors"
           >
             <X className="w-6 h-6" />
@@ -66,11 +67,13 @@ export default function BookingModal({ isOpen, onClose, aircraftName }: BookingM
               </h3>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div className="relative">
+                  <label htmlFor="departure" className="sr-only">Departure City or Airport</label>
                   <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none">
                     <PlaneTakeoff className="w-5 h-5 text-black/40 dark:text-white/40" />
                   </div>
                   <input
                     type="text"
+                    id="departure"
                     name="departure"
                     required
                     value={formData.departure}
@@ -80,11 +83,13 @@ export default function BookingModal({ isOpen, onClose, aircraftName }: BookingM
                   />
                 </div>
                 <div className="relative">
+                  <label htmlFor="destination" className="sr-only">Destination City or Airport</label>
                   <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none">
                     <PlaneLanding className="w-5 h-5 text-black/40 dark:text-white/40" />
                   </div>
                   <input
                     type="text"
+                    id="destination"
                     name="destination"
                     required
                     value={formData.destination}
@@ -94,11 +99,13 @@ export default function BookingModal({ isOpen, onClose, aircraftName }: BookingM
                   />
                 </div>
                 <div className="relative">
+                  <label htmlFor="date" className="sr-only">Departure Date</label>
                   <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none">
                     <Calendar className="w-5 h-5 text-black/40 dark:text-white/40" />
                   </div>
                   <input
                     type="date"
+                    id="date"
                     name="date"
                     required
                     value={formData.date}
@@ -107,11 +114,13 @@ export default function BookingModal({ isOpen, onClose, aircraftName }: BookingM
                   />
                 </div>
                 <div className="relative">
+                  <label htmlFor="passengers" className="sr-only">Number of Passengers</label>
                   <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none">
                     <Users className="w-5 h-5 text-black/40 dark:text-white/40" />
                   </div>
                   <input
                     type="number"
+                    id="passengers"
                     name="passengers"
                     min="1"
                     required
@@ -131,11 +140,13 @@ export default function BookingModal({ isOpen, onClose, aircraftName }: BookingM
               </h3>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div className="relative md:col-span-2">
+                  <label htmlFor="name" className="sr-only">Full Name</label>
                   <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none">
                     <User className="w-5 h-5 text-black/40 dark:text-white/40" />
                   </div>
                   <input
                     type="text"
+                    id="name"
                     name="name"
                     required
                     value={formData.name}
@@ -145,11 +156,13 @@ export default function BookingModal({ isOpen, onClose, aircraftName }: BookingM
                   />
                 </div>
                 <div className="relative">
+                  <label htmlFor="email" className="sr-only">Email Address</label>
                   <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none">
                     <Mail className="w-5 h-5 text-black/40 dark:text-white/40" />
                   </div>
                   <input
                     type="email"
+                    id="email"
                     name="email"
                     required
                     value={formData.email}
@@ -159,11 +172,13 @@ export default function BookingModal({ isOpen, onClose, aircraftName }: BookingM
                   />
                 </div>
                 <div className="relative">
+                  <label htmlFor="phone" className="sr-only">Phone Number</label>
                   <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none">
                     <Phone className="w-5 h-5 text-black/40 dark:text-white/40" />
                   </div>
                   <input
                     type="tel"
+                    id="phone"
                     name="phone"
                     required
                     value={formData.phone}
@@ -177,7 +192,9 @@ export default function BookingModal({ isOpen, onClose, aircraftName }: BookingM
 
             {/* Additional Notes */}
             <div className="pt-2">
+              <label htmlFor="notes" className="sr-only">Additional requests or information</label>
               <textarea
+                id="notes"
                 name="notes"
                 value={formData.notes}
                 onChange={handleChange}
