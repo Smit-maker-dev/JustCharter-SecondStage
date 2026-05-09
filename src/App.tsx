@@ -5,7 +5,6 @@ import {
   Link,
   useLocation,
 } from "react-router-dom";
-import { Helmet } from "react-helmet-async";
 import {
   ArrowRight,
   Plane,
@@ -1117,41 +1116,44 @@ function DestinationsSection() {
 }
 
 function Footer() {
-  const [isDark, setIsDark] = useState(() => {
-    if (typeof localStorage !== "undefined") {
-      const saved = localStorage.getItem("theme-preference");
-      if (saved !== null) {
-        return saved === "dark";
-      }
-    }
-    const hour = new Date().getHours();
-    return hour >= 18 || hour < 6;
-  });
+  const [isDark, setIsDark] = useState(false);
+  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
+    setMounted(true);
+    const saved = localStorage.getItem("theme-preference");
+    if (saved !== null) {
+      setIsDark(saved === "dark");
+    } else {
+      const hour = new Date().getHours();
+      setIsDark(hour >= 18 || hour < 6);
+    }
+  }, []);
+
+  useEffect(() => {
+    if (!mounted) return;
     if (isDark) {
       document.documentElement.classList.add("dark");
     } else {
       document.documentElement.classList.remove("dark");
     }
-  }, [isDark]);
+  }, [isDark, mounted]);
 
   useEffect(() => {
+    if (!mounted) return;
     const interval = setInterval(() => {
-      if (typeof localStorage !== "undefined" && localStorage.getItem("theme-preference") === null) {
+      if (localStorage.getItem("theme-preference") === null) {
         const hour = new Date().getHours();
         setIsDark(hour >= 18 || hour < 6);
       }
     }, 60000);
     return () => clearInterval(interval);
-  }, []);
+  }, [mounted]);
 
   const toggleTheme = () => {
     const newTheme = !isDark;
     setIsDark(newTheme);
-    if (typeof localStorage !== "undefined") {
-      localStorage.setItem("theme-preference", newTheme ? "dark" : "light");
-    }
+    localStorage.setItem("theme-preference", newTheme ? "dark" : "light");
   };
 
   return (
@@ -1312,7 +1314,7 @@ function Footer() {
 
         <div className="flex flex-col md:flex-row justify-between items-center pt-8 border-t border-white/10 text-white/40 text-sm">
           <p>
-            &copy; {new Date().getFullYear()} JustCharter. All rights reserved.
+            &copy; 2024 JustCharter. All rights reserved.
           </p>
           <div className="flex items-center gap-6 mt-4 md:mt-0">
             <button
@@ -1481,10 +1483,6 @@ function MobileAppSection() {
 function HomePage() {
   return (
     <>
-      <Helmet>
-        <title>JustCharter - Private Aviation & Luxury Travel</title>
-        <meta name="description" content="JustCharter is your personal gateway to private aviation and luxury travel. Skip the commercial lines and fly on your own terms." />
-      </Helmet>
       <div className="h-screen flex flex-col overflow-hidden relative">
         <HeroSection />
       </div>
@@ -1540,13 +1538,23 @@ function ScrollToTopButton() {
 }
 
 export default function App() {
+  const [mounted, setMounted] = useState(false);
   const [showSplash, setShowSplash] = useState(true);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  if (!mounted) return null;
 
   return (
     <>
       {showSplash && <SplashScreen onComplete={() => setShowSplash(false)} />}
       <ScrollToTop />
-      <div className={`flex flex-col bg-[#F5F5F5] dark:bg-neutral-900 min-h-screen relative transition-colors duration-300 ${showSplash ? 'h-screen overflow-hidden' : ''}`}>
+      <div 
+        suppressHydrationWarning={true} 
+        className={`flex flex-col bg-[#F5F5F5] dark:bg-neutral-900 min-h-screen relative transition-colors duration-300 ${showSplash ? 'h-screen overflow-hidden' : ''}`}
+      >
         <Navbar />
         <Suspense fallback={<div className="min-h-screen flex items-center justify-center"><div className="w-8 h-8 border-4 border-black/20 dark:border-white/20 border-t-black dark:border-t-white rounded-full animate-spin"></div></div>}>
           <Routes>

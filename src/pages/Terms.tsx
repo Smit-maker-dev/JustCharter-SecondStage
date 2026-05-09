@@ -5,7 +5,7 @@ export default function Terms() {
         <h1 className="text-4xl md:text-5xl font-medium mb-12 text-black dark:text-white" style={{ letterSpacing: '-0.04em' }}>Terms of Service</h1>
         
         <div className="prose dark:prose-invert prose-lg max-w-none text-black/70 dark:text-white/70">
-           <p className="mb-6">Last updated: {new Date().toLocaleDateString()}</p>
+           <p className="mb-6">Last updated: January 1, 2024</p>
           
           <h2 className="text-2xl font-medium text-black dark:text-white mt-12 mb-4">1. Charter Agreements</h2>
           <p className="mb-6">By booking a flight with JustCharter, you agree to the terms outlined in the specific Charter Agreement provided at the time of booking. JustCharter acts as an agent arranging carriage by air on behalf of its clients with FAR Part 135 direct air carriers that exercise full operational control of charter flights.</p>

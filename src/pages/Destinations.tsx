@@ -22,7 +22,14 @@ interface Destination {
 }
 
 export default function Destinations() {
+  const [mounted, setMounted] = useState(false);
   const [selectedDest, setSelectedDest] = useState<Destination | null>(null);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  if (!mounted) return null;
 
   const globalDestinations: Destination[] = [
     {

@@ -1,5 +1,4 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { Helmet } from 'react-helmet-async';
 import { Plane, Calendar, Users, MapPin, Search, CheckCircle2, Navigation, ChevronDown, ChevronUp, Info, Coffee, ChevronLeft, ChevronRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { MapContainer, TileLayer, Polyline, Marker, Popup, useMap } from 'react-leaflet';
@@ -541,8 +540,15 @@ const CustomDropdown = ({ options, value, onChange, icon: Icon, placeholder }: {
 };
 
 export default function TripPlanner() {
+  const [mounted, setMounted] = useState(false);
   const [isSearching, setIsSearching] = useState(false);
   const [hasSearched, setHasSearched] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  if (!mounted) return null;
   const [departure, setDeparture] = useState('');
   const [arrival, setArrival] = useState('');
   const [departureCoords, setDepartureCoords] = useState<[number, number]>([-74.006, 40.7128]);
@@ -609,10 +615,6 @@ export default function TripPlanner() {
 
   return (
     <div className="pt-24 md:pt-32 min-h-screen bg-gray-50 dark:bg-[#0a0a0a]">
-      <Helmet>
-        <title>Trip Planner - JustCharter</title>
-        <meta name="description" content="Plan your private jet charter seamlessly. Search flights, select your aircraft, and manage your luxury travel itinerary." />
-      </Helmet>
       <div className="max-w-[88rem] mx-auto px-4 sm:px-6 mb-20 lg:mb-32">
         <div className="mb-12 md:mb-16">
           <h1 className="text-4xl sm:text-5xl md:text-7xl font-medium mb-6 tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-black to-black/60 dark:from-white dark:to-white/60">

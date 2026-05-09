@@ -7,6 +7,7 @@ export default function SplashScreen({
 }: {
   onComplete: () => void;
 }) {
+  const [mounted, setMounted] = useState(false);
   const [isVisible, setIsVisible] = useState(true);
   const [progress, setProgress] = useState(0);
   const [loaderStatus, setLoaderStatus] = useState("INITIALIZING SYSTEMS");
@@ -14,6 +15,7 @@ export default function SplashScreen({
   const customEase: [number, number, number, number] = [0.76, 0, 0.24, 1]; // Premium cubic-bezier for sophisticated motion
 
   useEffect(() => {
+    setMounted(true);
     document.body.style.overflow = "hidden";
 
     // Simulate loading progress
@@ -45,6 +47,8 @@ export default function SplashScreen({
       document.body.style.overflow = "";
     };
   }, [onComplete]);
+
+  if (!mounted) return null;
 
   return (
     <AnimatePresence mode="wait">

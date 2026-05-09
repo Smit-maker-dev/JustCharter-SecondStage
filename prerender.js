@@ -1,3 +1,11 @@
+global.window = global;
+global.window.addEventListener = () => {};
+global.window.removeEventListener = () => {};
+global.window.matchMedia = () => ({ matches: false, addListener: () => {}, removeListener: () => {} });
+global.document = { createElement: () => ({}), getElementById: () => null };
+global.localStorage = { getItem: () => null, setItem: () => {} };
+global.matchMedia = () => ({ matches: false });
+
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -33,15 +41,16 @@ const routesToPrerender = [
 (async () => {
   for (const url of routesToPrerender) {
     try {
-      const { html: appHtml, helmet } = await render(url);
+      const { html: appHtml } = await render(url);
 
-      let html = template.replace(`<!--app-html-->`, appHtml);
-      
-      const helmetData = helmet 
-        ? `${helmet.title.toString()}${helmet.meta.toString()}${helmet.link.toString()}`
-        : '';
-        
-      html = html.replace(`</head>`, `${helmetData}\n</head>`);
+      // React 19 might hoist tags to the start of the SSR output.
+      // We look for any <title>, <meta>, or <link> at the very beginning of the string.
+      const hoistedMatch = appHtml.match(/^(<(title|meta|link)[^>]*>(.*?<\/\2>)?)+/i);
+      const hoistedTags = hoistedMatch ? hoistedMatch[0] : '';
+      const cleanAppHtml = hoistedMatch ? appHtml.slice(hoistedTags.length) : appHtml;
+
+      let html = template.replace(`<!--app-html-->`, cleanAppHtml);
+      html = html.replace(`</head>`, `${hoistedTags}\n</head>`);
 
       const filePath = `dist${url === '/' ? '/index' : url}.html`;
       fs.writeFileSync(toAbsolute(filePath), html);

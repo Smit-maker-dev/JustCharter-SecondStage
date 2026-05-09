@@ -5,7 +5,7 @@ export default function PrivacyPolicy() {
         <h1 className="text-4xl md:text-5xl font-medium mb-12 text-black dark:text-white" style={{ letterSpacing: '-0.04em' }}>Privacy Policy</h1>
         
         <div className="prose dark:prose-invert prose-lg max-w-none text-black/70 dark:text-white/70">
-          <p className="mb-6">Last updated: {new Date().toLocaleDateString()}</p>
+          <p className="mb-6">Last updated: January 1, 2024</p>
           
           <h2 className="text-2xl font-medium text-black dark:text-white mt-12 mb-4">1. Information We Collect</h2>
           <p className="mb-6">We collect information that you outline during the booking process, membership application, and flight manifest creation. This includes personal identification information (Name, Date of Birth, Passport Details, Email address, Phone number, etc.) required for aviation security and customs adherence.</p>

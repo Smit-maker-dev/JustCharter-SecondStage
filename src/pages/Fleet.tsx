@@ -11,7 +11,6 @@ import {
 } from "lucide-react";
 import { Link } from "react-router-dom";
 import React, { useState } from "react";
-import { Helmet } from 'react-helmet-async';
 import BookingModal from "../components/BookingModal";
 
 interface Aircraft {
@@ -209,10 +208,6 @@ export default function Fleet() {
 
   return (
     <div className="bg-[#F5F5F5] dark:bg-neutral-900 min-h-screen pt-20 md:pt-24 pb-16 md:pb-24">
-      <Helmet>
-        <title>Our Fleet - JustCharter</title>
-        <meta name="description" content="Explore JustCharter's elite global fleet of more than 3,000 strictly vetted premier aircraft, tailored for any mission." />
-      </Helmet>
       {/* Hero Section */}
       <div className="max-w-[88rem] mx-auto px-4 sm:px-6 mt-8 md:mt-16 mb-12 md:mb-20">
         <h4 className="text-black/50 dark:text-white/50 text-sm mb-4 font-medium tracking-wide uppercase">

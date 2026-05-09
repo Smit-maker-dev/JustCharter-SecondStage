@@ -5,7 +5,7 @@ export default function CookiePolicy() {
         <h1 className="text-4xl md:text-5xl font-medium mb-12 text-black dark:text-white" style={{ letterSpacing: '-0.04em' }}>Cookie Policy</h1>
         
         <div className="prose dark:prose-invert prose-lg max-w-none text-black/70 dark:text-white/70">
-           <p className="mb-6">Last updated: {new Date().toLocaleDateString()}</p>
+           <p className="mb-6">Last updated: January 1, 2024</p>
           
           <h2 className="text-2xl font-medium text-black dark:text-white mt-12 mb-4">1. What are cookies?</h2>
           <p className="mb-6">Cookies are small text files that are placed on your computer or mobile device when you visit our website. They are widely used to make websites work more efficiently, as well as to provide reporting information.</p>
