@@ -552,6 +552,54 @@ const CustomDropdown = ({ id, options, value, onChange, icon: Icon, placeholder 
   );
 };
 
+const MarkdownRenderer = ({ content }: { content: string }) => {
+  return (
+    <ReactMarkdown
+      components={{
+        h2: ({ node, ...props }) => (
+          <h2 className="text-xl md:text-2xl font-semibold mt-12 mb-6 flex items-center gap-3 text-black dark:text-white group/h2" {...props}>
+            <span className="w-1 h-8 bg-brand rounded-full transition-all group-hover/h2:h-10" />
+            {props.children}
+          </h2>
+        ),
+        h3: ({ node, ...props }) => (
+          <h3 className="text-[11px] font-bold mt-8 mb-4 text-brand uppercase tracking-[0.25em] flex items-center gap-2" {...props}>
+            <div className="h-px flex-1 bg-black/5 dark:bg-white/10" />
+            <span>{props.children}</span>
+            <div className="h-px flex-1 bg-black/5 dark:bg-white/10" />
+          </h3>
+        ),
+        p: ({ node, ...props }) => (
+          <p className="mb-6 leading-[1.8] text-black/70 dark:text-white/70 text-sm md:text-lg font-light" {...props} />
+        ),
+        ul: ({ node, ...props }) => (
+          <ul className="mb-8 space-y-4" {...props} />
+        ),
+        li: ({ node, ...props }) => (
+          <li className="flex items-start gap-4 p-4 bg-black/[0.02] dark:bg-white/[0.02] rounded-2xl border border-black/5 dark:border-white/5 transition-all hover:border-brand/30">
+            <CheckCircle2 className="w-5 h-5 text-brand mt-0.5 shrink-0" />
+            <span className="text-black/80 dark:text-white/80 text-sm md:text-base leading-relaxed">{props.children}</span>
+          </li>
+        ),
+        blockquote: ({ node, ...props }) => (
+          <div className="my-10 relative">
+            <div className="absolute -left-4 top-0 bottom-0 w-1 bg-brand/30 rounded-full" />
+            <div className="p-6 md:p-8 bg-gradient-to-br from-brand/10 to-transparent dark:from-brand/20 rounded-3xl border border-brand/10 italic text-base md:text-xl text-black/90 dark:text-white/95 font-medium leading-relaxed shadow-sm">
+              <span className="text-4xl text-brand/20 font-serif absolute -top-4 -left-2 tracking-tighter">"</span>
+              {props.children}
+            </div>
+          </div>
+        ),
+        strong: ({ node, ...props }) => (
+          <strong className="font-semibold text-black dark:text-white px-1 py-0.5 bg-black/5 dark:bg-white/10 rounded" {...props} />
+        )
+      }}
+    >
+      {content}
+    </ReactMarkdown>
+  );
+};
+
 export default function TripPlanner() {
   const [mounted, setMounted] = useState(false);
   const [isSearching, setIsSearching] = useState(false);
@@ -632,14 +680,15 @@ export default function TripPlanner() {
     setHasSearched(true);
     
     try {
-      const prompt = aiPrompt?.trim() ? aiPrompt : `Act as an expert private aviation charter broker. Provide top aircraft options for a flight from ${dep} to ${arr} on ${flightDate ? format(flightDate, 'MMM do, yyyy') : 'an upcoming date'} for ${passengers} passengers, preferring ${aircraftClass} class aircraft. 
+      const prompt = aiPrompt?.trim() ? aiPrompt : `Act as a senior executive charter consultant for JustCharter. Analyze the mission from ${dep} to ${arr} for ${passengers} passengers on ${flightDate ? format(flightDate, 'MMM do, yyyy') : 'an upcoming date'}. Recommend the optimal aircraft from the ${aircraftClass} category.
 
-Format your response using Markdown:
-- Use ## for headers
-- Use bold **text** for key details (aircraft names, speeds, ranges)
-- Use bullet points for features
-- Include a section for "Estimated Flight Time" and "Approximate Cost"
-- Keep descriptions professional yet engaging.`;
+Structure your response using Markdown:
+1. Start with a brief, high-end "Executive Mission Summary".
+2. Use ## for the recommended Aircraft (e.g. ## Global 7500).
+3. Use ### PERFORMANCE & INTERIOR for technical specifications.
+4. Use a > block for a "Broker's Intelligent Insight" - something technical or luxury-focused about this specific aircraft or route.
+5. Finish with a "FLIGHT DYNAMICS" section detailing Estimated Flight Time (EFT), potential fuel considerations, and approximate pricing range.
+6. Use professional, confident, and technical language suitable for high-net-worth clients.`;
       
       const ai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY });
       const response = await ai.models.generateContentStream({
@@ -654,7 +703,7 @@ Format your response using Markdown:
       }
     } catch (err) {
       console.error(err);
-      setAiError('Failed to fetch AI recommendations. Please try again.');
+      setAiError('Failed to fetch AI recommendations. Please check your connection.');
     } finally {
       setIsSearching(false);
     }
@@ -675,8 +724,10 @@ Format your response using Markdown:
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12">
           {/* Search Form */}
           <div className="lg:col-span-4 h-fit lg:sticky lg:top-32">
-            <div className="bg-white dark:bg-neutral-900 border border-black/5 dark:border-white/5 rounded-3xl p-5 sm:p-8 shadow-sm">
-              <h2 className="text-xl sm:text-2xl font-medium mb-6 flex items-center gap-2">
+            <div className="bg-white dark:bg-neutral-900 border border-black/5 dark:border-white/5 rounded-3xl p-5 sm:p-8 shadow-sm relative overflow-hidden">
+              <div className="absolute -top-24 -right-24 w-48 h-48 bg-brand/5 dark:bg-brand/10 rounded-full blur-3xl pointer-events-none" />
+              
+              <h2 className="text-xl sm:text-2xl font-medium mb-6 flex items-center gap-2 relative z-10">
                 <Navigation className="w-5 h-5 text-black/50 dark:text-white/50" />
                 Flight Details
               </h2>
@@ -825,77 +876,124 @@ Format your response using Markdown:
                 
                 {/* AI Recommendations */}
                 {(aiText || isSearching || aiError) && (
-                  <div className="bg-white dark:bg-neutral-900 border border-black/5 dark:border-white/5 rounded-3xl p-6 sm:p-8 shadow-sm relative overflow-hidden group">
-                    <div className="absolute top-0 right-0 p-8 pointer-events-none opacity-[0.03] dark:opacity-[0.05]">
-                      <Sparkles className="w-32 h-32" />
+                  <div className="bg-white dark:bg-neutral-900 border-2 border-brand/20 dark:border-brand/10 rounded-3xl p-6 sm:p-10 shadow-lg relative overflow-hidden group">
+                    <div className="absolute top-0 right-0 p-8 pointer-events-none opacity-[0.03] dark:opacity-[0.05] group-hover:scale-110 transition-transform duration-700">
+                      <Sparkles className="w-48 h-48" />
                     </div>
                     
-                    <div className="flex items-center gap-3 mb-6">
-                      <div className="p-2.5 bg-black/5 dark:bg-white/10 rounded-xl">
-                        <Wand2 className="w-6 h-6 text-black dark:text-white" />
+                    <div className="flex flex-wrap items-center justify-between gap-4 mb-8">
+                      <div className="flex items-center gap-4">
+                        <div className="p-3 bg-brand/10 dark:bg-brand/20 rounded-2xl">
+                          <Wand2 className="w-7 h-7 text-brand" />
+                        </div>
+                        <div>
+                          <h3 className="text-2xl font-medium">AI Broker Recommendations</h3>
+                          <div className="flex items-center gap-2 mt-1">
+                            <span className="relative flex h-2 w-2">
+                              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+                              <span className="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
+                            </span>
+                            <p className="text-[10px] font-bold tracking-widest uppercase text-black/40 dark:text-white/40">Broker Online | Low Latency</p>
+                          </div>
+                        </div>
                       </div>
-                      <div>
-                        <h3 className="text-2xl font-medium">AI Broker Recommendations</h3>
-                        <p className="text-sm text-black/50 dark:text-white/50">Personalized aircraft & route analysis</p>
-                      </div>
+                      
+                      {!isSearching && aiText && (
+                        <div className="flex gap-2">
+                          <button className="p-2.5 rounded-full hover:bg-black/5 dark:hover:bg-white/5 transition-colors text-black/50 dark:text-white/50" aria-label="Bookmark">
+                            <Bookmark className="w-5 h-5" />
+                          </button>
+                          <button className="p-2.5 rounded-full hover:bg-black/5 dark:hover:bg-white/5 transition-colors text-black/50 dark:text-white/50" aria-label="Share">
+                            <Share2 className="w-5 h-5" />
+                          </button>
+                        </div>
+                      )}
                     </div>
                     
                     {aiError ? (
-                      <div className="bg-red-50 dark:bg-red-900/10 text-red-800 dark:text-red-400 p-4 rounded-xl text-sm mb-4">
-                        {aiError}
+                      <div className="bg-red-50 dark:bg-red-900/10 text-red-800 dark:text-red-400 p-6 rounded-3xl text-sm mb-6 flex items-center gap-4 border border-red-100 dark:border-red-900/20">
+                        <div className="w-10 h-10 rounded-full bg-red-100 dark:bg-red-900/30 flex items-center justify-center shrink-0">
+                          <Info className="w-5 h-5" />
+                        </div>
+                        <div className="flex-1">
+                          <p className="font-semibold mb-0.5">Consultation Interrupted</p>
+                          <p className="opacity-80">{aiError}</p>
+                        </div>
+                        <button 
+                          onClick={() => {
+                            const form = document.querySelector('form');
+                            if (form) form.requestSubmit();
+                          }}
+                          className="px-5 py-2 bg-red-800 dark:bg-red-600 text-white rounded-full text-xs font-bold hover:bg-red-700 transition-colors shadow-lg shadow-red-900/20"
+                        >
+                          Retry
+                        </button>
                       </div>
                     ) : null}
 
                     {aiText ? (
-                      <div className="markdown-body">
-                        <div className="prose dark:prose-invert max-w-none text-black/80 dark:text-white/80">
-                          <ReactMarkdown>{aiText}</ReactMarkdown>
-                          {isSearching && <span className="inline-block w-2 h-4 ml-1 bg-black/40 dark:bg-white/40 animate-pulse" />}
+                      <div>
+                        <div className="prose-none transition-all duration-700 ease-out animate-in fade-in slide-in-from-bottom-4">
+                          <MarkdownRenderer content={aiText} />
+                          {isSearching && <span className="inline-block w-3 h-5 ml-2 bg-brand animate-pulse align-middle rounded-sm shadow-[0_0_10px_rgba(var(--color-brand-rgb),0.5)]" />}
                         </div>
                         
                         {!isSearching && (
-                          <div className="mt-10 pt-8 border-t border-black/10 dark:border-white/10 flex flex-wrap gap-4 items-center">
-                            <button className="flex items-center gap-2 px-5 py-2.5 rounded-full border border-black/20 dark:border-white/20 hover:bg-black/5 dark:hover:bg-white/5 font-medium transition-colors text-sm">
-                              <Bookmark className="w-4 h-4" />
-                              Save Itinerary
-                            </button>
-                            <button className="flex items-center gap-2 px-5 py-2.5 rounded-full border border-black/20 dark:border-white/20 hover:bg-black/5 dark:hover:bg-white/5 font-medium transition-colors text-sm">
-                              <Share2 className="w-4 h-4" />
-                              Share
-                            </button>
+                          <div className="mt-12 pt-10 border-t border-black/10 dark:border-white/10 flex flex-wrap gap-6 items-center">
+                            <div className="flex -space-x-3 items-center">
+                              {[1, 2, 3].map(i => (
+                                <div key={i} className="w-12 h-12 rounded-full border-4 border-white dark:border-neutral-900 bg-gray-200 dark:bg-neutral-800 overflow-hidden shadow-sm">
+                                  <img src={`https://i.pravatar.cc/100?u=charter_${i}`} alt="Broker avatar" className="w-full h-full object-cover" />
+                                </div>
+                              ))}
+                              <div className="w-12 h-12 rounded-full border-4 border-white dark:border-neutral-900 bg-black text-white text-[11px] flex items-center justify-center font-bold shadow-lg">
+                                +12
+                              </div>
+                            </div>
+                            <div>
+                              <p className="text-xs font-bold text-black dark:text-white mb-0.5 tracking-wide">Executive Review Team</p>
+                              <p className="text-[10px] uppercase tracking-widest text-black/40 dark:text-white/40">Verified by Ops | Available 24/7</p>
+                            </div>
+
                             <Link 
-                              to={`/contact?trip=${encodeURIComponent(aiText.substring(0, 100))}`}
-                              className="px-8 py-2.5 rounded-full bg-black text-white dark:bg-white dark:text-black font-medium hover:bg-black/80 dark:hover:bg-white/80 transition-colors text-sm ml-auto"
+                               to={`/contact?trip=${encodeURIComponent(aiText.substring(0, 100))}`}
+                              className="px-10 py-4 rounded-full bg-black text-white dark:bg-white dark:text-black font-bold hover:bg-brand hover:text-white dark:hover:bg-brand dark:hover:text-white transition-all transform hover:scale-105 active:scale-95 text-sm ml-auto shadow-2xl shadow-brand/20 group/btn flex items-center gap-2"
                             >
                               Finalize Booking
+                              <Navigation className="w-4 h-4 group-hover/btn:translate-x-1 group-hover/btn:-translate-y-1 transition-transform" />
                             </Link>
                           </div>
                         )}
                       </div>
                     ) : isSearching && !aiText && !aiError ? (
-                      <div className="space-y-4">
-                        <div className="flex items-center gap-3 text-black/60 dark:text-white/60 py-4">
-                          <div className="w-5 h-5 border-2 border-current rounded-full border-t-transparent animate-spin" />
-                          <span>Generating personalized recommendations...</span>
+                      <div className="space-y-10 py-6">
+                        <div className="flex items-center gap-5 text-black/80 dark:text-white/90">
+                          <div className="relative">
+                            <div className="w-10 h-10 border-4 border-brand/20 border-t-brand rounded-full animate-spin" />
+                            <Wand2 className="w-4 h-4 text-brand absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2" />
+                          </div>
+                          <div>
+                            <span className="font-bold text-lg tracking-tight block">Intelligent Flight Analysis</span>
+                            <span className="text-xs uppercase tracking-[0.2em] opacity-40">Scanning 42,000 Private Terminals</span>
+                          </div>
                         </div>
-                        <div className="space-y-2">
-                          <div className="h-4 bg-black/5 dark:bg-white/5 rounded-full w-full animate-pulse" />
-                          <div className="h-4 bg-black/5 dark:bg-white/5 rounded-full w-[90%] animate-pulse" />
-                          <div className="h-4 bg-black/5 dark:bg-white/5 rounded-full w-[95%] animate-pulse" />
+                        <div className="space-y-4">
+                          <div className="h-4 bg-gradient-to-r from-black/5 via-black/10 to-black/5 dark:from-white/5 dark:via-white/10 dark:to-white/5 rounded-full w-full animate-pulse" />
+                          <div className="h-4 bg-gradient-to-r from-black/5 via-black/10 to-black/5 dark:from-white/5 dark:via-white/10 dark:to-white/5 rounded-full w-[92%] animate-pulse delay-75" />
+                          <div className="h-4 bg-gradient-to-r from-black/5 via-black/10 to-black/5 dark:from-white/5 dark:via-white/10 dark:to-white/5 rounded-full w-[96%] animate-pulse delay-150" />
+                          <div className="h-4 bg-gradient-to-r from-black/5 via-black/10 to-black/5 dark:from-white/5 dark:via-white/10 dark:to-white/5 rounded-full w-[85%] animate-pulse delay-300" />
                         </div>
                       </div>
                     ) : null}
 
-                    {aiError && (
-                      <button 
-                        onClick={() => {
-                          const form = document.querySelector('form');
-                          if (form) form.requestSubmit();
-                        }}
-                        className="px-6 py-2.5 bg-black text-white dark:bg-white dark:text-black rounded-full text-sm font-medium hover:bg-black/80 dark:hover:bg-white/80 transition-colors mt-4"
-                      >
-                        Try Again
-                      </button>
+                    {!aiText && !isSearching && !aiError && (
+                      <div className="py-20 text-center space-y-6">
+                        <div className="w-20 h-20 bg-black/5 dark:bg-white/5 rounded-full flex items-center justify-center mx-auto mb-6">
+                          <Sparkles className="w-10 h-10 text-black/20 dark:text-white/20" />
+                        </div>
+                        <h4 className="text-xl font-medium">Consultation Pending</h4>
+                        <p className="text-black/50 dark:text-white/50 max-w-xs mx-auto">Input your journey parameters and our proprietary AI will curate a personalized mission profile for you.</p>
+                      </div>
                     )}
                   </div>
                 )}
