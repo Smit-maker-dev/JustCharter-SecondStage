@@ -1,8 +1,21 @@
 {
   "rewrites": [
-    {
-      "source": "/(.*)",
-      "destination": "/index.html"
-    }
+    { "source": "/about", "destination": "/about.html" },
+    { "source": "/services", "destination": "/services.html" },
+    { "source": "/fleet", "destination": "/fleet.html" },
+    { "source": "/destinations", "destination": "/destinations.html" },
+    { "source": "/members", "destination": "/members.html" },
+    { "source": "/contact", "destination": "/contact.html" },
+    { "source": "/planner", "destination": "/planner.html" },
+    { "source": "/empty-legs", "destination": "/empty-legs.html" },
+    { "source": "/safety-first", "destination": "/safety-first.html" },
+    { "source": "/careers", "destination": "/careers.html" },
+    { "source": "/corporate-accounts", "destination": "/corporate-accounts.html" },
+    { "source": "/login", "destination": "/login.html" },
+    { "source": "/privacy-policy", "destination": "/privacy-policy.html" },
+    { "source": "/terms", "destination": "/terms.html" },
+    { "source": "/cookie-policy", "destination": "/cookie-policy.html" },
+    { "source": "/history", "destination": "/history.html" },
+    { "source": "/(.*)", "destination": "/index.html" }
   ]
 }
