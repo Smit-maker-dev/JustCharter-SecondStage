@@ -8,6 +8,8 @@ import ForgetPass from '../Auth_Pages/ForgetPass'
 import ResetPass from '../Auth_Pages/ResetPass'
 import VeryfyOTP from '../Auth_Pages/VeryfyOTP'
 import Home from '../Main_Pages/Home'
+import LandingPageV3 from '../v3/LandingPageV3'
+import LandingPageV5 from '../v5/LandingPageV5'
 import MainLayout from '../Components/MainLayout'
 import Account from '../Main_Pages/Account'
 import Bookings from '../Main_Pages/Bookings'
@@ -34,7 +36,8 @@ export default function Router() {
       <Route path="/reset_password" element={<ResetPass/>} />
       <Route path="/OTP_verification" element={<VeryfyOTP/>} />
       <Route element={<MainLayout />}>
-          <Route path="/" element={<Home />} />
+          <Route path="/" element={<LandingPageV5 />} />
+          <Route path="/v5" element={<LandingPageV5 />} />
           <Route path="/account" element={<Account />} />
           <Route path="/bookings" element={<Bookings />} />
           <Route path="/services" element={<Services />} />
