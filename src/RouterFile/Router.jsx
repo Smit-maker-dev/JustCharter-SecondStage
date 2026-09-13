@@ -10,6 +10,8 @@ import VeryfyOTP from '../Auth_Pages/VeryfyOTP'
 import Home from '../Main_Pages/Home'
 import LandingPageV3 from '../v3/LandingPageV3'
 import LandingPageV5 from '../v5/LandingPageV5'
+import AboutPageV5 from '../v5/AboutPageV5'
+import AircraftDetailPageV5 from '../v5/AircraftDetailPageV5'
 import MainLayout from '../Components/MainLayout'
 import Account from '../Main_Pages/Account'
 import Bookings from '../Main_Pages/Bookings'
@@ -38,12 +40,13 @@ export default function Router() {
       <Route element={<MainLayout />}>
           <Route path="/" element={<LandingPageV5 />} />
           <Route path="/v5" element={<LandingPageV5 />} />
+          <Route path="/aircraft/:id" element={<AircraftDetailPageV5 />} />
           <Route path="/account" element={<Account />} />
           <Route path="/bookings" element={<Bookings />} />
           <Route path="/services" element={<Services />} />
           <Route path="/event" element={<EventPage />} />
           <Route path="/buy_sell" element={<BuyAndSell/>} />
-          <Route path="/about" element={<AboutPage />} />
+          <Route path="/about" element={<AboutPageV5 />} />
           <Route path="/privacy_policy" element={<PrivacyAndPolicy />} />
           <Route path="/terms_conditions" element={<TermsOfServices />} />
           <Route path="/cancellation-policy" element={<CanceletionPolicy />} />

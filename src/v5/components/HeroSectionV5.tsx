@@ -60,42 +60,42 @@ export default function HeroSectionV5() {
         </div>
 
         {/* Hero Central Story Content */}
-        <div className="relative z-10 max-w-5xl mx-auto px-6 text-center text-white my-auto pt-10 pb-16">
+        <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 text-center text-white my-auto pt-10 pb-16">
           
-          <div className="inline-flex items-center space-x-2 bg-white/10 backdrop-blur-md px-4 py-1.5 rounded-full border border-white/20 mb-6">
+          <div className="inline-flex items-center space-x-2 bg-white/10 backdrop-blur-md px-3.5 sm:px-4 py-1.5 rounded-full border border-white/20 mb-6">
             <span className="w-2 h-2 rounded-full bg-[#DFA93B]"></span>
-            <span className="text-xs font-serif italic tracking-widest uppercase text-stone-100">
+            <span className="text-[10px] sm:text-xs font-serif italic tracking-widest uppercase text-stone-100">
               Over 500+ Destinations Worldwide
             </span>
           </div>
 
-          <h1 className="text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-serif font-normal tracking-tight text-white leading-[1.08] mb-6 max-w-4xl mx-auto drop-shadow-sm">
+          <h1 className="text-3xl sm:text-5xl md:text-7xl lg:text-8xl font-serif font-normal tracking-tight text-white leading-[1.08] mb-6 max-w-4xl mx-auto drop-shadow-sm">
             Private Aviation <br className="hidden sm:block" />
             <span className="italic font-serif font-light text-stone-200">
               Made Simple
             </span>
           </h1>
 
-          <p className="text-base sm:text-xl text-stone-200 font-sans font-light max-w-2xl mx-auto leading-relaxed">
+          <p className="text-sm sm:text-xl text-stone-200 font-sans font-light max-w-2xl mx-auto leading-relaxed">
             Experience seamless corporate travel with our premium fleet.
           </p>
         </div>
 
         {/* Grounded Embedded Booking Bar (Overlapping Hero Bottom Edge) */}
-        <div className="relative z-20 max-w-6xl mx-auto px-4 sm:px-6 w-full -mb-24 sm:-mb-28">
-          <div className="bg-white/98 backdrop-blur-2xl rounded-2xl p-6 sm:p-8 shadow-[0_25px_60px_rgba(0,0,0,0.06)] border border-stone-200/80">
+        <div className="relative z-20 max-w-6xl mx-auto px-4 sm:px-6 w-full -mb-36 sm:-mb-28 lg:-mb-24">
+          <div className="bg-white/98 backdrop-blur-2xl rounded-2xl p-4 sm:p-6 lg:p-8 shadow-[0_25px_60px_rgba(0,0,0,0.06)] border border-stone-200/80">
             
             {/* Top Bar: Minimalist Trip Selector & Direct Quote Badge */}
-            <div className="flex flex-wrap items-center justify-between gap-4 pb-5 mb-5 border-b border-stone-100">
+            <div className="flex flex-col sm:flex-row items-center justify-between gap-3 pb-4 sm:pb-5 mb-4 sm:mb-5 border-b border-stone-100">
               
               {/* Minimalist Segment Buttons */}
-              <div className="inline-flex items-center bg-stone-100/90 p-1 rounded-xl border border-stone-200/60">
+              <div className="inline-flex items-center bg-stone-100/90 p-1 rounded-xl border border-stone-200/60 max-w-full overflow-x-auto">
                 {["one-way", "round-trip", "multi-city"].map((type) => (
                   <button
                     key={type}
                     type="button"
                     onClick={() => setTripType(type)}
-                    className={`px-4 py-2 rounded-lg text-xs font-semibold uppercase tracking-wider transition-all cursor-pointer ${
+                    className={`px-2.5 sm:px-4 py-1.5 sm:py-2 rounded-lg text-[10px] sm:text-xs font-semibold uppercase tracking-wider transition-all cursor-pointer whitespace-nowrap ${
                       tripType === type
                         ? "bg-white text-stone-900 shadow-sm"
                         : "text-stone-600 hover:text-stone-900"
@@ -107,19 +107,19 @@ export default function HeroSectionV5() {
               </div>
 
               {/* Direct Charter Quote Badge */}
-              <div className="inline-flex items-center space-x-2 bg-stone-50 border border-stone-200/80 px-4 py-2 rounded-full">
-                <ShieldCheck className="w-4 h-4 text-[#DFA93B]" />
-                <span className="text-xs font-serif italic text-stone-800">
+              <div className="inline-flex items-center space-x-2 bg-stone-50 border border-stone-200/80 px-3.5 sm:px-4 py-1.5 sm:py-2 rounded-full">
+                <ShieldCheck className="w-3.5 sm:w-4 h-3.5 sm:h-4 text-[#DFA93B]" />
+                <span className="text-[10px] sm:text-xs font-serif italic text-stone-800">
                   Direct Charter Quote
                 </span>
               </div>
             </div>
 
             {/* Input Controls */}
-            <form onSubmit={handleSearchSubmit} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-12 gap-3.5 items-center">
+            <form onSubmit={handleSearchSubmit} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-12 gap-3 sm:gap-3.5 items-center">
               
               {/* From */}
-              <div className="lg:col-span-3 bg-stone-50/90 hover:bg-stone-100/80 border border-stone-200/70 rounded-xl p-3.5 transition-all">
+              <div className="lg:col-span-3 bg-stone-50/90 hover:bg-stone-100/80 border border-stone-200/70 rounded-xl p-3 sm:p-3.5 transition-all">
                 <label className="text-[10px] font-bold uppercase tracking-wider text-stone-400 flex items-center space-x-1.5 mb-1">
                   <MapPin className="w-3.5 h-3.5 text-[#DFA93B]" />
                   <span>From</span>
@@ -134,7 +134,7 @@ export default function HeroSectionV5() {
               </div>
 
               {/* To */}
-              <div className="lg:col-span-3 bg-stone-50/90 hover:bg-stone-100/80 border border-stone-200/70 rounded-xl p-3.5 transition-all">
+              <div className="lg:col-span-3 bg-stone-50/90 hover:bg-stone-100/80 border border-stone-200/70 rounded-xl p-3 sm:p-3.5 transition-all">
                 <label className="text-[10px] font-bold uppercase tracking-wider text-stone-400 flex items-center space-x-1.5 mb-1">
                   <MapPin className="w-3.5 h-3.5 text-[#DFA93B]" />
                   <span>To</span>
@@ -149,7 +149,7 @@ export default function HeroSectionV5() {
               </div>
 
               {/* Date */}
-              <div className="lg:col-span-2 bg-stone-50/90 hover:bg-stone-100/80 border border-stone-200/70 rounded-xl p-3.5 transition-all">
+              <div className="lg:col-span-2 bg-stone-50/90 hover:bg-stone-100/80 border border-stone-200/70 rounded-xl p-3 sm:p-3.5 transition-all">
                 <label className="text-[10px] font-bold uppercase tracking-wider text-stone-400 flex items-center space-x-1.5 mb-1">
                   <Calendar className="w-3.5 h-3.5 text-[#DFA93B]" />
                   <span>Date</span>
@@ -164,7 +164,7 @@ export default function HeroSectionV5() {
               </div>
 
               {/* Guests */}
-              <div className="lg:col-span-2 bg-stone-50/90 hover:bg-stone-100/80 border border-stone-200/70 rounded-xl p-3.5 transition-all">
+              <div className="lg:col-span-2 bg-stone-50/90 hover:bg-stone-100/80 border border-stone-200/70 rounded-xl p-3 sm:p-3.5 transition-all">
                 <label className="text-[10px] font-bold uppercase tracking-wider text-stone-400 flex items-center space-x-1.5 mb-1">
                   <Users className="w-3.5 h-3.5 text-[#DFA93B]" />
                   <span>Guests</span>
@@ -186,7 +186,7 @@ export default function HeroSectionV5() {
               <div className="lg:col-span-2">
                 <button
                   type="submit"
-                  className="w-full h-full min-h-[52px] bg-[#DFA93B] hover:bg-[#c9952f] text-stone-950 font-bold text-xs uppercase tracking-wider px-6 py-4 rounded-xl transition-all shadow-sm hover:shadow-md flex items-center justify-center space-x-2 cursor-pointer border border-[#d29c30]"
+                  className="w-full h-full min-h-[48px] sm:min-h-[52px] bg-[#DFA93B] hover:bg-[#c9952f] text-stone-950 font-bold text-xs uppercase tracking-wider px-5 py-3.5 rounded-xl transition-all shadow-sm hover:shadow-md flex items-center justify-center space-x-2 cursor-pointer border border-[#d29c30]"
                 >
                   <span>Search Flights</span>
                   <ArrowRight className="w-4 h-4" />
@@ -200,7 +200,7 @@ export default function HeroSectionV5() {
       </section>
       
       {/* Spacer to handle negative margin overlapping bottom container cleanly */}
-      <div className="h-28 sm:h-32 bg-white"></div>
+      <div className="h-40 sm:h-32 bg-white"></div>
     </div>
   );
 }

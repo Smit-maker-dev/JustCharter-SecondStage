@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { ArrowUpRight } from "lucide-react";
+import { Link, useNavigate } from "react-router-dom";
 
 interface Spec {
   label: string;
@@ -100,6 +101,7 @@ const filters = ["All Aircraft", "Long Range", "Ultra Long Range", "Midsize"];
 
 export default function FleetSectionV5() {
   const [activeFilter, setActiveFilter] = useState("All Aircraft");
+  const navigate = useNavigate();
 
   const filteredData =
     activeFilter === "All Aircraft"
@@ -111,7 +113,7 @@ export default function FleetSectionV5() {
       <div className="max-w-7xl mx-auto px-6 lg:px-12">
         
         {/* Section Header & Minimalist Text Tab Navigation */}
-        <div className="flex flex-col lg:flex-row lg:items-end justify-between mb-20 gap-8">
+        <div className="flex flex-col lg:flex-row lg:items-end justify-between mb-14 sm:mb-20 gap-6 sm:gap-8">
           <div>
             <div className="inline-flex items-center space-x-2 bg-white px-4 py-1.5 rounded-full border border-stone-200/80 mb-3 shadow-sm">
               <span className="w-2 h-2 rounded-full bg-[#DFA93B]"></span>
@@ -119,13 +121,13 @@ export default function FleetSectionV5() {
                 Out-Of-Bounds Engineering
               </span>
             </div>
-            <h2 className="text-4xl sm:text-5xl lg:text-6xl font-serif font-normal tracking-tight text-stone-900">
+            <h2 className="text-3xl sm:text-5xl lg:text-6xl font-serif font-normal tracking-tight text-stone-900">
               Exceptional Aircraft Selection
             </h2>
           </div>
 
           {/* Minimalist Text Tabs with Gold Active Underline */}
-          <div className="flex items-center space-x-6 sm:space-x-8 border-b border-stone-200/80 pb-2 overflow-x-auto">
+          <div className="flex items-center space-x-6 sm:space-x-8 border-b border-stone-200/80 pb-2 overflow-x-auto max-w-full">
             {filters.map((filter) => (
               <button
                 key={filter}
@@ -143,7 +145,7 @@ export default function FleetSectionV5() {
         </div>
 
         {/* Gallery / Lookbook Aircraft Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-y-16 gap-x-10">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-y-10 sm:gap-y-16 gap-x-6 sm:gap-x-10">
           {filteredData.map((aircraft) => (
             <div
               key={aircraft.id}
@@ -183,15 +185,18 @@ export default function FleetSectionV5() {
 
               {/* Action Controls */}
               <div className="flex items-center justify-between pt-2">
-                <a
-                  href="#"
+                <Link
+                  to={`/aircraft/${aircraft.id}`}
                   className="text-xs font-semibold uppercase tracking-wider text-stone-600 hover:text-stone-950 flex items-center space-x-1"
                 >
                   <span>Inspect Spec</span>
                   <ArrowUpRight className="w-3.5 h-3.5" />
-                </a>
+                </Link>
 
-                <button className="bg-stone-900 hover:bg-[#DFA93B] hover:text-stone-950 text-white text-xs font-semibold uppercase tracking-wider px-5 py-2.5 rounded-xl transition-all cursor-pointer">
+                <button
+                  onClick={() => navigate(`/aircraft/${aircraft.id}`)}
+                  className="bg-stone-900 hover:bg-[#DFA93B] hover:text-stone-950 text-white text-xs font-semibold uppercase tracking-wider px-5 py-2.5 rounded-xl transition-all cursor-pointer"
+                >
                   Book Now
                 </button>
               </div>

@@ -290,10 +290,7 @@ export default function Navbar() {
             <ul className="space-y-4 text-center">
               {[
                 { label: "Home", path: "/" },
-                // { label: "Bookings", path: "/bookings" },
                 { label: "Services", path: "/services" },
-                // { label: "Event", path: "/event" },
-                // { label: "Buy & Sell", path: "/buy_sell" },
                 { label: "About", path: "/about" },
                 { label: "Privacy & Policy", path: "/privacy_policy" },
               ].map((item) => {
@@ -303,7 +300,7 @@ export default function Navbar() {
                     key={item.label}
                     className={`cursor-pointer transition-colors duration-300 ${
                       isActive
-                        ? "text-[#FFD700] font-semibold"
+                        ? "text-[#DFA93B] font-semibold"
                         : showScrolledStyle
                         ? "text-[#000000]"
                         : "text-gray-800"
@@ -333,7 +330,7 @@ export default function Navbar() {
                   </div>
                   <span
                     className={`text-sm transition-colors duration-300 ${
-                      showScrolledStyle ? "text-[#FFD700]" : "text-[#000000]"
+                      showScrolledStyle ? "text-[#DFA93B]" : "text-[#000000]"
                     }`}
                   >
                     {firstName} {lastName}

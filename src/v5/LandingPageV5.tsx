@@ -6,8 +6,8 @@ import TrustBarV5 from "./components/TrustBarV5";
 import AboutStatsSectionV5 from "./components/AboutStatsSectionV5";
 import TestimonialsSectionV5 from "./components/TestimonialsSectionV5";
 import MembershipSafetySectionV5 from "./components/MembershipSafetySectionV5";
+import FaqSectionV5 from "./components/FaqSectionV5";
 import ConciergeBarV5 from "./components/ConciergeBarV5";
-import FooterV5 from "./components/FooterV5";
 
 export default function LandingPageV5() {
   return (
@@ -33,11 +33,11 @@ export default function LandingPageV5() {
       {/* 7. Membership Advantages & Safety Commitments (Vertical Lists & Floating Price Tag) */}
       <MembershipSafetySectionV5 />
 
-      {/* 8. 24/7 Global Concierge Resort-Style Support Bar */}
-      <ConciergeBarV5 />
+      {/* 8. Frequently Asked Questions Section */}
+      <FaqSectionV5 />
 
-      {/* 9. Airy Catalog End-Page Footer */}
-      <FooterV5 />
+      {/* 9. 24/7 Global Concierge Resort-Style Support Bar */}
+      <ConciergeBarV5 />
     </div>
   );
 }

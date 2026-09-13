@@ -52,25 +52,25 @@ export default function AboutStatsSectionV5() {
         </div>
 
         {/* Editorial Book-Spread Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 items-start">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-start">
           
           {/* Left Column: Masked Image & Story Text */}
           <div className="lg:col-span-6 flex flex-col justify-between">
-            <div className="relative rounded-2xl overflow-hidden shadow-md border border-stone-200/80 mb-8 h-80 sm:h-96">
+            <div className="relative rounded-2xl overflow-hidden shadow-md border border-stone-200/80 mb-6 sm:mb-8 h-64 sm:h-80 lg:h-96">
               <img
                 src="/images/gulfstrem.jpg"
                 alt="Luxury Gulfstream Aircraft"
                 className="w-full h-full object-cover"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-stone-950/60 via-transparent to-transparent"></div>
-              <div className="absolute bottom-6 left-6 right-6 text-white">
-                <p className="text-xs font-serif italic text-stone-200">
+              <div className="absolute bottom-4 left-4 right-4 sm:bottom-6 sm:left-6 sm:right-6 text-white">
+                <p className="text-[11px] sm:text-xs font-serif italic text-stone-200">
                   Setting the benchmark for safety, discretion, and operational excellence since 2004
                 </p>
               </div>
             </div>
 
-            <p className="text-stone-600 text-base sm:text-lg font-light leading-relaxed">
+            <p className="text-stone-600 text-sm sm:text-lg font-light leading-relaxed">
               With over 20 years of experience in luxury aviation, JustCharter
               has established itself as the premier choice for discerning
               travelers who demand nothing but the best. Our commitment to
@@ -84,22 +84,22 @@ export default function AboutStatsSectionV5() {
             {chapters.map((chap, idx) => (
               <div
                 key={idx}
-                className="border-t border-[#DFA93B]/40 py-6 transition-all hover:pl-2 group cursor-default"
+                className="border-t border-[#DFA93B]/40 py-5 sm:py-6 transition-all hover:pl-2 group cursor-default"
               >
                 <div className="flex items-center justify-between mb-2">
-                  <span className="text-[11px] uppercase tracking-widest font-serif italic text-[#DFA93B]">
+                  <span className="text-[10px] sm:text-[11px] uppercase tracking-widest font-serif italic text-[#DFA93B]">
                     {chap.num}
                   </span>
-                  <div className="p-2 rounded-full bg-stone-50 border border-stone-200/60">
+                  <div className="p-1.5 sm:p-2 rounded-full bg-stone-50 border border-stone-200/60">
                     {chap.icon}
                   </div>
                 </div>
 
-                <div className="flex items-baseline space-x-4">
-                  <span className="text-3xl sm:text-4xl font-serif font-normal text-stone-900 group-hover:text-[#DFA93B] transition-colors">
+                <div className="flex flex-wrap items-baseline gap-2 sm:space-x-4">
+                  <span className="text-2xl sm:text-4xl font-serif font-normal text-stone-900 group-hover:text-[#DFA93B] transition-colors">
                     {chap.stat}
                   </span>
-                  <span className="text-base font-semibold text-stone-900 uppercase tracking-wider">
+                  <span className="text-xs sm:text-base font-semibold text-stone-900 uppercase tracking-wider">
                     {chap.label}
                   </span>
                 </div>

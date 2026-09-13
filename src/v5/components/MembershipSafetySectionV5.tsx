@@ -86,8 +86,8 @@ export default function MembershipSafetySectionV5() {
           </div>
 
           {/* Right Column: Parallax Style Image Container & Floating Gold Price Tag */}
-          <div className="lg:col-span-5 relative">
-            <div className="relative h-[480px] sm:h-[560px] rounded-2xl overflow-hidden shadow-xl bg-stone-900 group border border-stone-200/80">
+          <div className="lg:col-span-5 relative mt-6 lg:mt-0">
+            <div className="relative h-[340px] sm:h-[480px] lg:h-[560px] rounded-2xl overflow-hidden shadow-xl bg-stone-900 group border border-stone-200/80">
               <img
                 src="/images/oskar-kadaksoo.jpg"
                 alt="Luxury Aviation Interior"
@@ -96,10 +96,10 @@ export default function MembershipSafetySectionV5() {
               <div className="absolute inset-0 bg-gradient-to-t from-stone-950/80 via-transparent to-transparent"></div>
 
               {/* Floating Pricing Badge */}
-              <div className="absolute top-6 right-6 bg-white/95 backdrop-blur-md border border-stone-200/80 text-stone-900 px-5 py-3 rounded-xl shadow-lg font-bold flex items-center space-x-3 z-30">
-                <span className="text-[10px] uppercase tracking-widest text-stone-500 font-semibold">Starting at</span>
-                <span className="text-xl sm:text-2xl font-serif font-normal text-[#DFA93B]">$4,500</span>
-                <span className="text-xs font-normal text-stone-500">/ hr</span>
+              <div className="absolute top-4 right-4 sm:top-6 sm:right-6 bg-white/95 backdrop-blur-md border border-stone-200/80 text-stone-900 px-3.5 sm:px-5 py-2.5 sm:py-3 rounded-xl shadow-lg font-bold flex items-center space-x-2 sm:space-x-3 z-30">
+                <span className="text-[9px] sm:text-[10px] uppercase tracking-widest text-stone-500 font-semibold">Starting at</span>
+                <span className="text-base sm:text-2xl font-serif font-normal text-[#DFA93B]">$4,500</span>
+                <span className="text-[10px] sm:text-xs font-normal text-stone-500">/ hr</span>
               </div>
             </div>
           </div>

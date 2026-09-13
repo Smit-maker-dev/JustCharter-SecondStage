@@ -35,7 +35,7 @@ export default function TestimonialsSectionV5() {
 
   useEffect(() => {
     const timer = setInterval(() => {
-      nextTestimonial();
+      setCurrentIndex((prev) => (prev === testimonials.length - 1 ? 0 : prev + 1));
     }, 6500);
     return () => clearInterval(timer);
   }, []);
@@ -43,38 +43,38 @@ export default function TestimonialsSectionV5() {
   const current = testimonials[currentIndex];
 
   return (
-    <section className="py-32 bg-white font-sans text-stone-900 overflow-hidden border-t border-stone-200/60">
+    <section className="py-20 sm:py-32 bg-white font-sans text-stone-900 overflow-hidden border-t border-stone-200/60">
       <div className="max-w-5xl mx-auto px-6 lg:px-12 text-center">
         
         {/* Tag Header */}
-        <div className="inline-flex items-center space-x-2 bg-stone-100 px-4 py-1.5 rounded-full border border-stone-200/80 mb-10">
+        <div className="inline-flex items-center space-x-2 bg-stone-100 px-4 py-1.5 rounded-full border border-stone-200/80 mb-8 sm:mb-10">
           <span className="w-2 h-2 rounded-full bg-[#DFA93B]"></span>
           <span className="text-xs uppercase tracking-[0.2em] font-serif italic text-stone-700">
             Verified Client Reviews
           </span>
         </div>
 
-        {/* Oversized Pure Serif Centered Quote */}
-        <div className="relative mb-14 min-h-[160px] sm:min-h-[200px] flex flex-col justify-center items-center">
-          <Quote className="w-12 h-12 text-[#DFA93B]/25 mb-6" />
+        {/* Pure Serif Centered Quote */}
+        <div key={currentIndex} className="relative mb-10 sm:mb-14 min-h-[180px] sm:min-h-[200px] flex flex-col justify-center items-center transition-all duration-500">
+          <Quote className="w-8 sm:w-12 h-8 sm:h-12 text-[#DFA93B]/25 mb-4 sm:mb-6" />
           <blockquote className="transition-opacity duration-700">
-            <p className="text-2xl sm:text-4xl lg:text-5xl font-serif italic font-normal text-stone-900 leading-relaxed max-w-4xl mx-auto">
+            <p className="text-lg sm:text-3xl lg:text-4xl font-serif italic font-normal text-stone-900 leading-relaxed max-w-4xl mx-auto px-2">
               "{current.quote}"
             </p>
           </blockquote>
-        </div>
-
-        {/* Author Metadata */}
-        <div className="mb-10">
-          <p className="text-base font-semibold text-stone-900">{current.name}</p>
-          <p className="text-xs text-stone-500 font-light mt-0.5">{current.title}</p>
+          
+          {/* Author Metadata */}
+          <div className="mt-6 sm:mt-8">
+            <p className="text-sm sm:text-base font-semibold text-stone-900">{current.name}</p>
+            <p className="text-xs text-stone-500 font-light mt-0.5">{current.title}</p>
+          </div>
         </div>
 
         {/* Delicate Controls */}
-        <div className="flex items-center justify-center space-x-6">
+        <div className="flex items-center justify-center space-x-4 sm:space-x-6">
           <button
             onClick={prevTestimonial}
-            className="p-3 rounded-full border border-stone-200 hover:border-stone-900 text-stone-600 hover:text-stone-900 transition-all cursor-pointer"
+            className="p-2.5 sm:p-3 rounded-full border border-stone-200 hover:border-stone-900 text-stone-600 hover:text-stone-900 transition-all cursor-pointer"
             aria-label="Previous Testimonial"
           >
             <ChevronLeft size={18} />
@@ -97,19 +97,11 @@ export default function TestimonialsSectionV5() {
 
           <button
             onClick={nextTestimonial}
-            className="p-3 rounded-full border border-stone-200 hover:border-stone-900 text-stone-600 hover:text-stone-900 transition-all cursor-pointer"
+            className="p-2.5 sm:p-3 rounded-full border border-stone-200 hover:border-stone-900 text-stone-600 hover:text-stone-900 transition-all cursor-pointer"
             aria-label="Next Testimonial"
           >
             <ChevronRight size={18} />
           </button>
-        </div>
-
-        {/* Global Luxury Travel Magazine Strip */}
-        <div className="mt-20 pt-10 border-t border-stone-200/70 max-w-3xl mx-auto flex flex-col sm:flex-row items-center justify-center gap-3 text-stone-600 text-xs sm:text-sm font-serif italic">
-          <span>"JustCharter consistently exceeds our expectations, setting the gold standard for luxury private aviation."</span>
-          <span className="font-sans not-italic text-[10px] uppercase font-bold text-[#DFA93B] bg-stone-100 px-3 py-1 rounded-full border border-stone-200/60 flex-shrink-0">
-            Global Luxury Travel Magazine
-          </span>
         </div>
 
       </div>
