@@ -44,7 +44,7 @@ axiosInstance.interceptors.request.use(
 axiosInstance.interceptors.response.use(
   (response) => response,
   (error) => {
-    if (error.response?.status === 401) {
+    if (error.response?.status === 401 && !error.config?.skipAuthRedirect) {
       toast.error("Session expired. Please login again.");
       localStorage.removeItem('access_token');
       localStorage.removeItem('token');

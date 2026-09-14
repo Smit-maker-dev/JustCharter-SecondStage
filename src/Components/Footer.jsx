@@ -5,42 +5,42 @@ import { Link } from "react-router-dom";
 
 export default function Footer() {
   return (
-    <footer className="bg-black text-white px-6 py-10 md:px-16 lg:px-24">
+    <footer className="bg-stone-50 text-slate-900 border-t border-stone-200 px-6 py-10 md:px-16 lg:px-24">
       <div className="flex flex-col lg:flex-row justify-between gap-5">
         <div className="mb-10 lg:mb-0 lg:w-1/4">
           <img
-            src="/images/WhiteLogo.png"
+            src="/images/Blacklogo.png"
             alt="JustCharter Logo"
             className="h-10 mb-4"
           />
-          <p className="text-sm text-gray-400">
+          <p className="text-sm text-stone-600">
             Redefining the private aviation experience with uncompromising
             safety, service, and luxury.
           </p>
 
           <div className="flex gap-4 mt-6">
-            <span className=" bg-[#FFFFFF1A]  w-13 h-13 flex items-center justify-center rounded-full text-black hover:scale-105 transition">
+            <span className="bg-stone-200/70 border border-stone-300 w-12 h-12 flex items-center justify-center rounded-full text-black hover:scale-105 transition shadow-xs">
               <FaFacebook
-                size={28}
-                className="font-bold h-10 w-10 text-[#DFA93B]  p-1"
+                size={24}
+                className="font-bold text-[#DFA93B]"
               />
             </span>
-            <span className="bg-[#FFFFFF1A]  w-13 h-13 flex items-center justify-center rounded-full text-black hover:scale-105 transition">
+            <span className="bg-stone-200/70 border border-stone-300 w-12 h-12 flex items-center justify-center rounded-full text-black hover:scale-105 transition shadow-xs">
               <IoLogoLinkedin
-                size={28}
-                className="font-bold h-10 w-10 text-[#DFA93B]  p-1"
+                size={24}
+                className="font-bold text-[#DFA93B]"
               />
             </span>
-            <span className="bg-[#FFFFFF1A]  w-13 h-13 flex items-center justify-center rounded-full text-black hover:scale-105 transition">
+            <span className="bg-stone-200/70 border border-stone-300 w-12 h-12 flex items-center justify-center rounded-full text-black hover:scale-105 transition shadow-xs">
               <FaInstagram
-                size={28}
-                className="font-bold h-10 w-10 text-[#DFA93B]  p-1"
+                size={24}
+                className="font-bold text-[#DFA93B]"
               />
             </span>
-            <span className="bg-[#FFFFFF1A]  w-13 h-13 flex items-center justify-center rounded-full text-black hover:scale-105 transition">
+            <span className="bg-stone-200/70 border border-stone-300 w-12 h-12 flex items-center justify-center rounded-full text-black hover:scale-105 transition shadow-xs">
               <FaEnvelope
-                size={28}
-                className="font-bold h-10 w-10 text-[#DFA93B]  p-1"
+                size={24}
+                className="font-bold text-[#DFA93B]"
               />
             </span>
           </div>
@@ -49,7 +49,7 @@ export default function Footer() {
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-20 text-sm">
           <div>
             <h3 className="text-[#DFA93B] font-semibold mb-3">Services</h3>
-            <ul className="space-y-2 text-gray-300">
+            <ul className="space-y-2 text-stone-600">
               <li>Private Charter</li>
               <li>Membership Programs</li>
               <li>Aircraft Management</li>
@@ -60,9 +60,9 @@ export default function Footer() {
 
           <div>
             <h3 className="text-[#DFA93B] font-semibold mb-3">Company</h3>
-            <ul className="space-y-2 text-gray-300">
+            <ul className="space-y-2 text-stone-600">
               <li>
-                <Link to="/about" className="hover:text-white transition">
+                <Link to="/about" className="hover:text-stone-950 transition">
                   About Us
                 </Link>
               </li>
@@ -75,21 +75,21 @@ export default function Footer() {
 
           <div>
             <h3 className="text-[#DFA93B] font-semibold mb-3">Legal</h3>
-            <ul className="space-y-2 text-gray-300">
+            <ul className="space-y-2 text-stone-600">
               <li>
-                <Link to="/terms_conditions" className="hover:text-white transition">
+                <Link to="/terms_conditions" className="hover:text-stone-950 transition">
                   Terms of Service
                 </Link>
               </li>
               <li>
-                <Link to="/privacy_policy" className="hover:text-white transition">
+                <Link to="/privacy_policy" className="hover:text-stone-950 transition">
                   Privacy Policy
                 </Link>
               </li>
               <li>
                 <Link
                   to="/cancellation-policy"
-                  className="hover:text-white transition"
+                  className="hover:text-stone-950 transition"
                 >
                   Cancellation Policy
                 </Link>
@@ -97,13 +97,13 @@ export default function Footer() {
               <li>
                 <Link
                   to="/accessibility"
-                  className="hover:text-white transition"
+                  className="hover:text-stone-950 transition"
                 >
                   Accessibility
                 </Link>
               </li>
               <li>
-                <Link to="/faqs" className="hover:text-white transition">
+                <Link to="/faqs" className="hover:text-stone-950 transition">
                   FAQs
                 </Link>
               </li>
@@ -112,9 +112,9 @@ export default function Footer() {
         </div>
       </div>
 
-      <hr className="my-8 border-gray-700" />
+      <hr className="my-8 border-stone-300" />
 
-      <div className="flex flex-col md:flex-row justify-between items-center text-xs text-gray-500 space-y-2 md:space-y-0">
+      <div className="flex flex-col md:flex-row justify-between items-center text-xs text-stone-500 space-y-2 md:space-y-0">
         <p>© 2025 JustCharter. All rights reserved.</p>
         <div className="flex gap-4">
           <span>ARG/US Platinum Rated</span>

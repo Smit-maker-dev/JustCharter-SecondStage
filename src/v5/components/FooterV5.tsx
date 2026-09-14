@@ -64,7 +64,7 @@ export default function FooterV5() {
             </p>
             <a
               href="mailto:concierge@justcharter.com"
-              className="inline-flex items-center space-x-1.5 bg-stone-900 text-white text-xs font-semibold uppercase tracking-wider px-5 py-2.5 rounded-full hover:bg-[#DFA93B] hover:text-stone-950 transition-all shadow-sm"
+              className="inline-flex items-center space-x-1.5 bg-[#DFA93B] hover:bg-[#c9952f] text-slate-950 text-xs font-bold uppercase tracking-wider px-5 py-2.5 rounded-full transition-all shadow-sm"
             >
               <span>Charter Support</span>
               <ArrowUpRight size={14} />

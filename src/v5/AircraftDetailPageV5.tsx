@@ -203,17 +203,55 @@ export default function AircraftDetailPageV5() {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
 
-  const aircraft =
-    aircraftDetails.find((item) => item.id === Number(id)) || aircraftDetails[0];
-
+  const [aircraft, setAircraft] = useState<AircraftDetailData | null>(null);
+  const [recommendedAircraft, setRecommendedAircraft] = useState<AircraftDetailData[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
   const [activeImageIndex, setActiveImageIndex] = useState(0);
 
   useEffect(() => {
     setActiveImageIndex(0);
     window.scrollTo(0, 0);
+    setIsLoading(true);
+
+    // Fetch single aircraft by ID
+    fetch(`http://localhost:8272/settings/fleet/${id}`)
+      .then((res) => res.json())
+      .then((resData) => {
+        if (resData.data) {
+          setAircraft(resData.data);
+        }
+      })
+      .catch((err) => console.error("Error fetching aircraft details:", err))
+      .finally(() => setIsLoading(false));
+
+    // Fetch recommended fleet
+    fetch("http://localhost:8272/settings/fleet")
+      .then((res) => res.json())
+      .then((resData) => {
+        if (resData.data && Array.isArray(resData.data)) {
+          setRecommendedAircraft(resData.data.filter((item: AircraftDetailData) => item.id !== Number(id)).slice(0, 3));
+        }
+      })
+      .catch((err) => console.error("Error fetching recommended fleet:", err));
   }, [id]);
 
-  const recommendedAircraft = aircraftDetails.filter((item) => item.id !== aircraft.id).slice(0, 3);
+  if (isLoading || !aircraft) {
+    return (
+      <div className="min-h-screen bg-white pt-32 pb-20 max-w-7xl mx-auto px-6 font-sans">
+        <div className="animate-pulse space-y-8">
+          <div className="h-6 w-32 bg-stone-200 rounded"></div>
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10">
+            <div className="lg:col-span-7 h-96 bg-stone-200 rounded-2xl"></div>
+            <div className="lg:col-span-5 space-y-4">
+              <div className="h-10 bg-stone-200 rounded w-3/4"></div>
+              <div className="h-6 bg-stone-200 rounded w-1/2"></div>
+              <div className="h-32 bg-stone-100 rounded"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-white text-stone-900 font-sans antialiased selection:bg-[#DFA93B]/30 selection:text-stone-900 pt-24 sm:pt-28">
@@ -294,7 +332,7 @@ export default function AircraftDetailPageV5() {
 
             <div className="space-y-4">
               <button
-                onClick={() => navigate("/")}
+                onClick={() => navigate("/request-quote")}
                 className="w-full bg-[#DFA93B] hover:bg-[#c9952f] text-stone-950 font-bold text-xs uppercase tracking-wider py-4 px-8 rounded-xl transition-all shadow-sm hover:shadow-md flex items-center justify-center space-x-2 cursor-pointer border border-[#d29c30]"
               >
                 <span>Request This Aircraft</span>

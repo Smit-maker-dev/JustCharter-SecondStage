@@ -12,6 +12,7 @@ import LandingPageV3 from '../v3/LandingPageV3'
 import LandingPageV5 from '../v5/LandingPageV5'
 import AboutPageV5 from '../v5/AboutPageV5'
 import AircraftDetailPageV5 from '../v5/AircraftDetailPageV5'
+import RequestQuotePageV5 from '../v5/RequestQuotePageV5'
 import MainLayout from '../Components/MainLayout'
 import Account from '../Main_Pages/Account'
 import Bookings from '../Main_Pages/Bookings'
@@ -41,6 +42,8 @@ export default function Router() {
           <Route path="/" element={<LandingPageV5 />} />
           <Route path="/v5" element={<LandingPageV5 />} />
           <Route path="/aircraft/:id" element={<AircraftDetailPageV5 />} />
+          <Route path="/request-quote" element={<RequestQuotePageV5 />} />
+          <Route path="/request_quote" element={<RequestQuotePageV5 />} />
           <Route path="/account" element={<Account />} />
           <Route path="/bookings" element={<Bookings />} />
           <Route path="/services" element={<Services />} />
