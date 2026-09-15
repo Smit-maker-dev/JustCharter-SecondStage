@@ -10,6 +10,7 @@ import VeryfyOTP from '../Auth_Pages/VeryfyOTP'
 import Home from '../Main_Pages/Home'
 import LandingPageV3 from '../v3/LandingPageV3'
 import LandingPageV5 from '../v5/LandingPageV5'
+import FleetPageV5 from '../v5/FleetPageV5'
 import AboutPageV5 from '../v5/AboutPageV5'
 import AircraftDetailPageV5 from '../v5/AircraftDetailPageV5'
 import RequestQuotePageV5 from '../v5/RequestQuotePageV5'
@@ -41,6 +42,7 @@ export default function Router() {
       <Route element={<MainLayout />}>
           <Route path="/" element={<LandingPageV5 />} />
           <Route path="/v5" element={<LandingPageV5 />} />
+          <Route path="/fleet" element={<FleetPageV5 />} />
           <Route path="/aircraft/:id" element={<AircraftDetailPageV5 />} />
           <Route path="/request-quote" element={<RequestQuotePageV5 />} />
           <Route path="/request_quote" element={<RequestQuotePageV5 />} />

@@ -375,7 +375,7 @@ useEffect(() => {
                 type="video/mp4"
               />
             </video>
-            <div className="absolute inset-0 bg-black/10"></div>
+            <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/45 to-white/95"></div>
           </div>
 
           {/* Content (same as before) */}

@@ -244,7 +244,7 @@ export default function HeroSectionV5() {
       {/* Floating Audio Control Pill */}
       <button
         onClick={() => setIsAudioMuted(!isAudioMuted)}
-        className="cursor-pointer fixed bottom-6 right-6 z-50 p-3.5 rounded-full bg-white/90 text-stone-900 shadow-md hover:shadow-lg backdrop-blur-md transition-all border border-stone-200/80"
+        className="cursor-pointer fixed bottom-6 right-6 z-50 p-3.5 rounded-full bg-black/40 text-white shadow-md hover:shadow-lg backdrop-blur-md transition-all border border-white/20 hover:bg-black/60"
         aria-label={isAudioMuted ? "Unmute video" : "Mute video"}
       >
         {isAudioMuted ? (
@@ -255,44 +255,44 @@ export default function HeroSectionV5() {
       </button>
 
       {/* Hero Full Screen Viewport */}
-      <section className="relative min-h-[85vh] lg:min-h-[90vh] flex flex-col justify-between pt-28 pb-16 bg-stone-50">
+      <section className="relative min-h-[85vh] lg:min-h-[90vh] flex flex-col justify-between pt-28 pb-16 bg-white">
         
-        {/* Background Video Media with Soft Vignette */}
+        {/* Background Video Media with Seamless Gradient Transition */}
         <div className="absolute inset-0 z-0 overflow-hidden">
           <video
             autoPlay
             muted={isAudioMuted}
             loop
             playsInline
-            className="w-full h-full object-cover object-center scale-105 filter opacity-40"
+            className="w-full h-full object-cover object-center scale-105"
           >
             <source
               src="/images/Paradigm Shift_ The Next-Gen Gulfstream Fleet (2023).mp4"
               type="video/mp4"
             />
           </video>
-          {/* Subtle top & bottom soft fade overlays */}
-          <div className="absolute inset-0 bg-gradient-to-b from-stone-50/90 via-white/80 to-stone-50/95"></div>
+          {/* Top-dark video overlay fading seamlessly into white at the bottom edge */}
+          <div className="absolute inset-0 bg-gradient-to-b from-stone-950/80 via-stone-950/50 via-[65%] to-white"></div>
         </div>
 
         {/* Hero Central Story Content */}
-        <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 text-center text-stone-900 my-auto pt-10 pb-16">
+        <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 text-center text-white my-auto pt-10 pb-16">
           
-          <div className="inline-flex items-center space-x-2 bg-white px-3.5 sm:px-4 py-1.5 rounded-full border border-stone-200/80 mb-6 shadow-sm">
+          <div className="inline-flex items-center space-x-2 bg-black/40 backdrop-blur-md px-3.5 sm:px-4 py-1.5 rounded-full border border-white/20 mb-6 shadow-sm">
             <span className="w-2 h-2 rounded-full bg-[#DFA93B]"></span>
-            <span className="text-[10px] sm:text-xs font-serif italic tracking-widest uppercase text-stone-800">
+            <span className="text-[10px] sm:text-xs font-serif italic tracking-widest uppercase text-stone-200">
               Over 500+ Destinations Worldwide
             </span>
           </div>
 
-          <h1 className="text-3xl sm:text-5xl md:text-7xl lg:text-8xl font-serif font-normal tracking-tight text-stone-950 leading-[1.08] mb-6 max-w-4xl mx-auto">
+          <h1 className="text-3xl sm:text-5xl md:text-7xl lg:text-8xl font-serif font-normal tracking-tight text-white leading-[1.08] mb-6 max-w-4xl mx-auto">
             Private Aviation <br className="hidden sm:block" />
-            <span className="italic font-serif font-light text-[#B88217]">
+            <span className="italic font-serif font-light text-[#DFA93B]">
               Made Simple
             </span>
           </h1>
 
-          <p className="text-sm sm:text-xl text-stone-700 font-sans font-light max-w-2xl mx-auto leading-relaxed">
+          <p className="text-sm sm:text-xl text-stone-200 font-sans font-light max-w-2xl mx-auto leading-relaxed">
             Experience seamless corporate travel with our premium fleet.
           </p>
         </div>

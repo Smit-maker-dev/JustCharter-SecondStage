@@ -2,7 +2,6 @@ import React from "react";
 import HeroSectionV5 from "./components/HeroSectionV5";
 import ServicesSectionV5 from "./components/ServicesSectionV5";
 import FleetSectionV5 from "./components/FleetSectionV5";
-import TrustBarV5 from "./components/TrustBarV5";
 import AboutStatsSectionV5 from "./components/AboutStatsSectionV5";
 import TestimonialsSectionV5 from "./components/TestimonialsSectionV5";
 import MembershipSafetySectionV5 from "./components/MembershipSafetySectionV5";
@@ -21,10 +20,7 @@ export default function LandingPageV5() {
       {/* 3. Exceptional Aircraft Selection (Lookbook Gallery & Text Tab System) */}
       <FleetSectionV5 />
 
-      {/* 4. Certified Safety Standards Trust Bar */}
-      <TrustBarV5 />
-
-      {/* 5. About & Editorial Book-Chapter Statistics Spread */}
+      {/* 4. About & Editorial Book-Chapter Statistics Spread */}
       <AboutStatsSectionV5 />
 
       {/* 6. Centered Oversized Serif Quote Testimonials Section */}

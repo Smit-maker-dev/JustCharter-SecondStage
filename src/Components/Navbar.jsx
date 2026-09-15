@@ -155,6 +155,7 @@ export default function Navbar() {
           <ul className="hidden lg:flex space-x-6 text-sm relative">
             {[
               { label: "Home", path: "/" },
+              { label: "Fleet", path: "/fleet" },
               // { label: "Bookings", path: "/bookings" },
               { label: "Services", path: "/services" },
               // { label: "Event", path: "/event" },
@@ -290,6 +291,7 @@ export default function Navbar() {
             <ul className="space-y-4 text-center">
               {[
                 { label: "Home", path: "/" },
+                { label: "Fleet", path: "/fleet" },
                 { label: "Services", path: "/services" },
                 { label: "About", path: "/about" },
                 { label: "Privacy & Policy", path: "/privacy_policy" },
