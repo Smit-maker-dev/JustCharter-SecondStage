@@ -56,7 +56,7 @@ export default function ServicesSectionV5() {
           {services.map((service, index) => (
             <div
               key={index}
-              className="bg-stone-50/80 hover:bg-white rounded-2xl p-5 sm:p-6 border border-stone-200/80 border-l-4 border-l-[#DFA93B] shadow-sm hover:shadow-md hover:border-l-[#DFA93B] hover:border-stone-300 transition-all duration-300 flex flex-col justify-between items-start text-left group"
+              className="bg-stone-50/80 hover:bg-white rounded-2xl p-5 sm:p-6 border border-stone-200/80 border-l-4 border-l-transparent shadow-sm hover:shadow-md hover:border-l-[#DFA93B] hover:border-stone-300 transition-all duration-300 flex flex-col justify-between items-start text-left group"
             >
               <div className="w-full">
                 {/* Horizontal Header: Icon Box & Tag Pill */}
