@@ -3,7 +3,7 @@ import { Phone, Mail, Clock, ArrowRight } from "lucide-react";
 
 export default function ConciergeBarV5() {
   return (
-    <section className="bg-white font-sans text-[#4A3B2A] py-12 sm:py-16 px-4 sm:px-6 lg:px-12">
+    <section className="bg-white font-sans text-[#002F5C] py-12 sm:py-16 px-4 sm:px-6 lg:px-12">
       <div className="max-w-7xl mx-auto">
         <div className="bg-stone-50/90 rounded-2xl p-6 sm:p-10 lg:p-12 border border-stone-200/80 shadow-sm flex flex-col lg:flex-row items-start lg:items-center justify-between gap-8">
           
@@ -15,7 +15,7 @@ export default function ConciergeBarV5() {
               </span>
             </div>
 
-            <h3 className="text-2xl sm:text-3xl lg:text-4xl font-serif font-normal tracking-tight text-[#4A3B2A] mb-2">
+            <h3 className="text-2xl sm:text-3xl lg:text-4xl font-serif font-normal tracking-tight text-[#002F5C] mb-2">
               Ready to Plan Your Next Journey?
             </h3>
 
@@ -28,7 +28,7 @@ export default function ConciergeBarV5() {
           <div className="flex flex-col sm:flex-row flex-wrap items-stretch sm:items-center gap-3 w-full lg:w-auto">
             <a
               href="tel:+1800555538"
-              className="bg-white hover:bg-stone-100 text-[#4A3B2A] border border-stone-200/80 px-4 sm:px-5 py-3 sm:py-3.5 rounded-xl flex items-center justify-center space-x-3 text-xs font-semibold transition-all shadow-sm"
+              className="bg-white hover:bg-stone-100 text-[#002F5C] border border-stone-200/80 px-4 sm:px-5 py-3 sm:py-3.5 rounded-xl flex items-center justify-center space-x-3 text-xs font-semibold transition-all shadow-sm"
             >
               <Phone className="w-4 h-4 text-[#FF9C0A]" />
               <span>+1 (800) 555-JET</span>
@@ -36,7 +36,7 @@ export default function ConciergeBarV5() {
 
             <a
               href="mailto:concierge@justcharter.com"
-              className="bg-white hover:bg-stone-100 text-[#4A3B2A] border border-stone-200/80 px-4 sm:px-5 py-3 sm:py-3.5 rounded-xl flex items-center justify-center space-x-3 text-xs font-semibold transition-all shadow-sm"
+              className="bg-white hover:bg-stone-100 text-[#002F5C] border border-stone-200/80 px-4 sm:px-5 py-3 sm:py-3.5 rounded-xl flex items-center justify-center space-x-3 text-xs font-semibold transition-all shadow-sm"
             >
               <Mail className="w-4 h-4 text-[#FF9C0A]" />
               <span>concierge@justcharter.com</span>
@@ -44,7 +44,7 @@ export default function ConciergeBarV5() {
 
             <a
               href="/bookings"
-              className="bg-[#FF9C0A] hover:bg-[#e08800] text-[#4A3B2A] px-5 sm:px-6 py-3 sm:py-3.5 rounded-xl flex items-center justify-center space-x-2 text-xs font-bold uppercase tracking-wider transition-all shadow-sm cursor-pointer"
+              className="bg-[#FF9C0A] hover:bg-[#e08800] text-[#002F5C] px-5 sm:px-6 py-3 sm:py-3.5 rounded-xl flex items-center justify-center space-x-2 text-xs font-bold uppercase tracking-wider transition-all shadow-sm cursor-pointer"
             >
               <span>Charter Support</span>
               <ArrowRight className="w-4 h-4" />

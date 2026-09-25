@@ -179,7 +179,7 @@ export default function AboutPage() {
           style={{
             fontFamily: "'Playfair Display', serif",
           }}
-          className="text-center text-xl md:text-[28px] font-semibold text-[#4A3B2A] mb-10"
+          className="text-center text-xl md:text-[28px] font-semibold text-[#002F5C] mb-10"
         >
           Our Values
         </h1>
@@ -190,7 +190,7 @@ export default function AboutPage() {
               key={index}
               className="cursor-pointer border-2 border-gray-300 rounded-xl p-6  hover:shadow-md transition"
             >
-              <h3 className="font-semibold text-[#4A3B2A] mb-1">{item.title}</h3>
+              <h3 className="font-semibold text-[#002F5C] mb-1">{item.title}</h3>
               <p className="text-gray-600 text-sm md:text-base">
                 {item.description}
               </p>

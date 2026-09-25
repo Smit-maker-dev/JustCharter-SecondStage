@@ -97,7 +97,7 @@ export default function HeroSectionV3() {
                     className={`px-4 py-2 rounded-xl text-xs font-bold uppercase tracking-wider transition-all cursor-pointer ${
                       tripType === type
                         ? "bg-slate-900 text-white shadow-sm"
-                        : "text-slate-600 hover:text-[#4A3B2A]"
+                        : "text-slate-600 hover:text-[#002F5C]"
                     }`}
                   >
                     {type.replace("-", " ")}
@@ -128,7 +128,7 @@ export default function HeroSectionV3() {
                   name="from"
                   value={bookingData.from}
                   onChange={handleInputChange}
-                  className="w-full bg-transparent text-xs sm:text-sm font-bold text-[#4A3B2A] focus:outline-none"
+                  className="w-full bg-transparent text-xs sm:text-sm font-bold text-[#002F5C] focus:outline-none"
                 />
               </div>
 
@@ -143,7 +143,7 @@ export default function HeroSectionV3() {
                   name="to"
                   value={bookingData.to}
                   onChange={handleInputChange}
-                  className="w-full bg-transparent text-xs sm:text-sm font-bold text-[#4A3B2A] focus:outline-none"
+                  className="w-full bg-transparent text-xs sm:text-sm font-bold text-[#002F5C] focus:outline-none"
                 />
               </div>
 
@@ -158,7 +158,7 @@ export default function HeroSectionV3() {
                   name="date"
                   value={bookingData.date}
                   onChange={handleInputChange}
-                  className="w-full bg-transparent text-xs font-bold text-[#4A3B2A] focus:outline-none cursor-pointer"
+                  className="w-full bg-transparent text-xs font-bold text-[#002F5C] focus:outline-none cursor-pointer"
                 />
               </div>
 
@@ -172,7 +172,7 @@ export default function HeroSectionV3() {
                   name="passengers"
                   value={bookingData.passengers}
                   onChange={handleInputChange}
-                  className="w-full bg-transparent text-xs font-bold text-[#4A3B2A] focus:outline-none cursor-pointer"
+                  className="w-full bg-transparent text-xs font-bold text-[#002F5C] focus:outline-none cursor-pointer"
                 >
                   <option value="1-4 Guests">1 - 4 Guests</option>
                   <option value="4 Guests">4 Guests</option>
@@ -185,7 +185,7 @@ export default function HeroSectionV3() {
               <div className="lg:col-span-2">
                 <button
                   type="submit"
-                  className="w-full h-full min-h-[52px] bg-[#FF9C0A] hover:bg-[#e08800] text-[#4A3B2A] font-bold text-xs uppercase tracking-wider px-6 py-4 rounded-2xl transition-all shadow-md hover:shadow-lg flex items-center justify-center space-x-2 border border-[#FF9C0A] cursor-pointer"
+                  className="w-full h-full min-h-[52px] bg-[#FF9C0A] hover:bg-[#e08800] text-[#002F5C] font-bold text-xs uppercase tracking-wider px-6 py-4 rounded-2xl transition-all shadow-md hover:shadow-lg flex items-center justify-center space-x-2 border border-[#FF9C0A] cursor-pointer"
                 >
                   <span>Search Flights</span>
                   <ArrowRight className="w-4 h-4" />

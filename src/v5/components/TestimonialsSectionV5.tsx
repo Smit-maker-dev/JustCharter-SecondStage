@@ -43,7 +43,7 @@ export default function TestimonialsSectionV5() {
   const current = testimonials[currentIndex];
 
   return (
-    <section className="py-20 sm:py-32 bg-white font-sans text-[#4A3B2A] overflow-hidden border-t border-stone-200/60">
+    <section className="py-20 sm:py-32 bg-white font-sans text-[#002F5C] overflow-hidden border-t border-stone-200/60">
       <div className="max-w-5xl mx-auto px-6 lg:px-12 text-center">
         
         {/* Tag Header */}
@@ -58,14 +58,14 @@ export default function TestimonialsSectionV5() {
         <div key={currentIndex} className="relative mb-10 sm:mb-14 min-h-[180px] sm:min-h-[200px] flex flex-col justify-center items-center transition-all duration-500">
           <Quote className="w-8 sm:w-12 h-8 sm:h-12 text-[#FF9C0A]/25 mb-4 sm:mb-6" />
           <blockquote className="transition-opacity duration-700">
-            <p className="text-lg sm:text-3xl lg:text-4xl font-serif italic font-normal text-[#4A3B2A] leading-relaxed max-w-4xl mx-auto px-2">
+            <p className="text-lg sm:text-3xl lg:text-4xl font-serif italic font-normal text-[#002F5C] leading-relaxed max-w-4xl mx-auto px-2">
               "{current.quote}"
             </p>
           </blockquote>
           
           {/* Author Metadata */}
           <div className="mt-6 sm:mt-8">
-            <p className="text-sm sm:text-base font-semibold text-[#4A3B2A]">{current.name}</p>
+            <p className="text-sm sm:text-base font-semibold text-[#002F5C]">{current.name}</p>
             <p className="text-xs text-stone-500 font-light mt-0.5">{current.title}</p>
           </div>
         </div>
@@ -74,7 +74,7 @@ export default function TestimonialsSectionV5() {
         <div className="flex items-center justify-center space-x-4 sm:space-x-6">
           <button
             onClick={prevTestimonial}
-            className="p-2.5 sm:p-3 rounded-full border border-stone-200 hover:border-[#4A3B2A] text-stone-600 hover:text-[#4A3B2A] transition-all cursor-pointer"
+            className="p-2.5 sm:p-3 rounded-full border border-stone-200 hover:border-[#002F5C] text-stone-600 hover:text-[#002F5C] transition-all cursor-pointer"
             aria-label="Previous Testimonial"
           >
             <ChevronLeft size={18} />
@@ -97,7 +97,7 @@ export default function TestimonialsSectionV5() {
 
           <button
             onClick={nextTestimonial}
-            className="p-2.5 sm:p-3 rounded-full border border-stone-200 hover:border-[#4A3B2A] text-stone-600 hover:text-[#4A3B2A] transition-all cursor-pointer"
+            className="p-2.5 sm:p-3 rounded-full border border-stone-200 hover:border-[#002F5C] text-stone-600 hover:text-[#002F5C] transition-all cursor-pointer"
             aria-label="Next Testimonial"
           >
             <ChevronRight size={18} />

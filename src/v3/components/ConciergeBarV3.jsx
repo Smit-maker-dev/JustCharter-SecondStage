@@ -3,7 +3,7 @@ import { Phone, Mail, Clock, ArrowRight } from "lucide-react";
 
 export default function ConciergeBarV3() {
   return (
-    <section className="bg-stone-50 border-y border-stone-200 text-[#4A3B2A] font-sans py-16 px-6 lg:px-12 relative overflow-hidden">
+    <section className="bg-stone-50 border-y border-stone-200 text-[#002F5C] font-sans py-16 px-6 lg:px-12 relative overflow-hidden">
       
       {/* Background Subtle Accent Glow */}
       <div className="absolute top-0 right-0 w-96 h-96 bg-[#FF9C0A]/15 rounded-full blur-3xl pointer-events-none"></div>
@@ -18,7 +18,7 @@ export default function ConciergeBarV3() {
             </span>
           </div>
 
-          <h3 className="text-2xl sm:text-3xl font-bold tracking-tight text-[#4A3B2A] mb-2">
+          <h3 className="text-2xl sm:text-3xl font-bold tracking-tight text-[#002F5C] mb-2">
             Ready to Plan Your Next Journey?
           </h3>
 
@@ -31,7 +31,7 @@ export default function ConciergeBarV3() {
         <div className="flex flex-wrap items-center gap-4">
           <a
             href="tel:+1800555538"
-            className="bg-white hover:bg-stone-100 text-[#4A3B2A] border border-stone-300 px-5 py-3 rounded-full flex items-center space-x-3 text-xs font-bold transition-all shadow-sm"
+            className="bg-white hover:bg-stone-100 text-[#002F5C] border border-stone-300 px-5 py-3 rounded-full flex items-center space-x-3 text-xs font-bold transition-all shadow-sm"
           >
             <Phone className="w-4 h-4 text-[#FF9C0A]" />
             <span>+1 (800) 555-JET</span>
@@ -39,7 +39,7 @@ export default function ConciergeBarV3() {
 
           <a
             href="mailto:concierge@justcharter.com"
-            className="bg-white hover:bg-stone-100 text-[#4A3B2A] border border-stone-300 px-5 py-3 rounded-full flex items-center space-x-3 text-xs font-bold transition-all shadow-sm"
+            className="bg-white hover:bg-stone-100 text-[#002F5C] border border-stone-300 px-5 py-3 rounded-full flex items-center space-x-3 text-xs font-bold transition-all shadow-sm"
           >
             <Mail className="w-4 h-4 text-[#FF9C0A]" />
             <span>concierge@justcharter.com</span>
@@ -47,7 +47,7 @@ export default function ConciergeBarV3() {
 
           <a
             href="/bookings"
-            className="bg-[#FF9C0A] hover:bg-[#e08800] text-[#4A3B2A] px-6 py-3 rounded-full flex items-center space-x-2 text-xs font-bold uppercase tracking-wider transition-all shadow-md"
+            className="bg-[#FF9C0A] hover:bg-[#e08800] text-[#002F5C] px-6 py-3 rounded-full flex items-center space-x-2 text-xs font-bold uppercase tracking-wider transition-all shadow-md"
           >
             <span>Charter Support</span>
             <ArrowRight className="w-4 h-4" />

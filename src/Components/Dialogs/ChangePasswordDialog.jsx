@@ -85,7 +85,7 @@ const ChangePasswordDialog = ({ open, onClose }) => {
           <IoMdCloseCircle className="w-5 h-5 text-gray-500 hover:text-red-500" />
         </button>
 
-        <h2 className="text-[24px] font-bold text-[#4A3B2A] mb-2">
+        <h2 className="text-[24px] font-bold text-[#002F5C] mb-2">
           Change Password
         </h2>
         <p className="text-[16px] text-gray-600 mb-8">
@@ -93,7 +93,7 @@ const ChangePasswordDialog = ({ open, onClose }) => {
         </p>
 
         <div className="flex items-center justify-between mb-2">
-          <label className="text-[14px]  text-[#4A3B2A]">Old Password</label>
+          <label className="text-[14px]  text-[#002F5C]">Old Password</label>
         </div>
         <div className="relative">
           <input
@@ -128,7 +128,7 @@ const ChangePasswordDialog = ({ open, onClose }) => {
             }}
           />
         </div>
-        <label className="block mt-6 mb-2 text-[15px]  text-[#4A3B2A]">
+        <label className="block mt-6 mb-2 text-[15px]  text-[#002F5C]">
           New Password
         </label>
         <div className="relative">
@@ -148,7 +148,7 @@ const ChangePasswordDialog = ({ open, onClose }) => {
             </span>
           )}
         </div>
-        <label className="block mt-6 mb-2 text-[15px]  text-[#4A3B2A]">
+        <label className="block mt-6 mb-2 text-[15px]  text-[#002F5C]">
           Confirm Password
         </label>
         <div className="relative">

@@ -93,7 +93,7 @@ export default function FleetSectionV3() {
       : aircraftData.filter((a) => a.category === activeFilter);
 
   return (
-    <section className="py-28 bg-white font-sans text-[#4A3B2A] overflow-hidden">
+    <section className="py-28 bg-white font-sans text-[#002F5C] overflow-hidden">
       <div className="max-w-7xl mx-auto px-6 lg:px-12">
         
         {/* Section Header & Category Pills (BUG 2 FIX: Individual pill buttons wrapper with zero awkward wrapping) */}
@@ -105,7 +105,7 @@ export default function FleetSectionV3() {
                 Out-Of-Bounds Engineering
               </span>
             </div>
-            <h2 className="text-3xl sm:text-5xl font-bold tracking-tight text-[#4A3B2A]">
+            <h2 className="text-3xl sm:text-5xl font-bold tracking-tight text-[#002F5C]">
               Exceptional Aircraft Selection
             </h2>
           </div>
@@ -118,8 +118,8 @@ export default function FleetSectionV3() {
                 onClick={() => setActiveFilter(filter)}
                 className={`px-5 py-2.5 rounded-full text-xs font-bold uppercase tracking-wider transition-all cursor-pointer border ${
                   activeFilter === filter
-                    ? "bg-slate-900 text-white border-[#4A3B2A] shadow-md"
-                    : "bg-stone-100 text-slate-600 border-slate-200/80 hover:bg-stone-200/70 hover:text-[#4A3B2A]"
+                    ? "bg-slate-900 text-white border-[#002F5C] shadow-md"
+                    : "bg-stone-100 text-slate-600 border-slate-200/80 hover:bg-stone-200/70 hover:text-[#002F5C]"
                 }`}
               >
                 {filter}
@@ -149,7 +149,7 @@ export default function FleetSectionV3() {
 
               {/* Specs & Info */}
               <div>
-                <h3 className="text-xl font-bold text-[#4A3B2A] mb-4 group-hover:text-[#FF9C0A] transition-colors">
+                <h3 className="text-xl font-bold text-[#002F5C] mb-4 group-hover:text-[#FF9C0A] transition-colors">
                   {aircraft.name}
                 </h3>
 
@@ -159,7 +159,7 @@ export default function FleetSectionV3() {
                       <span className="text-slate-400 font-medium text-[10px] uppercase tracking-wider">
                         {spec.label}
                       </span>
-                      <span className="text-[#4A3B2A] font-bold mt-0.5">
+                      <span className="text-[#002F5C] font-bold mt-0.5">
                         {spec.value}
                       </span>
                     </div>
@@ -171,13 +171,13 @@ export default function FleetSectionV3() {
               <div className="flex items-center justify-between pt-2">
                 <a
                   href="#"
-                  className="text-xs font-bold uppercase tracking-wider text-slate-700 hover:text-[#4A3B2A] flex items-center space-x-1"
+                  className="text-xs font-bold uppercase tracking-wider text-slate-700 hover:text-[#002F5C] flex items-center space-x-1"
                 >
                   <span>Inspect Spec</span>
                   <ArrowUpRight className="w-3.5 h-3.5" />
                 </a>
 
-                <button className="bg-[#FF9C0A] hover:bg-[#e08800] text-[#4A3B2A] text-xs font-bold uppercase tracking-wider px-5 py-2.5 rounded-full transition-all shadow-sm cursor-pointer">
+                <button className="bg-[#FF9C0A] hover:bg-[#e08800] text-[#002F5C] text-xs font-bold uppercase tracking-wider px-5 py-2.5 rounded-full transition-all shadow-sm cursor-pointer">
                   Book Now
                 </button>
               </div>

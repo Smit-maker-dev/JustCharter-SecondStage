@@ -496,7 +496,7 @@ export default function Account() {
 
             {tabIndex === 1 && (
               <>
-                <div className="mt-4 text-[#4A3B2A] text-sm">
+                <div className="mt-4 text-[#002F5C] text-sm">
                   <p className="mt-6 text-md  font-semibold ">
                     Company / Organization Name
                   </p>
@@ -635,7 +635,7 @@ export default function Account() {
 
                   <button
                     onClick={handleSaveProfessionalInfo}
-                    className="cursor-pointer mt-6 bg-[#FF9C0A] hover:bg-yellow-500 text-[#4A3B2A] font-bold px-12 py-2 rounded-lg"
+                    className="cursor-pointer mt-6 bg-[#FF9C0A] hover:bg-yellow-500 text-[#002F5C] font-bold px-12 py-2 rounded-lg"
                   >
                     Save
                   </button>

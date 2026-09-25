@@ -67,13 +67,13 @@ export default function LoginPage() {
             <img src="/images/Blacklogo.png" alt="JustCharter Logo" className="h-11" />
           </div>
 
-          <h2 className="text-3xl font-bold text-[#4A3B2A] mb-8">
+          <h2 className="text-3xl font-bold text-[#002F5C] mb-8">
             Welcome to JustCharter
           </h2>
 
           <form className="space-y-6" onSubmit={handleSubmit}>
             <div>
-              <label className="text-sm text-[#4A3B2A] mb-2 block">
+              <label className="text-sm text-[#002F5C] mb-2 block">
                 Email Address
               </label>
               <input
@@ -87,7 +87,7 @@ export default function LoginPage() {
             </div>
 
             <div>
-              <label className="text-sm text-[#4A3B2A] mb-2 block">
+              <label className="text-sm text-[#002F5C] mb-2 block">
                 Password
               </label>
               <div className="relative">

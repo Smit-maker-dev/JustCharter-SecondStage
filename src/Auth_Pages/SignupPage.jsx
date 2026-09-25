@@ -132,7 +132,7 @@ export default function SignupPage() {
             </div>
           </div>
 
-          <h2 className="text-2xl font-bold text-[#4A3B2A] mb-6">
+          <h2 className="text-2xl font-bold text-[#002F5C] mb-6">
             Welcome to JustCharter
           </h2>
           <form onSubmit={handleSubmit} className="space-y-4">
@@ -284,18 +284,18 @@ export default function SignupPage() {
                 onChange={handleChange}
                 className="mt-1  accent-black"
               />
-              <span className="text-sm text-[#4A3B2A]">
+              <span className="text-sm text-[#002F5C]">
                 I want to receive emails about the product, feature updates,
                 events, and marketing promotions.
               </span>
             </div>
             <p className="text-xs mt-2 text-gray-600">
               By creating an account, you agree to the{" "}
-              <a href="#" className="underline text-[#4A3B2A]">
+              <a href="#" className="underline text-[#002F5C]">
                 Terms
               </a>{" "}
               and Condition{" "}
-              <a href="#" className="underline text-[#4A3B2A]">
+              <a href="#" className="underline text-[#002F5C]">
                 Privacy & Policy
               </a>
               .

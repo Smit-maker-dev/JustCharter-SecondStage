@@ -34,7 +34,7 @@ export default function ServicesSectionV3() {
   ];
 
   return (
-    <section className="py-24 bg-stone-50/50 font-sans text-[#4A3B2A] overflow-hidden">
+    <section className="py-24 bg-stone-50/50 font-sans text-[#002F5C] overflow-hidden">
       <div className="max-w-7xl mx-auto px-6 lg:px-12">
         
         {/* Section Header */}
@@ -46,7 +46,7 @@ export default function ServicesSectionV3() {
             </span>
           </div>
 
-          <h2 className="text-3xl sm:text-5xl font-bold tracking-tight text-[#4A3B2A] mb-4">
+          <h2 className="text-3xl sm:text-5xl font-bold tracking-tight text-[#002F5C] mb-4">
             Premium Aviation Services
           </h2>
 
@@ -72,7 +72,7 @@ export default function ServicesSectionV3() {
                   {service.tag}
                 </span>
 
-                <h3 className="text-xl font-bold text-[#4A3B2A] mb-3 group-hover:text-[#FF9C0A] transition-colors">
+                <h3 className="text-xl font-bold text-[#002F5C] mb-3 group-hover:text-[#FF9C0A] transition-colors">
                   {service.title}
                 </h3>
 
@@ -81,7 +81,7 @@ export default function ServicesSectionV3() {
                 </p>
               </div>
 
-              <div className="pt-6 mt-6 border-t border-slate-100 flex items-center justify-between text-xs font-semibold text-slate-400 group-hover:text-[#4A3B2A] transition-colors">
+              <div className="pt-6 mt-6 border-t border-slate-100 flex items-center justify-between text-xs font-semibold text-slate-400 group-hover:text-[#002F5C] transition-colors">
                 <span>Learn More</span>
                 <ArrowRight className="w-4 h-4 text-[#FF9C0A] group-hover:translate-x-1 transition-transform" />
               </div>

@@ -44,7 +44,7 @@ export default function FleetSectionV5() {
   const homeDisplayData = filteredData.slice(0, 6);
 
   return (
-    <section className="py-28 bg-stone-50/60 font-sans text-[#4A3B2A] overflow-hidden">
+    <section className="py-28 bg-stone-50/60 font-sans text-[#002F5C] overflow-hidden">
       <div className="max-w-7xl mx-auto px-6 lg:px-12">
         
         {/* Section Header & Minimalist Text Tab Navigation */}
@@ -56,7 +56,7 @@ export default function FleetSectionV5() {
                 Out-Of-Bounds Engineering
               </span>
             </div>
-            <h2 className="text-3xl sm:text-5xl lg:text-6xl font-serif font-normal tracking-tight text-[#4A3B2A]">
+            <h2 className="text-3xl sm:text-5xl lg:text-6xl font-serif font-normal tracking-tight text-[#002F5C]">
               Exceptional Aircraft Selection
             </h2>
           </div>
@@ -69,7 +69,7 @@ export default function FleetSectionV5() {
                 onClick={() => setActiveFilter(filter)}
                 className={`text-xs font-semibold uppercase tracking-wider transition-all cursor-pointer whitespace-nowrap pb-2 border-b-2 -mb-2 ${
                   activeFilter === filter
-                    ? "text-[#4A3B2A] border-[#FF9C0A]"
+                    ? "text-[#002F5C] border-[#FF9C0A]"
                     : "text-stone-400 border-transparent hover:text-stone-700"
                 }`}
               >
@@ -102,7 +102,7 @@ export default function FleetSectionV5() {
             <div className="mt-16 sm:mt-20 text-center">
               <Link
                 to="/fleet"
-                className="bg-stone-900 hover:bg-[#FF9C0A] hover:text-[#4A3B2A] text-white font-semibold text-xs uppercase tracking-wider px-8 py-4 rounded-xl shadow-sm inline-flex items-center space-x-2 transition-all cursor-pointer group"
+                className="bg-stone-900 hover:bg-[#FF9C0A] hover:text-[#002F5C] text-white font-semibold text-xs uppercase tracking-wider px-8 py-4 rounded-xl shadow-sm inline-flex items-center space-x-2 transition-all cursor-pointer group"
               >
                 <span>View Full Fleet</span>
                 <ArrowUpRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />

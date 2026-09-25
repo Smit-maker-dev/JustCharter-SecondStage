@@ -49,7 +49,7 @@ export default function FaqSectionV5() {
   };
 
   return (
-    <section className="py-24 sm:py-28 bg-white font-sans text-[#4A3B2A] overflow-hidden border-t border-stone-200/60">
+    <section className="py-24 sm:py-28 bg-white font-sans text-[#002F5C] overflow-hidden border-t border-stone-200/60">
       <div className="max-w-5xl mx-auto px-6 lg:px-12">
         
         {/* Section Header */}
@@ -61,7 +61,7 @@ export default function FaqSectionV5() {
             </span>
           </div>
 
-          <h2 className="text-4xl sm:text-5xl lg:text-6xl font-serif font-normal tracking-tight text-[#4A3B2A] mb-6">
+          <h2 className="text-4xl sm:text-5xl lg:text-6xl font-serif font-normal tracking-tight text-[#002F5C] mb-6">
             Questions, Answered
           </h2>
 
@@ -82,7 +82,7 @@ export default function FaqSectionV5() {
                   className="w-full flex items-center justify-between text-left group cursor-pointer focus:outline-none"
                   aria-expanded={isOpen}
                 >
-                  <span className="text-lg sm:text-xl font-serif font-normal text-[#4A3B2A] group-hover:text-[#FF9C0A] transition-colors pr-6">
+                  <span className="text-lg sm:text-xl font-serif font-normal text-[#002F5C] group-hover:text-[#FF9C0A] transition-colors pr-6">
                     {faq.q}
                   </span>
                   <div className="p-1.5 sm:p-2 rounded-full bg-stone-50 border border-stone-200/80 text-stone-600 group-hover:border-[#FF9C0A]/50 transition-all flex-shrink-0">

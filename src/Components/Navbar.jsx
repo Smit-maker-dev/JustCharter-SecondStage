@@ -124,7 +124,7 @@ export default function Navbar() {
             <li className="relative">
               <div
                 className={`flex justify-center items-center space-x-1 cursor-pointer transition-colors duration-300 ${
-                  showScrolledStyle ? "text-[#4A3B2A]" : "text-white"
+                  showScrolledStyle ? "text-[#002F5C]" : "text-white"
                 }`}
               >
                 <span>Services</span>
@@ -171,7 +171,7 @@ export default function Navbar() {
                     isActive
                       ? "text-[#FF9C0A] font-semibold"
                       : showScrolledStyle
-                      ? "text-[#4A3B2A]"
+                      ? "text-[#002F5C]"
                       : "text-white"
                   }`}
                   onClick={() => navigate(item.path)}
@@ -204,8 +204,8 @@ export default function Navbar() {
                 onClick={() => navigate("/register")}
                 className={`cursor-pointer text-sm px-6 py-2  rounded-md transition ${
                   showScrolledStyle
-                    ? "text-[#4A3B2A] hover:bg-[#FF9C0A]  hover:text-white"
-                    : "text-white hover:bg-[#FF9C0A]  hover:text-[#4A3B2A]"
+                    ? "text-[#002F5C] hover:bg-[#FF9C0A]  hover:text-white"
+                    : "text-white hover:bg-[#FF9C0A]  hover:text-[#002F5C]"
                 }`}
               >
                 Sign Up
@@ -227,7 +227,7 @@ export default function Navbar() {
             <button
               onClick={toggleMobileMenu}
               className={`text-xl transition-colors duration-300 ${
-                showScrolledStyle ? "text-[#4A3B2A]" : "text-white"
+                showScrolledStyle ? "text-[#002F5C]" : "text-white"
               }`}
             >
               {isMobileMenuOpen ? <IoClose /> : <FaBars />}
@@ -250,7 +250,7 @@ export default function Navbar() {
               </li>
               <li
                 className={`cursor-pointer transition-colors duration-300 ${
-                  showScrolledStyle ? "text-[#000000]" : "text-[#4A3B2A]"
+                  showScrolledStyle ? "text-[#000000]" : "text-[#002F5C]"
                 }`}
                 onClick={() => navigate("/bookings")}
               >
@@ -260,7 +260,7 @@ export default function Navbar() {
               <li>
                 <div
                   className={`flex justify-center items-center space-x-1 cursor-pointer transition-colors duration-300 ${
-                    showScrolledStyle ? "text-[#4A3B2A]" : "text-[#4A3B2A]"
+                    showScrolledStyle ? "text-[#002F5C]" : "text-[#002F5C]"
                   }`}
                 >
                   <span>Services</span>
@@ -268,21 +268,21 @@ export default function Navbar() {
               </li>
               <li
                 className={`cursor-pointer transition-colors duration-300 ${
-                  showScrolledStyle ? "text-[#000000]" : "text-[#4A3B2A]"
+                  showScrolledStyle ? "text-[#000000]" : "text-[#002F5C]"
                 }`}
               >
                 Event
               </li>
               <li
                 className={`cursor-pointer transition-colors duration-300 ${
-                  showScrolledStyle ? "text-[#000000]" : "text-[#4A3B2A]"
+                  showScrolledStyle ? "text-[#000000]" : "text-[#002F5C]"
                 }`}
               >
                 Buy & Sell
               </li>
               <li
                 className={`cursor-pointer transition-colors duration-300 ${
-                  showScrolledStyle ? "text-[#000000]" : "text-[#4A3B2A]"
+                  showScrolledStyle ? "text-[#000000]" : "text-[#002F5C]"
                 }`}
               >
                 About
@@ -304,8 +304,8 @@ export default function Navbar() {
                       isActive
                         ? "text-[#FF9C0A] font-semibold"
                         : showScrolledStyle
-                        ? "text-[#4A3B2A]"
-                        : "text-[#4A3B2A]"
+                        ? "text-[#002F5C]"
+                        : "text-[#002F5C]"
                     }`}
                     onClick={() => {
                       setIsMobileMenuOpen(false);
@@ -332,7 +332,7 @@ export default function Navbar() {
                   </div>
                   <span
                     className={`text-sm transition-colors duration-300 ${
-                      showScrolledStyle ? "text-[#FF9C0A]" : "text-[#4A3B2A]"
+                      showScrolledStyle ? "text-[#FF9C0A]" : "text-[#002F5C]"
                     }`}
                   >
                     {firstName} {lastName}
@@ -344,8 +344,8 @@ export default function Navbar() {
                     onClick={() => navigate("/register")}
                     className={`text-sm px-4 py-2 rounded transition ${
                       showScrolledStyle
-                        ? "text-[#4A3B2A] hover:bg-[#FF9C0A] border"
-                        : "text-[#4A3B2A] hover:bg-[#FF9C0A] border hover:text-white"
+                        ? "text-[#002F5C] hover:bg-[#FF9C0A] border"
+                        : "text-[#002F5C] hover:bg-[#FF9C0A] border hover:text-white"
                     }`}
                   >
                     Sign Up

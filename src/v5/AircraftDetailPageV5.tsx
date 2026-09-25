@@ -254,7 +254,7 @@ export default function AircraftDetailPageV5() {
   }
 
   return (
-    <div className="min-h-screen bg-white text-[#4A3B2A] font-sans antialiased selection:bg-[#FF9C0A]/30 selection:text-[#4A3B2A] pt-24 sm:pt-28">
+    <div className="min-h-screen bg-white text-[#002F5C] font-sans antialiased selection:bg-[#FF9C0A]/30 selection:text-[#002F5C] pt-24 sm:pt-28">
       
       <div className="max-w-7xl mx-auto px-6 lg:px-12 pb-20">
         
@@ -262,7 +262,7 @@ export default function AircraftDetailPageV5() {
         <div className="mb-8">
           <Link
             to="/"
-            className="inline-flex items-center space-x-2 text-xs font-semibold uppercase tracking-wider text-stone-500 hover:text-[#4A3B2A] transition-colors group"
+            className="inline-flex items-center space-x-2 text-xs font-semibold uppercase tracking-wider text-stone-500 hover:text-[#002F5C] transition-colors group"
           >
             <ArrowLeft className="w-4 h-4 text-[#FF9C0A] group-hover:-translate-x-1 transition-transform" />
             <span>Back to Fleet</span>
@@ -317,7 +317,7 @@ export default function AircraftDetailPageV5() {
                 </span>
               </div>
 
-              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-serif font-normal tracking-tight text-[#4A3B2A] mb-3">
+              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-serif font-normal tracking-tight text-[#002F5C] mb-3">
                 {aircraft.name}
               </h1>
 
@@ -333,7 +333,7 @@ export default function AircraftDetailPageV5() {
             <div className="space-y-4">
               <button
                 onClick={() => navigate("/request-quote")}
-                className="w-full bg-[#FF9C0A] hover:bg-[#e08800] text-[#4A3B2A] font-bold text-xs uppercase tracking-wider py-4 px-8 rounded-xl transition-all shadow-sm hover:shadow-md flex items-center justify-center space-x-2 cursor-pointer border border-[#FF9C0A]"
+                className="w-full bg-[#FF9C0A] hover:bg-[#e08800] text-[#002F5C] font-bold text-xs uppercase tracking-wider py-4 px-8 rounded-xl transition-all shadow-sm hover:shadow-md flex items-center justify-center space-x-2 cursor-pointer border border-[#FF9C0A]"
               >
                 <span>Request This Aircraft</span>
                 <ArrowUpRight className="w-4 h-4" />
@@ -351,7 +351,7 @@ export default function AircraftDetailPageV5() {
 
         {/* 3. Key Specs Strip */}
         <div className="mb-20">
-          <h2 className="text-2xl font-serif font-normal text-[#4A3B2A] mb-6">
+          <h2 className="text-2xl font-serif font-normal text-[#002F5C] mb-6">
             Technical Specifications
           </h2>
 
@@ -362,7 +362,7 @@ export default function AircraftDetailPageV5() {
                 <Navigation className="w-4 h-4 text-[#FF9C0A]" />
                 <span className="text-[10px] font-bold uppercase tracking-wider">Max Range</span>
               </div>
-              <span className="text-lg sm:text-xl font-serif font-semibold text-[#4A3B2A]">
+              <span className="text-lg sm:text-xl font-serif font-semibold text-[#002F5C]">
                 {aircraft.specs.range}
               </span>
             </div>
@@ -372,7 +372,7 @@ export default function AircraftDetailPageV5() {
                 <Gauge className="w-4 h-4 text-[#FF9C0A]" />
                 <span className="text-[10px] font-bold uppercase tracking-wider">Max Speed</span>
               </div>
-              <span className="text-lg sm:text-xl font-serif font-semibold text-[#4A3B2A]">
+              <span className="text-lg sm:text-xl font-serif font-semibold text-[#002F5C]">
                 {aircraft.specs.speed}
               </span>
             </div>
@@ -382,7 +382,7 @@ export default function AircraftDetailPageV5() {
                 <Users className="w-4 h-4 text-[#FF9C0A]" />
                 <span className="text-[10px] font-bold uppercase tracking-wider">Passengers</span>
               </div>
-              <span className="text-lg sm:text-xl font-serif font-semibold text-[#4A3B2A]">
+              <span className="text-lg sm:text-xl font-serif font-semibold text-[#002F5C]">
                 {aircraft.specs.passengers}
               </span>
             </div>
@@ -392,7 +392,7 @@ export default function AircraftDetailPageV5() {
                 <Maximize className="w-4 h-4 text-[#FF9C0A]" />
                 <span className="text-[10px] font-bold uppercase tracking-wider">Cabin Height</span>
               </div>
-              <span className="text-lg sm:text-xl font-serif font-semibold text-[#4A3B2A]">
+              <span className="text-lg sm:text-xl font-serif font-semibold text-[#002F5C]">
                 {aircraft.specs.height}
               </span>
             </div>
@@ -402,7 +402,7 @@ export default function AircraftDetailPageV5() {
                 <Maximize className="w-4 h-4 text-[#FF9C0A]" />
                 <span className="text-[10px] font-bold uppercase tracking-wider">Cabin Length</span>
               </div>
-              <span className="text-lg sm:text-xl font-serif font-semibold text-[#4A3B2A]">
+              <span className="text-lg sm:text-xl font-serif font-semibold text-[#002F5C]">
                 {aircraft.specs.length}
               </span>
             </div>
@@ -412,7 +412,7 @@ export default function AircraftDetailPageV5() {
                 <Luggage className="w-4 h-4 text-[#FF9C0A]" />
                 <span className="text-[10px] font-bold uppercase tracking-wider">Baggage</span>
               </div>
-              <span className="text-lg sm:text-xl font-serif font-semibold text-[#4A3B2A]">
+              <span className="text-lg sm:text-xl font-serif font-semibold text-[#002F5C]">
                 {aircraft.specs.baggage}
               </span>
             </div>
@@ -429,7 +429,7 @@ export default function AircraftDetailPageV5() {
             </span>
           </div>
 
-          <h3 className="text-2xl sm:text-3xl font-serif font-normal text-[#4A3B2A] mb-6">
+          <h3 className="text-2xl sm:text-3xl font-serif font-normal text-[#002F5C] mb-6">
             Standout Engineering & Cabin Features
           </h3>
 
@@ -437,7 +437,7 @@ export default function AircraftDetailPageV5() {
             {aircraft.highlights.map((bullet, idx) => (
               <div key={idx} className="flex items-start space-x-3 bg-stone-50/80 p-4 rounded-xl border border-stone-200/60">
                 <CheckCircle2 className="w-5 h-5 text-[#FF9C0A] flex-shrink-0 mt-0.5" />
-                <span className="text-xs sm:text-sm font-medium text-[#4A3B2A] leading-relaxed">
+                <span className="text-xs sm:text-sm font-medium text-[#002F5C] leading-relaxed">
                   {bullet}
                 </span>
               </div>
@@ -452,13 +452,13 @@ export default function AircraftDetailPageV5() {
               <span className="text-[10px] uppercase tracking-[0.2em] font-semibold text-[#FF9C0A] block mb-1">
                 Explore More Fleet
               </span>
-              <h2 className="text-3xl sm:text-4xl font-serif font-normal text-[#4A3B2A]">
+              <h2 className="text-3xl sm:text-4xl font-serif font-normal text-[#002F5C]">
                 You Might Also Like
               </h2>
             </div>
             <Link
               to="/"
-              className="text-xs font-semibold uppercase tracking-wider text-stone-600 hover:text-[#4A3B2A] flex items-center space-x-1"
+              className="text-xs font-semibold uppercase tracking-wider text-stone-600 hover:text-[#002F5C] flex items-center space-x-1"
             >
               <span>View All</span>
               <ArrowUpRight className="w-4 h-4" />
@@ -483,7 +483,7 @@ export default function AircraftDetailPageV5() {
                 </div>
 
                 <div>
-                  <h3 className="text-xl font-serif font-normal text-[#4A3B2A] mb-4 group-hover:text-[#FF9C0A] transition-colors">
+                  <h3 className="text-xl font-serif font-normal text-[#002F5C] mb-4 group-hover:text-[#FF9C0A] transition-colors">
                     {item.name}
                   </h3>
 
@@ -492,7 +492,7 @@ export default function AircraftDetailPageV5() {
                       <span className="text-stone-400 font-medium text-[10px] uppercase tracking-wider">
                         Max Range
                       </span>
-                      <span className="text-[#4A3B2A] font-bold mt-0.5">
+                      <span className="text-[#002F5C] font-bold mt-0.5">
                         {item.specs.range}
                       </span>
                     </div>
@@ -500,7 +500,7 @@ export default function AircraftDetailPageV5() {
                       <span className="text-stone-400 font-medium text-[10px] uppercase tracking-wider">
                         Passengers
                       </span>
-                      <span className="text-[#4A3B2A] font-bold mt-0.5">
+                      <span className="text-[#002F5C] font-bold mt-0.5">
                         {item.specs.passengers}
                       </span>
                     </div>
@@ -510,7 +510,7 @@ export default function AircraftDetailPageV5() {
                 <div className="flex items-center justify-between pt-2">
                   <Link
                     to={`/aircraft/${item.id}`}
-                    className="text-xs font-semibold uppercase tracking-wider text-stone-600 hover:text-[#4A3B2A] flex items-center space-x-1"
+                    className="text-xs font-semibold uppercase tracking-wider text-stone-600 hover:text-[#002F5C] flex items-center space-x-1"
                   >
                     <span>Inspect Spec</span>
                     <ArrowUpRight className="w-3.5 h-3.5" />
@@ -518,7 +518,7 @@ export default function AircraftDetailPageV5() {
 
                   <button
                     onClick={() => navigate(`/aircraft/${item.id}`)}
-                    className="bg-stone-900 hover:bg-[#FF9C0A] hover:text-[#4A3B2A] text-white text-xs font-semibold uppercase tracking-wider px-5 py-2 rounded-xl transition-all cursor-pointer"
+                    className="bg-stone-900 hover:bg-[#FF9C0A] hover:text-[#002F5C] text-white text-xs font-semibold uppercase tracking-wider px-5 py-2 rounded-xl transition-all cursor-pointer"
                   >
                     Book Now
                   </button>

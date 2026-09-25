@@ -24,7 +24,7 @@ export default function CanceletionPolicy() {
       </header>
       <div className="md:mx-20 px-4 sm:px-6 py-12">
         <div className="bg-white rounded-lg shadow-sm p-6 sm:p-8">
-          <h2 className="text-2xl font-semibold text-[#4A3B2A] mb-6 pb-2 border-b border-gray-200">
+          <h2 className="text-2xl font-semibold text-[#002F5C] mb-6 pb-2 border-b border-gray-200">
             Cancellation & Refund Policy
           </h2>
           <p className="text-gray-700 mb-6">
@@ -34,7 +34,7 @@ export default function CanceletionPolicy() {
 
           <div className="space-y-6">
             <div>
-              <h3 className="text-lg font-medium text-[#4A3B2A] mb-2">
+              <h3 className="text-lg font-medium text-[#002F5C] mb-2">
                 1. Overview
               </h3>
               <div className="space-y-3 pl-4">
@@ -46,7 +46,7 @@ export default function CanceletionPolicy() {
             </div>
 
             <div>
-              <h3 className="text-lg font-medium text-[#4A3B2A] mb-2">
+              <h3 className="text-lg font-medium text-[#002F5C] mb-2">
                 2. Cancellation Charges
               </h3>
               <div className="space-y-3 pl-4">
@@ -66,7 +66,7 @@ export default function CanceletionPolicy() {
             </div>
 
             <div>
-              <h3 className="text-lg font-medium text-[#4A3B2A] mb-2">
+              <h3 className="text-lg font-medium text-[#002F5C] mb-2">
                 3. Refund Process
               </h3>
               <div className="space-y-3 pl-4">
@@ -86,7 +86,7 @@ export default function CanceletionPolicy() {
             </div>
 
             <div>
-              <h3 className="text-lg font-medium text-[#4A3B2A] mb-2">
+              <h3 className="text-lg font-medium text-[#002F5C] mb-2">
                 4. Non-Refundable Charges
               </h3>
               <div className="space-y-3 pl-4">
@@ -106,7 +106,7 @@ export default function CanceletionPolicy() {
             </div>
 
             <div>
-              <h3 className="text-lg font-medium text-[#4A3B2A] mb-2">
+              <h3 className="text-lg font-medium text-[#002F5C] mb-2">
                 5. Rescheduling Policy
               </h3>
               <div className="space-y-3 pl-4">
@@ -126,7 +126,7 @@ export default function CanceletionPolicy() {
             </div>
 
             <div>
-              <h3 className="text-lg font-medium text-[#4A3B2A] mb-2">
+              <h3 className="text-lg font-medium text-[#002F5C] mb-2">
                 6. Force Majeure & Operational Interruptions
               </h3>
               <div className="space-y-3 pl-4">
@@ -148,7 +148,7 @@ export default function CanceletionPolicy() {
             </div>
 
             <div>
-              <h3 className="text-lg font-medium text-[#4A3B2A] mb-2">
+              <h3 className="text-lg font-medium text-[#002F5C] mb-2">
                 7. How to Cancel
               </h3>
               <div className="space-y-3 pl-4">
@@ -167,7 +167,7 @@ export default function CanceletionPolicy() {
             </div>
 
             <div className="bg-gray-50 p-4 rounded-lg">
-              <h3 className="text-lg font-medium text-[#4A3B2A] mb-2">
+              <h3 className="text-lg font-medium text-[#002F5C] mb-2">
                 Policy Acknowledgement
               </h3>
               <p className="text-gray-700">

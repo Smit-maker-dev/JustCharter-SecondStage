@@ -93,7 +93,7 @@ export default function ResetPass() {
             <img src={Logo} alt="JustCharter Logo" className="h-10" />
           </div>
 
-          <h2 className="text-2xl md:text-3xl font-bold text-[#4A3B2A] mb-2">
+          <h2 className="text-2xl md:text-3xl font-bold text-[#002F5C] mb-2">
             Reset Password
           </h2>
           <p className="text-sm text-gray-600 mb-8">
@@ -101,7 +101,7 @@ export default function ResetPass() {
           </p>
           <form onSubmit={handleSubmit} className="space-y-6">
             <div>
-              <label className="text-sm text-[#4A3B2A] mb-2 block">
+              <label className="text-sm text-[#002F5C] mb-2 block">
                 New Password
               </label>
               <div className="relative">
@@ -128,7 +128,7 @@ export default function ResetPass() {
               </div>
             </div>
 
-            <label className="text-sm text-[#4A3B2A] mb-2 block">
+            <label className="text-sm text-[#002F5C] mb-2 block">
               Confirm New Password
             </label>
             <div className="relative">

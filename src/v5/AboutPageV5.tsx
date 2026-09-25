@@ -33,7 +33,7 @@ export default function AboutPageV5() {
   ];
 
   return (
-    <div className="min-h-screen bg-white text-[#4A3B2A] font-sans antialiased selection:bg-[#FF9C0A]/30 selection:text-[#4A3B2A]">
+    <div className="min-h-screen bg-white text-[#002F5C] font-sans antialiased selection:bg-[#FF9C0A]/30 selection:text-[#002F5C]">
       
       {/* 1. Hero Section */}
       <section className="relative min-h-[55vh] lg:min-h-[60vh] flex flex-col justify-center items-center text-center pt-32 pb-20 bg-stone-900 overflow-hidden">
@@ -70,7 +70,7 @@ export default function AboutPageV5() {
       </section>
 
       {/* 2. About Us Section */}
-      <section className="py-28 bg-stone-50/70 font-sans text-[#4A3B2A] overflow-hidden border-b border-stone-200/80">
+      <section className="py-28 bg-stone-50/70 font-sans text-[#002F5C] overflow-hidden border-b border-stone-200/80">
         <div className="max-w-4xl mx-auto px-6 text-center">
           
           <div className="inline-flex items-center space-x-2 bg-white px-4 py-1.5 rounded-full border border-stone-200/80 mb-6 shadow-sm">
@@ -80,7 +80,7 @@ export default function AboutPageV5() {
             </span>
           </div>
 
-          <h2 className="text-4xl sm:text-5xl lg:text-6xl font-serif font-normal tracking-tight text-[#4A3B2A] mb-8">
+          <h2 className="text-4xl sm:text-5xl lg:text-6xl font-serif font-normal tracking-tight text-[#002F5C] mb-8">
             About Us
           </h2>
 
@@ -105,7 +105,7 @@ export default function AboutPageV5() {
       </section>
 
       {/* 3. Vision & Mission Section (Editorial Statement Columns) */}
-      <section className="py-24 bg-white font-sans text-[#4A3B2A] overflow-hidden">
+      <section className="py-24 bg-white font-sans text-[#002F5C] overflow-hidden">
         <div className="max-w-6xl mx-auto px-6 lg:px-12">
           
           <div className="text-center max-w-3xl mx-auto mb-16">
@@ -115,7 +115,7 @@ export default function AboutPageV5() {
                 Guiding Principles
               </span>
             </div>
-            <h2 className="text-4xl sm:text-5xl font-serif font-normal tracking-tight text-[#4A3B2A]">
+            <h2 className="text-4xl sm:text-5xl font-serif font-normal tracking-tight text-[#002F5C]">
               Vision & Mission
             </h2>
           </div>
@@ -132,7 +132,7 @@ export default function AboutPageV5() {
                 </span>
               </div>
 
-              <h3 className="text-3xl sm:text-4xl font-serif font-normal text-[#4A3B2A] mb-4">
+              <h3 className="text-3xl sm:text-4xl font-serif font-normal text-[#002F5C] mb-4">
                 Our Vision
               </h3>
 
@@ -152,7 +152,7 @@ export default function AboutPageV5() {
                 </span>
               </div>
 
-              <h3 className="text-3xl sm:text-4xl font-serif font-normal text-[#4A3B2A] mb-4">
+              <h3 className="text-3xl sm:text-4xl font-serif font-normal text-[#002F5C] mb-4">
                 Our Mission
               </h3>
 
@@ -172,7 +172,7 @@ export default function AboutPageV5() {
       <ServicesSectionV5 />
 
       {/* 5. Our Values Section (Minimalist Stat Strip Style) */}
-      <section className="py-24 bg-stone-50/70 font-sans text-[#4A3B2A] overflow-hidden border-t border-stone-200/80">
+      <section className="py-24 bg-stone-50/70 font-sans text-[#002F5C] overflow-hidden border-t border-stone-200/80">
         <div className="max-w-7xl mx-auto px-6 lg:px-12">
           
           <div className="text-center max-w-3xl mx-auto mb-16">
@@ -183,7 +183,7 @@ export default function AboutPageV5() {
               </span>
             </div>
 
-            <h2 className="text-4xl sm:text-5xl lg:text-6xl font-serif font-normal tracking-tight text-[#4A3B2A]">
+            <h2 className="text-4xl sm:text-5xl lg:text-6xl font-serif font-normal tracking-tight text-[#002F5C]">
               Our Values
             </h2>
           </div>
@@ -199,7 +199,7 @@ export default function AboutPageV5() {
                   {item.tag}
                 </span>
 
-                <h3 className="text-2xl font-serif font-normal text-[#4A3B2A] mb-2">
+                <h3 className="text-2xl font-serif font-normal text-[#002F5C] mb-2">
                   {item.title}
                 </h3>
 

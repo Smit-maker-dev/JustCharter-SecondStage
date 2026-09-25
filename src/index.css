@@ -2,11 +2,11 @@
 
 @theme {
   --color-primary-accent: #FF9C0A;
-  --color-dark-text: #4A3B2A;
+  --color-dark-text: #002F5C;
 }
 
 @layer base {
   body {
-    color: #4A3B2A;
+    color: #002F5C;
   }
 }

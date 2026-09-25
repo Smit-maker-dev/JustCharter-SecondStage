@@ -31,7 +31,7 @@ export default function AboutStatsSectionV3() {
   ];
 
   return (
-    <section className="py-24 bg-stone-50/70 font-sans text-[#4A3B2A] relative overflow-hidden">
+    <section className="py-24 bg-stone-50/70 font-sans text-[#002F5C] relative overflow-hidden">
       
       {/* Background Fluid Decorative Circles */}
       <div className="absolute top-1/2 -left-32 w-96 h-96 bg-[#FF9C0A]/10 rounded-full blur-3xl pointer-events-none"></div>
@@ -51,7 +51,7 @@ export default function AboutStatsSectionV3() {
               </span>
             </div>
 
-            <h2 className="text-3xl sm:text-5xl font-bold tracking-tight text-[#4A3B2A] leading-tight mb-6">
+            <h2 className="text-3xl sm:text-5xl font-bold tracking-tight text-[#002F5C] leading-tight mb-6">
               The Premier Choice for Private Aviation
             </h2>
 
@@ -73,7 +73,7 @@ export default function AboutStatsSectionV3() {
               >
                 <div className="flex items-center justify-between mb-6">
                   {/* Clean Bordered Circular Number Badge */}
-                  <div className="w-16 h-16 rounded-full bg-stone-50 border-2 border-slate-200/80 text-[#4A3B2A] group-hover:border-[#FF9C0A] group-hover:bg-[#FF9C0A] group-hover:text-[#4A3B2A] transition-all flex items-center justify-center font-bold text-xl font-mono shadow-inner">
+                  <div className="w-16 h-16 rounded-full bg-stone-50 border-2 border-slate-200/80 text-[#002F5C] group-hover:border-[#FF9C0A] group-hover:bg-[#FF9C0A] group-hover:text-[#002F5C] transition-all flex items-center justify-center font-bold text-xl font-mono shadow-inner">
                     {stat.num}
                   </div>
                   <div className="p-3 rounded-full bg-stone-50 border border-slate-200/60">
@@ -82,7 +82,7 @@ export default function AboutStatsSectionV3() {
                 </div>
 
                 <div>
-                  <h3 className="text-base font-bold text-[#4A3B2A] uppercase tracking-wider mb-1">
+                  <h3 className="text-base font-bold text-[#002F5C] uppercase tracking-wider mb-1">
                     {stat.label}
                   </h3>
                   <p className="text-xs text-slate-500 leading-relaxed">

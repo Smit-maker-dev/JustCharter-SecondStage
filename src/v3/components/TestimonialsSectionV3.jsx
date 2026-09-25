@@ -43,7 +43,7 @@ export default function TestimonialsSectionV3() {
   const current = testimonials[currentIndex];
 
   return (
-    <section className="py-24 bg-stone-50 font-sans text-[#4A3B2A] overflow-hidden">
+    <section className="py-24 bg-stone-50 font-sans text-[#002F5C] overflow-hidden">
       <div className="max-w-5xl mx-auto px-6 lg:px-12">
         
         {/* Section Header */}
@@ -55,7 +55,7 @@ export default function TestimonialsSectionV3() {
             </span>
           </div>
 
-          <h2 className="text-3xl sm:text-5xl font-bold tracking-tight text-[#4A3B2A] mb-4">
+          <h2 className="text-3xl sm:text-5xl font-bold tracking-tight text-[#002F5C] mb-4">
             Trusted by Discerning Clients
           </h2>
 
@@ -81,7 +81,7 @@ export default function TestimonialsSectionV3() {
           </div>
 
           <blockquote className="min-h-[120px] flex items-center justify-center my-6">
-            <p className="text-xl sm:text-2xl lg:text-3xl font-serif italic text-[#4A3B2A] leading-relaxed text-center font-medium">
+            <p className="text-xl sm:text-2xl lg:text-3xl font-serif italic text-[#002F5C] leading-relaxed text-center font-medium">
               "{current.quote}"
             </p>
           </blockquote>
@@ -93,7 +93,7 @@ export default function TestimonialsSectionV3() {
                 <Users size={18} />
               </div>
               <div className="ml-3 text-left">
-                <p className="text-sm font-bold text-[#4A3B2A]">{current.name}</p>
+                <p className="text-sm font-bold text-[#002F5C]">{current.name}</p>
                 <p className="text-xs text-slate-500 font-medium">{current.title}</p>
               </div>
             </div>
@@ -102,7 +102,7 @@ export default function TestimonialsSectionV3() {
             <div className="flex items-center space-x-3">
               <button
                 onClick={prevTestimonial}
-                className="p-2.5 rounded-full border border-slate-200 hover:border-[#4A3B2A] text-slate-600 hover:text-[#4A3B2A] transition-all cursor-pointer"
+                className="p-2.5 rounded-full border border-slate-200 hover:border-[#002F5C] text-slate-600 hover:text-[#002F5C] transition-all cursor-pointer"
                 aria-label="Previous Testimonial"
               >
                 <ChevronLeft size={18} />
@@ -125,7 +125,7 @@ export default function TestimonialsSectionV3() {
 
               <button
                 onClick={nextTestimonial}
-                className="p-2.5 rounded-full border border-slate-200 hover:border-[#4A3B2A] text-slate-600 hover:text-[#4A3B2A] transition-all cursor-pointer"
+                className="p-2.5 rounded-full border border-slate-200 hover:border-[#002F5C] text-slate-600 hover:text-[#002F5C] transition-all cursor-pointer"
                 aria-label="Next Testimonial"
               >
                 <ChevronRight size={18} />
@@ -142,7 +142,7 @@ export default function TestimonialsSectionV3() {
           </p>
           <div className="inline-flex items-center space-x-2 bg-stone-100 px-4 py-2 rounded-full border border-slate-200/80 flex-shrink-0">
             <span className="w-2 h-2 rounded-full bg-[#FF9C0A]"></span>
-            <span className="text-xs font-bold uppercase tracking-widest text-[#4A3B2A]">
+            <span className="text-xs font-bold uppercase tracking-widest text-[#002F5C]">
               Global Luxury Travel Magazine
             </span>
           </div>

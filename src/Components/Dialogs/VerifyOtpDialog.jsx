@@ -106,14 +106,14 @@ export default function VerifyOtpDialog({
       </button>
 
       <DialogContent className="p-6 sm:p-8 font-inter bg-white relative">
-        <h2 className="text-[22px] sm:text-[24px] font-bold text-[#4A3B2A] mb-2">
+        <h2 className="text-[22px] sm:text-[24px] font-bold text-[#002F5C] mb-2">
           OTP Verification
         </h2>
         <p className="text-[15px] sm:text-[16px] text-gray-600 mb-8">
           We’ve sent a 6-digit code to your email
         </p>
 
-        <label className="block text-[14px] sm:text-[15px] text-[#4A3B2A] mb-2">
+        <label className="block text-[14px] sm:text-[15px] text-[#002F5C] mb-2">
           Enter Verification Code
         </label>
         <div className="relative mb-6">

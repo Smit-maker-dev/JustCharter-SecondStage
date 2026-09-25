@@ -239,7 +239,7 @@ export default function HeroSectionV5() {
   }).slice(0, 3);
 
   return (
-    <div className="relative font-sans bg-white text-[#4A3B2A] overflow-hidden">
+    <div className="relative font-sans bg-white text-[#002F5C] overflow-hidden">
       
       {/* Floating Audio Control Pill */}
       <button
@@ -316,8 +316,8 @@ export default function HeroSectionV5() {
                     }}
                     className={`px-2.5 sm:px-4 py-1.5 sm:py-2 rounded-lg text-[10px] sm:text-xs font-semibold uppercase tracking-wider transition-all cursor-pointer whitespace-nowrap ${
                       tripType === type
-                        ? "bg-white text-[#4A3B2A] shadow-sm"
-                        : "text-stone-600 hover:text-[#4A3B2A]"
+                        ? "bg-white text-[#002F5C] shadow-sm"
+                        : "text-stone-600 hover:text-[#002F5C]"
                     }`}
                   >
                     {type.replace("-", " ")}
@@ -335,7 +335,7 @@ export default function HeroSectionV5() {
                 className="inline-flex items-center space-x-2 bg-stone-50 hover:bg-stone-100 border border-stone-200/80 px-3.5 sm:px-4 py-1.5 sm:py-2 rounded-full cursor-pointer transition-colors"
               >
                 <ShieldCheck className="w-3.5 sm:w-4 h-3.5 sm:h-4 text-[#FF9C0A]" />
-                <span className="text-[10px] sm:text-xs font-serif italic text-[#4A3B2A]">
+                <span className="text-[10px] sm:text-xs font-serif italic text-[#002F5C]">
                   Direct Charter Quote
                 </span>
               </button>
@@ -363,7 +363,7 @@ export default function HeroSectionV5() {
                         }}
                         onChange={(e) => setAirportSearchQuery(e.target.value)}
                         placeholder="Search origin airport..."
-                        className="w-full bg-transparent text-xs sm:text-sm font-semibold text-[#4A3B2A] focus:outline-none"
+                        className="w-full bg-transparent text-xs sm:text-sm font-semibold text-[#002F5C] focus:outline-none"
                       />
                     </div>
                     {errors["from"] && <span className="text-[10px] text-red-500 mt-1 block px-1">{errors["from"]}</span>}
@@ -384,7 +384,7 @@ export default function HeroSectionV5() {
                             onClick={() => handleSelectAirport("from", ap.full)}
                             className="w-full text-left px-3 py-2 rounded-lg hover:bg-stone-50 transition-colors flex items-center justify-between text-xs cursor-pointer"
                           >
-                            <span className="font-semibold text-[#4A3B2A]">{ap.full}</span>
+                            <span className="font-semibold text-[#002F5C]">{ap.full}</span>
                             <span className="text-[10px] text-stone-400 font-light truncate ml-2 max-w-[140px]">{ap.name}</span>
                           </button>
                         ))}
@@ -408,7 +408,7 @@ export default function HeroSectionV5() {
                         }}
                         onChange={(e) => setAirportSearchQuery(e.target.value)}
                         placeholder="Search destination..."
-                        className="w-full bg-transparent text-xs sm:text-sm font-semibold text-[#4A3B2A] focus:outline-none"
+                        className="w-full bg-transparent text-xs sm:text-sm font-semibold text-[#002F5C] focus:outline-none"
                       />
                     </div>
                     {errors["to"] && <span className="text-[10px] text-red-500 mt-1 block px-1">{errors["to"]}</span>}
@@ -429,7 +429,7 @@ export default function HeroSectionV5() {
                             onClick={() => handleSelectAirport("to", ap.full)}
                             className="w-full text-left px-3 py-2 rounded-lg hover:bg-stone-50 transition-colors flex items-center justify-between text-xs cursor-pointer"
                           >
-                            <span className="font-semibold text-[#4A3B2A]">{ap.full}</span>
+                            <span className="font-semibold text-[#002F5C]">{ap.full}</span>
                             <span className="text-[10px] text-stone-400 font-light truncate ml-2 max-w-[140px]">{ap.name}</span>
                           </button>
                         ))}
@@ -455,7 +455,7 @@ export default function HeroSectionV5() {
                           }
                           setErrors((prev) => ({ ...prev, date: "" }));
                         }}
-                        className="w-full bg-transparent text-xs font-semibold text-[#4A3B2A] focus:outline-none cursor-pointer"
+                        className="w-full bg-transparent text-xs font-semibold text-[#002F5C] focus:outline-none cursor-pointer"
                       />
                     </div>
                     {errors["date"] && <span className="text-[10px] text-red-500 mt-1 block px-1">{errors["date"]}</span>}
@@ -477,7 +477,7 @@ export default function HeroSectionV5() {
                             setReturnDate(e.target.value);
                             setErrors((prev) => ({ ...prev, returnDate: "" }));
                           }}
-                          className="w-full bg-transparent text-xs font-semibold text-[#4A3B2A] focus:outline-none cursor-pointer"
+                          className="w-full bg-transparent text-xs font-semibold text-[#002F5C] focus:outline-none cursor-pointer"
                         />
                       </div>
                       {errors["returnDate"] && <span className="text-[10px] text-red-500 mt-1 block px-1">{errors["returnDate"]}</span>}
@@ -494,7 +494,7 @@ export default function HeroSectionV5() {
                         <Users className="w-3.5 h-3.5 text-[#FF9C0A]" />
                         <span>Guests</span>
                       </label>
-                      <span className="block text-xs sm:text-sm font-semibold text-[#4A3B2A]">
+                      <span className="block text-xs sm:text-sm font-semibold text-[#002F5C]">
                         {guestCount} Guests
                       </span>
                     </div>
@@ -504,22 +504,22 @@ export default function HeroSectionV5() {
                       <div className="absolute top-full right-0 z-50 mt-1 bg-white rounded-xl shadow-xl border border-stone-200 p-4 w-60">
                         <div className="flex items-center justify-between">
                           <div>
-                            <span className="text-xs font-bold text-[#4A3B2A] block">Passengers</span>
+                            <span className="text-xs font-bold text-[#002F5C] block">Passengers</span>
                             <span className="text-[10px] text-stone-500">Max 19 guests per jet</span>
                           </div>
                           <div className="flex items-center space-x-2">
                             <button
                               type="button"
                               onClick={() => setGuestCount(Math.max(1, guestCount - 1))}
-                              className="w-7 h-7 rounded-lg bg-stone-100 text-[#4A3B2A] font-bold flex items-center justify-center hover:bg-stone-200 transition-colors"
+                              className="w-7 h-7 rounded-lg bg-stone-100 text-[#002F5C] font-bold flex items-center justify-center hover:bg-stone-200 transition-colors"
                             >
                               -
                             </button>
-                            <span className="text-sm font-bold text-[#4A3B2A] w-4 text-center">{guestCount}</span>
+                            <span className="text-sm font-bold text-[#002F5C] w-4 text-center">{guestCount}</span>
                             <button
                               type="button"
                               onClick={() => setGuestCount(Math.min(19, guestCount + 1))}
-                              className="w-7 h-7 rounded-lg bg-stone-100 text-[#4A3B2A] font-bold flex items-center justify-center hover:bg-stone-200 transition-colors"
+                              className="w-7 h-7 rounded-lg bg-stone-100 text-[#002F5C] font-bold flex items-center justify-center hover:bg-stone-200 transition-colors"
                             >
                               +
                             </button>
@@ -533,7 +533,7 @@ export default function HeroSectionV5() {
                   <div className={`lg:col-span-2 ${tripType === "round-trip" ? "lg:col-span-12 pt-2 sm:pt-0" : ""}`}>
                     <button
                       type="submit"
-                      className="w-full h-full min-h-[48px] sm:min-h-[52px] bg-[#FF9C0A] hover:bg-[#e08800] text-[#4A3B2A] font-bold text-xs uppercase tracking-wider px-5 py-3.5 rounded-xl transition-all shadow-sm hover:shadow-md flex items-center justify-center space-x-2 cursor-pointer border border-[#FF9C0A]"
+                      className="w-full h-full min-h-[48px] sm:min-h-[52px] bg-[#FF9C0A] hover:bg-[#e08800] text-[#002F5C] font-bold text-xs uppercase tracking-wider px-5 py-3.5 rounded-xl transition-all shadow-sm hover:shadow-md flex items-center justify-center space-x-2 cursor-pointer border border-[#FF9C0A]"
                     >
                       <span>Search Flights</span>
                       <ArrowRight className="w-4 h-4" />
@@ -562,7 +562,7 @@ export default function HeroSectionV5() {
                               setAirportSearchQuery(leg.from);
                             }}
                             onChange={(e) => setAirportSearchQuery(e.target.value)}
-                            className="w-full bg-transparent text-xs font-semibold text-[#4A3B2A] focus:outline-none"
+                            className="w-full bg-transparent text-xs font-semibold text-[#002F5C] focus:outline-none"
                           />
                         </div>
                         {errors[`multi-from-${idx}`] && <span className="text-[9px] text-red-500 block px-1">{errors[`multi-from-${idx}`]}</span>}
@@ -582,7 +582,7 @@ export default function HeroSectionV5() {
                                 onClick={() => handleSelectAirport(`multi-from-${idx}`, ap.full)}
                                 className="w-full text-left px-2.5 py-1.5 rounded hover:bg-stone-50 transition-colors flex items-center justify-between text-xs cursor-pointer"
                               >
-                                <span className="font-semibold text-[#4A3B2A]">{ap.full}</span>
+                                <span className="font-semibold text-[#002F5C]">{ap.full}</span>
                                 <span className="text-[10px] text-stone-400 font-light truncate ml-2 max-w-[120px]">{ap.name}</span>
                               </button>
                             ))}
@@ -605,7 +605,7 @@ export default function HeroSectionV5() {
                               setAirportSearchQuery(leg.to);
                             }}
                             onChange={(e) => setAirportSearchQuery(e.target.value)}
-                            className="w-full bg-transparent text-xs font-semibold text-[#4A3B2A] focus:outline-none"
+                            className="w-full bg-transparent text-xs font-semibold text-[#002F5C] focus:outline-none"
                           />
                         </div>
                         {errors[`multi-to-${idx}`] && <span className="text-[9px] text-red-500 block px-1">{errors[`multi-to-${idx}`]}</span>}
@@ -625,7 +625,7 @@ export default function HeroSectionV5() {
                                 onClick={() => handleSelectAirport(`multi-to-${idx}`, ap.full)}
                                 className="w-full text-left px-2.5 py-1.5 rounded hover:bg-stone-50 transition-colors flex items-center justify-between text-xs cursor-pointer"
                               >
-                                <span className="font-semibold text-[#4A3B2A]">{ap.full}</span>
+                                <span className="font-semibold text-[#002F5C]">{ap.full}</span>
                                 <span className="text-[10px] text-stone-400 font-light truncate ml-2 max-w-[120px]">{ap.name}</span>
                               </button>
                             ))}
@@ -650,7 +650,7 @@ export default function HeroSectionV5() {
                                 prev.map((l, i) => (i === idx ? { ...l, date: newDate } : l))
                               );
                             }}
-                            className="w-full bg-transparent text-xs font-semibold text-[#4A3B2A] focus:outline-none cursor-pointer"
+                            className="w-full bg-transparent text-xs font-semibold text-[#002F5C] focus:outline-none cursor-pointer"
                           />
                         </div>
                       </div>
@@ -688,7 +688,7 @@ export default function HeroSectionV5() {
                       <div className="relative guest-stepper-container">
                         <div
                           onClick={() => setIsGuestOpen(!isGuestOpen)}
-                          className="bg-stone-50 border border-stone-200/70 px-4 py-2 rounded-xl text-xs font-semibold text-[#4A3B2A] cursor-pointer"
+                          className="bg-stone-50 border border-stone-200/70 px-4 py-2 rounded-xl text-xs font-semibold text-[#002F5C] cursor-pointer"
                         >
                           {guestCount} Guests
                         </div>
@@ -696,20 +696,20 @@ export default function HeroSectionV5() {
                         {isGuestOpen && (
                           <div className="absolute bottom-full right-0 mb-1 z-50 bg-white rounded-xl shadow-xl border border-stone-200 p-4 w-60">
                             <div className="flex items-center justify-between">
-                              <span className="text-xs font-bold text-[#4A3B2A]">Passengers</span>
+                              <span className="text-xs font-bold text-[#002F5C]">Passengers</span>
                               <div className="flex items-center space-x-2">
                                 <button
                                   type="button"
                                   onClick={() => setGuestCount(Math.max(1, guestCount - 1))}
-                                  className="w-7 h-7 rounded bg-stone-100 text-[#4A3B2A] font-bold flex items-center justify-center hover:bg-stone-200"
+                                  className="w-7 h-7 rounded bg-stone-100 text-[#002F5C] font-bold flex items-center justify-center hover:bg-stone-200"
                                 >
                                   -
                                 </button>
-                                <span className="text-sm font-bold text-[#4A3B2A] w-4 text-center">{guestCount}</span>
+                                <span className="text-sm font-bold text-[#002F5C] w-4 text-center">{guestCount}</span>
                                 <button
                                   type="button"
                                   onClick={() => setGuestCount(Math.min(19, guestCount + 1))}
-                                  className="w-7 h-7 rounded bg-stone-100 text-[#4A3B2A] font-bold flex items-center justify-center hover:bg-stone-200"
+                                  className="w-7 h-7 rounded bg-stone-100 text-[#002F5C] font-bold flex items-center justify-center hover:bg-stone-200"
                                 >
                                   +
                                 </button>
@@ -721,7 +721,7 @@ export default function HeroSectionV5() {
 
                       <button
                         type="submit"
-                        className="bg-[#FF9C0A] hover:bg-[#e08800] text-[#4A3B2A] font-bold text-xs uppercase tracking-wider px-6 py-2.5 rounded-xl transition-all shadow-sm flex items-center justify-center space-x-2 cursor-pointer"
+                        className="bg-[#FF9C0A] hover:bg-[#e08800] text-[#002F5C] font-bold text-xs uppercase tracking-wider px-6 py-2.5 rounded-xl transition-all shadow-sm flex items-center justify-center space-x-2 cursor-pointer"
                       >
                         <span>Search Flights</span>
                         <ArrowRight className="w-4 h-4" />
@@ -751,13 +751,13 @@ export default function HeroSectionV5() {
                 <span className="text-[10px] uppercase tracking-[0.2em] font-semibold text-[#FF9C0A] block mb-1">
                   Flight Options Available
                 </span>
-                <h3 className="text-2xl sm:text-3xl font-serif font-normal text-[#4A3B2A]">
+                <h3 className="text-2xl sm:text-3xl font-serif font-normal text-[#002F5C]">
                   Request a Firm Charter Quote
                 </h3>
               </div>
 
               <div className="bg-white px-4 py-2 rounded-xl border border-stone-200/80 text-xs font-medium text-stone-700">
-                <span className="font-bold text-[#4A3B2A]">Search: </span>
+                <span className="font-bold text-[#002F5C]">Search: </span>
                 {tripType === "multi-city"
                   ? `${multiLegs.length} Legs (${guestCount} Guests)`
                   : `${fromLocation} → ${toLocation} (${guestCount} Guests, ${departureDate})`}
@@ -776,11 +776,11 @@ export default function HeroSectionV5() {
                     <div>
                       <img src={jet.images[0]} alt={jet.name} className="w-full h-36 object-cover rounded-lg mb-3" />
                       <span className="text-[9px] uppercase tracking-widest text-[#FF9C0A] font-semibold block mb-1">{jet.category}</span>
-                      <h5 className="font-serif font-normal text-lg text-[#4A3B2A]">{jet.name}</h5>
+                      <h5 className="font-serif font-normal text-lg text-[#002F5C]">{jet.name}</h5>
                       <p className="text-xs text-stone-500 font-light mt-1">{jet.tagline}</p>
                     </div>
                     <div className="mt-4 pt-3 border-t border-stone-100 flex items-center justify-between text-xs">
-                      <span className="font-bold text-[#4A3B2A]">{jet.specs.range}</span>
+                      <span className="font-bold text-[#002F5C]">{jet.specs.range}</span>
                       <button
                         type="button"
                         onClick={() => navigate(`/aircraft/${jet.id}`)}
@@ -798,7 +798,7 @@ export default function HeroSectionV5() {
             {/* Concierge Contact Form */}
             {!quoteSubmitted ? (
               <form onSubmit={handleContactSubmit} className="bg-white p-6 sm:p-8 rounded-xl border border-stone-200/80">
-                <h4 className="text-lg font-serif font-normal text-[#4A3B2A] mb-2">
+                <h4 className="text-lg font-serif font-normal text-[#002F5C] mb-2">
                   Send Details to Concierge Team
                 </h4>
                 <p className="text-xs text-stone-500 font-light mb-6">
@@ -814,7 +814,7 @@ export default function HeroSectionV5() {
                       value={contactForm.name}
                       onChange={(e) => setContactForm({ ...contactForm, name: e.target.value })}
                       placeholder="e.g. Jonathan Harrington"
-                      className="w-full bg-stone-50 border border-stone-200 p-2.5 rounded-lg text-xs text-[#4A3B2A] focus:outline-none"
+                      className="w-full bg-stone-50 border border-stone-200 p-2.5 rounded-lg text-xs text-[#002F5C] focus:outline-none"
                     />
                   </div>
                   <div>
@@ -825,7 +825,7 @@ export default function HeroSectionV5() {
                       value={contactForm.email}
                       onChange={(e) => setContactForm({ ...contactForm, email: e.target.value })}
                       placeholder="e.g. j.harrington@company.com"
-                      className="w-full bg-stone-50 border border-stone-200 p-2.5 rounded-lg text-xs text-[#4A3B2A] focus:outline-none"
+                      className="w-full bg-stone-50 border border-stone-200 p-2.5 rounded-lg text-xs text-[#002F5C] focus:outline-none"
                     />
                   </div>
                   <div>
@@ -836,14 +836,14 @@ export default function HeroSectionV5() {
                       value={contactForm.phone}
                       onChange={(e) => setContactForm({ ...contactForm, phone: e.target.value })}
                       placeholder="+1 (555) 019-2834"
-                      className="w-full bg-stone-50 border border-stone-200 p-2.5 rounded-lg text-xs text-[#4A3B2A] focus:outline-none"
+                      className="w-full bg-stone-50 border border-stone-200 p-2.5 rounded-lg text-xs text-[#002F5C] focus:outline-none"
                     />
                   </div>
                 </div>
 
                 <button
                   type="submit"
-                  className="bg-[#FF9C0A] hover:bg-[#e08800] text-[#4A3B2A] font-bold text-xs uppercase tracking-wider px-8 py-3.5 rounded-xl transition-all shadow-sm cursor-pointer"
+                  className="bg-[#FF9C0A] hover:bg-[#e08800] text-[#002F5C] font-bold text-xs uppercase tracking-wider px-8 py-3.5 rounded-xl transition-all shadow-sm cursor-pointer"
                 >
                   Submit Quote Request
                 </button>
@@ -869,7 +869,7 @@ export default function HeroSectionV5() {
             
             <button
               onClick={() => setIsQuickQuoteOpen(false)}
-              className="absolute top-4 right-4 p-2 text-stone-400 hover:text-[#4A3B2A] transition-colors"
+              className="absolute top-4 right-4 p-2 text-stone-400 hover:text-[#002F5C] transition-colors"
             >
               <X className="w-5 h-5" />
             </button>
@@ -883,7 +883,7 @@ export default function HeroSectionV5() {
                   </span>
                 </div>
 
-                <h3 className="text-2xl font-serif font-normal text-[#4A3B2A] mb-1">
+                <h3 className="text-2xl font-serif font-normal text-[#002F5C] mb-1">
                   Request Quick Quote
                 </h3>
 
@@ -900,7 +900,7 @@ export default function HeroSectionV5() {
                       value={quickQuoteForm.name}
                       onChange={(e) => setQuickQuoteForm({ ...quickQuoteForm, name: e.target.value })}
                       placeholder="e.g. Sophia Williams"
-                      className="w-full bg-stone-50 border border-stone-200 p-3 rounded-xl text-xs text-[#4A3B2A] focus:outline-none"
+                      className="w-full bg-stone-50 border border-stone-200 p-3 rounded-xl text-xs text-[#002F5C] focus:outline-none"
                     />
                   </div>
 
@@ -912,7 +912,7 @@ export default function HeroSectionV5() {
                       value={quickQuoteForm.phone}
                       onChange={(e) => setQuickQuoteForm({ ...quickQuoteForm, phone: e.target.value })}
                       placeholder="+1 (555) 019-2834"
-                      className="w-full bg-stone-50 border border-stone-200 p-3 rounded-xl text-xs text-[#4A3B2A] focus:outline-none"
+                      className="w-full bg-stone-50 border border-stone-200 p-3 rounded-xl text-xs text-[#002F5C] focus:outline-none"
                     />
                   </div>
 
@@ -923,14 +923,14 @@ export default function HeroSectionV5() {
                       value={quickQuoteForm.route}
                       onChange={(e) => setQuickQuoteForm({ ...quickQuoteForm, route: e.target.value })}
                       placeholder="e.g. New York to London, Oct 12"
-                      className="w-full bg-stone-50 border border-stone-200 p-3 rounded-xl text-xs text-[#4A3B2A] focus:outline-none"
+                      className="w-full bg-stone-50 border border-stone-200 p-3 rounded-xl text-xs text-[#002F5C] focus:outline-none"
                     />
                   </div>
                 </div>
 
                 <button
                   type="submit"
-                  className="w-full bg-[#FF9C0A] hover:bg-[#e08800] text-[#4A3B2A] font-bold text-xs uppercase tracking-wider py-3.5 rounded-xl transition-all shadow-sm cursor-pointer"
+                  className="w-full bg-[#FF9C0A] hover:bg-[#e08800] text-[#002F5C] font-bold text-xs uppercase tracking-wider py-3.5 rounded-xl transition-all shadow-sm cursor-pointer"
                 >
                   Request Callback
                 </button>
@@ -938,7 +938,7 @@ export default function HeroSectionV5() {
             ) : (
               <div className="text-center py-6">
                 <CheckCircle2 className="w-10 h-10 text-emerald-600 mx-auto mb-3" />
-                <h4 className="text-xl font-serif font-normal text-[#4A3B2A] mb-1">Callback Requested</h4>
+                <h4 className="text-xl font-serif font-normal text-[#002F5C] mb-1">Callback Requested</h4>
                 <p className="text-xs text-stone-600 font-light leading-relaxed mb-6">
                   Thank you {quickQuoteForm.name}. A senior flight manager will call your mobile number directly to arrange your charter.
                 </p>

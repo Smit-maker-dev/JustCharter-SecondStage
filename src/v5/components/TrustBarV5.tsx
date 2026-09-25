@@ -10,7 +10,7 @@ const certifications = [
 
 export default function TrustBarV5() {
   return (
-    <section className="bg-white border-y border-stone-200/80 py-10 font-sans text-[#4A3B2A]">
+    <section className="bg-white border-y border-stone-200/80 py-10 font-sans text-[#002F5C]">
       <div className="max-w-7xl mx-auto px-6 lg:px-12">
         <div className="flex flex-col md:flex-row items-center justify-between gap-6">
           
@@ -19,7 +19,7 @@ export default function TrustBarV5() {
               <ShieldCheck className="w-5 h-5" />
             </div>
             <div>
-              <p className="text-xs font-serif italic text-[#4A3B2A]">
+              <p className="text-xs font-serif italic text-[#002F5C]">
                 Certified Safety Standards
               </p>
               <p className="text-[11px] text-stone-500 font-light">
@@ -37,7 +37,7 @@ export default function TrustBarV5() {
               >
                 <CheckCircle2 className="w-4 h-4 text-[#FF9C0A] flex-shrink-0" />
                 <div>
-                  <p className="text-xs font-semibold text-[#4A3B2A] leading-none">
+                  <p className="text-xs font-semibold text-[#002F5C] leading-none">
                     {cert.name}
                   </p>
                   <p className="text-[9px] text-stone-500 font-light leading-tight mt-0.5 hidden sm:block">

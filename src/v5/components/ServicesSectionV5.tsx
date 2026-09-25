@@ -30,7 +30,7 @@ export default function ServicesSectionV5() {
   ];
 
   return (
-    <section className="py-24 bg-white font-sans text-[#4A3B2A] overflow-hidden">
+    <section className="py-24 bg-white font-sans text-[#002F5C] overflow-hidden">
       <div className="max-w-7xl mx-auto px-6 lg:px-12">
         
         {/* Section Header */}
@@ -42,7 +42,7 @@ export default function ServicesSectionV5() {
             </span>
           </div>
 
-          <h2 className="text-4xl sm:text-5xl lg:text-6xl font-serif font-normal tracking-tight text-[#4A3B2A] mb-6">
+          <h2 className="text-4xl sm:text-5xl lg:text-6xl font-serif font-normal tracking-tight text-[#002F5C] mb-6">
             Premium Aviation Services
           </h2>
 
@@ -69,7 +69,7 @@ export default function ServicesSectionV5() {
                   </span>
                 </div>
 
-                <h3 className="text-lg sm:text-xl font-serif font-normal text-[#4A3B2A] mb-2 group-hover:text-[#FF9C0A] transition-colors">
+                <h3 className="text-lg sm:text-xl font-serif font-normal text-[#002F5C] mb-2 group-hover:text-[#FF9C0A] transition-colors">
                   {service.title}
                 </h3>
 
@@ -78,7 +78,7 @@ export default function ServicesSectionV5() {
                 </p>
               </div>
 
-              <div className="pt-3 mt-4 border-t border-stone-200/60 w-full flex items-center justify-between text-xs font-semibold text-stone-500 group-hover:text-[#4A3B2A] transition-colors">
+              <div className="pt-3 mt-4 border-t border-stone-200/60 w-full flex items-center justify-between text-xs font-semibold text-stone-500 group-hover:text-[#002F5C] transition-colors">
                 <span>Learn More</span>
                 <ArrowRight className="w-3.5 h-3.5 text-[#FF9C0A] group-hover:translate-x-1 transition-transform" />
               </div>

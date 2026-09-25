@@ -19,7 +19,7 @@ const advantages = [
 
 export default function MembershipSafetySectionV3() {
   return (
-    <section className="py-24 bg-white font-sans text-[#4A3B2A] overflow-hidden">
+    <section className="py-24 bg-white font-sans text-[#002F5C] overflow-hidden">
       <div className="max-w-7xl mx-auto px-6 lg:px-12">
         
         {/* Overlapping Layered Design Container */}
@@ -56,7 +56,7 @@ export default function MembershipSafetySectionV3() {
                   </span>
                 </div>
 
-                <h3 className="text-2xl sm:text-3xl font-bold text-[#4A3B2A] mb-4">
+                <h3 className="text-2xl sm:text-3xl font-bold text-[#002F5C] mb-4">
                   Privileged Access & Rates
                 </h3>
 
@@ -84,7 +84,7 @@ export default function MembershipSafetySectionV3() {
                   </span>
                 </div>
 
-                <h3 className="text-2xl sm:text-3xl font-bold text-[#4A3B2A] mb-4">
+                <h3 className="text-2xl sm:text-3xl font-bold text-[#002F5C] mb-4">
                   Uncompromising Protection
                 </h3>
 

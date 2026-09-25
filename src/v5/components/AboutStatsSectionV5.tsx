@@ -34,7 +34,7 @@ export default function AboutStatsSectionV5() {
   ];
 
   return (
-    <section className="py-28 bg-white font-sans text-[#4A3B2A] relative overflow-hidden">
+    <section className="py-28 bg-white font-sans text-[#002F5C] relative overflow-hidden">
       <div className="max-w-7xl mx-auto px-6 lg:px-12">
         
         {/* Header */}
@@ -46,7 +46,7 @@ export default function AboutStatsSectionV5() {
             </span>
           </div>
 
-          <h2 className="text-4xl sm:text-5xl lg:text-6xl font-serif font-normal tracking-tight text-[#4A3B2A] leading-tight">
+          <h2 className="text-4xl sm:text-5xl lg:text-6xl font-serif font-normal tracking-tight text-[#002F5C] leading-tight">
             The Premier Choice for Private Aviation
           </h2>
         </div>
@@ -96,10 +96,10 @@ export default function AboutStatsSectionV5() {
                 </div>
 
                 <div className="flex flex-wrap items-baseline gap-2 sm:space-x-4">
-                  <span className="text-2xl sm:text-4xl font-serif font-normal text-[#4A3B2A] group-hover:text-[#FF9C0A] transition-colors">
+                  <span className="text-2xl sm:text-4xl font-serif font-normal text-[#002F5C] group-hover:text-[#FF9C0A] transition-colors">
                     {chap.stat}
                   </span>
-                  <span className="text-xs sm:text-base font-semibold text-[#4A3B2A] uppercase tracking-wider">
+                  <span className="text-xs sm:text-base font-semibold text-[#002F5C] uppercase tracking-wider">
                     {chap.label}
                   </span>
                 </div>
