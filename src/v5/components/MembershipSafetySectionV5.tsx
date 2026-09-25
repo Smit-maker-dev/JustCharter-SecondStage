@@ -30,7 +30,7 @@ export default function MembershipSafetySectionV5() {
             {/* Membership Advantages */}
             <div>
               <div className="inline-flex items-center space-x-2 bg-white px-4 py-1 rounded-full border border-stone-200/80 mb-3 shadow-sm">
-                <span className="w-2 h-2 rounded-full bg-[#FFD200]"></span>
+                <span className="w-2 h-2 rounded-full bg-[#FFB817]"></span>
                 <span className="text-[11px] uppercase tracking-[0.2em] font-serif italic text-stone-700">
                   Membership Advantages
                 </span>
@@ -48,7 +48,7 @@ export default function MembershipSafetySectionV5() {
                 {advantages.map((item, idx) => (
                   <li key={idx} className="flex items-start space-x-3 text-xs sm:text-sm text-[#002F5C] font-medium">
                     {/* Gold Diamond Bullet */}
-                    <span className="w-2 h-2 rotate-45 bg-[#FFD200] mt-1.5 flex-shrink-0"></span>
+                    <span className="w-2 h-2 rotate-45 bg-[#FFB817] mt-1.5 flex-shrink-0"></span>
                     <span>{item}</span>
                   </li>
                 ))}
@@ -58,7 +58,7 @@ export default function MembershipSafetySectionV5() {
             {/* Safety Commitments */}
             <div className="pt-8 border-t border-stone-200/60">
               <div className="inline-flex items-center space-x-2 bg-white px-4 py-1 rounded-full border border-stone-200/80 mb-3 shadow-sm">
-                <Shield className="w-3.5 h-3.5 text-[#FFD200]" />
+                <Shield className="w-3.5 h-3.5 text-[#FFB817]" />
                 <span className="text-[11px] uppercase tracking-[0.2em] font-serif italic text-stone-700">
                   Safety Commitments
                 </span>
@@ -76,7 +76,7 @@ export default function MembershipSafetySectionV5() {
                 {commitments.map((item, idx) => (
                   <li key={idx} className="flex items-start space-x-3 text-xs sm:text-sm text-stone-700 font-medium">
                     {/* Gold Diamond Bullet */}
-                    <span className="w-2 h-2 rotate-45 bg-[#FFD200] mt-1.5 flex-shrink-0"></span>
+                    <span className="w-2 h-2 rotate-45 bg-[#FFB817] mt-1.5 flex-shrink-0"></span>
                     <span>{item}</span>
                   </li>
                 ))}
@@ -98,7 +98,7 @@ export default function MembershipSafetySectionV5() {
               {/* Floating Pricing Badge */}
               <div className="absolute top-4 right-4 sm:top-6 sm:right-6 bg-white/95 backdrop-blur-md border border-stone-200/80 text-[#002F5C] px-3.5 sm:px-5 py-2.5 sm:py-3 rounded-xl shadow-lg font-bold flex items-center space-x-2 sm:space-x-3 z-30">
                 <span className="text-[9px] sm:text-[10px] uppercase tracking-widest text-stone-500 font-semibold">Starting at</span>
-                <span className="text-base sm:text-2xl font-serif font-normal text-[#FFD200]">$4,500</span>
+                <span className="text-base sm:text-2xl font-serif font-normal text-[#FFB817]">$4,500</span>
                 <span className="text-[10px] sm:text-xs font-normal text-stone-500">/ hr</span>
               </div>
             </div>

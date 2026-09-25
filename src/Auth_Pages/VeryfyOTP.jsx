@@ -176,7 +176,7 @@ export default function VeryfyOTP() {
                 <button
                   type="button"
                   onClick={sendOtp}
-                  className="text-[#FFD200] underline cursor-pointer"
+                  className="text-[#FFB817] underline cursor-pointer"
                 >
                   Resend OTP
                 </button>
@@ -185,7 +185,7 @@ export default function VeryfyOTP() {
 
             <button
               type="submit"
-              className="cursor-pointer w-full md:w-3/5 bg-blue-400 text-white py-2.5 mt-4 rounded-lg hover:bg-[#e6be00] transition"
+              className="cursor-pointer w-full md:w-3/5 bg-blue-400 text-white py-2.5 mt-4 rounded-lg hover:bg-[#e5a510] transition"
             >
               Verify
             </button>

@@ -20,7 +20,7 @@ export default function FooterV3() {
               JustCharter is the premier private aviation marketplace connecting discerning travelers with certified operators worldwide.
             </p>
             <div className="inline-flex items-center space-x-2 bg-white px-4 py-2 rounded-full border border-slate-200 text-xs font-semibold text-slate-800 shadow-sm">
-              <Shield className="w-4 h-4 text-[#FFD200]" />
+              <Shield className="w-4 h-4 text-[#FFB817]" />
               <span>ARGUS Platinum & Wyvern Wingman</span>
             </div>
           </div>
@@ -31,11 +31,11 @@ export default function FooterV3() {
               Platform Links
             </h4>
             <ul className="space-y-3 text-sm font-semibold text-slate-700">
-              <li><a href="/services" className="hover:text-[#FFD200] transition-colors">Aircraft Fleet</a></li>
-              <li><a href="/about" className="hover:text-[#FFD200] transition-colors">About Us</a></li>
-              <li><a href="/buy_sell" className="hover:text-[#FFD200] transition-colors">Buy & Sell Aircraft</a></li>
-              <li><a href="/event" className="hover:text-[#FFD200] transition-colors">Private Events</a></li>
-              <li><a href="/bookings" className="hover:text-[#FFD200] transition-colors">Flight Bookings</a></li>
+              <li><a href="/services" className="hover:text-[#FFB817] transition-colors">Aircraft Fleet</a></li>
+              <li><a href="/about" className="hover:text-[#FFB817] transition-colors">About Us</a></li>
+              <li><a href="/buy_sell" className="hover:text-[#FFB817] transition-colors">Buy & Sell Aircraft</a></li>
+              <li><a href="/event" className="hover:text-[#FFB817] transition-colors">Private Events</a></li>
+              <li><a href="/bookings" className="hover:text-[#FFB817] transition-colors">Flight Bookings</a></li>
             </ul>
           </div>
 

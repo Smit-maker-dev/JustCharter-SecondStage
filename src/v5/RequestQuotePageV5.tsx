@@ -187,7 +187,7 @@ export default function RequestQuotePageV5() {
   const isLargeGroupFallback = fleet.length > 0 && matchingAircraft.length === 0;
 
   return (
-    <div className="min-h-screen bg-stone-50/50 text-[#002F5C] font-sans antialiased selection:bg-[#FFD200]/30 selection:text-[#002F5C] pt-24 sm:pt-28">
+    <div className="min-h-screen bg-stone-50/50 text-[#002F5C] font-sans antialiased selection:bg-[#FFB817]/30 selection:text-[#002F5C] pt-24 sm:pt-28">
       
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 pb-24">
         
@@ -204,7 +204,7 @@ export default function RequestQuotePageV5() {
             
             <div className="flex flex-wrap items-center gap-4 sm:gap-6 text-xs sm:text-sm">
               <div className="flex items-center space-x-2 bg-stone-50 px-3.5 py-2 rounded-xl border border-stone-200/70">
-                <MapPin className="w-4 h-4 text-[#FFD200] flex-shrink-0" />
+                <MapPin className="w-4 h-4 text-[#FFB817] flex-shrink-0" />
                 <div>
                   <span className="text-[9px] uppercase font-bold text-stone-400 block tracking-wider">Route</span>
                   <span className="font-semibold text-[#002F5C]">{fromLocation} → {toLocation}</span>
@@ -212,7 +212,7 @@ export default function RequestQuotePageV5() {
               </div>
 
               <div className="flex items-center space-x-2 bg-stone-50 px-3.5 py-2 rounded-xl border border-stone-200/70">
-                <Calendar className="w-4 h-4 text-[#FFD200] flex-shrink-0" />
+                <Calendar className="w-4 h-4 text-[#FFB817] flex-shrink-0" />
                 <div>
                   <span className="text-[9px] uppercase font-bold text-stone-400 block tracking-wider">Date</span>
                   <span className="font-semibold text-[#002F5C]">
@@ -222,7 +222,7 @@ export default function RequestQuotePageV5() {
               </div>
 
               <div className="flex items-center space-x-2 bg-stone-50 px-3.5 py-2 rounded-xl border border-stone-200/70">
-                <Users className="w-4 h-4 text-[#FFD200] flex-shrink-0" />
+                <Users className="w-4 h-4 text-[#FFB817] flex-shrink-0" />
                 <div>
                   <span className="text-[9px] uppercase font-bold text-stone-400 block tracking-wider">Guests</span>
                   <span className="font-semibold text-[#002F5C]">{guestCount} Passenger{guestCount > 1 ? "s" : ""}</span>
@@ -234,7 +234,7 @@ export default function RequestQuotePageV5() {
             <button
               type="button"
               onClick={() => setIsEditingSearch(!isEditingSearch)}
-              className="inline-flex items-center space-x-1.5 text-xs font-semibold uppercase tracking-wider text-[#FFD200] hover:text-[#b88526] bg-[#FFD200]/10 hover:bg-[#FFD200]/20 px-4 py-2.5 rounded-xl transition-all border border-[#FFD200]/20 cursor-pointer self-start lg:self-auto"
+              className="inline-flex items-center space-x-1.5 text-xs font-semibold uppercase tracking-wider text-[#FFB817] hover:text-[#b88526] bg-[#FFB817]/10 hover:bg-[#FFB817]/20 px-4 py-2.5 rounded-xl transition-all border border-[#FFB817]/20 cursor-pointer self-start lg:self-auto"
             >
               <Edit3 className="w-3.5 h-3.5" />
               <span>{isEditingSearch ? "Close Editor" : "Edit Search"}</span>
@@ -257,7 +257,7 @@ export default function RequestQuotePageV5() {
                       setShowFromDropdown(true);
                     }}
                     onFocus={() => setShowFromDropdown(true)}
-                    className="w-full bg-stone-50 border border-stone-200 rounded-xl px-3.5 py-2.5 text-xs font-semibold text-[#002F5C] focus:outline-none focus:border-[#FFD200]"
+                    className="w-full bg-stone-50 border border-stone-200 rounded-xl px-3.5 py-2.5 text-xs font-semibold text-[#002F5C] focus:outline-none focus:border-[#FFB817]"
                     placeholder="Search origin airport"
                   />
                   {showFromDropdown && airports.length > 0 && (
@@ -294,7 +294,7 @@ export default function RequestQuotePageV5() {
                       setShowToDropdown(true);
                     }}
                     onFocus={() => setShowToDropdown(true)}
-                    className="w-full bg-stone-50 border border-stone-200 rounded-xl px-3.5 py-2.5 text-xs font-semibold text-[#002F5C] focus:outline-none focus:border-[#FFD200]"
+                    className="w-full bg-stone-50 border border-stone-200 rounded-xl px-3.5 py-2.5 text-xs font-semibold text-[#002F5C] focus:outline-none focus:border-[#FFB817]"
                     placeholder="Search destination airport"
                   />
                   {showToDropdown && airports.length > 0 && (
@@ -326,7 +326,7 @@ export default function RequestQuotePageV5() {
                   type="date"
                   value={editDate}
                   onChange={(e) => setEditDate(e.target.value)}
-                  className="w-full bg-stone-50 border border-stone-200 rounded-xl px-3 py-2 text-xs font-semibold text-[#002F5C] focus:outline-none focus:border-[#FFD200]"
+                  className="w-full bg-stone-50 border border-stone-200 rounded-xl px-3 py-2 text-xs font-semibold text-[#002F5C] focus:outline-none focus:border-[#FFB817]"
                 />
               </div>
 
@@ -354,7 +354,7 @@ export default function RequestQuotePageV5() {
               <div className="lg:col-span-12 flex justify-end pt-2">
                 <button
                   type="submit"
-                  className="bg-stone-900 hover:bg-[#FFD200] hover:text-[#002F5C] text-white font-bold text-xs uppercase tracking-wider px-6 py-2.5 rounded-xl transition-all cursor-pointer"
+                  className="bg-stone-900 hover:bg-[#FFB817] hover:text-[#002F5C] text-white font-bold text-xs uppercase tracking-wider px-6 py-2.5 rounded-xl transition-all cursor-pointer"
                 >
                   Update & Re-Calculate
                 </button>
@@ -368,7 +368,7 @@ export default function RequestQuotePageV5() {
         {/* 3. Section Heading */}
         <div className="mb-12">
           <div className="inline-flex items-center space-x-2 bg-white px-3.5 py-1.5 rounded-full border border-stone-200/80 mb-3 shadow-sm">
-            <span className="w-2 h-2 rounded-full bg-[#FFD200]"></span>
+            <span className="w-2 h-2 rounded-full bg-[#FFB817]"></span>
             <span className="text-[10px] uppercase tracking-[0.2em] font-serif italic text-stone-700">
               Curated Private Aircraft
             </span>
@@ -395,8 +395,8 @@ export default function RequestQuotePageV5() {
           </div>
         ) : isLargeGroupFallback ? (
           /* 6. Fallback State for Groups Exceeding Capacity */
-          <div className="bg-white border-2 border-dashed border-[#FFD200]/40 rounded-2xl p-8 sm:p-12 mb-16 text-center max-w-3xl mx-auto shadow-sm">
-            <div className="w-12 h-12 rounded-full bg-[#FFD200]/10 text-[#FFD200] flex items-center justify-center mx-auto mb-4">
+          <div className="bg-white border-2 border-dashed border-[#FFB817]/40 rounded-2xl p-8 sm:p-12 mb-16 text-center max-w-3xl mx-auto shadow-sm">
+            <div className="w-12 h-12 rounded-full bg-[#FFB817]/10 text-[#FFB817] flex items-center justify-center mx-auto mb-4">
               <Plane className="w-6 h-6" />
             </div>
             <h3 className="text-2xl font-serif font-normal text-[#002F5C] mb-3">
@@ -405,7 +405,7 @@ export default function RequestQuotePageV5() {
             <p className="text-stone-600 text-sm sm:text-base font-serif italic leading-relaxed mb-6">
               For groups of this size ({guestCount} guests), our concierge team can source additional aircraft — please share your details below.
             </p>
-            <span className="inline-flex items-center space-x-2 text-xs font-semibold text-[#FFD200] uppercase tracking-wider">
+            <span className="inline-flex items-center space-x-2 text-xs font-semibold text-[#FFB817] uppercase tracking-wider">
               <Sparkles className="w-4 h-4" />
               <span>Direct Concierge Sourcing Active</span>
             </span>
@@ -418,7 +418,7 @@ export default function RequestQuotePageV5() {
                 <div
                   key={jet.id}
                   className={`bg-white rounded-2xl p-6 border transition-all duration-300 flex flex-col justify-between group shadow-sm hover:shadow-md ${
-                    isSelected ? "border-[#FFD200] ring-2 ring-[#FFD200]/20" : "border-stone-200/80"
+                    isSelected ? "border-[#FFB817] ring-2 ring-[#FFB817]/20" : "border-stone-200/80"
                   }`}
                 >
                   <div>
@@ -429,13 +429,13 @@ export default function RequestQuotePageV5() {
                         alt={jet.name}
                         className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
                       />
-                      <span className="absolute top-3 right-3 bg-stone-950/80 backdrop-blur-md text-[#FFD200] text-[10px] uppercase tracking-widest font-semibold px-3 py-1 rounded-full border border-white/10">
+                      <span className="absolute top-3 right-3 bg-stone-950/80 backdrop-blur-md text-[#FFB817] text-[10px] uppercase tracking-widest font-semibold px-3 py-1 rounded-full border border-white/10">
                         {jet.category}
                       </span>
                     </div>
 
                     {/* Content */}
-                    <h3 className="text-2xl font-serif font-normal text-[#002F5C] mb-2 group-hover:text-[#FFD200] transition-colors">
+                    <h3 className="text-2xl font-serif font-normal text-[#002F5C] mb-2 group-hover:text-[#FFB817] transition-colors">
                       {jet.name}
                     </h3>
 
@@ -471,7 +471,7 @@ export default function RequestQuotePageV5() {
                       className="text-xs font-semibold uppercase tracking-wider text-stone-600 hover:text-[#002F5C] flex items-center space-x-1"
                     >
                       <span>Inspect Spec</span>
-                      <ArrowUpRight className="w-3.5 h-3.5 text-[#FFD200]" />
+                      <ArrowUpRight className="w-3.5 h-3.5 text-[#FFB817]" />
                     </Link>
 
                     <button
@@ -482,8 +482,8 @@ export default function RequestQuotePageV5() {
                       }}
                       className={`text-xs font-semibold uppercase tracking-wider px-5 py-2.5 rounded-xl transition-all cursor-pointer ${
                         isSelected
-                          ? "bg-[#FFD200] text-[#002F5C]"
-                          : "bg-stone-900 hover:bg-[#FFD200] hover:text-[#002F5C] text-white"
+                          ? "bg-[#FFB817] text-[#002F5C]"
+                          : "bg-stone-900 hover:bg-[#FFB817] hover:text-[#002F5C] text-white"
                       }`}
                     >
                       {isSelected ? "Selected" : "Request This Aircraft"}
@@ -504,7 +504,7 @@ export default function RequestQuotePageV5() {
               
               <div>
                 <div className="inline-flex items-center space-x-2 bg-stone-100 px-3.5 py-1 rounded-full border border-stone-200/80 mb-3">
-                  <span className="w-2 h-2 rounded-full bg-[#FFD200]"></span>
+                  <span className="w-2 h-2 rounded-full bg-[#FFB817]"></span>
                   <span className="text-[10px] uppercase tracking-widest font-serif italic text-stone-700">
                     Concierge Direct Confirmation
                   </span>
@@ -524,7 +524,7 @@ export default function RequestQuotePageV5() {
                   <div className="flex items-center space-x-3">
                     <img src={selectedAircraft.imageUrl} alt={selectedAircraft.name} className="w-16 h-10 object-cover rounded-lg" />
                     <div>
-                      <span className="text-[9px] uppercase font-bold text-[#FFD200] block">Selected Aircraft</span>
+                      <span className="text-[9px] uppercase font-bold text-[#FFB817] block">Selected Aircraft</span>
                       <span className="text-sm font-semibold text-[#002F5C]">{selectedAircraft.name}</span>
                     </div>
                   </div>
@@ -549,7 +549,7 @@ export default function RequestQuotePageV5() {
                     value={contactForm.name}
                     onChange={(e) => setContactForm({ ...contactForm, name: e.target.value })}
                     placeholder="e.g. Eleanor Vance"
-                    className="w-full bg-stone-50 border border-stone-200 rounded-xl px-4 py-3 text-xs font-semibold text-[#002F5C] focus:outline-none focus:border-[#FFD200]"
+                    className="w-full bg-stone-50 border border-stone-200 rounded-xl px-4 py-3 text-xs font-semibold text-[#002F5C] focus:outline-none focus:border-[#FFB817]"
                   />
                 </div>
 
@@ -563,7 +563,7 @@ export default function RequestQuotePageV5() {
                     value={contactForm.email}
                     onChange={(e) => setContactForm({ ...contactForm, email: e.target.value })}
                     placeholder="name@company.com"
-                    className="w-full bg-stone-50 border border-stone-200 rounded-xl px-4 py-3 text-xs font-semibold text-[#002F5C] focus:outline-none focus:border-[#FFD200]"
+                    className="w-full bg-stone-50 border border-stone-200 rounded-xl px-4 py-3 text-xs font-semibold text-[#002F5C] focus:outline-none focus:border-[#FFB817]"
                   />
                 </div>
               </div>
@@ -579,7 +579,7 @@ export default function RequestQuotePageV5() {
                     value={contactForm.phone}
                     onChange={(e) => setContactForm({ ...contactForm, phone: e.target.value })}
                     placeholder="+1 (555) 000-0000"
-                    className="w-full bg-stone-50 border border-stone-200 rounded-xl px-4 py-3 text-xs font-semibold text-[#002F5C] focus:outline-none focus:border-[#FFD200]"
+                    className="w-full bg-stone-50 border border-stone-200 rounded-xl px-4 py-3 text-xs font-semibold text-[#002F5C] focus:outline-none focus:border-[#FFB817]"
                   />
                 </div>
 
@@ -605,21 +605,21 @@ export default function RequestQuotePageV5() {
                   value={contactForm.notes}
                   onChange={(e) => setContactForm({ ...contactForm, notes: e.target.value })}
                   placeholder="In-flight catering preferences, ground transport, pet transport, etc."
-                  className="w-full bg-stone-50 border border-stone-200 rounded-xl px-4 py-3 text-xs font-medium text-[#002F5C] focus:outline-none focus:border-[#FFD200]"
+                  className="w-full bg-stone-50 border border-stone-200 rounded-xl px-4 py-3 text-xs font-medium text-[#002F5C] focus:outline-none focus:border-[#FFB817]"
                 />
               </div>
 
               <button
                 type="submit"
                 disabled={isSubmittingQuote}
-                className="w-full bg-[#FFD200] hover:bg-[#e6be00] text-[#002F5C] font-bold text-xs uppercase tracking-wider py-4 px-8 rounded-xl transition-all shadow-sm hover:shadow-md flex items-center justify-center space-x-2 cursor-pointer border border-[#FFD200]"
+                className="w-full bg-[#FFB817] hover:bg-[#e5a510] text-[#002F5C] font-bold text-xs uppercase tracking-wider py-4 px-8 rounded-xl transition-all shadow-sm hover:shadow-md flex items-center justify-center space-x-2 cursor-pointer border border-[#FFB817]"
               >
                 <span>{isSubmittingQuote ? "Submitting Request..." : "Get My Quote"}</span>
                 <ArrowRight className="w-4 h-4" />
               </button>
 
               <div className="flex items-center justify-center space-x-2 text-[11px] text-stone-500 font-light pt-2">
-                <ShieldCheck className="w-4 h-4 text-[#FFD200]" />
+                <ShieldCheck className="w-4 h-4 text-[#FFB817]" />
                 <span>Your details are kept strictly confidential. Response expected within 2 hours.</span>
               </div>
 
@@ -627,7 +627,7 @@ export default function RequestQuotePageV5() {
           ) : (
             /* Submission Confirmation Message State */
             <div className="py-8 text-center space-y-4">
-              <div className="w-16 h-16 bg-[#FFD200]/15 text-[#FFD200] rounded-full flex items-center justify-center mx-auto border border-[#FFD200]/30">
+              <div className="w-16 h-16 bg-[#FFB817]/15 text-[#FFB817] rounded-full flex items-center justify-center mx-auto border border-[#FFB817]/30">
                 <CheckCircle2 className="w-8 h-8" />
               </div>
 
@@ -643,7 +643,7 @@ export default function RequestQuotePageV5() {
                 <button
                   type="button"
                   onClick={() => navigate("/")}
-                  className="bg-stone-900 hover:bg-[#FFD200] hover:text-[#002F5C] text-white font-bold text-xs uppercase tracking-wider px-8 py-3.5 rounded-xl transition-all cursor-pointer"
+                  className="bg-stone-900 hover:bg-[#FFB817] hover:text-[#002F5C] text-white font-bold text-xs uppercase tracking-wider px-8 py-3.5 rounded-xl transition-all cursor-pointer"
                 >
                   Return to Homepage
                 </button>

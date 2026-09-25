@@ -51,7 +51,7 @@ export default function FleetSectionV5() {
         <div className="flex flex-col lg:flex-row lg:items-end justify-between mb-14 sm:mb-20 gap-6 sm:gap-8">
           <div>
             <div className="inline-flex items-center space-x-2 bg-white px-4 py-1.5 rounded-full border border-stone-200/80 mb-3 shadow-sm">
-              <span className="w-2 h-2 rounded-full bg-[#FFD200]"></span>
+              <span className="w-2 h-2 rounded-full bg-[#FFB817]"></span>
               <span className="text-xs uppercase tracking-[0.2em] font-serif italic text-stone-700">
                 Out-Of-Bounds Engineering
               </span>
@@ -69,7 +69,7 @@ export default function FleetSectionV5() {
                 onClick={() => setActiveFilter(filter)}
                 className={`text-xs font-semibold uppercase tracking-wider transition-all cursor-pointer whitespace-nowrap pb-2 border-b-2 -mb-2 ${
                   activeFilter === filter
-                    ? "text-[#002F5C] border-[#FFD200]"
+                    ? "text-[#002F5C] border-[#FFB817]"
                     : "text-stone-400 border-transparent hover:text-stone-700"
                 }`}
               >
@@ -102,7 +102,7 @@ export default function FleetSectionV5() {
             <div className="mt-16 sm:mt-20 text-center">
               <Link
                 to="/fleet"
-                className="bg-stone-900 hover:bg-[#FFD200] hover:text-[#002F5C] text-white font-semibold text-xs uppercase tracking-wider px-8 py-4 rounded-xl shadow-sm inline-flex items-center space-x-2 transition-all cursor-pointer group"
+                className="bg-stone-900 hover:bg-[#FFB817] hover:text-[#002F5C] text-white font-semibold text-xs uppercase tracking-wider px-8 py-4 rounded-xl shadow-sm inline-flex items-center space-x-2 transition-all cursor-pointer group"
               >
                 <span>View Full Fleet</span>
                 <ArrowUpRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />

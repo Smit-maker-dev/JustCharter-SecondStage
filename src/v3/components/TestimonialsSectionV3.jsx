@@ -49,7 +49,7 @@ export default function TestimonialsSectionV3() {
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-16">
           <div className="inline-flex items-center space-x-2 bg-white px-4 py-1.5 rounded-full border border-slate-200/80 shadow-sm mb-4">
-            <span className="w-2 h-2 rounded-full bg-[#FFD200]"></span>
+            <span className="w-2 h-2 rounded-full bg-[#FFB817]"></span>
             <span className="text-xs uppercase tracking-[0.2em] font-semibold text-slate-700">
               Verified Client Reviews
             </span>
@@ -73,7 +73,7 @@ export default function TestimonialsSectionV3() {
                 <Star
                   key={i}
                   size={18}
-                  className="text-[#FFD200] fill-[#FFD200]"
+                  className="text-[#FFB817] fill-[#FFB817]"
                 />
               ))}
             </div>
@@ -89,7 +89,7 @@ export default function TestimonialsSectionV3() {
           <div className="flex flex-col sm:flex-row items-center justify-between pt-8 border-t border-slate-100 gap-4">
             
             <div className="flex items-center">
-              <div className="w-11 h-11 rounded-full bg-slate-900 text-[#FFD200] flex items-center justify-center font-bold text-sm">
+              <div className="w-11 h-11 rounded-full bg-slate-900 text-[#FFB817] flex items-center justify-center font-bold text-sm">
                 <Users size={18} />
               </div>
               <div className="ml-3 text-left">
@@ -115,7 +115,7 @@ export default function TestimonialsSectionV3() {
                     onClick={() => setCurrentIndex(idx)}
                     className={`h-2 rounded-full transition-all cursor-pointer ${
                       currentIndex === idx
-                        ? "w-6 bg-[#FFD200]"
+                        ? "w-6 bg-[#FFB817]"
                         : "w-2 bg-slate-300 hover:bg-slate-400"
                     }`}
                     aria-label={`Go to slide ${idx + 1}`}
@@ -141,7 +141,7 @@ export default function TestimonialsSectionV3() {
             "JustCharter consistently exceeds our expectations, setting the gold standard for luxury private aviation."
           </p>
           <div className="inline-flex items-center space-x-2 bg-stone-100 px-4 py-2 rounded-full border border-slate-200/80 flex-shrink-0">
-            <span className="w-2 h-2 rounded-full bg-[#FFD200]"></span>
+            <span className="w-2 h-2 rounded-full bg-[#FFB817]"></span>
             <span className="text-xs font-bold uppercase tracking-widest text-[#002F5C]">
               Global Luxury Travel Magazine
             </span>

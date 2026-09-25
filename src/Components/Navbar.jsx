@@ -107,7 +107,7 @@ export default function Navbar() {
 
           {/* <ul className="hidden lg:flex space-x-6 text-sm relative">
             <li
-              className="cursor-pointer text-[#FFD200]"
+              className="cursor-pointer text-[#FFB817]"
               onClick={() => navigate("/")}
             >
               Home
@@ -169,7 +169,7 @@ export default function Navbar() {
                   key={item.label}
                   className={`cursor-pointer transition-colors duration-300 ${
                     isActive
-                      ? "text-[#FFD200] font-semibold"
+                      ? "text-[#FFB817] font-semibold"
                       : showScrolledStyle
                       ? "text-[#002F5C]"
                       : "text-white"
@@ -192,7 +192,7 @@ export default function Navbar() {
               </div>
               <span
                 className={`text-sm transition-colors duration-300 ${
-                  showScrolledStyle ? "text-[#FFD200]" : "text-[#FFFFFF]"
+                  showScrolledStyle ? "text-[#FFB817]" : "text-[#FFFFFF]"
                 }`}
               >
                 {firstName} {lastName}
@@ -204,8 +204,8 @@ export default function Navbar() {
                 onClick={() => navigate("/register")}
                 className={`cursor-pointer text-sm px-6 py-2  rounded-md transition ${
                   showScrolledStyle
-                    ? "text-[#002F5C] hover:bg-[#FFD200]  hover:text-white"
-                    : "text-white hover:bg-[#FFD200]  hover:text-[#002F5C]"
+                    ? "text-[#002F5C] hover:bg-[#FFB817]  hover:text-white"
+                    : "text-white hover:bg-[#FFB817]  hover:text-[#002F5C]"
                 }`}
               >
                 Sign Up
@@ -214,8 +214,8 @@ export default function Navbar() {
                 onClick={() => navigate("/login")}
                 className={`text-sm px-10 py-2 rounded-md transition cursor-pointer ${
                   showScrolledStyle
-                    ? "bg-[#FFD200] text-white hover:bg-[#e6be00] hover:text-white"
-                    : "bg-[#FFD200] text-white hover:bg-[#e6be00] hover:text-white"
+                    ? "bg-[#FFB817] text-white hover:bg-[#e5a510] hover:text-white"
+                    : "bg-[#FFB817] text-white hover:bg-[#e5a510] hover:text-white"
                 }`}
               >
                 Login
@@ -243,7 +243,7 @@ export default function Navbar() {
           <div className="flex flex-col items-center text-sm space-y-4 py-6">
             {/* <ul className="space-y-4 text-center">
               <li
-                className="cursor-pointer text-[#FFD200]"
+                className="cursor-pointer text-[#FFB817]"
                 onClick={() => navigate("/")}
               >
                 Home
@@ -302,7 +302,7 @@ export default function Navbar() {
                     key={item.label}
                     className={`cursor-pointer transition-colors duration-300 ${
                       isActive
-                        ? "text-[#FFD200] font-semibold"
+                        ? "text-[#FFB817] font-semibold"
                         : showScrolledStyle
                         ? "text-[#002F5C]"
                         : "text-[#002F5C]"
@@ -332,7 +332,7 @@ export default function Navbar() {
                   </div>
                   <span
                     className={`text-sm transition-colors duration-300 ${
-                      showScrolledStyle ? "text-[#FFD200]" : "text-[#002F5C]"
+                      showScrolledStyle ? "text-[#FFB817]" : "text-[#002F5C]"
                     }`}
                   >
                     {firstName} {lastName}
@@ -344,8 +344,8 @@ export default function Navbar() {
                     onClick={() => navigate("/register")}
                     className={`text-sm px-4 py-2 rounded transition ${
                       showScrolledStyle
-                        ? "text-[#002F5C] hover:bg-[#FFD200] border"
-                        : "text-[#002F5C] hover:bg-[#FFD200] border hover:text-white"
+                        ? "text-[#002F5C] hover:bg-[#FFB817] border"
+                        : "text-[#002F5C] hover:bg-[#FFB817] border hover:text-white"
                     }`}
                   >
                     Sign Up
@@ -358,8 +358,8 @@ export default function Navbar() {
                     }}
                     className={`text-sm px-4 py-2 rounded transition ${
                       showScrolledStyle
-                        ? "text-white shadow-md bg-[#FFD200] hover:bg-[#e6be00]"
-                        : "text-white shadow-md bg-[#FFD200] hover:bg-[#e6be00]"
+                        ? "text-white shadow-md bg-[#FFB817] hover:bg-[#e5a510]"
+                        : "text-white shadow-md bg-[#FFB817] hover:bg-[#e5a510]"
                     }`}
                   >
                     Login
