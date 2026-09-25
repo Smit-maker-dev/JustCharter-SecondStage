@@ -22,25 +22,25 @@ export default function Footer() {
             <span className="bg-stone-200/70 border border-stone-300 w-12 h-12 flex items-center justify-center rounded-full text-[#002F5C] hover:scale-105 transition shadow-xs">
               <FaFacebook
                 size={24}
-                className="font-bold text-[#FFB817]"
+                className="font-bold text-[#FFD200]"
               />
             </span>
             <span className="bg-stone-200/70 border border-stone-300 w-12 h-12 flex items-center justify-center rounded-full text-[#002F5C] hover:scale-105 transition shadow-xs">
               <IoLogoLinkedin
                 size={24}
-                className="font-bold text-[#FFB817]"
+                className="font-bold text-[#FFD200]"
               />
             </span>
             <span className="bg-stone-200/70 border border-stone-300 w-12 h-12 flex items-center justify-center rounded-full text-[#002F5C] hover:scale-105 transition shadow-xs">
               <FaInstagram
                 size={24}
-                className="font-bold text-[#FFB817]"
+                className="font-bold text-[#FFD200]"
               />
             </span>
             <span className="bg-stone-200/70 border border-stone-300 w-12 h-12 flex items-center justify-center rounded-full text-[#002F5C] hover:scale-105 transition shadow-xs">
               <FaEnvelope
                 size={24}
-                className="font-bold text-[#FFB817]"
+                className="font-bold text-[#FFD200]"
               />
             </span>
           </div>
@@ -48,7 +48,7 @@ export default function Footer() {
 
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-20 text-sm">
           <div>
-            <h3 className="text-[#FFB817] font-semibold mb-3">Services</h3>
+            <h3 className="text-[#FFD200] font-semibold mb-3">Services</h3>
             <ul className="space-y-2 text-stone-600">
               <li>Private Charter</li>
               <li>Membership Programs</li>
@@ -59,7 +59,7 @@ export default function Footer() {
           </div>
 
           <div>
-            <h3 className="text-[#FFB817] font-semibold mb-3">Company</h3>
+            <h3 className="text-[#FFD200] font-semibold mb-3">Company</h3>
             <ul className="space-y-2 text-stone-600">
               <li>
                 <Link to="/about" className="hover:text-[#002F5C] transition">
@@ -74,7 +74,7 @@ export default function Footer() {
           </div>
 
           <div>
-            <h3 className="text-[#FFB817] font-semibold mb-3">Legal</h3>
+            <h3 className="text-[#FFD200] font-semibold mb-3">Legal</h3>
             <ul className="space-y-2 text-stone-600">
               <li>
                 <Link to="/terms_conditions" className="hover:text-[#002F5C] transition">

@@ -4,25 +4,25 @@ import { PlaneTakeoff, Shield, Calendar, Clock, ArrowRight } from "lucide-react"
 export default function ServicesSectionV5() {
   const services = [
     {
-      icon: <PlaneTakeoff className="w-5 h-5 text-[#FFB817]" />,
+      icon: <PlaneTakeoff className="w-5 h-5 text-[#FFD200]" />,
       title: "Private Charter",
       desc: "Tailored flight experiences to meet your specific needs, with access to over 5,000 airports worldwide.",
       tag: "5,000+ Airports",
     },
     {
-      icon: <Shield className="w-5 h-5 text-[#FFB817]" />,
+      icon: <Shield className="w-5 h-5 text-[#FFD200]" />,
       title: "Safety First",
       desc: "Our fleet meets the highest safety standards with rigorous maintenance and experienced flight crews.",
       tag: "ARGUS & Wyvern",
     },
     {
-      icon: <Calendar className="w-5 h-5 text-[#FFB817]" />,
+      icon: <Calendar className="w-5 h-5 text-[#FFD200]" />,
       title: "Flexible Scheduling",
       desc: "Fly on your terms with departure times that suit your schedule, avoiding commercial airline constraints.",
       tag: "24h Availability",
     },
     {
-      icon: <Clock className="w-5 h-5 text-[#FFB817]" />,
+      icon: <Clock className="w-5 h-5 text-[#FFD200]" />,
       title: "Time Efficiency",
       desc: "Skip long security lines and boarding processes, making your journey faster and more comfortable.",
       tag: "Zero Delay FBO",
@@ -36,7 +36,7 @@ export default function ServicesSectionV5() {
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-16">
           <div className="inline-flex items-center space-x-2 bg-stone-100 px-4 py-1.5 rounded-full border border-stone-200/80 shadow-sm mb-4">
-            <span className="w-2 h-2 rounded-full bg-[#FFB817]"></span>
+            <span className="w-2 h-2 rounded-full bg-[#FFD200]"></span>
             <span className="text-xs uppercase tracking-[0.2em] font-serif italic text-stone-700">
               World-Class Capabilities
             </span>
@@ -56,12 +56,12 @@ export default function ServicesSectionV5() {
           {services.map((service, index) => (
             <div
               key={index}
-              className="bg-stone-50/80 hover:bg-white rounded-2xl p-5 sm:p-6 border border-stone-200/80 border-l-4 border-l-transparent shadow-sm hover:shadow-md hover:border-l-[#FFB817] hover:border-stone-300 transition-all duration-300 flex flex-col justify-between items-start text-left group"
+              className="bg-stone-50/80 hover:bg-white rounded-2xl p-5 sm:p-6 border border-stone-200/80 border-l-4 border-l-transparent shadow-sm hover:shadow-md hover:border-l-[#FFD200] hover:border-stone-300 transition-all duration-300 flex flex-col justify-between items-start text-left group"
             >
               <div className="w-full">
                 {/* Horizontal Header: Icon Box & Tag Pill */}
                 <div className="flex items-center justify-between w-full mb-3.5">
-                  <div className="w-10 h-10 rounded-xl bg-[#FFB817]/10 border border-[#FFB817]/25 flex items-center justify-center group-hover:scale-105 transition-transform">
+                  <div className="w-10 h-10 rounded-xl bg-[#FFD200]/10 border border-[#FFD200]/25 flex items-center justify-center group-hover:scale-105 transition-transform">
                     {service.icon}
                   </div>
                   <span className="text-[9px] uppercase tracking-widest font-semibold text-stone-500 bg-white px-2.5 py-0.5 rounded-full border border-stone-200/60">
@@ -69,7 +69,7 @@ export default function ServicesSectionV5() {
                   </span>
                 </div>
 
-                <h3 className="text-lg sm:text-xl font-serif font-normal text-[#002F5C] mb-2 group-hover:text-[#FFB817] transition-colors">
+                <h3 className="text-lg sm:text-xl font-serif font-normal text-[#002F5C] mb-2 group-hover:text-[#FFD200] transition-colors">
                   {service.title}
                 </h3>
 
@@ -80,7 +80,7 @@ export default function ServicesSectionV5() {
 
               <div className="pt-3 mt-4 border-t border-stone-200/60 w-full flex items-center justify-between text-xs font-semibold text-stone-500 group-hover:text-[#002F5C] transition-colors">
                 <span>Learn More</span>
-                <ArrowRight className="w-3.5 h-3.5 text-[#FFB817] group-hover:translate-x-1 transition-transform" />
+                <ArrowRight className="w-3.5 h-3.5 text-[#FFD200] group-hover:translate-x-1 transition-transform" />
               </div>
             </div>
           ))}

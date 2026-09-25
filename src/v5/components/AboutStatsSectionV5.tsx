@@ -8,28 +8,28 @@ export default function AboutStatsSectionV5() {
       stat: "20+",
       label: "Years Experience",
       desc: "Two decades of luxury aviation leadership",
-      icon: <Calendar className="w-4 h-4 text-[#FFB817]" />,
+      icon: <Calendar className="w-4 h-4 text-[#FFD200]" />,
     },
     {
       num: "Chapter N° 02",
       stat: "50+",
       label: "Luxury Aircraft",
       desc: "Owned and operated long-range fleet",
-      icon: <Plane className="w-4 h-4 text-[#FFB817]" />,
+      icon: <Plane className="w-4 h-4 text-[#FFD200]" />,
     },
     {
       num: "Chapter N° 03",
       stat: "180+",
       label: "Global Destinations",
       desc: "Direct access across 6 continents",
-      icon: <Globe className="w-4 h-4 text-[#FFB817]" />,
+      icon: <Globe className="w-4 h-4 text-[#FFD200]" />,
     },
     {
       num: "Chapter N° 04",
       stat: "10K+",
       label: "Satisfied Clients",
       desc: "High-net-worth & corporate travelers",
-      icon: <Users className="w-4 h-4 text-[#FFB817]" />,
+      icon: <Users className="w-4 h-4 text-[#FFD200]" />,
     },
   ];
 
@@ -40,7 +40,7 @@ export default function AboutStatsSectionV5() {
         {/* Header */}
         <div className="max-w-3xl mb-16">
           <div className="inline-flex items-center space-x-2 bg-stone-100 px-4 py-1.5 rounded-full border border-stone-200/80 mb-4">
-            <span className="w-2 h-2 rounded-full bg-[#FFB817]"></span>
+            <span className="w-2 h-2 rounded-full bg-[#FFD200]"></span>
             <span className="text-xs uppercase tracking-[0.2em] font-serif italic text-stone-700">
               About JustCharter
             </span>
@@ -84,10 +84,10 @@ export default function AboutStatsSectionV5() {
             {chapters.map((chap, idx) => (
               <div
                 key={idx}
-                className="border-t border-[#FFB817]/40 py-5 sm:py-6 transition-all hover:pl-2 group cursor-default"
+                className="border-t border-[#FFD200]/40 py-5 sm:py-6 transition-all hover:pl-2 group cursor-default"
               >
                 <div className="flex items-center justify-between mb-2">
-                  <span className="text-[10px] sm:text-[11px] uppercase tracking-widest font-serif italic text-[#FFB817]">
+                  <span className="text-[10px] sm:text-[11px] uppercase tracking-widest font-serif italic text-[#FFD200]">
                     {chap.num}
                   </span>
                   <div className="p-1.5 sm:p-2 rounded-full bg-stone-50 border border-stone-200/60">
@@ -96,7 +96,7 @@ export default function AboutStatsSectionV5() {
                 </div>
 
                 <div className="flex flex-wrap items-baseline gap-2 sm:space-x-4">
-                  <span className="text-2xl sm:text-4xl font-serif font-normal text-[#002F5C] group-hover:text-[#FFB817] transition-colors">
+                  <span className="text-2xl sm:text-4xl font-serif font-normal text-[#002F5C] group-hover:text-[#FFD200] transition-colors">
                     {chap.stat}
                   </span>
                   <span className="text-xs sm:text-base font-semibold text-[#002F5C] uppercase tracking-wider">
@@ -109,7 +109,7 @@ export default function AboutStatsSectionV5() {
                 </p>
               </div>
             ))}
-            <div className="border-t border-[#FFB817]/40"></div>
+            <div className="border-t border-[#FFD200]/40"></div>
           </div>
 
         </div>

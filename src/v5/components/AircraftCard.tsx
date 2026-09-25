@@ -32,14 +32,14 @@ export default function AircraftCard({ aircraft }: AircraftCardProps) {
           alt={aircraft.name}
           className="w-full h-full object-cover opacity-95 group-hover:scale-105 transition-transform duration-700"
         />
-        <span className="absolute top-3 right-3 bg-stone-950/80 backdrop-blur-md text-[#FFB817] text-[10px] uppercase tracking-widest font-semibold px-3 py-1 rounded-full border border-white/10">
+        <span className="absolute top-3 right-3 bg-stone-950/80 backdrop-blur-md text-[#FFD200] text-[10px] uppercase tracking-widest font-semibold px-3 py-1 rounded-full border border-white/10">
           {aircraft.tag}
         </span>
       </div>
 
       {/* Title & Specs */}
       <div>
-        <h3 className="text-2xl font-serif font-normal text-[#002F5C] mb-4 group-hover:text-[#FFB817] transition-colors">
+        <h3 className="text-2xl font-serif font-normal text-[#002F5C] mb-4 group-hover:text-[#FFD200] transition-colors">
           {aircraft.name}
         </h3>
 
@@ -69,7 +69,7 @@ export default function AircraftCard({ aircraft }: AircraftCardProps) {
 
         <button
           onClick={() => navigate(`/aircraft/${aircraft.id}`)}
-          className="bg-stone-900 hover:bg-[#FFB817] hover:text-[#002F5C] text-white text-xs font-semibold uppercase tracking-wider px-5 py-2.5 rounded-xl transition-all cursor-pointer"
+          className="bg-stone-900 hover:bg-[#FFD200] hover:text-[#002F5C] text-white text-xs font-semibold uppercase tracking-wider px-5 py-2.5 rounded-xl transition-all cursor-pointer"
         >
           Book Now
         </button>

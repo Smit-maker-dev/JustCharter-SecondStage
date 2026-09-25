@@ -20,7 +20,7 @@ export default function FooterV5() {
               JustCharter is the premier private aviation marketplace connecting discerning travelers with certified operators worldwide.
             </p>
             <div className="inline-flex items-center space-x-2 bg-stone-50 px-4 py-2 rounded-full border border-stone-200/70 text-xs font-serif italic text-[#002F5C] shadow-sm">
-              <Shield className="w-4 h-4 text-[#FFB817]" />
+              <Shield className="w-4 h-4 text-[#FFD200]" />
               <span>ARGUS Platinum & Wyvern Wingman</span>
             </div>
           </div>
@@ -31,11 +31,11 @@ export default function FooterV5() {
               Platform Links
             </h4>
             <ul className="space-y-3.5 text-sm font-medium text-stone-700">
-              <li><a href="/services" className="hover:text-[#FFB817] transition-colors">Aircraft Fleet</a></li>
-              <li><a href="/about" className="hover:text-[#FFB817] transition-colors">About Us</a></li>
-              <li><a href="/buy_sell" className="hover:text-[#FFB817] transition-colors">Buy & Sell Aircraft</a></li>
-              <li><a href="/event" className="hover:text-[#FFB817] transition-colors">Private Events</a></li>
-              <li><a href="/bookings" className="hover:text-[#FFB817] transition-colors">Flight Bookings</a></li>
+              <li><a href="/services" className="hover:text-[#FFD200] transition-colors">Aircraft Fleet</a></li>
+              <li><a href="/about" className="hover:text-[#FFD200] transition-colors">About Us</a></li>
+              <li><a href="/buy_sell" className="hover:text-[#FFD200] transition-colors">Buy & Sell Aircraft</a></li>
+              <li><a href="/event" className="hover:text-[#FFD200] transition-colors">Private Events</a></li>
+              <li><a href="/bookings" className="hover:text-[#FFD200] transition-colors">Flight Bookings</a></li>
             </ul>
           </div>
 
@@ -64,7 +64,7 @@ export default function FooterV5() {
             </p>
             <a
               href="mailto:concierge@justcharter.com"
-              className="inline-flex items-center space-x-1.5 bg-[#FFB817] hover:bg-[#e5a510] text-[#002F5C] text-xs font-bold uppercase tracking-wider px-5 py-2.5 rounded-full transition-all shadow-sm"
+              className="inline-flex items-center space-x-1.5 bg-[#FFD200] hover:bg-[#e6be00] text-[#002F5C] text-xs font-bold uppercase tracking-wider px-5 py-2.5 rounded-full transition-all shadow-sm"
             >
               <span>Charter Support</span>
               <ArrowUpRight size={14} />

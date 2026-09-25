@@ -100,7 +100,7 @@ export default function FleetSectionV3() {
         <div className="flex flex-col lg:flex-row lg:items-end justify-between mb-20 gap-8">
           <div>
             <div className="inline-flex items-center space-x-2 bg-stone-100 px-4 py-1.5 rounded-full border border-slate-200/80 mb-3">
-              <span className="w-2 h-2 rounded-full bg-[#FFB817]"></span>
+              <span className="w-2 h-2 rounded-full bg-[#FFD200]"></span>
               <span className="text-xs uppercase tracking-[0.2em] font-semibold text-slate-700">
                 Out-Of-Bounds Engineering
               </span>
@@ -142,14 +142,14 @@ export default function FleetSectionV3() {
                   alt={aircraft.name}
                   className="w-full h-56 object-cover opacity-95 group-hover:scale-105 transition-transform duration-700"
                 />
-                <span className="absolute top-3 right-3 bg-slate-950/80 backdrop-blur-md text-[#FFB817] text-[10px] uppercase tracking-widest font-bold px-3 py-1 rounded-full border border-white/10">
+                <span className="absolute top-3 right-3 bg-slate-950/80 backdrop-blur-md text-[#FFD200] text-[10px] uppercase tracking-widest font-bold px-3 py-1 rounded-full border border-white/10">
                   {aircraft.tag}
                 </span>
               </div>
 
               {/* Specs & Info */}
               <div>
-                <h3 className="text-xl font-bold text-[#002F5C] mb-4 group-hover:text-[#FFB817] transition-colors">
+                <h3 className="text-xl font-bold text-[#002F5C] mb-4 group-hover:text-[#FFD200] transition-colors">
                   {aircraft.name}
                 </h3>
 
@@ -177,7 +177,7 @@ export default function FleetSectionV3() {
                   <ArrowUpRight className="w-3.5 h-3.5" />
                 </a>
 
-                <button className="bg-[#FFB817] hover:bg-[#e5a510] text-[#002F5C] text-xs font-bold uppercase tracking-wider px-5 py-2.5 rounded-full transition-all shadow-sm cursor-pointer">
+                <button className="bg-[#FFD200] hover:bg-[#e6be00] text-[#002F5C] text-xs font-bold uppercase tracking-wider px-5 py-2.5 rounded-full transition-all shadow-sm cursor-pointer">
                   Book Now
                 </button>
               </div>

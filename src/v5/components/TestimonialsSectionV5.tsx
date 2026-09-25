@@ -48,7 +48,7 @@ export default function TestimonialsSectionV5() {
         
         {/* Tag Header */}
         <div className="inline-flex items-center space-x-2 bg-stone-100 px-4 py-1.5 rounded-full border border-stone-200/80 mb-8 sm:mb-10">
-          <span className="w-2 h-2 rounded-full bg-[#FFB817]"></span>
+          <span className="w-2 h-2 rounded-full bg-[#FFD200]"></span>
           <span className="text-xs uppercase tracking-[0.2em] font-serif italic text-stone-700">
             Verified Client Reviews
           </span>
@@ -56,7 +56,7 @@ export default function TestimonialsSectionV5() {
 
         {/* Pure Serif Centered Quote */}
         <div key={currentIndex} className="relative mb-10 sm:mb-14 min-h-[180px] sm:min-h-[200px] flex flex-col justify-center items-center transition-all duration-500">
-          <Quote className="w-8 sm:w-12 h-8 sm:h-12 text-[#FFB817]/25 mb-4 sm:mb-6" />
+          <Quote className="w-8 sm:w-12 h-8 sm:h-12 text-[#FFD200]/25 mb-4 sm:mb-6" />
           <blockquote className="transition-opacity duration-700">
             <p className="text-lg sm:text-3xl lg:text-4xl font-serif italic font-normal text-[#002F5C] leading-relaxed max-w-4xl mx-auto px-2">
               "{current.quote}"
@@ -87,7 +87,7 @@ export default function TestimonialsSectionV5() {
                 onClick={() => setCurrentIndex(idx)}
                 className={`h-2 rounded-full transition-all cursor-pointer ${
                   currentIndex === idx
-                    ? "w-8 bg-[#FFB817]"
+                    ? "w-8 bg-[#FFD200]"
                     : "w-2 bg-stone-300 hover:bg-stone-400"
                 }`}
                 aria-label={`Go to slide ${idx + 1}`}

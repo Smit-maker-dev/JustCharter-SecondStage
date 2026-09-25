@@ -15,7 +15,7 @@ export default function TrustBarV5() {
         <div className="flex flex-col md:flex-row items-center justify-between gap-6">
           
           <div className="flex items-center space-x-3 flex-shrink-0">
-            <div className="w-10 h-10 rounded-full bg-[#FFB817]/15 text-[#FFB817] flex items-center justify-center">
+            <div className="w-10 h-10 rounded-full bg-[#FFD200]/15 text-[#FFD200] flex items-center justify-center">
               <ShieldCheck className="w-5 h-5" />
             </div>
             <div>
@@ -33,9 +33,9 @@ export default function TrustBarV5() {
             {certifications.map((cert, index) => (
               <div
                 key={index}
-                className="bg-stone-50/80 border border-stone-200/80 rounded-xl px-5 py-3 flex items-center space-x-3 shadow-sm hover:border-[#FFB817]/40 transition-colors"
+                className="bg-stone-50/80 border border-stone-200/80 rounded-xl px-5 py-3 flex items-center space-x-3 shadow-sm hover:border-[#FFD200]/40 transition-colors"
               >
-                <CheckCircle2 className="w-4 h-4 text-[#FFB817] flex-shrink-0" />
+                <CheckCircle2 className="w-4 h-4 text-[#FFD200] flex-shrink-0" />
                 <div>
                   <p className="text-xs font-semibold text-[#002F5C] leading-none">
                     {cert.name}

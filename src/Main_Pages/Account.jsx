@@ -487,7 +487,7 @@ export default function Account() {
 
                 <button
                   onClick={handleSaveBasicInfo}
-                  className="cursor-pointer mt-6 bg-[#FFB817] hover:bg-yellow-500 text-[#4B5563] font-bold px-12 py-2 rounded-lg"
+                  className="cursor-pointer mt-6 bg-[#FFD200] hover:bg-yellow-500 text-[#4B5563] font-bold px-12 py-2 rounded-lg"
                 >
                   Save
                 </button>
@@ -635,7 +635,7 @@ export default function Account() {
 
                   <button
                     onClick={handleSaveProfessionalInfo}
-                    className="cursor-pointer mt-6 bg-[#FFB817] hover:bg-yellow-500 text-[#002F5C] font-bold px-12 py-2 rounded-lg"
+                    className="cursor-pointer mt-6 bg-[#FFD200] hover:bg-yellow-500 text-[#002F5C] font-bold px-12 py-2 rounded-lg"
                   >
                     Save
                   </button>
@@ -661,10 +661,10 @@ export default function Account() {
               <div className="text-xs text-[#4B5563]">
                 {professionalData?.companyName}
               </div>
-              <button className="w-50 mt-4 border rounded-lg p-2.5 text-sm text-[#FFB817]">
+              <button className="w-50 mt-4 border rounded-lg p-2.5 text-sm text-[#FFD200]">
                 Flight History
               </button>
-              <button className="w-50 bg-[#FFB817] text-white p-2.5 rounded-lg text-sm">
+              <button className="w-50 bg-[#FFD200] text-white p-2.5 rounded-lg text-sm">
                 My Flights
               </button>
             </div>

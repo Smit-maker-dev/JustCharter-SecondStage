@@ -10,7 +10,7 @@ import ConciergeBarV5 from "./components/ConciergeBarV5";
 
 export default function LandingPageV5() {
   return (
-    <div className="min-h-screen bg-white text-[#002F5C] font-sans antialiased selection:bg-[#FFB817]/30 selection:text-[#002F5C]">
+    <div className="min-h-screen bg-white text-[#002F5C] font-sans antialiased selection:bg-[#FFD200]/30 selection:text-[#002F5C]">
       {/* 1. Hero Section with Grounded Overlapping Booking Container */}
       <HeroSectionV5 />
 

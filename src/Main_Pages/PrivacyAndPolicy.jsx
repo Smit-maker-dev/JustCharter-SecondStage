@@ -3,7 +3,7 @@ import React, { useRef } from "react";
 export default function PrivacyAndPolicy() {
   return (
     <div className="min-h-screen bg-gray-50 mt-16">
-      <header className="relative bg-[#FFB817] text-white py-18">
+      <header className="relative bg-[#FFD200] text-white py-18">
         <div
           className="absolute inset-0 bg-cover bg-center opacity-30"
           style={{
