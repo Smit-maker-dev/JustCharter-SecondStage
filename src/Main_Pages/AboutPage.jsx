@@ -54,7 +54,7 @@ export default function AboutPage() {
         <div className="relative text-center px-4">
           <h1 className=" text-xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-white">
             <span
-              className="text-[#DFA93B] shadow"
+              className="text-[#FF9C0A] shadow"
               style={{ fontFamily: "'Playfair Display', serif" }}
             >
               Luxury Meets the Sky
@@ -95,7 +95,7 @@ export default function AboutPage() {
           {/* Vision */}
           <div className="cursor-pointer border-2 border-gray-300 rounded-xl p-4 md:p-8 hover:shadow-md transition">
             <div className="flex items-center gap-3 mb-3">
-              <div className="text-[#1A9FFF] text-3xl">
+              <div className="text-[#FF9C0A] text-3xl">
                 <FaGlobe />
               </div>
               <h3 className="text-lg md:text-xl font-semibold">Our Vision</h3>
@@ -110,7 +110,7 @@ export default function AboutPage() {
           {/* Mission */}
           <div className="cursor-pointer border-2 border-gray-300 rounded-xl p-4 md:p-8 hover:shadow-md transition">
             <div className="flex items-center gap-3 mb-3">
-              <div className="text-[#1A9FFF] text-3xl">
+              <div className="text-[#FF9C0A] text-3xl">
                 <FaCompass />
               </div>
               <h3 className="text-lg md:text-xl font-semibold">Our Mission</h3>
@@ -136,7 +136,7 @@ export default function AboutPage() {
           </h1>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             <div className="bg-white rounded-lg py-8 px-6 text-center shadow-sm hover:shadow-md transition">
-              <PlaneTakeoff className="mx-auto mb-4 text-[#1A9FFF]" size={36} />
+              <PlaneTakeoff className="mx-auto mb-4 text-[#FF9C0A]" size={36} />
               <h3 className="font-semibold mb-2">Private Charter</h3>
               <p className="text-sm text-gray-600">
                 Tailored flight experiences to meet your specific needs, with
@@ -145,7 +145,7 @@ export default function AboutPage() {
             </div>
 
             <div className="bg-white rounded-lg py-8 px-6 text-center shadow-sm hover:shadow-md transition">
-              <Shield className="mx-auto mb-4 text-[#1A9FFF]" size={36} />
+              <Shield className="mx-auto mb-4 text-[#FF9C0A]" size={36} />
               <h3 className="font-semibold mb-2">Safety First</h3>
               <p className="text-sm text-gray-600">
                 Our fleet meets the highest safety standards with rigorous
@@ -154,7 +154,7 @@ export default function AboutPage() {
             </div>
 
             <div className=" bg-white rounded-lg py-8 px-6 text-center shadow-sm hover:shadow-md transition">
-              <Calendar className="mx-auto mb-4 text-[#1A9FFF]" size={36} />
+              <Calendar className="mx-auto mb-4 text-[#FF9C0A]" size={36} />
               <h3 className="font-semibold mb-2">Flexible Scheduling</h3>
               <p className="text-sm text-gray-600">
                 Fly on your terms with departure times that suit your schedule,
@@ -163,7 +163,7 @@ export default function AboutPage() {
             </div>
 
             <div className="bg-white rounded-lg py-8 px-6 text-center shadow-sm hover:shadow-md transition">
-              <Clock className="mx-auto mb-4 text-[#1A9FFF]" size={36} />
+              <Clock className="mx-auto mb-4 text-[#FF9C0A]" size={36} />
               <h3 className="font-semibold mb-2">Time Efficiency</h3>
               <p className="text-sm text-gray-600">
                 Skip long security lines and boarding processes, making your
@@ -179,7 +179,7 @@ export default function AboutPage() {
           style={{
             fontFamily: "'Playfair Display', serif",
           }}
-          className="text-center text-xl md:text-[28px] font-semibold text-gray-800 mb-10"
+          className="text-center text-xl md:text-[28px] font-semibold text-[#4A3B2A] mb-10"
         >
           Our Values
         </h1>
@@ -190,7 +190,7 @@ export default function AboutPage() {
               key={index}
               className="cursor-pointer border-2 border-gray-300 rounded-xl p-6  hover:shadow-md transition"
             >
-              <h3 className="font-semibold text-gray-900 mb-1">{item.title}</h3>
+              <h3 className="font-semibold text-[#4A3B2A] mb-1">{item.title}</h3>
               <p className="text-gray-600 text-sm md:text-base">
                 {item.description}
               </p>
@@ -228,7 +228,7 @@ export default function AboutPage() {
                     <Star
                       key={i}
                       size={16}
-                      className="text-[#DFA93B] fill-[#DFA93B] mr-1"
+                      className="text-[#FF9C0A] fill-[#FF9C0A] mr-1"
                     />
                   ))}
                 </div>

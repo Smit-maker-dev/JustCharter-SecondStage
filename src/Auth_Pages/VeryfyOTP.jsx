@@ -152,7 +152,7 @@ export default function VeryfyOTP() {
             <img src={Logo} alt="JustCharter Logo" className="h-10" />
           </div>
 
-          <h2 className="text-2xl font-bold text-black mb-1">
+          <h2 className="text-2xl font-bold text-[#4A3B2A] mb-1">
             OTP Verification
           </h2>
           <p className="text-sm text-gray-600 mb-6">
@@ -161,7 +161,7 @@ export default function VeryfyOTP() {
 
           <form onSubmit={handleSubmit} className="space-y-6">
             <div>
-              <label className="text-sm text-gray-800 mb-1 block">
+              <label className="text-sm text-[#4A3B2A] mb-1 block">
                 Enter Verification Code
               </label>
 
@@ -176,7 +176,7 @@ export default function VeryfyOTP() {
                 <button
                   type="button"
                   onClick={sendOtp}
-                  className="text-blue-500 underline cursor-pointer"
+                  className="text-[#FF9C0A] underline cursor-pointer"
                 >
                   Resend OTP
                 </button>
@@ -185,7 +185,7 @@ export default function VeryfyOTP() {
 
             <button
               type="submit"
-              className="cursor-pointer w-full md:w-3/5 bg-blue-400 text-white py-2.5 mt-4 rounded-lg hover:bg-blue-700 transition"
+              className="cursor-pointer w-full md:w-3/5 bg-blue-400 text-white py-2.5 mt-4 rounded-lg hover:bg-[#e08800] transition"
             >
               Verify
             </button>

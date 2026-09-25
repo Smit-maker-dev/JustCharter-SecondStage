@@ -43,19 +43,19 @@ export default function TestimonialsSectionV3() {
   const current = testimonials[currentIndex];
 
   return (
-    <section className="py-24 bg-stone-50 font-sans text-slate-900 overflow-hidden">
+    <section className="py-24 bg-stone-50 font-sans text-[#4A3B2A] overflow-hidden">
       <div className="max-w-5xl mx-auto px-6 lg:px-12">
         
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-16">
           <div className="inline-flex items-center space-x-2 bg-white px-4 py-1.5 rounded-full border border-slate-200/80 shadow-sm mb-4">
-            <span className="w-2 h-2 rounded-full bg-[#DFA93B]"></span>
+            <span className="w-2 h-2 rounded-full bg-[#FF9C0A]"></span>
             <span className="text-xs uppercase tracking-[0.2em] font-semibold text-slate-700">
               Verified Client Reviews
             </span>
           </div>
 
-          <h2 className="text-3xl sm:text-5xl font-bold tracking-tight text-slate-900 mb-4">
+          <h2 className="text-3xl sm:text-5xl font-bold tracking-tight text-[#4A3B2A] mb-4">
             Trusted by Discerning Clients
           </h2>
 
@@ -73,7 +73,7 @@ export default function TestimonialsSectionV3() {
                 <Star
                   key={i}
                   size={18}
-                  className="text-[#DFA93B] fill-[#DFA93B]"
+                  className="text-[#FF9C0A] fill-[#FF9C0A]"
                 />
               ))}
             </div>
@@ -81,7 +81,7 @@ export default function TestimonialsSectionV3() {
           </div>
 
           <blockquote className="min-h-[120px] flex items-center justify-center my-6">
-            <p className="text-xl sm:text-2xl lg:text-3xl font-serif italic text-slate-900 leading-relaxed text-center font-medium">
+            <p className="text-xl sm:text-2xl lg:text-3xl font-serif italic text-[#4A3B2A] leading-relaxed text-center font-medium">
               "{current.quote}"
             </p>
           </blockquote>
@@ -89,11 +89,11 @@ export default function TestimonialsSectionV3() {
           <div className="flex flex-col sm:flex-row items-center justify-between pt-8 border-t border-slate-100 gap-4">
             
             <div className="flex items-center">
-              <div className="w-11 h-11 rounded-full bg-slate-900 text-[#DFA93B] flex items-center justify-center font-bold text-sm">
+              <div className="w-11 h-11 rounded-full bg-slate-900 text-[#FF9C0A] flex items-center justify-center font-bold text-sm">
                 <Users size={18} />
               </div>
               <div className="ml-3 text-left">
-                <p className="text-sm font-bold text-slate-900">{current.name}</p>
+                <p className="text-sm font-bold text-[#4A3B2A]">{current.name}</p>
                 <p className="text-xs text-slate-500 font-medium">{current.title}</p>
               </div>
             </div>
@@ -102,7 +102,7 @@ export default function TestimonialsSectionV3() {
             <div className="flex items-center space-x-3">
               <button
                 onClick={prevTestimonial}
-                className="p-2.5 rounded-full border border-slate-200 hover:border-slate-900 text-slate-600 hover:text-slate-900 transition-all cursor-pointer"
+                className="p-2.5 rounded-full border border-slate-200 hover:border-[#4A3B2A] text-slate-600 hover:text-[#4A3B2A] transition-all cursor-pointer"
                 aria-label="Previous Testimonial"
               >
                 <ChevronLeft size={18} />
@@ -115,7 +115,7 @@ export default function TestimonialsSectionV3() {
                     onClick={() => setCurrentIndex(idx)}
                     className={`h-2 rounded-full transition-all cursor-pointer ${
                       currentIndex === idx
-                        ? "w-6 bg-[#DFA93B]"
+                        ? "w-6 bg-[#FF9C0A]"
                         : "w-2 bg-slate-300 hover:bg-slate-400"
                     }`}
                     aria-label={`Go to slide ${idx + 1}`}
@@ -125,7 +125,7 @@ export default function TestimonialsSectionV3() {
 
               <button
                 onClick={nextTestimonial}
-                className="p-2.5 rounded-full border border-slate-200 hover:border-slate-900 text-slate-600 hover:text-slate-900 transition-all cursor-pointer"
+                className="p-2.5 rounded-full border border-slate-200 hover:border-[#4A3B2A] text-slate-600 hover:text-[#4A3B2A] transition-all cursor-pointer"
                 aria-label="Next Testimonial"
               >
                 <ChevronRight size={18} />
@@ -141,8 +141,8 @@ export default function TestimonialsSectionV3() {
             "JustCharter consistently exceeds our expectations, setting the gold standard for luxury private aviation."
           </p>
           <div className="inline-flex items-center space-x-2 bg-stone-100 px-4 py-2 rounded-full border border-slate-200/80 flex-shrink-0">
-            <span className="w-2 h-2 rounded-full bg-[#DFA93B]"></span>
-            <span className="text-xs font-bold uppercase tracking-widest text-slate-950">
+            <span className="w-2 h-2 rounded-full bg-[#FF9C0A]"></span>
+            <span className="text-xs font-bold uppercase tracking-widest text-[#4A3B2A]">
               Global Luxury Travel Magazine
             </span>
           </div>

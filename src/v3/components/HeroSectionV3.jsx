@@ -64,7 +64,7 @@ export default function HeroSectionV3() {
           
           <h1 className="text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-bold tracking-tight text-white leading-[1.05] max-w-5xl mx-auto mb-6">
             Private Aviation <br className="hidden sm:block" />
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-white via-slate-100 to-[#DFA93B]">
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-white via-slate-100 to-[#FF9C0A]">
               Made Simple
             </span>
           </h1>
@@ -74,7 +74,7 @@ export default function HeroSectionV3() {
           </p>
 
           <div className="inline-block bg-black/40 backdrop-blur-md px-4 py-1.5 rounded-full border border-white/10">
-            <span className="text-xs text-[#DFA93B] font-semibold uppercase tracking-[0.2em]">
+            <span className="text-xs text-[#FF9C0A] font-semibold uppercase tracking-[0.2em]">
               Over 500+ Destinations Worldwide
             </span>
           </div>
@@ -97,7 +97,7 @@ export default function HeroSectionV3() {
                     className={`px-4 py-2 rounded-xl text-xs font-bold uppercase tracking-wider transition-all cursor-pointer ${
                       tripType === type
                         ? "bg-slate-900 text-white shadow-sm"
-                        : "text-slate-600 hover:text-slate-900"
+                        : "text-slate-600 hover:text-[#4A3B2A]"
                     }`}
                   >
                     {type.replace("-", " ")}
@@ -106,9 +106,9 @@ export default function HeroSectionV3() {
               </div>
 
               {/* Right-Aligned Direct Charter Quote Badge Pill */}
-              <div className="inline-flex items-center space-x-2 bg-[#DFA93B]/10 border border-[#DFA93B]/30 px-4 py-2 rounded-full">
-                <ShieldCheck className="w-4 h-4 text-[#DFA93B]" />
-                <span className="text-xs font-bold uppercase tracking-widest text-[#DFA93B]">
+              <div className="inline-flex items-center space-x-2 bg-[#FF9C0A]/10 border border-[#FF9C0A]/30 px-4 py-2 rounded-full">
+                <ShieldCheck className="w-4 h-4 text-[#FF9C0A]" />
+                <span className="text-xs font-bold uppercase tracking-widest text-[#FF9C0A]">
                   Direct Charter Quote
                 </span>
               </div>
@@ -120,7 +120,7 @@ export default function HeroSectionV3() {
               {/* From Input Card */}
               <div className="lg:col-span-3 bg-slate-50/90 hover:bg-slate-100/80 border border-slate-200/60 rounded-2xl p-3.5 transition-colors">
                 <label className="text-[10px] font-bold uppercase tracking-wider text-slate-400 flex items-center space-x-1.5 mb-1">
-                  <MapPin className="w-3.5 h-3.5 text-[#DFA93B]" />
+                  <MapPin className="w-3.5 h-3.5 text-[#FF9C0A]" />
                   <span>From</span>
                 </label>
                 <input
@@ -128,14 +128,14 @@ export default function HeroSectionV3() {
                   name="from"
                   value={bookingData.from}
                   onChange={handleInputChange}
-                  className="w-full bg-transparent text-xs sm:text-sm font-bold text-slate-900 focus:outline-none"
+                  className="w-full bg-transparent text-xs sm:text-sm font-bold text-[#4A3B2A] focus:outline-none"
                 />
               </div>
 
               {/* To Input Card */}
               <div className="lg:col-span-3 bg-slate-50/90 hover:bg-slate-100/80 border border-slate-200/60 rounded-2xl p-3.5 transition-colors">
                 <label className="text-[10px] font-bold uppercase tracking-wider text-slate-400 flex items-center space-x-1.5 mb-1">
-                  <MapPin className="w-3.5 h-3.5 text-[#DFA93B]" />
+                  <MapPin className="w-3.5 h-3.5 text-[#FF9C0A]" />
                   <span>To</span>
                 </label>
                 <input
@@ -143,14 +143,14 @@ export default function HeroSectionV3() {
                   name="to"
                   value={bookingData.to}
                   onChange={handleInputChange}
-                  className="w-full bg-transparent text-xs sm:text-sm font-bold text-slate-900 focus:outline-none"
+                  className="w-full bg-transparent text-xs sm:text-sm font-bold text-[#4A3B2A] focus:outline-none"
                 />
               </div>
 
               {/* Date Input Card */}
               <div className="lg:col-span-2 bg-slate-50/90 hover:bg-slate-100/80 border border-slate-200/60 rounded-2xl p-3.5 transition-colors">
                 <label className="text-[10px] font-bold uppercase tracking-wider text-slate-400 flex items-center space-x-1.5 mb-1">
-                  <Calendar className="w-3.5 h-3.5 text-[#DFA93B]" />
+                  <Calendar className="w-3.5 h-3.5 text-[#FF9C0A]" />
                   <span>Date</span>
                 </label>
                 <input
@@ -158,21 +158,21 @@ export default function HeroSectionV3() {
                   name="date"
                   value={bookingData.date}
                   onChange={handleInputChange}
-                  className="w-full bg-transparent text-xs font-bold text-slate-900 focus:outline-none cursor-pointer"
+                  className="w-full bg-transparent text-xs font-bold text-[#4A3B2A] focus:outline-none cursor-pointer"
                 />
               </div>
 
               {/* Guests Input Card */}
               <div className="lg:col-span-2 bg-slate-50/90 hover:bg-slate-100/80 border border-slate-200/60 rounded-2xl p-3.5 transition-colors">
                 <label className="text-[10px] font-bold uppercase tracking-wider text-slate-400 flex items-center space-x-1.5 mb-1">
-                  <Users className="w-3.5 h-3.5 text-[#DFA93B]" />
+                  <Users className="w-3.5 h-3.5 text-[#FF9C0A]" />
                   <span>Guests</span>
                 </label>
                 <select
                   name="passengers"
                   value={bookingData.passengers}
                   onChange={handleInputChange}
-                  className="w-full bg-transparent text-xs font-bold text-slate-900 focus:outline-none cursor-pointer"
+                  className="w-full bg-transparent text-xs font-bold text-[#4A3B2A] focus:outline-none cursor-pointer"
                 >
                   <option value="1-4 Guests">1 - 4 Guests</option>
                   <option value="4 Guests">4 Guests</option>
@@ -185,7 +185,7 @@ export default function HeroSectionV3() {
               <div className="lg:col-span-2">
                 <button
                   type="submit"
-                  className="w-full h-full min-h-[52px] bg-[#DFA93B] hover:bg-[#c9952f] text-slate-950 font-bold text-xs uppercase tracking-wider px-6 py-4 rounded-2xl transition-all shadow-md hover:shadow-lg flex items-center justify-center space-x-2 border border-[#d29c30] cursor-pointer"
+                  className="w-full h-full min-h-[52px] bg-[#FF9C0A] hover:bg-[#e08800] text-[#4A3B2A] font-bold text-xs uppercase tracking-wider px-6 py-4 rounded-2xl transition-all shadow-md hover:shadow-lg flex items-center justify-center space-x-2 border border-[#FF9C0A] cursor-pointer"
                 >
                   <span>Search Flights</span>
                   <ArrowRight className="w-4 h-4" />

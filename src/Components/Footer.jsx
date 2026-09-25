@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 
 export default function Footer() {
   return (
-    <footer className="bg-stone-50 text-slate-900 border-t border-stone-200 px-6 py-10 md:px-16 lg:px-24">
+    <footer className="bg-stone-50 text-[#4A3B2A] border-t border-stone-200 px-6 py-10 md:px-16 lg:px-24">
       <div className="flex flex-col lg:flex-row justify-between gap-5">
         <div className="mb-10 lg:mb-0 lg:w-1/4">
           <img
@@ -19,28 +19,28 @@ export default function Footer() {
           </p>
 
           <div className="flex gap-4 mt-6">
-            <span className="bg-stone-200/70 border border-stone-300 w-12 h-12 flex items-center justify-center rounded-full text-black hover:scale-105 transition shadow-xs">
+            <span className="bg-stone-200/70 border border-stone-300 w-12 h-12 flex items-center justify-center rounded-full text-[#4A3B2A] hover:scale-105 transition shadow-xs">
               <FaFacebook
                 size={24}
-                className="font-bold text-[#DFA93B]"
+                className="font-bold text-[#FF9C0A]"
               />
             </span>
-            <span className="bg-stone-200/70 border border-stone-300 w-12 h-12 flex items-center justify-center rounded-full text-black hover:scale-105 transition shadow-xs">
+            <span className="bg-stone-200/70 border border-stone-300 w-12 h-12 flex items-center justify-center rounded-full text-[#4A3B2A] hover:scale-105 transition shadow-xs">
               <IoLogoLinkedin
                 size={24}
-                className="font-bold text-[#DFA93B]"
+                className="font-bold text-[#FF9C0A]"
               />
             </span>
-            <span className="bg-stone-200/70 border border-stone-300 w-12 h-12 flex items-center justify-center rounded-full text-black hover:scale-105 transition shadow-xs">
+            <span className="bg-stone-200/70 border border-stone-300 w-12 h-12 flex items-center justify-center rounded-full text-[#4A3B2A] hover:scale-105 transition shadow-xs">
               <FaInstagram
                 size={24}
-                className="font-bold text-[#DFA93B]"
+                className="font-bold text-[#FF9C0A]"
               />
             </span>
-            <span className="bg-stone-200/70 border border-stone-300 w-12 h-12 flex items-center justify-center rounded-full text-black hover:scale-105 transition shadow-xs">
+            <span className="bg-stone-200/70 border border-stone-300 w-12 h-12 flex items-center justify-center rounded-full text-[#4A3B2A] hover:scale-105 transition shadow-xs">
               <FaEnvelope
                 size={24}
-                className="font-bold text-[#DFA93B]"
+                className="font-bold text-[#FF9C0A]"
               />
             </span>
           </div>
@@ -48,7 +48,7 @@ export default function Footer() {
 
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-20 text-sm">
           <div>
-            <h3 className="text-[#DFA93B] font-semibold mb-3">Services</h3>
+            <h3 className="text-[#FF9C0A] font-semibold mb-3">Services</h3>
             <ul className="space-y-2 text-stone-600">
               <li>Private Charter</li>
               <li>Membership Programs</li>
@@ -59,10 +59,10 @@ export default function Footer() {
           </div>
 
           <div>
-            <h3 className="text-[#DFA93B] font-semibold mb-3">Company</h3>
+            <h3 className="text-[#FF9C0A] font-semibold mb-3">Company</h3>
             <ul className="space-y-2 text-stone-600">
               <li>
-                <Link to="/about" className="hover:text-stone-950 transition">
+                <Link to="/about" className="hover:text-[#4A3B2A] transition">
                   About Us
                 </Link>
               </li>
@@ -74,22 +74,22 @@ export default function Footer() {
           </div>
 
           <div>
-            <h3 className="text-[#DFA93B] font-semibold mb-3">Legal</h3>
+            <h3 className="text-[#FF9C0A] font-semibold mb-3">Legal</h3>
             <ul className="space-y-2 text-stone-600">
               <li>
-                <Link to="/terms_conditions" className="hover:text-stone-950 transition">
+                <Link to="/terms_conditions" className="hover:text-[#4A3B2A] transition">
                   Terms of Service
                 </Link>
               </li>
               <li>
-                <Link to="/privacy_policy" className="hover:text-stone-950 transition">
+                <Link to="/privacy_policy" className="hover:text-[#4A3B2A] transition">
                   Privacy Policy
                 </Link>
               </li>
               <li>
                 <Link
                   to="/cancellation-policy"
-                  className="hover:text-stone-950 transition"
+                  className="hover:text-[#4A3B2A] transition"
                 >
                   Cancellation Policy
                 </Link>
@@ -97,13 +97,13 @@ export default function Footer() {
               <li>
                 <Link
                   to="/accessibility"
-                  className="hover:text-stone-950 transition"
+                  className="hover:text-[#4A3B2A] transition"
                 >
                   Accessibility
                 </Link>
               </li>
               <li>
-                <Link to="/faqs" className="hover:text-stone-950 transition">
+                <Link to="/faqs" className="hover:text-[#4A3B2A] transition">
                   FAQs
                 </Link>
               </li>

@@ -10,7 +10,7 @@ import ConciergeBarV3 from "./components/ConciergeBarV3";
 
 export default function LandingPageV3() {
   return (
-    <div className="min-h-screen bg-white text-slate-900 font-sans antialiased selection:bg-[#DFA93B]/20 selection:text-slate-900">
+    <div className="min-h-screen bg-white text-[#4A3B2A] font-sans antialiased selection:bg-[#FF9C0A]/20 selection:text-[#4A3B2A]">
       {/* 1. Hero Section with Aligned Direct Quote Pill */}
       <HeroSectionV3 />
 

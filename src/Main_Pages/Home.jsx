@@ -223,11 +223,11 @@ useEffect(() => {
             </p>
 
             <div className="flex justify-center gap-4">
-              <button className="bg-white text-black px-6 py-2 cursor-pointer rounded-full text-sm font-semibold hover:bg-[#FFD700] transition">
+              <button className="bg-white text-[#4A3B2A] px-6 py-2 cursor-pointer rounded-full text-sm font-semibold hover:bg-[#FF9C0A] transition">
                 Plan Flight
               </button>
 
-              <button className="border border-white px-6 py-2 rounded-full text-sm font-semibold hover:bg-white hover:text-black transition">
+              <button className="border border-white px-6 py-2 rounded-full text-sm font-semibold hover:bg-white hover:text-[#4A3B2A] transition">
                 Explore
               </button>
             </div>
@@ -252,10 +252,10 @@ useEffect(() => {
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <button className="bg-white text-black px-6 py-2 rounded-full text-sm hover:bg-gray-200 transition">
+              <button className="bg-white text-[#4A3B2A] px-6 py-2 rounded-full text-sm hover:bg-gray-200 transition">
                 Plan Flight
               </button>
-              <button className="border border-white px-6 py-2 rounded-full text-sm hover:bg-white hover:text-black transition">
+              <button className="border border-white px-6 py-2 rounded-full text-sm hover:bg-white hover:text-[#4A3B2A] transition">
                 Explore
               </button>
             </div>
@@ -285,10 +285,10 @@ useEffect(() => {
               Over 500+ destinations worldwide
             </p>
             <div className="flex justify-center gap-4">
-              <button className="bg-white text-black px-6 py-2 rounded-full text-sm font-semibold hover:bg-[#FFD700] transition-colors duration-200">
+              <button className="bg-white text-[#4A3B2A] px-6 py-2 rounded-full text-sm font-semibold hover:bg-[#FF9C0A] transition-colors duration-200">
                 Plan Flight
               </button>
-              <button className="border border-white px-6 py-2 rounded-full text-sm font-semibold hover:bg-white hover:text-black transition-colors duration-200">
+              <button className="border border-white px-6 py-2 rounded-full text-sm font-semibold hover:bg-white hover:text-[#4A3B2A] transition-colors duration-200">
                 Explore
               </button>
             </div>
@@ -308,10 +308,10 @@ useEffect(() => {
               Over 500+ destinations worldwide
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <button className="cursor-pointer bg-white text-black px-6 py-2 rounded-full text-sm font-semibold hover:bg-[#FFD700] transition-colors duration-200">
+              <button className="cursor-pointer bg-white text-[#4A3B2A] px-6 py-2 rounded-full text-sm font-semibold hover:bg-[#FF9C0A] transition-colors duration-200">
                 Plan Flight
               </button>
-              <button className="border border-white px-6 py-2 rounded-full text-sm font-semibold hover:bg-white hover:text-black transition-colors duration-200">
+              <button className="border border-white px-6 py-2 rounded-full text-sm font-semibold hover:bg-white hover:text-[#4A3B2A] transition-colors duration-200">
                 Explore
               </button>
             </div>
@@ -351,7 +351,7 @@ useEffect(() => {
             onClick={() => setIsAudioMuted(!isAudioMuted)}
             className={`cursor-pointer fixed bottom-6 right-6 z-50 p-3 rounded-full shadow-md hover:bg-black/70 transition-all duration-200 backdrop-blur-sm ${
               scrolled
-                ? "bg-white/90 border-black/20 text-black hover:bg-white"
+                ? "bg-white/90 border-[#4A3B2A]/20 text-[#4A3B2A] hover:bg-white"
                 : "bg-black/30 border-white text-white"
             }`}
             aria-label={isAudioMuted ? "Unmute video" : "Mute video"}
@@ -395,10 +395,10 @@ useEffect(() => {
               Over 500+ destinations worldwide
             </p>
             <div className="flex justify-center gap-4">
-              <button className="cursor-pointer bg-white text-black px-6 py-2 rounded-full text-sm font-semibold hover:text-yellow-500 hover:bg-[#DFA93B] transition-colors duration-200">
+              <button className="cursor-pointer bg-white text-[#4A3B2A] px-6 py-2 rounded-full text-sm font-semibold hover:text-yellow-500 hover:bg-[#FF9C0A] transition-colors duration-200">
                 Plan Flight
               </button>
-              <button className="border border-white px-6 py-2 rounded-full text-sm font-semibold hover:bg-white hover:text-black transition-colors duration-200">
+              <button className="border border-white px-6 py-2 rounded-full text-sm font-semibold hover:bg-white hover:text-[#4A3B2A] transition-colors duration-200">
                 Explore
               </button>
             </div>
@@ -418,10 +418,10 @@ useEffect(() => {
               Over 500+ destinations worldwide
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <button className="cursor-pointer bg-white text-black px-6 py-2 rounded-full text-sm font-semibold hover:bg-[#DFA93B] transition-colors duration-200">
+              <button className="cursor-pointer bg-white text-[#4A3B2A] px-6 py-2 rounded-full text-sm font-semibold hover:bg-[#FF9C0A] transition-colors duration-200">
                 Plan Flight
               </button>
-              <button className="border border-white px-6 py-2 rounded-full text-sm font-semibold hover:bg-white hover:text-black transition-colors duration-200">
+              <button className="border border-white px-6 py-2 rounded-full text-sm font-semibold hover:bg-white hover:text-[#4A3B2A] transition-colors duration-200">
                 Explore
               </button>
             </div>
@@ -448,7 +448,7 @@ useEffect(() => {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             <div className=" rounded-lg py-8 px-6 text-center shadow-sm hover:shadow-md transition">
               <PlaneTakeoff
-                className="mx-auto mb-4 text-[#DFA93B]"
+                className="mx-auto mb-4 text-[#FF9C0A]"
                 size={36}
               />
               <h3 className="font-semibold mb-2">Private Charter</h3>
@@ -459,7 +459,7 @@ useEffect(() => {
             </div>
 
             <div className=" rounded-lg py-8 px-6 text-center shadow-sm hover:shadow-md transition">
-              <Shield className="mx-auto mb-4 text-[#DFA93B]" size={36} />
+              <Shield className="mx-auto mb-4 text-[#FF9C0A]" size={36} />
               <h3 className="font-semibold mb-2">Safety First</h3>
               <p className="text-sm text-gray-600">
                 Our fleet meets the highest safety standards with rigorous
@@ -468,7 +468,7 @@ useEffect(() => {
             </div>
 
             <div className=" rounded-lg py-8 px-6 text-center shadow-sm hover:shadow-md transition">
-              <Calendar className="mx-auto mb-4 text-[#DFA93B]" size={36} />
+              <Calendar className="mx-auto mb-4 text-[#FF9C0A]" size={36} />
               <h3 className="font-semibold mb-2">Flexible Scheduling</h3>
               <p className="text-sm text-gray-600">
                 Fly on your terms with departure times that suit your schedule,
@@ -477,7 +477,7 @@ useEffect(() => {
             </div>
 
             <div className=" rounded-lg py-8 px-6 text-center shadow-sm hover:shadow-md transition">
-              <Clock className="mx-auto mb-4 text-[#DFA93B]" size={36} />
+              <Clock className="mx-auto mb-4 text-[#FF9C0A]" size={36} />
               <h3 className="font-semibold mb-2">Time Efficiency</h3>
               <p className="text-sm text-gray-600">
                 Skip long security lines and boarding processes, making your
@@ -492,7 +492,7 @@ useEffect(() => {
         <div className="bg-[#F9FAFB] py-15 px-6 lg:px-14">
           <div className="max-w-7xl mx-auto text-center">
             <h2
-              className="text-3xl font-semibold text-gray-900"
+              className="text-3xl font-semibold text-[#4A3B2A]"
               style={{ fontFamily: "'Playfair Display', serif" }}
             >
               Exceptional Aircraft Selection
@@ -536,13 +536,13 @@ useEffect(() => {
                   </div>
                   <div className="p-6 flex-1 flex flex-col justify-between">
                     <div>
-                      <h3 className="text-lg text-start font-bold text-gray-900">
+                      <h3 className="text-lg text-start font-bold text-[#4A3B2A]">
                         {aircraft.name}
                       </h3>
                       <ul className="mt-3 space-y-2">
                         {aircraft.specs.map((spec, idx) => (
                           <li key={idx} className="flex items-start">
-                            <span className="mt-1 w-2 h-2 bg-[#DFA93B] rounded-full flex-shrink-0 mr-2"></span>
+                            <span className="mt-1 w-2 h-2 bg-[#FF9C0A] rounded-full flex-shrink-0 mr-2"></span>
                             <span className="text-gray-700 text-sm">
                               {spec.label}: {spec.value}
                             </span>
@@ -552,7 +552,7 @@ useEffect(() => {
                     </div>
                     <a
                       href="#"
-                      className="mt-4 text-sm font-medium text-gray-900 underline text-start"
+                      className="mt-4 text-sm font-medium text-[#4A3B2A] underline text-start"
                     >
                       Inspect aircraft &rarr;
                     </a>
@@ -564,7 +564,7 @@ useEffect(() => {
             <div className="mt-10">
               <a
                 href="#"
-                className="inline-flex items-center px-6 py-3 border border-gray-300 rounded-md text-gray-900 text-sm font-medium bg-white hover:bg-gray-50 transition"
+                className="inline-flex items-center px-6 py-3 border border-gray-300 rounded-md text-[#4A3B2A] text-sm font-medium bg-white hover:bg-gray-50 transition"
               >
                 Explore Full Fleet &rarr;
               </a>
@@ -576,11 +576,11 @@ useEffect(() => {
       <div className="About-JustCharter py-14 px-10 mb-7 md:px-20 bg-white">
         <section className="flex flex-col lg:flex-row items-center gap-10 px-6">
           <div className="lg:w-1/2 w-full">
-            <p className="text-[18px] text-[#DFA93B] font-medium mb-1">
+            <p className="text-[18px] text-[#FF9C0A] font-medium mb-1">
               ABOUT JUSTCHARTER
             </p>
             <h2
-              className="text-[28px] md:text-3xl font-semibold text-gray-900 mb-4"
+              className="text-[28px] md:text-3xl font-semibold text-[#4A3B2A] mb-4"
               style={{ fontFamily: "'Playfair Display', serif" }}
             >
               The Premier Choice for Private Aviation
@@ -595,7 +595,7 @@ useEffect(() => {
 
             <div className="grid text-center grid-cols-2 sm:grid-cols-4 gap-6 mt-8">
               <div>
-                <p className="text-xl font-bold text-gray-900">20+</p>
+                <p className="text-xl font-bold text-[#4A3B2A]">20+</p>
                 <p className="text-sm text-gray-500 leading-tight">
                   Years
                   <br />
@@ -603,7 +603,7 @@ useEffect(() => {
                 </p>
               </div>
               <div>
-                <p className="text-xl font-bold text-gray-900">50+</p>
+                <p className="text-xl font-bold text-[#4A3B2A]">50+</p>
                 <p className="text-sm text-gray-500 leading-tight">
                   Luxury
                   <br />
@@ -611,7 +611,7 @@ useEffect(() => {
                 </p>
               </div>
               <div>
-                <p className="text-xl font-bold text-gray-900">180+</p>
+                <p className="text-xl font-bold text-[#4A3B2A]">180+</p>
                 <p className="text-sm text-gray-500 leading-tight">
                   Global
                   <br />
@@ -619,7 +619,7 @@ useEffect(() => {
                 </p>
               </div>
               <div>
-                <p className="text-xl font-bold text-gray-900">10K+</p>
+                <p className="text-xl font-bold text-[#4A3B2A]">10K+</p>
                 <p className="text-sm text-gray-500 leading-tight">
                   Satisfied
                   <br />
@@ -668,7 +668,7 @@ useEffect(() => {
                     <Star
                       key={i}
                       size={16}
-                      className="text-[#DFA93B] fill-[#DFA93B] mr-1"
+                      className="text-[#FF9C0A] fill-[#FF9C0A] mr-1"
                     />
                   ))}
                 </div>
@@ -735,7 +735,7 @@ useEffect(() => {
                     key={index}
                     className="flex items-center gap-2 border border-gray-200 px-3 py-1.5 rounded-sm text-sm bg-white "
                   >
-                    <Shield className="text-[#DFA93B] w-4 h-4" />
+                    <Shield className="text-[#FF9C0A] w-4 h-4" />
                     {cert}
                   </div>
                 ))}
@@ -743,7 +743,7 @@ useEffect(() => {
             </div>
 
             <div className="bg-[#F9FAFB] p-6 sm:p-8 rounded-xl ">
-              <h3 className="text-[28px] font-semibold text-gray-900 mb-6">
+              <h3 className="text-[28px] font-semibold text-[#4A3B2A] mb-6">
                 Our Safety Commitments
               </h3>
               <ul className="space-y-3 mb-6">
@@ -752,7 +752,7 @@ useEffect(() => {
                     key={index}
                     className="flex items-start gap-2 text-gray-700"
                   >
-                    <Star className="w-4 h-4 text-[#DFA93B] mt-1" />
+                    <Star className="w-4 h-4 text-[#FF9C0A] mt-1" />
                     <span>{item}</span>
                   </li>
                 ))}
@@ -760,15 +760,15 @@ useEffect(() => {
 
               <div className="grid grid-cols-3 gap-4 text-center">
                 <div>
-                  <p className="text-xl font-bold text-gray-900">100%</p>
+                  <p className="text-xl font-bold text-[#4A3B2A]">100%</p>
                   <p className="text-sm text-gray-600">Safety Rating</p>
                 </div>
                 <div>
-                  <p className="text-xl font-bold text-gray-900">0</p>
+                  <p className="text-xl font-bold text-[#4A3B2A]">0</p>
                   <p className="text-sm text-gray-600">Incidents</p>
                 </div>
                 <div>
-                  <p className="text-xl font-bold text-gray-900">24/7</p>
+                  <p className="text-xl font-bold text-[#4A3B2A]">24/7</p>
                   <p className="text-sm text-gray-600">Support</p>
                 </div>
               </div>
@@ -782,7 +782,7 @@ useEffect(() => {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
             <div>
               <h2
-                className="text-2xl sm:text-3xl font-semibold text-gray-900 mb-4"
+                className="text-2xl sm:text-3xl font-semibold text-[#4A3B2A] mb-4"
                 style={{ fontFamily: "'Playfair Display', serif" }}
               >
                 Membership Advantages
@@ -805,7 +805,7 @@ useEffect(() => {
               </ul>
               <a
                 href="#"
-                className="inline-flex items-center font-semibold text-black hover:underline transition"
+                className="inline-flex items-center font-semibold text-[#4A3B2A] hover:underline transition"
               >
                 Learn More
                 <svg

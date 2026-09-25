@@ -19,7 +19,7 @@ const advantages = [
 
 export default function MembershipSafetySectionV3() {
   return (
-    <section className="py-24 bg-white font-sans text-slate-900 overflow-hidden">
+    <section className="py-24 bg-white font-sans text-[#4A3B2A] overflow-hidden">
       <div className="max-w-7xl mx-auto px-6 lg:px-12">
         
         {/* Overlapping Layered Design Container */}
@@ -37,7 +37,7 @@ export default function MembershipSafetySectionV3() {
             {/* FIX 3: Top-Right Glassmorphic Floating Price Badge (Zero collision with content card) */}
             <div className="absolute top-6 right-6 bg-slate-950/85 backdrop-blur-md border border-white/20 text-white px-5 py-3 rounded-full shadow-2xl font-bold flex items-center space-x-3 z-30">
               <span className="text-[10px] uppercase tracking-widest text-slate-300 font-extrabold">Starting at</span>
-              <span className="text-xl sm:text-2xl font-black text-[#DFA93B]">$4,500</span>
+              <span className="text-xl sm:text-2xl font-black text-[#FF9C0A]">$4,500</span>
               <span className="text-xs font-semibold text-slate-300">/ hr</span>
             </div>
           </div>
@@ -50,13 +50,13 @@ export default function MembershipSafetySectionV3() {
               {/* Membership Advantages Column */}
               <div>
                 <div className="inline-flex items-center space-x-2 bg-stone-100 px-4 py-1 rounded-full border border-slate-200/80 mb-3">
-                  <span className="w-2 h-2 rounded-full bg-[#DFA93B]"></span>
+                  <span className="w-2 h-2 rounded-full bg-[#FF9C0A]"></span>
                   <span className="text-[11px] uppercase tracking-[0.2em] font-semibold text-slate-700">
                     Membership Advantages
                   </span>
                 </div>
 
-                <h3 className="text-2xl sm:text-3xl font-bold text-slate-900 mb-4">
+                <h3 className="text-2xl sm:text-3xl font-bold text-[#4A3B2A] mb-4">
                   Privileged Access & Rates
                 </h3>
 
@@ -68,7 +68,7 @@ export default function MembershipSafetySectionV3() {
                   {advantages.map((item, idx) => (
                     <li key={idx} className="flex items-start space-x-3 text-xs sm:text-sm font-semibold text-slate-800">
                       {/* Small Gold Circle Bullet */}
-                      <span className="w-2.5 h-2.5 rounded-full bg-[#DFA93B] mt-1 flex-shrink-0"></span>
+                      <span className="w-2.5 h-2.5 rounded-full bg-[#FF9C0A] mt-1 flex-shrink-0"></span>
                       <span>{item}</span>
                     </li>
                   ))}
@@ -78,13 +78,13 @@ export default function MembershipSafetySectionV3() {
               {/* Safety Commitments Column */}
               <div className="lg:border-l lg:border-slate-100 lg:pl-10">
                 <div className="inline-flex items-center space-x-2 bg-stone-100 px-4 py-1 rounded-full border border-slate-200/80 mb-3">
-                  <Shield className="w-3.5 h-3.5 text-[#DFA93B]" />
+                  <Shield className="w-3.5 h-3.5 text-[#FF9C0A]" />
                   <span className="text-[11px] uppercase tracking-[0.2em] font-semibold text-slate-700">
                     Safety Commitments
                   </span>
                 </div>
 
-                <h3 className="text-2xl sm:text-3xl font-bold text-slate-900 mb-4">
+                <h3 className="text-2xl sm:text-3xl font-bold text-[#4A3B2A] mb-4">
                   Uncompromising Protection
                 </h3>
 
@@ -95,7 +95,7 @@ export default function MembershipSafetySectionV3() {
                 <ul className="space-y-3 font-sans">
                   {commitments.map((item, idx) => (
                     <li key={idx} className="flex items-start space-x-3 text-xs sm:text-sm text-slate-700">
-                      <Star className="w-3.5 h-3.5 text-[#DFA93B] fill-[#DFA93B] mt-1 flex-shrink-0" />
+                      <Star className="w-3.5 h-3.5 text-[#FF9C0A] fill-[#FF9C0A] mt-1 flex-shrink-0" />
                       <span>{item}</span>
                     </li>
                   ))}

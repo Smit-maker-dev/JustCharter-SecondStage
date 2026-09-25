@@ -136,7 +136,7 @@ export default function VerifyEmail() {
             </div>
           </div>
 
-          <h2 className="text-2xl font-bold text-black mb-1">
+          <h2 className="text-2xl font-bold text-[#4A3B2A] mb-1">
             Verify Your Email
           </h2>
           <p className="text-sm text-gray-600 mb-6">
@@ -145,7 +145,7 @@ export default function VerifyEmail() {
 
           <form onSubmit={handleSubmit} className="space-y-6">
             <div>
-              <label className="text-sm text-gray-800 mb-1 block">
+              <label className="text-sm text-[#4A3B2A] mb-1 block">
                 Enter Verification Code
               </label>
              <OTPInput code={code} setCode={setCode} />
@@ -159,7 +159,7 @@ export default function VerifyEmail() {
                 <button
                   type="button"
                   onClick={sendOtp}
-                  className="text-blue-500 underline cursor-pointer"
+                  className="text-[#FF9C0A] underline cursor-pointer"
                 >
                   Resend OTP
                 </button>
@@ -169,7 +169,7 @@ export default function VerifyEmail() {
             <button
               type="submit"
               disabled={loading}
-              className="cursor-pointer w-full md:w-3/5 bg-[#1A9FFF] text-white py-2.5 mt-4 rounded-lg hover:bg-blue-500 transition"
+              className="cursor-pointer w-full md:w-3/5 bg-[#FF9C0A] text-white py-2.5 mt-4 rounded-lg hover:bg-[#FF9C0A] transition"
             >
               {loading ? (
                 <div className="flex items-center justify-center gap-2">

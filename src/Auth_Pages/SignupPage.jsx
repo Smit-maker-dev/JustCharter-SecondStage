@@ -132,7 +132,7 @@ export default function SignupPage() {
             </div>
           </div>
 
-          <h2 className="text-2xl font-bold text-black mb-6">
+          <h2 className="text-2xl font-bold text-[#4A3B2A] mb-6">
             Welcome to JustCharter
           </h2>
           <form onSubmit={handleSubmit} className="space-y-4">
@@ -284,18 +284,18 @@ export default function SignupPage() {
                 onChange={handleChange}
                 className="mt-1  accent-black"
               />
-              <span className="text-sm text-black">
+              <span className="text-sm text-[#4A3B2A]">
                 I want to receive emails about the product, feature updates,
                 events, and marketing promotions.
               </span>
             </div>
             <p className="text-xs mt-2 text-gray-600">
               By creating an account, you agree to the{" "}
-              <a href="#" className="underline text-gray-800">
+              <a href="#" className="underline text-[#4A3B2A]">
                 Terms
               </a>{" "}
               and Condition{" "}
-              <a href="#" className="underline text-gray-800">
+              <a href="#" className="underline text-[#4A3B2A]">
                 Privacy & Policy
               </a>
               .
@@ -303,7 +303,7 @@ export default function SignupPage() {
             <button
               type="submit"
               disabled={loading}
-              className="cursor-pointer w-full md:w-3/5 font-semibold bg-blue-400 text-white py-2.5 mt-4 rounded-lg hover:bg-blue-700 transition flex items-center justify-center gap-2"
+              className="cursor-pointer w-full md:w-3/5 font-semibold bg-blue-400 text-white py-2.5 mt-4 rounded-lg hover:bg-[#e08800] transition flex items-center justify-center gap-2"
             >
               {loading ? (
                 <span className="flex items-center gap-2">
@@ -317,7 +317,7 @@ export default function SignupPage() {
 
             <p className="text-sm mt-4">
               Already have an account ?{" "}
-              <Link to="/Login" className="text-blue-600 underline">
+              <Link to="/Login" className="text-[#FF9C0A] underline">
                 Log in
               </Link>
             </p>

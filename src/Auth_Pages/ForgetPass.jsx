@@ -60,7 +60,7 @@ export default function ForgetPass() {
             <img src={Logo} alt="JustCharter Logo" className="h-10" />
           </div>
 
-          <h2 className="text-2xl font-bold text-black mb-2">
+          <h2 className="text-2xl font-bold text-[#4A3B2A] mb-2">
             Forgot Password
           </h2>
           <p className="text-sm text-gray-600 mb-6">
@@ -69,7 +69,7 @@ export default function ForgetPass() {
 
           <form onSubmit={handleSubmit} className="space-y-6">
             <div>
-              <label className="text-sm text-gray-800 mb-1 block">
+              <label className="text-sm text-[#4A3B2A] mb-1 block">
                 Email Address
               </label>
               <div>
@@ -85,7 +85,7 @@ export default function ForgetPass() {
             </div>
             <button
               type="submit"
-              className="cursor-pointer w-full md:w-3/5 bg-[#1A9FFF] text-white py-2.5 mt-4 rounded-lg hover:bg-blue-700 transition"
+              className="cursor-pointer w-full md:w-3/5 bg-[#FF9C0A] text-white py-2.5 mt-4 rounded-lg hover:bg-[#e08800] transition"
             >
               Submit
             </button>

@@ -3,7 +3,7 @@ import React from "react";
 export default function TermsOfServices() {
   return (
     <div className="min-h-screen bg-gray-50 mt-16">
-      <header className="relative bg-[#DFA93B] text-white py-18">
+      <header className="relative bg-[#FF9C0A] text-white py-18">
         <div
           className="absolute inset-0 bg-cover bg-center opacity-30"
           style={{
@@ -25,7 +25,7 @@ export default function TermsOfServices() {
 
       <div className="md:mx-20 px-4 sm:px-6 py-12">
         <div className="bg-white rounded-lg shadow-sm p-6 sm:p-8">
-          <h2 className="text-2xl font-semibold text-gray-800 mb-6 pb-2 border-b border-gray-200">
+          <h2 className="text-2xl font-semibold text-[#4A3B2A] mb-6 pb-2 border-b border-gray-200">
             Terms & Conditions
           </h2>
           <p className="text-gray-700 mb-6">
@@ -36,7 +36,7 @@ export default function TermsOfServices() {
 
           <div className="space-y-6">
             <div>
-              <h3 className="text-lg font-medium text-gray-800 mb-2">
+              <h3 className="text-lg font-medium text-[#4A3B2A] mb-2">
                 1. General Terms
               </h3>
               <div className="space-y-3 pl-4">
@@ -49,7 +49,7 @@ export default function TermsOfServices() {
             </div>
 
             <div>
-              <h3 className="text-lg font-medium text-gray-800 mb-2">
+              <h3 className="text-lg font-medium text-[#4A3B2A] mb-2">
                 2. Booking & Confirmation
               </h3>
               <div className="space-y-3 pl-4">
@@ -67,7 +67,7 @@ export default function TermsOfServices() {
             </div>
 
             <div>
-              <h3 className="text-lg font-medium text-gray-800 mb-2">
+              <h3 className="text-lg font-medium text-[#4A3B2A] mb-2">
                 3. Payments & Charges
               </h3>
               <div className="space-y-3 pl-4">
@@ -83,7 +83,7 @@ export default function TermsOfServices() {
             </div>
 
             <div>
-              <h3 className="text-lg font-medium text-gray-800 mb-2">
+              <h3 className="text-lg font-medium text-[#4A3B2A] mb-2">
                 4. Cancellations & Refunds
               </h3>
               <div className="space-y-3 pl-4">
@@ -100,7 +100,7 @@ export default function TermsOfServices() {
             </div>
 
             <div>
-              <h3 className="text-lg font-medium text-gray-800 mb-2">
+              <h3 className="text-lg font-medium text-[#4A3B2A] mb-2">
                 5. Passenger Responsibilities
               </h3>
               <div className="space-y-3 pl-4">
@@ -117,7 +117,7 @@ export default function TermsOfServices() {
             </div>
 
             <div>
-              <h3 className="text-lg font-medium text-gray-800 mb-2">
+              <h3 className="text-lg font-medium text-[#4A3B2A] mb-2">
                 6. Flight Operations & Delays
               </h3>
               <div className="space-y-3 pl-4">
@@ -135,7 +135,7 @@ export default function TermsOfServices() {
             </div>
 
             <div>
-              <h3 className="text-lg font-medium text-gray-800 mb-2">
+              <h3 className="text-lg font-medium text-[#4A3B2A] mb-2">
                 7. Baggage
               </h3>
               <div className="space-y-3 pl-4">
@@ -151,7 +151,7 @@ export default function TermsOfServices() {
             </div>
 
             <div>
-              <h3 className="text-lg font-medium text-gray-800 mb-2">
+              <h3 className="text-lg font-medium text-[#4A3B2A] mb-2">
                 8. Medical Flights & Special Needs
               </h3>
               <div className="space-y-3 pl-4">
@@ -167,7 +167,7 @@ export default function TermsOfServices() {
             </div>
 
             <div>
-              <h3 className="text-lg font-medium text-gray-800 mb-2">
+              <h3 className="text-lg font-medium text-[#4A3B2A] mb-2">
                 9. Liability Disclaimer
               </h3>
               <div className="space-y-3 pl-4">
@@ -184,7 +184,7 @@ export default function TermsOfServices() {
             </div>
 
             <div>
-              <h3 className="text-lg font-medium text-gray-800 mb-2">
+              <h3 className="text-lg font-medium text-[#4A3B2A] mb-2">
                 10. Modifications
               </h3>
               <div className="space-y-3 pl-4">
@@ -196,7 +196,7 @@ export default function TermsOfServices() {
             </div>
 
             <div>
-              <h3 className="text-lg font-medium text-gray-800 mb-2">
+              <h3 className="text-lg font-medium text-[#4A3B2A] mb-2">
                 11. Governing Law
               </h3>
               <div className="space-y-3 pl-4">
@@ -209,7 +209,7 @@ export default function TermsOfServices() {
             </div>
 
             <div className="bg-gray-50 p-4 rounded-lg">
-              <h3 className="text-lg font-medium text-gray-800 mb-2">
+              <h3 className="text-lg font-medium text-[#4A3B2A] mb-2">
                 Acceptance
               </h3>
               <p className="text-gray-700">

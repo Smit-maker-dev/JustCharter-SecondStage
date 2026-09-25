@@ -8,45 +8,45 @@ export default function AboutStatsSectionV5() {
       stat: "20+",
       label: "Years Experience",
       desc: "Two decades of luxury aviation leadership",
-      icon: <Calendar className="w-4 h-4 text-[#DFA93B]" />,
+      icon: <Calendar className="w-4 h-4 text-[#FF9C0A]" />,
     },
     {
       num: "Chapter N° 02",
       stat: "50+",
       label: "Luxury Aircraft",
       desc: "Owned and operated long-range fleet",
-      icon: <Plane className="w-4 h-4 text-[#DFA93B]" />,
+      icon: <Plane className="w-4 h-4 text-[#FF9C0A]" />,
     },
     {
       num: "Chapter N° 03",
       stat: "180+",
       label: "Global Destinations",
       desc: "Direct access across 6 continents",
-      icon: <Globe className="w-4 h-4 text-[#DFA93B]" />,
+      icon: <Globe className="w-4 h-4 text-[#FF9C0A]" />,
     },
     {
       num: "Chapter N° 04",
       stat: "10K+",
       label: "Satisfied Clients",
       desc: "High-net-worth & corporate travelers",
-      icon: <Users className="w-4 h-4 text-[#DFA93B]" />,
+      icon: <Users className="w-4 h-4 text-[#FF9C0A]" />,
     },
   ];
 
   return (
-    <section className="py-28 bg-white font-sans text-stone-900 relative overflow-hidden">
+    <section className="py-28 bg-white font-sans text-[#4A3B2A] relative overflow-hidden">
       <div className="max-w-7xl mx-auto px-6 lg:px-12">
         
         {/* Header */}
         <div className="max-w-3xl mb-16">
           <div className="inline-flex items-center space-x-2 bg-stone-100 px-4 py-1.5 rounded-full border border-stone-200/80 mb-4">
-            <span className="w-2 h-2 rounded-full bg-[#DFA93B]"></span>
+            <span className="w-2 h-2 rounded-full bg-[#FF9C0A]"></span>
             <span className="text-xs uppercase tracking-[0.2em] font-serif italic text-stone-700">
               About JustCharter
             </span>
           </div>
 
-          <h2 className="text-4xl sm:text-5xl lg:text-6xl font-serif font-normal tracking-tight text-stone-900 leading-tight">
+          <h2 className="text-4xl sm:text-5xl lg:text-6xl font-serif font-normal tracking-tight text-[#4A3B2A] leading-tight">
             The Premier Choice for Private Aviation
           </h2>
         </div>
@@ -84,10 +84,10 @@ export default function AboutStatsSectionV5() {
             {chapters.map((chap, idx) => (
               <div
                 key={idx}
-                className="border-t border-[#DFA93B]/40 py-5 sm:py-6 transition-all hover:pl-2 group cursor-default"
+                className="border-t border-[#FF9C0A]/40 py-5 sm:py-6 transition-all hover:pl-2 group cursor-default"
               >
                 <div className="flex items-center justify-between mb-2">
-                  <span className="text-[10px] sm:text-[11px] uppercase tracking-widest font-serif italic text-[#DFA93B]">
+                  <span className="text-[10px] sm:text-[11px] uppercase tracking-widest font-serif italic text-[#FF9C0A]">
                     {chap.num}
                   </span>
                   <div className="p-1.5 sm:p-2 rounded-full bg-stone-50 border border-stone-200/60">
@@ -96,10 +96,10 @@ export default function AboutStatsSectionV5() {
                 </div>
 
                 <div className="flex flex-wrap items-baseline gap-2 sm:space-x-4">
-                  <span className="text-2xl sm:text-4xl font-serif font-normal text-stone-900 group-hover:text-[#DFA93B] transition-colors">
+                  <span className="text-2xl sm:text-4xl font-serif font-normal text-[#4A3B2A] group-hover:text-[#FF9C0A] transition-colors">
                     {chap.stat}
                   </span>
-                  <span className="text-xs sm:text-base font-semibold text-stone-900 uppercase tracking-wider">
+                  <span className="text-xs sm:text-base font-semibold text-[#4A3B2A] uppercase tracking-wider">
                     {chap.label}
                   </span>
                 </div>
@@ -109,7 +109,7 @@ export default function AboutStatsSectionV5() {
                 </p>
               </div>
             ))}
-            <div className="border-t border-[#DFA93B]/40"></div>
+            <div className="border-t border-[#FF9C0A]/40"></div>
           </div>
 
         </div>

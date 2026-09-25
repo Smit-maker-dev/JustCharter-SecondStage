@@ -106,14 +106,14 @@ export default function VerifyOtpDialog({
       </button>
 
       <DialogContent className="p-6 sm:p-8 font-inter bg-white relative">
-        <h2 className="text-[22px] sm:text-[24px] font-bold text-black mb-2">
+        <h2 className="text-[22px] sm:text-[24px] font-bold text-[#4A3B2A] mb-2">
           OTP Verification
         </h2>
         <p className="text-[15px] sm:text-[16px] text-gray-600 mb-8">
           We’ve sent a 6-digit code to your email
         </p>
 
-        <label className="block text-[14px] sm:text-[15px] text-black mb-2">
+        <label className="block text-[14px] sm:text-[15px] text-[#4A3B2A] mb-2">
           Enter Verification Code
         </label>
         <div className="relative mb-6">
@@ -139,7 +139,7 @@ export default function VerifyOtpDialog({
             <span className="text-gray-400">Resend in {timer}s</span>
           ) : (
             <span
-              className="text-blue-600 cursor-pointer"
+              className="text-[#FF9C0A] cursor-pointer"
               onClick={handleResendOtp}
             >
               Resend
@@ -149,7 +149,7 @@ export default function VerifyOtpDialog({
 
         <button
           onClick={handleVerify}
-          className="cursor-pointer w-full md:w-3/5  bg-[#1A9FFF] text-white py-2.5 mt-4 rounded-lg hover:bg-blue-700 transition"
+          className="cursor-pointer w-full md:w-3/5  bg-[#FF9C0A] text-white py-2.5 mt-4 rounded-lg hover:bg-[#e08800] transition"
         >
           Verify
         </button>

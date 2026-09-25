@@ -85,7 +85,7 @@ const ChangePasswordDialog = ({ open, onClose }) => {
           <IoMdCloseCircle className="w-5 h-5 text-gray-500 hover:text-red-500" />
         </button>
 
-        <h2 className="text-[24px] font-bold text-black mb-2">
+        <h2 className="text-[24px] font-bold text-[#4A3B2A] mb-2">
           Change Password
         </h2>
         <p className="text-[16px] text-gray-600 mb-8">
@@ -93,7 +93,7 @@ const ChangePasswordDialog = ({ open, onClose }) => {
         </p>
 
         <div className="flex items-center justify-between mb-2">
-          <label className="text-[14px]  text-black">Old Password</label>
+          <label className="text-[14px]  text-[#4A3B2A]">Old Password</label>
         </div>
         <div className="relative">
           <input
@@ -128,7 +128,7 @@ const ChangePasswordDialog = ({ open, onClose }) => {
             }}
           />
         </div>
-        <label className="block mt-6 mb-2 text-[15px]  text-black">
+        <label className="block mt-6 mb-2 text-[15px]  text-[#4A3B2A]">
           New Password
         </label>
         <div className="relative">
@@ -148,7 +148,7 @@ const ChangePasswordDialog = ({ open, onClose }) => {
             </span>
           )}
         </div>
-        <label className="block mt-6 mb-2 text-[15px]  text-black">
+        <label className="block mt-6 mb-2 text-[15px]  text-[#4A3B2A]">
           Confirm Password
         </label>
         <div className="relative">
@@ -179,7 +179,7 @@ const ChangePasswordDialog = ({ open, onClose }) => {
 
         <button
           onClick={handleSubmit}
-          className="cursor-pointer w-full md:w-3/5  bg-[#1A9FFF] text-white py-2.5 mt-4 rounded-lg hover:bg-blue-700 transition"
+          className="cursor-pointer w-full md:w-3/5  bg-[#FF9C0A] text-white py-2.5 mt-4 rounded-lg hover:bg-[#e08800] transition"
         >
           Save
         </button>

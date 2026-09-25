@@ -67,13 +67,13 @@ export default function LoginPage() {
             <img src="/images/Blacklogo.png" alt="JustCharter Logo" className="h-11" />
           </div>
 
-          <h2 className="text-3xl font-bold text-black mb-8">
+          <h2 className="text-3xl font-bold text-[#4A3B2A] mb-8">
             Welcome to JustCharter
           </h2>
 
           <form className="space-y-6" onSubmit={handleSubmit}>
             <div>
-              <label className="text-sm text-gray-800 mb-2 block">
+              <label className="text-sm text-[#4A3B2A] mb-2 block">
                 Email Address
               </label>
               <input
@@ -87,7 +87,7 @@ export default function LoginPage() {
             </div>
 
             <div>
-              <label className="text-sm text-gray-800 mb-2 block">
+              <label className="text-sm text-[#4A3B2A] mb-2 block">
                 Password
               </label>
               <div className="relative">
@@ -126,7 +126,7 @@ export default function LoginPage() {
              <button
               type="submit"
               disabled={loading}
-              className="cursor-pointer w-full md:w-3/5 font-semibold bg-blue-400 text-white py-2.5 mt-4 rounded-lg hover:bg-blue-700 transition flex items-center justify-center gap-2"
+              className="cursor-pointer w-full md:w-3/5 font-semibold bg-blue-400 text-white py-2.5 mt-4 rounded-lg hover:bg-[#e08800] transition flex items-center justify-center gap-2"
             >
               {loading ? (
                 <span className="flex items-center gap-2">
@@ -139,7 +139,7 @@ export default function LoginPage() {
             </button>
             <p className="text-sm mt-4">
               Don't have an account?{" "}
-              <Link to="/register" className="text-blue-600 hover:underline">
+              <Link to="/register" className="text-[#FF9C0A] hover:underline">
                 Sign up
               </Link>
             </p>

@@ -49,7 +49,7 @@ const handleSubmit = async (e) => {
       </button>
 
       <DialogContent className="p-6 sm:p-8 font-inter bg-white relative">
-        <h2 className="text-[22px] sm:text-[24px] font-bold text-black mb-2">
+        <h2 className="text-[22px] sm:text-[24px] font-bold text-[#4A3B2A] mb-2">
           Forgot Password
         </h2>
         <p className="text-[15px] sm:text-[16px] text-gray-600 mb-6">
@@ -57,7 +57,7 @@ const handleSubmit = async (e) => {
         </p>
 
         <form onSubmit={handleSubmit}>
-          <label className="block text-[14px] sm:text-[15px] text-black mb-2">
+          <label className="block text-[14px] sm:text-[15px] text-[#4A3B2A] mb-2">
             Email Address
           </label>
           <input
@@ -72,7 +72,7 @@ const handleSubmit = async (e) => {
           <div className="mt-6 flex justify-center sm:justify-start">
             <button
               type="submit"
-              className="w-full sm:w-3/5 bg-[#1A9FFF] text-white py-2.5 rounded-lg hover:bg-blue-700 transition"
+              className="w-full sm:w-3/5 bg-[#FF9C0A] text-white py-2.5 rounded-lg hover:bg-[#e08800] transition"
             >
               Submit
             </button>

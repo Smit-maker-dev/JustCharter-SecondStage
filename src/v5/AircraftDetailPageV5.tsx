@@ -254,7 +254,7 @@ export default function AircraftDetailPageV5() {
   }
 
   return (
-    <div className="min-h-screen bg-white text-stone-900 font-sans antialiased selection:bg-[#DFA93B]/30 selection:text-stone-900 pt-24 sm:pt-28">
+    <div className="min-h-screen bg-white text-[#4A3B2A] font-sans antialiased selection:bg-[#FF9C0A]/30 selection:text-[#4A3B2A] pt-24 sm:pt-28">
       
       <div className="max-w-7xl mx-auto px-6 lg:px-12 pb-20">
         
@@ -262,9 +262,9 @@ export default function AircraftDetailPageV5() {
         <div className="mb-8">
           <Link
             to="/"
-            className="inline-flex items-center space-x-2 text-xs font-semibold uppercase tracking-wider text-stone-500 hover:text-stone-900 transition-colors group"
+            className="inline-flex items-center space-x-2 text-xs font-semibold uppercase tracking-wider text-stone-500 hover:text-[#4A3B2A] transition-colors group"
           >
-            <ArrowLeft className="w-4 h-4 text-[#DFA93B] group-hover:-translate-x-1 transition-transform" />
+            <ArrowLeft className="w-4 h-4 text-[#FF9C0A] group-hover:-translate-x-1 transition-transform" />
             <span>Back to Fleet</span>
           </Link>
         </div>
@@ -280,7 +280,7 @@ export default function AircraftDetailPageV5() {
                 alt={aircraft.name}
                 className="w-full h-full object-cover transition-all duration-500"
               />
-              <span className="absolute top-4 right-4 bg-stone-950/85 backdrop-blur-md text-[#DFA93B] text-xs uppercase tracking-widest font-semibold px-4 py-1.5 rounded-full border border-white/10">
+              <span className="absolute top-4 right-4 bg-stone-950/85 backdrop-blur-md text-[#FF9C0A] text-xs uppercase tracking-widest font-semibold px-4 py-1.5 rounded-full border border-white/10">
                 {aircraft.category}
               </span>
             </div>
@@ -293,7 +293,7 @@ export default function AircraftDetailPageV5() {
                   onClick={() => setActiveImageIndex(idx)}
                   className={`relative rounded-xl overflow-hidden bg-stone-900 h-20 sm:h-24 border-2 transition-all cursor-pointer ${
                     activeImageIndex === idx
-                      ? "border-[#DFA93B] ring-2 ring-[#DFA93B]/30"
+                      ? "border-[#FF9C0A] ring-2 ring-[#FF9C0A]/30"
                       : "border-transparent opacity-70 hover:opacity-100"
                   }`}
                 >
@@ -311,13 +311,13 @@ export default function AircraftDetailPageV5() {
           <div className="lg:col-span-5 flex flex-col justify-between">
             <div>
               <div className="inline-flex items-center space-x-2 bg-stone-100 px-4 py-1.5 rounded-full border border-stone-200/80 mb-4 shadow-sm">
-                <span className="w-2 h-2 rounded-full bg-[#DFA93B]"></span>
+                <span className="w-2 h-2 rounded-full bg-[#FF9C0A]"></span>
                 <span className="text-xs uppercase tracking-[0.2em] font-serif italic text-stone-700">
                   {aircraft.tag}
                 </span>
               </div>
 
-              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-serif font-normal tracking-tight text-stone-900 mb-3">
+              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-serif font-normal tracking-tight text-[#4A3B2A] mb-3">
                 {aircraft.name}
               </h1>
 
@@ -333,14 +333,14 @@ export default function AircraftDetailPageV5() {
             <div className="space-y-4">
               <button
                 onClick={() => navigate("/request-quote")}
-                className="w-full bg-[#DFA93B] hover:bg-[#c9952f] text-stone-950 font-bold text-xs uppercase tracking-wider py-4 px-8 rounded-xl transition-all shadow-sm hover:shadow-md flex items-center justify-center space-x-2 cursor-pointer border border-[#d29c30]"
+                className="w-full bg-[#FF9C0A] hover:bg-[#e08800] text-[#4A3B2A] font-bold text-xs uppercase tracking-wider py-4 px-8 rounded-xl transition-all shadow-sm hover:shadow-md flex items-center justify-center space-x-2 cursor-pointer border border-[#FF9C0A]"
               >
                 <span>Request This Aircraft</span>
                 <ArrowUpRight className="w-4 h-4" />
               </button>
 
               <div className="flex items-center justify-center space-x-2 text-xs text-stone-500 font-light pt-2">
-                <ShieldCheck className="w-4 h-4 text-[#DFA93B]" />
+                <ShieldCheck className="w-4 h-4 text-[#FF9C0A]" />
                 <span>ARGUS Platinum & Wyvern Certified Operator</span>
               </div>
             </div>
@@ -351,7 +351,7 @@ export default function AircraftDetailPageV5() {
 
         {/* 3. Key Specs Strip */}
         <div className="mb-20">
-          <h2 className="text-2xl font-serif font-normal text-stone-900 mb-6">
+          <h2 className="text-2xl font-serif font-normal text-[#4A3B2A] mb-6">
             Technical Specifications
           </h2>
 
@@ -359,60 +359,60 @@ export default function AircraftDetailPageV5() {
             
             <div className="flex flex-col">
               <div className="flex items-center space-x-1.5 text-stone-400 mb-1">
-                <Navigation className="w-4 h-4 text-[#DFA93B]" />
+                <Navigation className="w-4 h-4 text-[#FF9C0A]" />
                 <span className="text-[10px] font-bold uppercase tracking-wider">Max Range</span>
               </div>
-              <span className="text-lg sm:text-xl font-serif font-semibold text-stone-900">
+              <span className="text-lg sm:text-xl font-serif font-semibold text-[#4A3B2A]">
                 {aircraft.specs.range}
               </span>
             </div>
 
             <div className="flex flex-col">
               <div className="flex items-center space-x-1.5 text-stone-400 mb-1">
-                <Gauge className="w-4 h-4 text-[#DFA93B]" />
+                <Gauge className="w-4 h-4 text-[#FF9C0A]" />
                 <span className="text-[10px] font-bold uppercase tracking-wider">Max Speed</span>
               </div>
-              <span className="text-lg sm:text-xl font-serif font-semibold text-stone-900">
+              <span className="text-lg sm:text-xl font-serif font-semibold text-[#4A3B2A]">
                 {aircraft.specs.speed}
               </span>
             </div>
 
             <div className="flex flex-col">
               <div className="flex items-center space-x-1.5 text-stone-400 mb-1">
-                <Users className="w-4 h-4 text-[#DFA93B]" />
+                <Users className="w-4 h-4 text-[#FF9C0A]" />
                 <span className="text-[10px] font-bold uppercase tracking-wider">Passengers</span>
               </div>
-              <span className="text-lg sm:text-xl font-serif font-semibold text-stone-900">
+              <span className="text-lg sm:text-xl font-serif font-semibold text-[#4A3B2A]">
                 {aircraft.specs.passengers}
               </span>
             </div>
 
             <div className="flex flex-col">
               <div className="flex items-center space-x-1.5 text-stone-400 mb-1">
-                <Maximize className="w-4 h-4 text-[#DFA93B]" />
+                <Maximize className="w-4 h-4 text-[#FF9C0A]" />
                 <span className="text-[10px] font-bold uppercase tracking-wider">Cabin Height</span>
               </div>
-              <span className="text-lg sm:text-xl font-serif font-semibold text-stone-900">
+              <span className="text-lg sm:text-xl font-serif font-semibold text-[#4A3B2A]">
                 {aircraft.specs.height}
               </span>
             </div>
 
             <div className="flex flex-col">
               <div className="flex items-center space-x-1.5 text-stone-400 mb-1">
-                <Maximize className="w-4 h-4 text-[#DFA93B]" />
+                <Maximize className="w-4 h-4 text-[#FF9C0A]" />
                 <span className="text-[10px] font-bold uppercase tracking-wider">Cabin Length</span>
               </div>
-              <span className="text-lg sm:text-xl font-serif font-semibold text-stone-900">
+              <span className="text-lg sm:text-xl font-serif font-semibold text-[#4A3B2A]">
                 {aircraft.specs.length}
               </span>
             </div>
 
             <div className="flex flex-col">
               <div className="flex items-center space-x-1.5 text-stone-400 mb-1">
-                <Luggage className="w-4 h-4 text-[#DFA93B]" />
+                <Luggage className="w-4 h-4 text-[#FF9C0A]" />
                 <span className="text-[10px] font-bold uppercase tracking-wider">Baggage</span>
               </div>
-              <span className="text-lg sm:text-xl font-serif font-semibold text-stone-900">
+              <span className="text-lg sm:text-xl font-serif font-semibold text-[#4A3B2A]">
                 {aircraft.specs.baggage}
               </span>
             </div>
@@ -423,21 +423,21 @@ export default function AircraftDetailPageV5() {
         {/* 4. Highlights Section */}
         <div className="mb-20 bg-white border border-stone-200/80 rounded-2xl p-8 sm:p-10 shadow-sm">
           <div className="inline-flex items-center space-x-2 bg-stone-100 px-3.5 py-1 rounded-full border border-stone-200/80 mb-4">
-            <span className="w-2 h-2 rounded-full bg-[#DFA93B]"></span>
+            <span className="w-2 h-2 rounded-full bg-[#FF9C0A]"></span>
             <span className="text-[10px] uppercase tracking-widest font-serif italic text-stone-700">
               Aircraft Highlights
             </span>
           </div>
 
-          <h3 className="text-2xl sm:text-3xl font-serif font-normal text-stone-900 mb-6">
+          <h3 className="text-2xl sm:text-3xl font-serif font-normal text-[#4A3B2A] mb-6">
             Standout Engineering & Cabin Features
           </h3>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             {aircraft.highlights.map((bullet, idx) => (
               <div key={idx} className="flex items-start space-x-3 bg-stone-50/80 p-4 rounded-xl border border-stone-200/60">
-                <CheckCircle2 className="w-5 h-5 text-[#DFA93B] flex-shrink-0 mt-0.5" />
-                <span className="text-xs sm:text-sm font-medium text-stone-800 leading-relaxed">
+                <CheckCircle2 className="w-5 h-5 text-[#FF9C0A] flex-shrink-0 mt-0.5" />
+                <span className="text-xs sm:text-sm font-medium text-[#4A3B2A] leading-relaxed">
                   {bullet}
                 </span>
               </div>
@@ -449,16 +449,16 @@ export default function AircraftDetailPageV5() {
         <div>
           <div className="flex items-center justify-between mb-8">
             <div>
-              <span className="text-[10px] uppercase tracking-[0.2em] font-semibold text-[#DFA93B] block mb-1">
+              <span className="text-[10px] uppercase tracking-[0.2em] font-semibold text-[#FF9C0A] block mb-1">
                 Explore More Fleet
               </span>
-              <h2 className="text-3xl sm:text-4xl font-serif font-normal text-stone-900">
+              <h2 className="text-3xl sm:text-4xl font-serif font-normal text-[#4A3B2A]">
                 You Might Also Like
               </h2>
             </div>
             <Link
               to="/"
-              className="text-xs font-semibold uppercase tracking-wider text-stone-600 hover:text-stone-950 flex items-center space-x-1"
+              className="text-xs font-semibold uppercase tracking-wider text-stone-600 hover:text-[#4A3B2A] flex items-center space-x-1"
             >
               <span>View All</span>
               <ArrowUpRight className="w-4 h-4" />
@@ -477,13 +477,13 @@ export default function AircraftDetailPageV5() {
                     alt={item.name}
                     className="w-full h-full object-cover opacity-95 group-hover:scale-105 transition-transform duration-700"
                   />
-                  <span className="absolute top-3 right-3 bg-stone-950/80 backdrop-blur-md text-[#DFA93B] text-[10px] uppercase tracking-widest font-semibold px-3 py-1 rounded-full border border-white/10">
+                  <span className="absolute top-3 right-3 bg-stone-950/80 backdrop-blur-md text-[#FF9C0A] text-[10px] uppercase tracking-widest font-semibold px-3 py-1 rounded-full border border-white/10">
                     {item.category}
                   </span>
                 </div>
 
                 <div>
-                  <h3 className="text-xl font-serif font-normal text-stone-900 mb-4 group-hover:text-[#DFA93B] transition-colors">
+                  <h3 className="text-xl font-serif font-normal text-[#4A3B2A] mb-4 group-hover:text-[#FF9C0A] transition-colors">
                     {item.name}
                   </h3>
 
@@ -492,7 +492,7 @@ export default function AircraftDetailPageV5() {
                       <span className="text-stone-400 font-medium text-[10px] uppercase tracking-wider">
                         Max Range
                       </span>
-                      <span className="text-stone-900 font-bold mt-0.5">
+                      <span className="text-[#4A3B2A] font-bold mt-0.5">
                         {item.specs.range}
                       </span>
                     </div>
@@ -500,7 +500,7 @@ export default function AircraftDetailPageV5() {
                       <span className="text-stone-400 font-medium text-[10px] uppercase tracking-wider">
                         Passengers
                       </span>
-                      <span className="text-stone-900 font-bold mt-0.5">
+                      <span className="text-[#4A3B2A] font-bold mt-0.5">
                         {item.specs.passengers}
                       </span>
                     </div>
@@ -510,7 +510,7 @@ export default function AircraftDetailPageV5() {
                 <div className="flex items-center justify-between pt-2">
                   <Link
                     to={`/aircraft/${item.id}`}
-                    className="text-xs font-semibold uppercase tracking-wider text-stone-600 hover:text-stone-950 flex items-center space-x-1"
+                    className="text-xs font-semibold uppercase tracking-wider text-stone-600 hover:text-[#4A3B2A] flex items-center space-x-1"
                   >
                     <span>Inspect Spec</span>
                     <ArrowUpRight className="w-3.5 h-3.5" />
@@ -518,7 +518,7 @@ export default function AircraftDetailPageV5() {
 
                   <button
                     onClick={() => navigate(`/aircraft/${item.id}`)}
-                    className="bg-stone-900 hover:bg-[#DFA93B] hover:text-stone-950 text-white text-xs font-semibold uppercase tracking-wider px-5 py-2 rounded-xl transition-all cursor-pointer"
+                    className="bg-stone-900 hover:bg-[#FF9C0A] hover:text-[#4A3B2A] text-white text-xs font-semibold uppercase tracking-wider px-5 py-2 rounded-xl transition-all cursor-pointer"
                   >
                     Book Now
                   </button>

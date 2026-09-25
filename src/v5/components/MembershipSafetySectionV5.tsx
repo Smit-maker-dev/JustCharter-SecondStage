@@ -19,7 +19,7 @@ const advantages = [
 
 export default function MembershipSafetySectionV5() {
   return (
-    <section className="py-28 bg-stone-50/70 font-sans text-stone-900 overflow-hidden border-t border-stone-200/80">
+    <section className="py-28 bg-stone-50/70 font-sans text-[#4A3B2A] overflow-hidden border-t border-stone-200/80">
       <div className="max-w-7xl mx-auto px-6 lg:px-12">
         
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 items-center">
@@ -30,13 +30,13 @@ export default function MembershipSafetySectionV5() {
             {/* Membership Advantages */}
             <div>
               <div className="inline-flex items-center space-x-2 bg-white px-4 py-1 rounded-full border border-stone-200/80 mb-3 shadow-sm">
-                <span className="w-2 h-2 rounded-full bg-[#DFA93B]"></span>
+                <span className="w-2 h-2 rounded-full bg-[#FF9C0A]"></span>
                 <span className="text-[11px] uppercase tracking-[0.2em] font-serif italic text-stone-700">
                   Membership Advantages
                 </span>
               </div>
 
-              <h3 className="text-3xl sm:text-4xl font-serif font-normal text-stone-900 mb-4">
+              <h3 className="text-3xl sm:text-4xl font-serif font-normal text-[#4A3B2A] mb-4">
                 Privileged Access & Rates
               </h3>
 
@@ -46,9 +46,9 @@ export default function MembershipSafetySectionV5() {
 
               <ul className="space-y-4">
                 {advantages.map((item, idx) => (
-                  <li key={idx} className="flex items-start space-x-3 text-xs sm:text-sm text-stone-800 font-medium">
+                  <li key={idx} className="flex items-start space-x-3 text-xs sm:text-sm text-[#4A3B2A] font-medium">
                     {/* Gold Diamond Bullet */}
-                    <span className="w-2 h-2 rotate-45 bg-[#DFA93B] mt-1.5 flex-shrink-0"></span>
+                    <span className="w-2 h-2 rotate-45 bg-[#FF9C0A] mt-1.5 flex-shrink-0"></span>
                     <span>{item}</span>
                   </li>
                 ))}
@@ -58,13 +58,13 @@ export default function MembershipSafetySectionV5() {
             {/* Safety Commitments */}
             <div className="pt-8 border-t border-stone-200/60">
               <div className="inline-flex items-center space-x-2 bg-white px-4 py-1 rounded-full border border-stone-200/80 mb-3 shadow-sm">
-                <Shield className="w-3.5 h-3.5 text-[#DFA93B]" />
+                <Shield className="w-3.5 h-3.5 text-[#FF9C0A]" />
                 <span className="text-[11px] uppercase tracking-[0.2em] font-serif italic text-stone-700">
                   Safety Commitments
                 </span>
               </div>
 
-              <h3 className="text-3xl sm:text-4xl font-serif font-normal text-stone-900 mb-4">
+              <h3 className="text-3xl sm:text-4xl font-serif font-normal text-[#4A3B2A] mb-4">
                 Uncompromising Protection
               </h3>
 
@@ -76,7 +76,7 @@ export default function MembershipSafetySectionV5() {
                 {commitments.map((item, idx) => (
                   <li key={idx} className="flex items-start space-x-3 text-xs sm:text-sm text-stone-700 font-medium">
                     {/* Gold Diamond Bullet */}
-                    <span className="w-2 h-2 rotate-45 bg-[#DFA93B] mt-1.5 flex-shrink-0"></span>
+                    <span className="w-2 h-2 rotate-45 bg-[#FF9C0A] mt-1.5 flex-shrink-0"></span>
                     <span>{item}</span>
                   </li>
                 ))}
@@ -96,9 +96,9 @@ export default function MembershipSafetySectionV5() {
               <div className="absolute inset-0 bg-gradient-to-t from-stone-950/80 via-transparent to-transparent"></div>
 
               {/* Floating Pricing Badge */}
-              <div className="absolute top-4 right-4 sm:top-6 sm:right-6 bg-white/95 backdrop-blur-md border border-stone-200/80 text-stone-900 px-3.5 sm:px-5 py-2.5 sm:py-3 rounded-xl shadow-lg font-bold flex items-center space-x-2 sm:space-x-3 z-30">
+              <div className="absolute top-4 right-4 sm:top-6 sm:right-6 bg-white/95 backdrop-blur-md border border-stone-200/80 text-[#4A3B2A] px-3.5 sm:px-5 py-2.5 sm:py-3 rounded-xl shadow-lg font-bold flex items-center space-x-2 sm:space-x-3 z-30">
                 <span className="text-[9px] sm:text-[10px] uppercase tracking-widest text-stone-500 font-semibold">Starting at</span>
-                <span className="text-base sm:text-2xl font-serif font-normal text-[#DFA93B]">$4,500</span>
+                <span className="text-base sm:text-2xl font-serif font-normal text-[#FF9C0A]">$4,500</span>
                 <span className="text-[10px] sm:text-xs font-normal text-stone-500">/ hr</span>
               </div>
             </div>

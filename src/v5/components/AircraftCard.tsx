@@ -32,14 +32,14 @@ export default function AircraftCard({ aircraft }: AircraftCardProps) {
           alt={aircraft.name}
           className="w-full h-full object-cover opacity-95 group-hover:scale-105 transition-transform duration-700"
         />
-        <span className="absolute top-3 right-3 bg-stone-950/80 backdrop-blur-md text-[#DFA93B] text-[10px] uppercase tracking-widest font-semibold px-3 py-1 rounded-full border border-white/10">
+        <span className="absolute top-3 right-3 bg-stone-950/80 backdrop-blur-md text-[#FF9C0A] text-[10px] uppercase tracking-widest font-semibold px-3 py-1 rounded-full border border-white/10">
           {aircraft.tag}
         </span>
       </div>
 
       {/* Title & Specs */}
       <div>
-        <h3 className="text-2xl font-serif font-normal text-stone-900 mb-4 group-hover:text-[#DFA93B] transition-colors">
+        <h3 className="text-2xl font-serif font-normal text-[#4A3B2A] mb-4 group-hover:text-[#FF9C0A] transition-colors">
           {aircraft.name}
         </h3>
 
@@ -49,7 +49,7 @@ export default function AircraftCard({ aircraft }: AircraftCardProps) {
               <span className="text-stone-400 font-medium text-[10px] uppercase tracking-wider">
                 {spec.label}
               </span>
-              <span className="text-stone-900 font-bold mt-0.5">
+              <span className="text-[#4A3B2A] font-bold mt-0.5">
                 {spec.value}
               </span>
             </div>
@@ -61,7 +61,7 @@ export default function AircraftCard({ aircraft }: AircraftCardProps) {
       <div className="flex items-center justify-between pt-2">
         <Link
           to={`/aircraft/${aircraft.id}`}
-          className="text-xs font-semibold uppercase tracking-wider text-stone-600 hover:text-stone-950 flex items-center space-x-1"
+          className="text-xs font-semibold uppercase tracking-wider text-stone-600 hover:text-[#4A3B2A] flex items-center space-x-1"
         >
           <span>Inspect Spec</span>
           <ArrowUpRight className="w-3.5 h-3.5" />
@@ -69,7 +69,7 @@ export default function AircraftCard({ aircraft }: AircraftCardProps) {
 
         <button
           onClick={() => navigate(`/aircraft/${aircraft.id}`)}
-          className="bg-stone-900 hover:bg-[#DFA93B] hover:text-stone-950 text-white text-xs font-semibold uppercase tracking-wider px-5 py-2.5 rounded-xl transition-all cursor-pointer"
+          className="bg-stone-900 hover:bg-[#FF9C0A] hover:text-[#4A3B2A] text-white text-xs font-semibold uppercase tracking-wider px-5 py-2.5 rounded-xl transition-all cursor-pointer"
         >
           Book Now
         </button>

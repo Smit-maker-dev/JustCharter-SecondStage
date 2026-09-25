@@ -49,19 +49,19 @@ export default function FaqSectionV5() {
   };
 
   return (
-    <section className="py-24 sm:py-28 bg-white font-sans text-stone-900 overflow-hidden border-t border-stone-200/60">
+    <section className="py-24 sm:py-28 bg-white font-sans text-[#4A3B2A] overflow-hidden border-t border-stone-200/60">
       <div className="max-w-5xl mx-auto px-6 lg:px-12">
         
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-16 sm:mb-20">
           <div className="inline-flex items-center space-x-2 bg-stone-100 px-4 py-1.5 rounded-full border border-stone-200/80 shadow-sm mb-4">
-            <span className="w-2 h-2 rounded-full bg-[#DFA93B]"></span>
+            <span className="w-2 h-2 rounded-full bg-[#FF9C0A]"></span>
             <span className="text-xs uppercase tracking-[0.2em] font-serif italic text-stone-700">
               Frequently Asked Questions
             </span>
           </div>
 
-          <h2 className="text-4xl sm:text-5xl lg:text-6xl font-serif font-normal tracking-tight text-stone-900 mb-6">
+          <h2 className="text-4xl sm:text-5xl lg:text-6xl font-serif font-normal tracking-tight text-[#4A3B2A] mb-6">
             Questions, Answered
           </h2>
 
@@ -82,13 +82,13 @@ export default function FaqSectionV5() {
                   className="w-full flex items-center justify-between text-left group cursor-pointer focus:outline-none"
                   aria-expanded={isOpen}
                 >
-                  <span className="text-lg sm:text-xl font-serif font-normal text-stone-900 group-hover:text-[#DFA93B] transition-colors pr-6">
+                  <span className="text-lg sm:text-xl font-serif font-normal text-[#4A3B2A] group-hover:text-[#FF9C0A] transition-colors pr-6">
                     {faq.q}
                   </span>
-                  <div className="p-1.5 sm:p-2 rounded-full bg-stone-50 border border-stone-200/80 text-stone-600 group-hover:border-[#DFA93B]/50 transition-all flex-shrink-0">
+                  <div className="p-1.5 sm:p-2 rounded-full bg-stone-50 border border-stone-200/80 text-stone-600 group-hover:border-[#FF9C0A]/50 transition-all flex-shrink-0">
                     <ChevronDown
                       className={`w-4 sm:w-5 h-4 sm:h-5 transition-transform duration-300 ${
-                        isOpen ? "rotate-180 text-[#DFA93B]" : "text-stone-600"
+                        isOpen ? "rotate-180 text-[#FF9C0A]" : "text-stone-600"
                       }`}
                     />
                   </div>

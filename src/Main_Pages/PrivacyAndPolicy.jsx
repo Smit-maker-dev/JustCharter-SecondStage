@@ -3,7 +3,7 @@ import React, { useRef } from "react";
 export default function PrivacyAndPolicy() {
   return (
     <div className="min-h-screen bg-gray-50 mt-16">
-      <header className="relative bg-[#DFA93B] text-white py-18">
+      <header className="relative bg-[#FF9C0A] text-white py-18">
         <div
           className="absolute inset-0 bg-cover bg-center opacity-30"
           style={{
@@ -25,7 +25,7 @@ export default function PrivacyAndPolicy() {
 
       <div className="md:mx-20 px-4 sm:px-6 py-12">
       <div className="bg-white rounded-lg shadow-sm p-6 sm:p-8">
-        <h2 className="text-2xl font-semibold text-gray-800 mb-6 pb-2 border-b border-gray-200">
+        <h2 className="text-2xl font-semibold text-[#4A3B2A] mb-6 pb-2 border-b border-gray-200">
            Privacy Policy
         </h2>
         <p className="text-gray-700 mb-6">
@@ -36,7 +36,7 @@ export default function PrivacyAndPolicy() {
 
         <div className="space-y-6">
           <div>
-            <h3 className="text-lg font-medium text-gray-800 mb-2">
+            <h3 className="text-lg font-medium text-[#4A3B2A] mb-2">
               1. Introduction
             </h3>
             <div className="space-y-3 pl-4">
@@ -50,7 +50,7 @@ export default function PrivacyAndPolicy() {
           </div>
 
           <div>
-            <h3 className="text-lg font-medium text-gray-800 mb-2">
+            <h3 className="text-lg font-medium text-[#4A3B2A] mb-2">
               2. Information We May Collect
             </h3>
             <div className="space-y-3 pl-4">
@@ -67,7 +67,7 @@ export default function PrivacyAndPolicy() {
           </div>
 
           <div>
-            <h3 className="text-lg font-medium text-gray-800 mb-2">
+            <h3 className="text-lg font-medium text-[#4A3B2A] mb-2">
               3. How We Use Your Information
             </h3>
             <div className="space-y-3 pl-4">
@@ -83,7 +83,7 @@ export default function PrivacyAndPolicy() {
           </div>
 
           <div>
-            <h3 className="text-lg font-medium text-gray-800 mb-2">
+            <h3 className="text-lg font-medium text-[#4A3B2A] mb-2">
               4. Sharing of Information
             </h3>
             <div className="space-y-3 pl-4">
@@ -100,7 +100,7 @@ export default function PrivacyAndPolicy() {
           </div>
 
           <div>
-            <h3 className="text-lg font-medium text-gray-800 mb-2">
+            <h3 className="text-lg font-medium text-[#4A3B2A] mb-2">
               5. Data Retention
             </h3>
             <div className="space-y-3 pl-4">
@@ -116,7 +116,7 @@ export default function PrivacyAndPolicy() {
           </div>
 
           <div>
-            <h3 className="text-lg font-medium text-gray-800 mb-2">
+            <h3 className="text-lg font-medium text-[#4A3B2A] mb-2">
               6. Your Choices
             </h3>
             <div className="space-y-3 pl-4">
@@ -132,7 +132,7 @@ export default function PrivacyAndPolicy() {
           </div>
 
           <div>
-            <h3 className="text-lg font-medium text-gray-800 mb-2">
+            <h3 className="text-lg font-medium text-[#4A3B2A] mb-2">
               7. Security
             </h3>
             <div className="space-y-3 pl-4">
@@ -147,7 +147,7 @@ export default function PrivacyAndPolicy() {
           </div>
 
           <div>
-            <h3 className="text-lg font-medium text-gray-800 mb-2">
+            <h3 className="text-lg font-medium text-[#4A3B2A] mb-2">
               8. Policy Updates
             </h3>
             <div className="space-y-3 pl-4">
@@ -162,7 +162,7 @@ export default function PrivacyAndPolicy() {
           </div>
 
           <div>
-            <h3 className="text-lg font-medium text-gray-800 mb-2">
+            <h3 className="text-lg font-medium text-[#4A3B2A] mb-2">
               9. Contact
             </h3>
             <div className="space-y-3 pl-4">
@@ -174,7 +174,7 @@ export default function PrivacyAndPolicy() {
           </div>
 
           <div className="bg-gray-50 p-4 rounded-lg">
-            <h3 className="text-lg font-medium text-gray-800 mb-2">Consent</h3>
+            <h3 className="text-lg font-medium text-[#4A3B2A] mb-2">Consent</h3>
             <p className="text-gray-700">
               By using our platform or services, users provide consent to
               collect and process their data as outlined above.
