@@ -286,7 +286,7 @@ export default function HeroSectionV5() {
           </div>
 
           <h1 className="text-3xl sm:text-5xl md:text-7xl lg:text-8xl font-serif font-normal tracking-tight text-white leading-[1.08] mb-6 max-w-4xl mx-auto">
-            Private Aviation <br className="hidden sm:block" />
+            <span className="text-white">Private Aviation</span> <br className="hidden sm:block" />
             <span className="italic font-serif font-light text-[#FF9C0A]">
               Made Simple
             </span>

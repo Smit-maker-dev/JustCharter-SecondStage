@@ -5,10 +5,8 @@
   --color-dark-text: #4A3B2A;
 }
 
-body {
-  color: #4A3B2A;
-}
-
-h1, h2, h3, h4, h5, h6 {
-  color: #4A3B2A;
+@layer base {
+  body {
+    color: #4A3B2A;
+  }
 }
