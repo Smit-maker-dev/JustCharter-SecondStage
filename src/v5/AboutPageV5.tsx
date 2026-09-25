@@ -7,25 +7,25 @@ import ConciergeBarV5 from "./components/ConciergeBarV5";
 export default function AboutPageV5() {
   const values = [
     {
-      icon: <Award className="w-6 h-6 text-[#FF9C0A]" />,
+      icon: <Award className="w-6 h-6 text-[#FFD200]" />,
       title: "Excellence",
       description: "Setting the highest standards in private aviation.",
       tag: "Benchmark Standard",
     },
     {
-      icon: <Lock className="w-6 h-6 text-[#FF9C0A]" />,
+      icon: <Lock className="w-6 h-6 text-[#FFD200]" />,
       title: "Privacy",
       description: "Ensuring complete discretion and confidentiality for all travelers.",
       tag: "Discreet Travel",
     },
     {
-      icon: <ShieldCheck className="w-6 h-6 text-[#FF9C0A]" />,
+      icon: <ShieldCheck className="w-6 h-6 text-[#FFD200]" />,
       title: "Safety",
       description: "Unwavering commitment to your security with audited standards.",
       tag: "ARGUS & Wyvern",
     },
     {
-      icon: <Sparkles className="w-6 h-6 text-[#FF9C0A]" />,
+      icon: <Sparkles className="w-6 h-6 text-[#FFD200]" />,
       title: "Satisfaction",
       description: "Exceeding expectations at every altitude with bespoke service.",
       tag: "Bespoke Service",
@@ -33,7 +33,7 @@ export default function AboutPageV5() {
   ];
 
   return (
-    <div className="min-h-screen bg-white text-[#002F5C] font-sans antialiased selection:bg-[#FF9C0A]/30 selection:text-[#002F5C]">
+    <div className="min-h-screen bg-white text-[#002F5C] font-sans antialiased selection:bg-[#FFD200]/30 selection:text-[#002F5C]">
       
       {/* 1. Hero Section */}
       <section className="relative min-h-[55vh] lg:min-h-[60vh] flex flex-col justify-center items-center text-center pt-32 pb-20 bg-stone-900 overflow-hidden">
@@ -50,7 +50,7 @@ export default function AboutPageV5() {
         {/* Hero Central Content */}
         <div className="relative z-10 max-w-4xl mx-auto px-6 text-white my-auto">
           <div className="inline-flex items-center space-x-2 bg-white/10 backdrop-blur-md px-4 py-1.5 rounded-full border border-white/20 mb-6">
-            <span className="w-2 h-2 rounded-full bg-[#FF9C0A]"></span>
+            <span className="w-2 h-2 rounded-full bg-[#FFD200]"></span>
             <span className="text-xs font-serif italic tracking-widest uppercase text-stone-100">
               Luxury Meets the Sky
             </span>
@@ -74,7 +74,7 @@ export default function AboutPageV5() {
         <div className="max-w-4xl mx-auto px-6 text-center">
           
           <div className="inline-flex items-center space-x-2 bg-white px-4 py-1.5 rounded-full border border-stone-200/80 mb-6 shadow-sm">
-            <span className="w-2 h-2 rounded-full bg-[#FF9C0A]"></span>
+            <span className="w-2 h-2 rounded-full bg-[#FFD200]"></span>
             <span className="text-xs uppercase tracking-[0.2em] font-serif italic text-stone-700">
               About JustCharter
             </span>
@@ -110,7 +110,7 @@ export default function AboutPageV5() {
           
           <div className="text-center max-w-3xl mx-auto mb-16">
             <div className="inline-flex items-center space-x-2 bg-stone-100 px-4 py-1.5 rounded-full border border-stone-200/80 shadow-sm mb-4">
-              <span className="w-2 h-2 rounded-full bg-[#FF9C0A]"></span>
+              <span className="w-2 h-2 rounded-full bg-[#FFD200]"></span>
               <span className="text-xs uppercase tracking-[0.2em] font-serif italic text-stone-700">
                 Guiding Principles
               </span>
@@ -125,7 +125,7 @@ export default function AboutPageV5() {
             
             {/* Vision */}
             <div className="flex flex-col justify-start pt-6 md:pt-0">
-              <div className="flex items-center space-x-2 text-[#FF9C0A] mb-3">
+              <div className="flex items-center space-x-2 text-[#FFD200] mb-3">
                 <Globe className="w-5 h-5" />
                 <span className="text-[10px] uppercase tracking-[0.2em] font-semibold text-stone-500">
                   Future Vision
@@ -145,7 +145,7 @@ export default function AboutPageV5() {
 
             {/* Mission */}
             <div className="flex flex-col justify-start pt-10 md:pt-0 md:pl-12 lg:pl-16">
-              <div className="flex items-center space-x-2 text-[#FF9C0A] mb-3">
+              <div className="flex items-center space-x-2 text-[#FFD200] mb-3">
                 <Compass className="w-5 h-5" />
                 <span className="text-[10px] uppercase tracking-[0.2em] font-semibold text-stone-500">
                   Core Purpose
@@ -177,7 +177,7 @@ export default function AboutPageV5() {
           
           <div className="text-center max-w-3xl mx-auto mb-16">
             <div className="inline-flex items-center space-x-2 bg-white px-4 py-1.5 rounded-full border border-stone-200/80 shadow-sm mb-4">
-              <span className="w-2 h-2 rounded-full bg-[#FF9C0A]"></span>
+              <span className="w-2 h-2 rounded-full bg-[#FFD200]"></span>
               <span className="text-xs uppercase tracking-[0.2em] font-serif italic text-stone-700">
                 Core Ethos
               </span>
@@ -195,7 +195,7 @@ export default function AboutPageV5() {
                 key={index}
                 className="border-t border-stone-300/80 pt-6 flex flex-col items-start text-left"
               >
-                <span className="text-[10px] uppercase tracking-[0.2em] font-semibold text-[#FF9C0A] block mb-2">
+                <span className="text-[10px] uppercase tracking-[0.2em] font-semibold text-[#FFD200] block mb-2">
                   {item.tag}
                 </span>
 

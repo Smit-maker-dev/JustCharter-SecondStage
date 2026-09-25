@@ -126,7 +126,7 @@ export default function LoginPage() {
              <button
               type="submit"
               disabled={loading}
-              className="cursor-pointer w-full md:w-3/5 font-semibold bg-blue-400 text-white py-2.5 mt-4 rounded-lg hover:bg-[#e08800] transition flex items-center justify-center gap-2"
+              className="cursor-pointer w-full md:w-3/5 font-semibold bg-blue-400 text-white py-2.5 mt-4 rounded-lg hover:bg-[#e6be00] transition flex items-center justify-center gap-2"
             >
               {loading ? (
                 <span className="flex items-center gap-2">
@@ -139,7 +139,7 @@ export default function LoginPage() {
             </button>
             <p className="text-sm mt-4">
               Don't have an account?{" "}
-              <Link to="/register" className="text-[#FF9C0A] hover:underline">
+              <Link to="/register" className="text-[#FFD200] hover:underline">
                 Sign up
               </Link>
             </p>

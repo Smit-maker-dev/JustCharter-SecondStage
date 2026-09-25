@@ -139,7 +139,7 @@ export default function VerifyOtpDialog({
             <span className="text-gray-400">Resend in {timer}s</span>
           ) : (
             <span
-              className="text-[#FF9C0A] cursor-pointer"
+              className="text-[#FFD200] cursor-pointer"
               onClick={handleResendOtp}
             >
               Resend
@@ -149,7 +149,7 @@ export default function VerifyOtpDialog({
 
         <button
           onClick={handleVerify}
-          className="cursor-pointer w-full md:w-3/5  bg-[#FF9C0A] text-white py-2.5 mt-4 rounded-lg hover:bg-[#e08800] transition"
+          className="cursor-pointer w-full md:w-3/5  bg-[#FFD200] text-white py-2.5 mt-4 rounded-lg hover:bg-[#e6be00] transition"
         >
           Verify
         </button>

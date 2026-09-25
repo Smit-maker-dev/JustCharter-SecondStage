@@ -6,13 +6,13 @@ export default function ConciergeBarV3() {
     <section className="bg-stone-50 border-y border-stone-200 text-[#002F5C] font-sans py-16 px-6 lg:px-12 relative overflow-hidden">
       
       {/* Background Subtle Accent Glow */}
-      <div className="absolute top-0 right-0 w-96 h-96 bg-[#FF9C0A]/15 rounded-full blur-3xl pointer-events-none"></div>
+      <div className="absolute top-0 right-0 w-96 h-96 bg-[#FFD200]/15 rounded-full blur-3xl pointer-events-none"></div>
 
       <div className="max-w-7xl mx-auto flex flex-col lg:flex-row items-center justify-between gap-8 relative z-10">
         
         <div>
           <div className="inline-flex items-center space-x-2 bg-stone-200/80 px-3.5 py-1 rounded-full border border-stone-300 mb-3">
-            <Clock className="w-3.5 h-3.5 text-[#FF9C0A]" />
+            <Clock className="w-3.5 h-3.5 text-[#FFD200]" />
             <span className="text-[10px] font-bold uppercase tracking-widest text-slate-700">
               24/7 Global Fleet Ops & Concierge
             </span>
@@ -33,7 +33,7 @@ export default function ConciergeBarV3() {
             href="tel:+1800555538"
             className="bg-white hover:bg-stone-100 text-[#002F5C] border border-stone-300 px-5 py-3 rounded-full flex items-center space-x-3 text-xs font-bold transition-all shadow-sm"
           >
-            <Phone className="w-4 h-4 text-[#FF9C0A]" />
+            <Phone className="w-4 h-4 text-[#FFD200]" />
             <span>+1 (800) 555-JET</span>
           </a>
 
@@ -41,13 +41,13 @@ export default function ConciergeBarV3() {
             href="mailto:concierge@justcharter.com"
             className="bg-white hover:bg-stone-100 text-[#002F5C] border border-stone-300 px-5 py-3 rounded-full flex items-center space-x-3 text-xs font-bold transition-all shadow-sm"
           >
-            <Mail className="w-4 h-4 text-[#FF9C0A]" />
+            <Mail className="w-4 h-4 text-[#FFD200]" />
             <span>concierge@justcharter.com</span>
           </a>
 
           <a
             href="/bookings"
-            className="bg-[#FF9C0A] hover:bg-[#e08800] text-[#002F5C] px-6 py-3 rounded-full flex items-center space-x-2 text-xs font-bold uppercase tracking-wider transition-all shadow-md"
+            className="bg-[#FFD200] hover:bg-[#e6be00] text-[#002F5C] px-6 py-3 rounded-full flex items-center space-x-2 text-xs font-bold uppercase tracking-wider transition-all shadow-md"
           >
             <span>Charter Support</span>
             <ArrowRight className="w-4 h-4" />

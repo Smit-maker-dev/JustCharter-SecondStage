@@ -4,28 +4,28 @@ import { PlaneTakeoff, Shield, Calendar, Clock, ArrowRight } from "lucide-react"
 export default function ServicesSectionV3() {
   const services = [
     {
-      icon: <PlaneTakeoff className="w-6 h-6 text-[#FF9C0A]" />,
+      icon: <PlaneTakeoff className="w-6 h-6 text-[#FFD200]" />,
       title: "Private Charter",
       desc: "Tailored flight experiences to meet your specific needs, with access to over 5,000 airports worldwide.",
       tag: "5,000+ Airports",
       stagger: "mt-0",
     },
     {
-      icon: <Shield className="w-6 h-6 text-[#FF9C0A]" />,
+      icon: <Shield className="w-6 h-6 text-[#FFD200]" />,
       title: "Safety First",
       desc: "Our fleet meets the highest safety standards with rigorous maintenance and experienced flight crews.",
       tag: "ARGUS & Wyvern",
       stagger: "lg:translate-y-8",
     },
     {
-      icon: <Calendar className="w-6 h-6 text-[#FF9C0A]" />,
+      icon: <Calendar className="w-6 h-6 text-[#FFD200]" />,
       title: "Flexible Scheduling",
       desc: "Fly on your terms with departure times that suit your schedule, avoiding commercial airline constraints.",
       tag: "24h Availability",
       stagger: "mt-0",
     },
     {
-      icon: <Clock className="w-6 h-6 text-[#FF9C0A]" />,
+      icon: <Clock className="w-6 h-6 text-[#FFD200]" />,
       title: "Time Efficiency",
       desc: "Skip long security lines and boarding processes, making your journey faster and more comfortable.",
       tag: "Zero Delay FBO",
@@ -40,7 +40,7 @@ export default function ServicesSectionV3() {
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-20">
           <div className="inline-flex items-center space-x-2 bg-white px-4 py-1.5 rounded-full border border-slate-200/80 shadow-sm mb-4">
-            <span className="w-2 h-2 rounded-full bg-[#FF9C0A]"></span>
+            <span className="w-2 h-2 rounded-full bg-[#FFD200]"></span>
             <span className="text-xs uppercase tracking-[0.2em] font-semibold text-slate-700">
               World-Class Capabilities
             </span>
@@ -60,11 +60,11 @@ export default function ServicesSectionV3() {
           {services.map((service, index) => (
             <div
               key={index}
-              className={`bg-white rounded-3xl p-8 border border-slate-200/70 shadow-[0_15px_35px_rgba(0,0,0,0.03)] hover:shadow-[0_25px_50px_rgba(0,0,0,0.07)] hover:border-[#FF9C0A]/60 transition-all duration-500 flex flex-col justify-between group ${service.stagger}`}
+              className={`bg-white rounded-3xl p-8 border border-slate-200/70 shadow-[0_15px_35px_rgba(0,0,0,0.03)] hover:shadow-[0_25px_50px_rgba(0,0,0,0.07)] hover:border-[#FFD200]/60 transition-all duration-500 flex flex-col justify-between group ${service.stagger}`}
             >
               <div>
                 {/* FIX 2: Standardized Circular Icon Container (rounded-full matching site-wide icon shape) */}
-                <div className="w-12 h-12 rounded-full bg-[#FF9C0A]/10 border border-[#FF9C0A]/20 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                <div className="w-12 h-12 rounded-full bg-[#FFD200]/10 border border-[#FFD200]/20 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
                   {service.icon}
                 </div>
 
@@ -72,7 +72,7 @@ export default function ServicesSectionV3() {
                   {service.tag}
                 </span>
 
-                <h3 className="text-xl font-bold text-[#002F5C] mb-3 group-hover:text-[#FF9C0A] transition-colors">
+                <h3 className="text-xl font-bold text-[#002F5C] mb-3 group-hover:text-[#FFD200] transition-colors">
                   {service.title}
                 </h3>
 
@@ -83,7 +83,7 @@ export default function ServicesSectionV3() {
 
               <div className="pt-6 mt-6 border-t border-slate-100 flex items-center justify-between text-xs font-semibold text-slate-400 group-hover:text-[#002F5C] transition-colors">
                 <span>Learn More</span>
-                <ArrowRight className="w-4 h-4 text-[#FF9C0A] group-hover:translate-x-1 transition-transform" />
+                <ArrowRight className="w-4 h-4 text-[#FFD200] group-hover:translate-x-1 transition-transform" />
               </div>
             </div>
           ))}

@@ -64,7 +64,7 @@ export default function HeroSectionV3() {
           
           <h1 className="text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-bold tracking-tight text-white leading-[1.05] max-w-5xl mx-auto mb-6">
             Private Aviation <br className="hidden sm:block" />
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-white via-slate-100 to-[#FF9C0A]">
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-white via-slate-100 to-[#FFD200]">
               Made Simple
             </span>
           </h1>
@@ -74,7 +74,7 @@ export default function HeroSectionV3() {
           </p>
 
           <div className="inline-block bg-black/40 backdrop-blur-md px-4 py-1.5 rounded-full border border-white/10">
-            <span className="text-xs text-[#FF9C0A] font-semibold uppercase tracking-[0.2em]">
+            <span className="text-xs text-[#FFD200] font-semibold uppercase tracking-[0.2em]">
               Over 500+ Destinations Worldwide
             </span>
           </div>
@@ -106,9 +106,9 @@ export default function HeroSectionV3() {
               </div>
 
               {/* Right-Aligned Direct Charter Quote Badge Pill */}
-              <div className="inline-flex items-center space-x-2 bg-[#FF9C0A]/10 border border-[#FF9C0A]/30 px-4 py-2 rounded-full">
-                <ShieldCheck className="w-4 h-4 text-[#FF9C0A]" />
-                <span className="text-xs font-bold uppercase tracking-widest text-[#FF9C0A]">
+              <div className="inline-flex items-center space-x-2 bg-[#FFD200]/10 border border-[#FFD200]/30 px-4 py-2 rounded-full">
+                <ShieldCheck className="w-4 h-4 text-[#FFD200]" />
+                <span className="text-xs font-bold uppercase tracking-widest text-[#FFD200]">
                   Direct Charter Quote
                 </span>
               </div>
@@ -120,7 +120,7 @@ export default function HeroSectionV3() {
               {/* From Input Card */}
               <div className="lg:col-span-3 bg-slate-50/90 hover:bg-slate-100/80 border border-slate-200/60 rounded-2xl p-3.5 transition-colors">
                 <label className="text-[10px] font-bold uppercase tracking-wider text-slate-400 flex items-center space-x-1.5 mb-1">
-                  <MapPin className="w-3.5 h-3.5 text-[#FF9C0A]" />
+                  <MapPin className="w-3.5 h-3.5 text-[#FFD200]" />
                   <span>From</span>
                 </label>
                 <input
@@ -135,7 +135,7 @@ export default function HeroSectionV3() {
               {/* To Input Card */}
               <div className="lg:col-span-3 bg-slate-50/90 hover:bg-slate-100/80 border border-slate-200/60 rounded-2xl p-3.5 transition-colors">
                 <label className="text-[10px] font-bold uppercase tracking-wider text-slate-400 flex items-center space-x-1.5 mb-1">
-                  <MapPin className="w-3.5 h-3.5 text-[#FF9C0A]" />
+                  <MapPin className="w-3.5 h-3.5 text-[#FFD200]" />
                   <span>To</span>
                 </label>
                 <input
@@ -150,7 +150,7 @@ export default function HeroSectionV3() {
               {/* Date Input Card */}
               <div className="lg:col-span-2 bg-slate-50/90 hover:bg-slate-100/80 border border-slate-200/60 rounded-2xl p-3.5 transition-colors">
                 <label className="text-[10px] font-bold uppercase tracking-wider text-slate-400 flex items-center space-x-1.5 mb-1">
-                  <Calendar className="w-3.5 h-3.5 text-[#FF9C0A]" />
+                  <Calendar className="w-3.5 h-3.5 text-[#FFD200]" />
                   <span>Date</span>
                 </label>
                 <input
@@ -165,7 +165,7 @@ export default function HeroSectionV3() {
               {/* Guests Input Card */}
               <div className="lg:col-span-2 bg-slate-50/90 hover:bg-slate-100/80 border border-slate-200/60 rounded-2xl p-3.5 transition-colors">
                 <label className="text-[10px] font-bold uppercase tracking-wider text-slate-400 flex items-center space-x-1.5 mb-1">
-                  <Users className="w-3.5 h-3.5 text-[#FF9C0A]" />
+                  <Users className="w-3.5 h-3.5 text-[#FFD200]" />
                   <span>Guests</span>
                 </label>
                 <select
@@ -185,7 +185,7 @@ export default function HeroSectionV3() {
               <div className="lg:col-span-2">
                 <button
                   type="submit"
-                  className="w-full h-full min-h-[52px] bg-[#FF9C0A] hover:bg-[#e08800] text-[#002F5C] font-bold text-xs uppercase tracking-wider px-6 py-4 rounded-2xl transition-all shadow-md hover:shadow-lg flex items-center justify-center space-x-2 border border-[#FF9C0A] cursor-pointer"
+                  className="w-full h-full min-h-[52px] bg-[#FFD200] hover:bg-[#e6be00] text-[#002F5C] font-bold text-xs uppercase tracking-wider px-6 py-4 rounded-2xl transition-all shadow-md hover:shadow-lg flex items-center justify-center space-x-2 border border-[#FFD200] cursor-pointer"
                 >
                   <span>Search Flights</span>
                   <ArrowRight className="w-4 h-4" />

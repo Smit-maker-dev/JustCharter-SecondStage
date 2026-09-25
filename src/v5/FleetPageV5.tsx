@@ -55,7 +55,7 @@ export default function FleetPageV5() {
   };
 
   return (
-    <div className="min-h-screen bg-white text-[#002F5C] font-sans antialiased selection:bg-[#FF9C0A]/30 selection:text-[#002F5C]">
+    <div className="min-h-screen bg-white text-[#002F5C] font-sans antialiased selection:bg-[#FFD200]/30 selection:text-[#002F5C]">
       
       {/* 1. Hero / Header Section */}
       <section className="relative min-h-[45vh] lg:min-h-[50vh] flex flex-col justify-center items-center text-center pt-32 pb-16 bg-stone-900 overflow-hidden">
@@ -72,9 +72,9 @@ export default function FleetPageV5() {
         {/* Hero Central Content */}
         <div className="relative z-10 max-w-4xl mx-auto px-6 text-white my-auto">
           <div className="inline-flex items-center space-x-2 bg-white/10 backdrop-blur-md px-4 py-1.5 rounded-full border border-white/20 mb-6">
-            <span className="w-2 h-2 rounded-full bg-[#FF9C0A]"></span>
+            <span className="w-2 h-2 rounded-full bg-[#FFD200]"></span>
             <span className="text-xs font-serif italic tracking-widest uppercase text-stone-100 flex items-center gap-1.5">
-              <Plane className="w-3.5 h-3.5 text-[#FF9C0A]" /> Private Fleet Selection
+              <Plane className="w-3.5 h-3.5 text-[#FFD200]" /> Private Fleet Selection
             </span>
           </div>
 
@@ -111,7 +111,7 @@ export default function FleetPageV5() {
                   onClick={() => handleFilterChange(filter)}
                   className={`text-xs font-semibold uppercase tracking-wider transition-all cursor-pointer whitespace-nowrap pb-2 border-b-2 -mb-2 ${
                     activeFilter === filter
-                      ? "text-[#002F5C] border-[#FF9C0A]"
+                      ? "text-[#002F5C] border-[#FFD200]"
                       : "text-stone-400 border-transparent hover:text-stone-700"
                   }`}
                 >
@@ -153,7 +153,7 @@ export default function FleetPageV5() {
                 <div className="mt-16 text-center">
                   <button
                     onClick={handleLoadMore}
-                    className="bg-stone-900 hover:bg-[#FF9C0A] hover:text-[#002F5C] text-white font-semibold text-xs uppercase tracking-wider px-8 py-4 rounded-xl shadow-sm inline-flex items-center space-x-2 transition-all cursor-pointer group"
+                    className="bg-stone-900 hover:bg-[#FFD200] hover:text-[#002F5C] text-white font-semibold text-xs uppercase tracking-wider px-8 py-4 rounded-xl shadow-sm inline-flex items-center space-x-2 transition-all cursor-pointer group"
                   >
                     <span>Load More Aircraft</span>
                     <ChevronDown className="w-4 h-4 transition-transform group-hover:translate-y-0.5" />

@@ -159,7 +159,7 @@ export default function VerifyEmail() {
                 <button
                   type="button"
                   onClick={sendOtp}
-                  className="text-[#FF9C0A] underline cursor-pointer"
+                  className="text-[#FFD200] underline cursor-pointer"
                 >
                   Resend OTP
                 </button>
@@ -169,7 +169,7 @@ export default function VerifyEmail() {
             <button
               type="submit"
               disabled={loading}
-              className="cursor-pointer w-full md:w-3/5 bg-[#FF9C0A] text-white py-2.5 mt-4 rounded-lg hover:bg-[#FF9C0A] transition"
+              className="cursor-pointer w-full md:w-3/5 bg-[#FFD200] text-white py-2.5 mt-4 rounded-lg hover:bg-[#FFD200] transition"
             >
               {loading ? (
                 <div className="flex items-center justify-center gap-2">

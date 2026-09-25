@@ -55,7 +55,7 @@ export default function FaqSectionV5() {
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-16 sm:mb-20">
           <div className="inline-flex items-center space-x-2 bg-stone-100 px-4 py-1.5 rounded-full border border-stone-200/80 shadow-sm mb-4">
-            <span className="w-2 h-2 rounded-full bg-[#FF9C0A]"></span>
+            <span className="w-2 h-2 rounded-full bg-[#FFD200]"></span>
             <span className="text-xs uppercase tracking-[0.2em] font-serif italic text-stone-700">
               Frequently Asked Questions
             </span>
@@ -82,13 +82,13 @@ export default function FaqSectionV5() {
                   className="w-full flex items-center justify-between text-left group cursor-pointer focus:outline-none"
                   aria-expanded={isOpen}
                 >
-                  <span className="text-lg sm:text-xl font-serif font-normal text-[#002F5C] group-hover:text-[#FF9C0A] transition-colors pr-6">
+                  <span className="text-lg sm:text-xl font-serif font-normal text-[#002F5C] group-hover:text-[#FFD200] transition-colors pr-6">
                     {faq.q}
                   </span>
-                  <div className="p-1.5 sm:p-2 rounded-full bg-stone-50 border border-stone-200/80 text-stone-600 group-hover:border-[#FF9C0A]/50 transition-all flex-shrink-0">
+                  <div className="p-1.5 sm:p-2 rounded-full bg-stone-50 border border-stone-200/80 text-stone-600 group-hover:border-[#FFD200]/50 transition-all flex-shrink-0">
                     <ChevronDown
                       className={`w-4 sm:w-5 h-4 sm:h-5 transition-transform duration-300 ${
-                        isOpen ? "rotate-180 text-[#FF9C0A]" : "text-stone-600"
+                        isOpen ? "rotate-180 text-[#FFD200]" : "text-stone-600"
                       }`}
                     />
                   </div>

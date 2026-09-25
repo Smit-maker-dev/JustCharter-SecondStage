@@ -9,7 +9,7 @@ export default function ConciergeBarV5() {
           
           <div>
             <div className="inline-flex items-center space-x-2 bg-white px-3.5 py-1 rounded-full border border-stone-200/80 mb-3 shadow-sm">
-              <Clock className="w-3.5 h-3.5 text-[#FF9C0A]" />
+              <Clock className="w-3.5 h-3.5 text-[#FFD200]" />
               <span className="text-[10px] font-semibold uppercase tracking-widest text-stone-700">
                 24/7 Global Fleet Ops & Concierge
               </span>
@@ -30,7 +30,7 @@ export default function ConciergeBarV5() {
               href="tel:+1800555538"
               className="bg-white hover:bg-stone-100 text-[#002F5C] border border-stone-200/80 px-4 sm:px-5 py-3 sm:py-3.5 rounded-xl flex items-center justify-center space-x-3 text-xs font-semibold transition-all shadow-sm"
             >
-              <Phone className="w-4 h-4 text-[#FF9C0A]" />
+              <Phone className="w-4 h-4 text-[#FFD200]" />
               <span>+1 (800) 555-JET</span>
             </a>
 
@@ -38,13 +38,13 @@ export default function ConciergeBarV5() {
               href="mailto:concierge@justcharter.com"
               className="bg-white hover:bg-stone-100 text-[#002F5C] border border-stone-200/80 px-4 sm:px-5 py-3 sm:py-3.5 rounded-xl flex items-center justify-center space-x-3 text-xs font-semibold transition-all shadow-sm"
             >
-              <Mail className="w-4 h-4 text-[#FF9C0A]" />
+              <Mail className="w-4 h-4 text-[#FFD200]" />
               <span>concierge@justcharter.com</span>
             </a>
 
             <a
               href="/bookings"
-              className="bg-[#FF9C0A] hover:bg-[#e08800] text-[#002F5C] px-5 sm:px-6 py-3 sm:py-3.5 rounded-xl flex items-center justify-center space-x-2 text-xs font-bold uppercase tracking-wider transition-all shadow-sm cursor-pointer"
+              className="bg-[#FFD200] hover:bg-[#e6be00] text-[#002F5C] px-5 sm:px-6 py-3 sm:py-3.5 rounded-xl flex items-center justify-center space-x-2 text-xs font-bold uppercase tracking-wider transition-all shadow-sm cursor-pointer"
             >
               <span>Charter Support</span>
               <ArrowRight className="w-4 h-4" />
