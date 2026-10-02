@@ -98,7 +98,7 @@ export default function MembershipSafetySectionV5() {
               {/* Floating Pricing Badge */}
               <div className="absolute top-4 right-4 sm:top-6 sm:right-6 bg-white/95 backdrop-blur-md border border-stone-200/80 text-[#002F5C] px-3.5 sm:px-5 py-2.5 sm:py-3 rounded-xl shadow-lg font-bold flex items-center space-x-2 sm:space-x-3 z-30">
                 <span className="text-[9px] sm:text-[10px] uppercase tracking-widest text-stone-500 font-semibold">Starting at</span>
-                <span className="text-base sm:text-2xl font-serif font-normal text-[#FFD200]">$4,500</span>
+                <span className="text-base sm:text-2xl font-serif font-normal text-[#FFD200]">₹1,70,000</span>
                 <span className="text-[10px] sm:text-xs font-normal text-stone-500">/ hr</span>
               </div>
             </div>

@@ -37,7 +37,7 @@ export default function MembershipSafetySectionV3() {
             {/* FIX 3: Top-Right Glassmorphic Floating Price Badge (Zero collision with content card) */}
             <div className="absolute top-6 right-6 bg-slate-950/85 backdrop-blur-md border border-white/20 text-white px-5 py-3 rounded-full shadow-2xl font-bold flex items-center space-x-3 z-30">
               <span className="text-[10px] uppercase tracking-widest text-slate-300 font-extrabold">Starting at</span>
-              <span className="text-xl sm:text-2xl font-black text-[#FFD200]">$4,500</span>
+              <span className="text-xl sm:text-2xl font-black text-[#FFD200]">₹1,70,000</span>
               <span className="text-xs font-semibold text-slate-300">/ hr</span>
             </div>
           </div>
