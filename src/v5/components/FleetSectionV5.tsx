@@ -3,11 +3,13 @@ import { ArrowUpRight } from "lucide-react";
 import { Link } from "react-router-dom";
 import AircraftCard, { Aircraft } from "./AircraftCard";
 
-const filters = ["All Aircraft", "Long Range", "Ultra Long Range", "Midsize"];
+const categories = ["All Categories", "Piston", "Turboprop", "Light Jet", "Midsize Jet", "Super Midsize Jet", "Heavy Jet", "Helicopter"];
+const serviceTypes = ["All Services", "Charter", "Air Ambulance", "Aerial Survey", "Cargo"];
 
 export default function FleetSectionV5() {
-  const [activeFilter, setActiveFilter] = useState("All Aircraft");
-  const [aircraftList, setAircraftList] = useState<Aircraft[]>([]);
+  const [activeCategory, setActiveCategory] = useState("All Categories");
+  const [activeServiceType, setActiveServiceType] = useState("All Services");
+  const [aircraftList, setAircraftList] = useState<(Aircraft & { service_types?: string[] })[]>([]);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
@@ -18,7 +20,8 @@ export default function FleetSectionV5() {
           const mapped = resData.data.map((item: any) => ({
             id: item.id,
             name: item.name,
-            category: item.category,
+            category: item.aircraft_category || item.category,
+            service_types: Array.isArray(item.service_types) ? item.service_types : [item.service_types || "Charter"],
             imageUrl: item.imageUrl || "/images/gulfstrem.jpg",
             tag: item.tag || item.category,
             specs: [
@@ -35,10 +38,14 @@ export default function FleetSectionV5() {
       .finally(() => setIsLoading(false));
   }, []);
 
-  const filteredData =
-    activeFilter === "All Aircraft"
-      ? aircraftList
-      : aircraftList.filter((a) => a.category === activeFilter);
+  const filteredData = aircraftList.filter((a) => {
+    if (activeCategory !== "All Categories" && a.category !== activeCategory) return false;
+    if (activeServiceType !== "All Services") {
+      const services = a.service_types || [];
+      if (!services.includes(activeServiceType)) return false;
+    }
+    return true;
+  });
 
   // Limit displayed aircraft on home page to 6
   const homeDisplayData = filteredData.slice(0, 6);
@@ -48,7 +55,7 @@ export default function FleetSectionV5() {
       <div className="max-w-7xl mx-auto px-6 lg:px-12">
         
         {/* Section Header & Minimalist Text Tab Navigation */}
-        <div className="flex flex-col lg:flex-row lg:items-end justify-between mb-14 sm:mb-20 gap-6 sm:gap-8">
+        <div className="flex flex-col lg:flex-row lg:items-end justify-between mb-14 sm:mb-20 gap-6 sm:gap-8 border-b border-stone-200/80 pb-6">
           <div>
             <div className="inline-flex items-center space-x-2 bg-white px-4 py-1.5 rounded-full border border-stone-200/80 mb-3 shadow-sm">
               <span className="w-2 h-2 rounded-full bg-[#FFD200]"></span>
@@ -61,21 +68,42 @@ export default function FleetSectionV5() {
             </h2>
           </div>
 
-          {/* Minimalist Text Tabs with Gold Active Underline */}
-          <div className="flex items-center space-x-6 sm:space-x-8 border-b border-stone-200/80 pb-2 overflow-x-auto max-w-full">
-            {filters.map((filter) => (
-              <button
-                key={filter}
-                onClick={() => setActiveFilter(filter)}
-                className={`text-xs font-semibold uppercase tracking-wider transition-all cursor-pointer whitespace-nowrap pb-2 border-b-2 -mb-2 ${
-                  activeFilter === filter
-                    ? "text-[#002F5C] border-[#FFD200]"
-                    : "text-stone-400 border-transparent hover:text-stone-700"
-                }`}
-              >
-                {filter}
-              </button>
-            ))}
+          <div className="flex flex-col gap-3">
+            {/* Aircraft Category Pills */}
+            <div className="flex items-center space-x-4 overflow-x-auto max-w-full pb-1">
+              <span className="text-[10px] uppercase font-bold tracking-widest text-stone-400 mr-1">Category:</span>
+              {categories.map((cat) => (
+                <button
+                  key={cat}
+                  onClick={() => setActiveCategory(cat)}
+                  className={`text-xs font-semibold uppercase tracking-wider transition-all cursor-pointer whitespace-nowrap pb-1 border-b-2 ${
+                    activeCategory === cat
+                      ? "text-[#002F5C] border-[#FFD200]"
+                      : "text-stone-400 border-transparent hover:text-stone-700"
+                  }`}
+                >
+                  {cat}
+                </button>
+              ))}
+            </div>
+
+            {/* Service Type Pills */}
+            <div className="flex items-center space-x-4 overflow-x-auto max-w-full pb-1">
+              <span className="text-[10px] uppercase font-bold tracking-widest text-stone-400 mr-1">Service:</span>
+              {serviceTypes.map((st) => (
+                <button
+                  key={st}
+                  onClick={() => setActiveServiceType(st)}
+                  className={`text-xs font-semibold uppercase tracking-wider transition-all cursor-pointer whitespace-nowrap pb-1 border-b-2 ${
+                    activeServiceType === st
+                      ? "text-[#002F5C] border-[#FFD200]"
+                      : "text-stone-400 border-transparent hover:text-stone-700"
+                  }`}
+                >
+                  {st}
+                </button>
+              ))}
+            </div>
           </div>
         </div>
 

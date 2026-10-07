@@ -3,12 +3,15 @@ import AircraftCard, { Aircraft } from "./components/AircraftCard";
 import ConciergeBarV5 from "./components/ConciergeBarV5";
 import { Plane, ChevronDown } from "lucide-react";
 
-const filters = ["All Aircraft", "Long Range", "Ultra Long Range", "Midsize"];
+const categories = ["All Categories", "Piston", "Turboprop", "Light Jet", "Midsize Jet", "Super Midsize Jet", "Heavy Jet", "Helicopter"];
+const serviceTypes = ["All Services", "Charter", "Air Ambulance", "Aerial Survey", "Cargo"];
 const PAGE_SIZE = 6;
 
 export default function FleetPageV5() {
-  const [activeFilter, setActiveFilter] = useState("All Aircraft");
-  const [aircraftList, setAircraftList] = useState<Aircraft[]>([]);
+  const [activeCategory, setActiveCategory] = useState("All Categories");
+  const [activeServiceType, setActiveServiceType] = useState("All Services");
+  const [searchQuery, setSearchQuery] = useState("");
+  const [aircraftList, setAircraftList] = useState<(Aircraft & { service_types?: string[] })[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [visibleCount, setVisibleCount] = useState(PAGE_SIZE);
 
@@ -20,7 +23,8 @@ export default function FleetPageV5() {
           const mapped = resData.data.map((item: any) => ({
             id: item.id,
             name: item.name,
-            category: item.category,
+            category: item.aircraft_category || item.category,
+            service_types: Array.isArray(item.service_types) ? item.service_types : [item.service_types || "Charter"],
             imageUrl: item.imageUrl || "/images/gulfstrem.jpg",
             tag: item.tag || item.category,
             specs: [
@@ -37,15 +41,33 @@ export default function FleetPageV5() {
       .finally(() => setIsLoading(false));
   }, []);
 
-  const handleFilterChange = (filter: string) => {
-    setActiveFilter(filter);
+  const handleCategoryChange = (cat: string) => {
+    setActiveCategory(cat);
     setVisibleCount(PAGE_SIZE);
   };
 
-  const filteredData =
-    activeFilter === "All Aircraft"
-      ? aircraftList
-      : aircraftList.filter((a) => a.category === activeFilter);
+  const handleServiceTypeChange = (st: string) => {
+    setActiveServiceType(st);
+    setVisibleCount(PAGE_SIZE);
+  };
+
+  const filteredData = aircraftList.filter((a) => {
+    if (activeCategory !== "All Categories" && a.category !== activeCategory) {
+      return false;
+    }
+    if (activeServiceType !== "All Services") {
+      const services = a.service_types || [];
+      if (!services.includes(activeServiceType)) return false;
+    }
+    if (searchQuery.trim()) {
+      const q = searchQuery.toLowerCase();
+      const matchName = a.name.toLowerCase().includes(q);
+      const matchCat = a.category.toLowerCase().includes(q);
+      const matchSt = (a.service_types || []).join(" ").toLowerCase().includes(q);
+      if (!matchName && !matchCat && !matchSt) return false;
+    }
+    return true;
+  });
 
   const displayedAircraft = filteredData.slice(0, visibleCount);
   const hasMore = visibleCount < filteredData.length;
@@ -93,31 +115,74 @@ export default function FleetPageV5() {
         <div className="max-w-7xl mx-auto px-6 lg:px-12">
           
           {/* Header Controls & Filter Tabs */}
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between mb-12 sm:mb-16 gap-6 border-b border-stone-200/80 pb-6">
-            <div>
-              <h2 className="text-2xl sm:text-4xl font-serif font-normal text-[#002F5C]">
-                Explore All Fleet Models
-              </h2>
-              <p className="text-sm text-stone-500 font-light mt-1">
-                Showing {displayedAircraft.length} of {filteredData.length} available aircraft
-              </p>
+          <div className="flex flex-col gap-6 mb-12 border-b border-stone-200/80 pb-6">
+            <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
+              <div>
+                <h2 className="text-2xl sm:text-4xl font-serif font-normal text-[#002F5C]">
+                  Explore All Fleet Models
+                </h2>
+                <p className="text-sm text-stone-500 font-light mt-1">
+                  Showing {displayedAircraft.length} of {filteredData.length} available aircraft
+                </p>
+              </div>
+
+              {/* Search Bar */}
+              <div className="w-full md:w-72">
+                <input
+                  type="text"
+                  value={searchQuery}
+                  onChange={(e) => {
+                    setSearchQuery(e.target.value);
+                    setVisibleCount(PAGE_SIZE);
+                  }}
+                  placeholder="Search model, category, service..."
+                  className="w-full bg-white border border-stone-200 rounded-xl px-4 py-2 text-xs text-[#002F5C] placeholder-stone-400 focus:outline-none focus:border-[#002F5C]"
+                />
+              </div>
             </div>
 
-            {/* Category Filter Tabs */}
-            <div className="flex items-center space-x-6 sm:space-x-8 overflow-x-auto max-w-full pb-2 sm:pb-0">
-              {filters.map((filter) => (
-                <button
-                  key={filter}
-                  onClick={() => handleFilterChange(filter)}
-                  className={`text-xs font-semibold uppercase tracking-wider transition-all cursor-pointer whitespace-nowrap pb-2 border-b-2 -mb-2 ${
-                    activeFilter === filter
-                      ? "text-[#002F5C] border-[#FFD200]"
-                      : "text-stone-400 border-transparent hover:text-stone-700"
-                  }`}
-                >
-                  {filter}
-                </button>
-              ))}
+            {/* Aircraft Category Pills */}
+            <div className="flex flex-col gap-2">
+              <span className="text-[10px] uppercase font-bold tracking-widest text-stone-400">
+                Aircraft Category:
+              </span>
+              <div className="flex items-center space-x-4 sm:space-x-6 overflow-x-auto max-w-full pb-1">
+                {categories.map((cat) => (
+                  <button
+                    key={cat}
+                    onClick={() => handleCategoryChange(cat)}
+                    className={`text-xs font-semibold uppercase tracking-wider transition-all cursor-pointer whitespace-nowrap pb-1 border-b-2 ${
+                      activeCategory === cat
+                        ? "text-[#002F5C] border-[#FFD200]"
+                        : "text-stone-400 border-transparent hover:text-stone-700"
+                    }`}
+                  >
+                    {cat}
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            {/* Service Type Pills */}
+            <div className="flex flex-col gap-2">
+              <span className="text-[10px] uppercase font-bold tracking-widest text-stone-400">
+                Service Type:
+              </span>
+              <div className="flex items-center space-x-4 sm:space-x-6 overflow-x-auto max-w-full pb-1">
+                {serviceTypes.map((st) => (
+                  <button
+                    key={st}
+                    onClick={() => handleServiceTypeChange(st)}
+                    className={`text-xs font-semibold uppercase tracking-wider transition-all cursor-pointer whitespace-nowrap pb-1 border-b-2 ${
+                      activeServiceType === st
+                        ? "text-[#002F5C] border-[#FFD200]"
+                        : "text-stone-400 border-transparent hover:text-stone-700"
+                    }`}
+                  >
+                    {st}
+                  </button>
+                ))}
+              </div>
             </div>
           </div>
 
