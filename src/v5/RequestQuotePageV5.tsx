@@ -13,6 +13,7 @@ import {
   Plane
 } from "lucide-react";
 import FooterV5 from "./components/FooterV5";
+import { API_BASE_URL } from "../api/axiosInstance";
 import ConciergeBarV5 from "./components/ConciergeBarV5";
 
 interface AircraftSpec {
@@ -92,7 +93,7 @@ export default function RequestQuotePageV5() {
 
   // Fetch airports dynamically
   useEffect(() => {
-    fetch("http://localhost:8272/settings/airport")
+    fetch(`${API_BASE_URL}/settings/airport`)
       .then((res) => res.json())
       .then((resData) => {
         if (resData.data && Array.isArray(resData.data)) {
@@ -105,7 +106,7 @@ export default function RequestQuotePageV5() {
   // Fetch fleet dynamically from API
   const fetchFleetFromAPI = (guests: number) => {
     setIsLoadingFleet(true);
-    fetch(`http://localhost:8272/settings/fleet?seat_count=${guests}`)
+    fetch(`${API_BASE_URL}/settings/fleet?seat_count=${guests}`)
       .then((res) => res.json())
       .then((resData) => {
         if (resData.data && Array.isArray(resData.data)) {
@@ -155,7 +156,7 @@ export default function RequestQuotePageV5() {
 
     setIsSubmittingQuote(true);
     try {
-      await fetch("http://localhost:8272/settings/quote-request", {
+      await fetch(`${API_BASE_URL}/settings/quote-request`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { ArrowUpRight } from "lucide-react";
 import { Link } from "react-router-dom";
 import AircraftCard, { Aircraft } from "./AircraftCard";
+import { API_BASE_URL } from "../../api/axiosInstance";
 
 const categories = ["All Categories", "Piston", "Turboprop", "Light Jet", "Midsize Jet", "Super Midsize Jet", "Heavy Jet", "Helicopter"];
 const serviceTypes = ["All Services", "Charter", "Air Ambulance", "Aerial Survey", "Cargo"];
@@ -13,7 +14,7 @@ export default function FleetSectionV5() {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    fetch("http://localhost:8272/settings/fleet")
+    fetch(`${API_BASE_URL}/settings/fleet`)
       .then((res) => res.json())
       .then((resData) => {
         if (resData.data && Array.isArray(resData.data)) {

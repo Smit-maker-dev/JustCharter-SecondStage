@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useParams, Link, useNavigate } from "react-router-dom";
 import { ArrowLeft, ArrowUpRight, Gauge, Navigation, Users, Maximize, Luggage, ShieldCheck, CheckCircle2 } from "lucide-react";
 import ConciergeBarV5 from "./components/ConciergeBarV5";
+import { API_BASE_URL } from "../api/axiosInstance";
 
 export interface AircraftDetailData {
   id: number;
@@ -214,7 +215,7 @@ export default function AircraftDetailPageV5() {
     setIsLoading(true);
 
     // Fetch single aircraft by ID
-    fetch(`http://localhost:8272/settings/fleet/${id}`)
+    fetch(`${API_BASE_URL}/settings/fleet/${id}`)
       .then((res) => res.json())
       .then((resData) => {
         if (resData.data) {
@@ -225,7 +226,7 @@ export default function AircraftDetailPageV5() {
       .finally(() => setIsLoading(false));
 
     // Fetch recommended fleet
-    fetch("http://localhost:8272/settings/fleet")
+    fetch(`${API_BASE_URL}/settings/fleet`)
       .then((res) => res.json())
       .then((resData) => {
         if (resData.data && Array.isArray(resData.data)) {

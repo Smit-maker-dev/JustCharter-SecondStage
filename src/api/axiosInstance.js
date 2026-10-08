@@ -21,11 +21,14 @@
 // });
 
 // export default axiosInstance;
-import axios from 'axios';
-import { toast } from 'react-toastify';
+export const API_BASE_URL = (typeof import.meta !== 'undefined' && import.meta.env?.VITE_BASE_URL)
+  ? import.meta.env.VITE_BASE_URL
+  : (typeof window !== 'undefined' && window.location.hostname === 'localhost'
+      ? 'http://localhost:8272'
+      : 'https://api.justcharter.in');
 
 const axiosInstance = axios.create({
-  baseURL: "https://api.justcharter.in",
+  baseURL: API_BASE_URL,
   headers: {
     'Content-Type': 'application/json',
   },

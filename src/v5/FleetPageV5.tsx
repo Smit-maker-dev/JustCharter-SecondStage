@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import AircraftCard, { Aircraft } from "./components/AircraftCard";
 import ConciergeBarV5 from "./components/ConciergeBarV5";
 import { Plane, ChevronDown } from "lucide-react";
+import { API_BASE_URL } from "../api/axiosInstance";
 
 const categories = ["All Categories", "Piston", "Turboprop", "Light Jet", "Midsize Jet", "Super Midsize Jet", "Heavy Jet", "Helicopter"];
 const serviceTypes = ["All Services", "Charter", "Air Ambulance", "Aerial Survey", "Cargo"];
@@ -16,7 +17,7 @@ export default function FleetPageV5() {
   const [visibleCount, setVisibleCount] = useState(PAGE_SIZE);
 
   useEffect(() => {
-    fetch("http://localhost:8272/settings/fleet")
+    fetch(`${API_BASE_URL}/settings/fleet`)
       .then((res) => res.json())
       .then((resData) => {
         if (resData.data && Array.isArray(resData.data)) {
