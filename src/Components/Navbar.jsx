@@ -95,71 +95,17 @@ export default function Navbar() {
           <div className="flex items-center space-x-2">
             {/* <img src="/images/Logo.png" alt="JustCharter Logo" className="h-5" /> */}
             <img
-              src={
-                showScrolledStyle
-                  ? "/images/Blacklogo.png"
-                  : "/images/WhiteLogo.png"
-              }
+              src="/brand/logo.svg"
               alt="JustCharter Logo"
-              className="h-8 sm:h-8 md:h-8 lg:h-9 w-auto object-contain  transition duration-300 "
+              className="h-8 sm:h-8 md:h-8 lg:h-9 w-auto object-contain transition duration-300"
             />
           </div>
 
-          {/* <ul className="hidden lg:flex space-x-6 text-sm relative">
-            <li
-              className="cursor-pointer text-[#FFD200]"
-              onClick={() => navigate("/")}
-            >
-              Home
-            </li>
-            <li
-              className={`cursor-pointer transition-colors duration-300 ${
-                showScrolledStyle ? "text-[#000000]" : "text-[#FFFFFF]"
-              }`}
-              onClick={() => navigate("/bookings")}
-            >
-              Bookings
-            </li>
-
-            <li className="relative">
-              <div
-                className={`flex justify-center items-center space-x-1 cursor-pointer transition-colors duration-300 ${
-                  showScrolledStyle ? "text-[#002F5C]" : "text-white"
-                }`}
-              >
-                <span>Services</span>
-              </div>
-            </li>
-            <li
-              className={`cursor-pointer transition-colors duration-300 ${
-                showScrolledStyle ? "text-[#000000]" : "text-[#FFFFFF]"
-              }`}
-            >
-              Event
-            </li>
-            <li
-              className={`cursor-pointer transition-colors duration-300 ${
-                showScrolledStyle ? "text-[#000000]" : "text-[#FFFFFF]"
-              }`}
-            >
-              Buy & Sell
-            </li>
-            <li
-              className={`cursor-pointer transition-colors duration-300 ${
-                showScrolledStyle ? "text-[#000000]" : "text-[#FFFFFF]"
-              }`}
-            >
-              About
-            </li>
-          </ul> */}
           <ul className="hidden lg:flex space-x-6 text-sm relative">
             {[
               { label: "Home", path: "/" },
               { label: "Fleet", path: "/fleet" },
-              // { label: "Bookings", path: "/bookings" },
               { label: "Services", path: "/services" },
-              // { label: "Event", path: "/event" },
-              // { label: "Buy & Sell", path: "/buy_sell" },
               { label: "About", path: "/about" },
               { label: "Privacy & Policy", path: "/privacy_policy" },
             ].map((item) => {
@@ -169,7 +115,7 @@ export default function Navbar() {
                   key={item.label}
                   className={`cursor-pointer transition-colors duration-300 ${
                     isActive
-                      ? "text-[#FFD200] font-semibold"
+                      ? "text-[#8A6D00] font-extrabold"
                       : showScrolledStyle
                       ? "text-[#002F5C]"
                       : "text-white"
@@ -187,12 +133,12 @@ export default function Navbar() {
               onClick={() => navigate("/account")}
               className="hidden md:flex items-center p-1.5 rounded space-x-2 cursor-pointer hover:bg-gray-400 transition"
             >
-              <div className="h-8 w-8 bg-[#FF6B6B] rounded-full flex items-center justify-center text-white text-sm font-medium">
+              <div className="h-8 w-8 bg-[#FFD200] text-[#1A1A1A] font-bold rounded-full flex items-center justify-center text-sm font-medium">
                 {initials.toUpperCase()}
               </div>
               <span
                 className={`text-sm transition-colors duration-300 ${
-                  showScrolledStyle ? "text-[#FFD200]" : "text-[#FFFFFF]"
+                  showScrolledStyle ? "text-[#8A6D00]" : "text-[#FFFFFF]"
                 }`}
               >
                 {firstName} {lastName}
@@ -202,21 +148,17 @@ export default function Navbar() {
             <div className="hidden lg:flex space-x-4">
               <button
                 onClick={() => navigate("/register")}
-                className={`cursor-pointer text-sm px-6 py-2  rounded-md transition ${
+                className={`cursor-pointer text-sm px-6 py-2 rounded-md transition font-medium ${
                   showScrolledStyle
-                    ? "text-[#002F5C] hover:bg-[#FFD200]  hover:text-white"
-                    : "text-white hover:bg-[#FFD200]  hover:text-[#002F5C]"
+                    ? "text-[#002F5C] hover:bg-[#FFFBEA] hover:text-[#1A1A1A]"
+                    : "text-white hover:bg-[#FFD200] hover:text-[#1A1A1A]"
                 }`}
               >
                 Sign Up
               </button>
               <button
                 onClick={() => navigate("/login")}
-                className={`text-sm px-10 py-2 rounded-md transition cursor-pointer ${
-                  showScrolledStyle
-                    ? "bg-[#FFD200] text-white hover:bg-[#e6be00] hover:text-white"
-                    : "bg-[#FFD200] text-white hover:bg-[#e6be00] hover:text-white"
-                }`}
+                className={`text-sm px-10 py-2 rounded-md transition cursor-pointer font-bold bg-[#FFD200] text-[#1A1A1A] hover:bg-[#E6BC00]`}
               >
                 Login
               </button>

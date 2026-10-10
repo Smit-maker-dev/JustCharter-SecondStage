@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import AircraftCard, { Aircraft } from "./components/AircraftCard";
 import ConciergeBarV5 from "./components/ConciergeBarV5";
-import { Plane, ChevronDown } from "lucide-react";
+import { Plane, ChevronDown, RotateCcw } from "lucide-react";
 import { API_BASE_URL } from "../api/axiosInstance";
 
 const categories = ["All Categories", "Piston", "Turboprop", "Light Jet", "Midsize Jet", "Super Midsize Jet", "Heavy Jet", "Helicopter"];
@@ -14,11 +14,17 @@ export default function FleetPageV5() {
   const [searchQuery, setSearchQuery] = useState("");
   const [aircraftList, setAircraftList] = useState<(Aircraft & { service_types?: string[] })[]>([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [isError, setIsError] = useState(false);
   const [visibleCount, setVisibleCount] = useState(PAGE_SIZE);
 
-  useEffect(() => {
+  const fetchFleet = () => {
+    setIsLoading(true);
+    setIsError(false);
     fetch(`${API_BASE_URL}/settings/fleet`)
-      .then((res) => res.json())
+      .then((res) => {
+        if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`);
+        return res.json();
+      })
       .then((resData) => {
         if (resData.data && Array.isArray(resData.data)) {
           const mapped = resData.data.map((item: any) => ({
@@ -36,10 +42,19 @@ export default function FleetPageV5() {
             ]
           }));
           setAircraftList(mapped);
+        } else {
+          setAircraftList([]);
         }
       })
-      .catch((err) => console.error("Error fetching fleet:", err))
+      .catch((err) => {
+        console.error("Error fetching fleet:", err);
+        setIsError(true);
+      })
       .finally(() => setIsLoading(false));
+  };
+
+  useEffect(() => {
+    fetchFleet();
   }, []);
 
   const handleCategoryChange = (cat: string) => {
@@ -53,7 +68,7 @@ export default function FleetPageV5() {
   };
 
   const filteredData = aircraftList.filter((a) => {
-    if (activeCategory !== "All Categories" && a.category !== activeCategory) {
+    if (activeCategory !== "All Categories" && (a.category || "").toLowerCase() !== activeCategory.toLowerCase()) {
       return false;
     }
     if (activeServiceType !== "All Services") {
@@ -62,8 +77,8 @@ export default function FleetPageV5() {
     }
     if (searchQuery.trim()) {
       const q = searchQuery.toLowerCase();
-      const matchName = a.name.toLowerCase().includes(q);
-      const matchCat = a.category.toLowerCase().includes(q);
+      const matchName = (a.name || "").toLowerCase().includes(q);
+      const matchCat = (a.category || "").toLowerCase().includes(q);
       const matchSt = (a.service_types || []).join(" ").toLowerCase().includes(q);
       if (!matchName && !matchCat && !matchSt) return false;
     }
@@ -198,12 +213,26 @@ export default function FleetPageV5() {
                 </div>
               ))}
             </div>
+          ) : isError ? (
+            <div className="text-center py-20 bg-white rounded-2xl border border-red-100 shadow-sm max-w-lg mx-auto">
+              <h3 className="text-xl font-serif text-[#002F5C] mb-2">Unable to Load Fleet</h3>
+              <p className="text-sm text-stone-500 font-light mb-6">
+                Failed to fetch aircraft details from the server. Please try again.
+              </p>
+              <button
+                onClick={fetchFleet}
+                className="inline-flex items-center space-x-2 bg-[#002F5C] hover:bg-[#002347] text-white text-xs font-semibold uppercase tracking-wider px-6 py-3 rounded-xl transition-all cursor-pointer"
+              >
+                <RotateCcw className="w-4 h-4" />
+                <span>Retry Loading</span>
+              </button>
+            </div>
           ) : filteredData.length === 0 ? (
             <div className="text-center py-20 bg-white rounded-2xl border border-stone-200/70">
               <Plane className="w-12 h-12 text-stone-300 mx-auto mb-4" />
               <h3 className="text-xl font-serif text-[#002F5C] mb-2">No Aircraft Found</h3>
               <p className="text-sm text-stone-500 font-light">
-                No aircraft match the "{activeFilter}" category at this time.
+                No aircraft match the "{activeCategory}" category at this time.
               </p>
             </div>
           ) : (

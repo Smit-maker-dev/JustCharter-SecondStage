@@ -1,12 +1,48 @@
 @import "tailwindcss";
 
 @theme {
+  --color-brand-500: #FFD200;
+  --color-brand-600: #E6BC00;
+  --color-brand-700: #CCA800;
+  --color-brand-100: #FFF3B8;
+  --color-brand-50: #FFFBEA;
+  --color-brand-ink: #1A1A1A;
+  --color-brand-text: #8A6D00;
   --color-primary-accent: #FFD200;
-  --color-dark-text: #002F5C;
+  --color-brand-gold: #FFD200;
+  --color-brand-blue: #FFD200;
 }
+
+:root {
+  --brand-500: #FFD200;
+  --brand-600: #E6BC00;
+  --brand-700: #CCA800;
+  --brand-100: #FFF3B8;
+  --brand-50: #FFFBEA;
+  --brand-ink: #1A1A1A;
+  --brand-text: #8A6D00;
+}
+
+/* Brand Utility Classes */
+.text-brand-gold { color: #8A6D00; }
+.bg-brand-gold { background-color: #FFD200; color: #1A1A1A; }
+.border-brand-gold { border-color: #E6BC00; }
+
+.text-brand-blue { color: #8A6D00; }
+.bg-brand-blue { background-color: #FFD200; color: #1A1A1A; }
+.border-brand-blue { border-color: #E6BC00; }
+
+.bg-brand-500 { background-color: #FFD200; }
+.bg-brand-600 { background-color: #E6BC00; }
+.bg-brand-700 { background-color: #CCA800; }
+.bg-brand-100 { background-color: #FFF3B8; }
+.bg-brand-50 { background-color: #FFFBEA; }
+.text-brand-ink { color: #1A1A1A; }
+.text-brand-text { color: #8A6D00; }
 
 @layer base {
   body {
     color: #002F5C;
   }
 }
+

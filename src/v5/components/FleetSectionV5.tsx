@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { ArrowUpRight } from "lucide-react";
+import { ArrowUpRight, RotateCcw } from "lucide-react";
 import { Link } from "react-router-dom";
 import AircraftCard, { Aircraft } from "./AircraftCard";
 import { API_BASE_URL } from "../../api/axiosInstance";
@@ -12,10 +12,16 @@ export default function FleetSectionV5() {
   const [activeServiceType, setActiveServiceType] = useState("All Services");
   const [aircraftList, setAircraftList] = useState<(Aircraft & { service_types?: string[] })[]>([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [isError, setIsError] = useState(false);
 
-  useEffect(() => {
+  const fetchFleet = () => {
+    setIsLoading(true);
+    setIsError(false);
     fetch(`${API_BASE_URL}/settings/fleet`)
-      .then((res) => res.json())
+      .then((res) => {
+        if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`);
+        return res.json();
+      })
       .then((resData) => {
         if (resData.data && Array.isArray(resData.data)) {
           const mapped = resData.data.map((item: any) => ({
@@ -33,14 +39,23 @@ export default function FleetSectionV5() {
             ]
           }));
           setAircraftList(mapped);
+        } else {
+          setAircraftList([]);
         }
       })
-      .catch((err) => console.error("Error fetching fleet:", err))
+      .catch((err) => {
+        console.error("Error fetching fleet:", err);
+        setIsError(true);
+      })
       .finally(() => setIsLoading(false));
+  };
+
+  useEffect(() => {
+    fetchFleet();
   }, []);
 
   const filteredData = aircraftList.filter((a) => {
-    if (activeCategory !== "All Categories" && a.category !== activeCategory) return false;
+    if (activeCategory !== "All Categories" && (a.category || "").toLowerCase() !== activeCategory.toLowerCase()) return false;
     if (activeServiceType !== "All Services") {
       const services = a.service_types || [];
       if (!services.includes(activeServiceType)) return false;
@@ -118,6 +133,23 @@ export default function FleetSectionV5() {
                 <div className="bg-stone-100 h-16 rounded-xl"></div>
               </div>
             ))}
+          </div>
+        ) : isError ? (
+          <div className="text-center py-16 px-6 bg-white rounded-2xl border border-red-100 shadow-sm max-w-lg mx-auto">
+            <p className="text-base font-medium text-stone-800 mb-2">Unable to load fleet aircraft</p>
+            <p className="text-xs text-stone-500 mb-6">Please check your internet connection or try again.</p>
+            <button
+              onClick={fetchFleet}
+              className="inline-flex items-center space-x-2 bg-[#002F5C] hover:bg-[#002347] text-white text-xs font-semibold uppercase tracking-wider px-6 py-3 rounded-xl transition-all cursor-pointer"
+            >
+              <RotateCcw className="w-4 h-4" />
+              <span>Retry Loading</span>
+            </button>
+          </div>
+        ) : homeDisplayData.length === 0 ? (
+          <div className="text-center py-16 px-6 bg-white rounded-2xl border border-stone-200/70 max-w-lg mx-auto">
+            <p className="text-base font-medium text-stone-800 mb-1">No Aircraft Found</p>
+            <p className="text-xs text-stone-500">No fleet models available under the selected filters.</p>
           </div>
         ) : (
           <>
