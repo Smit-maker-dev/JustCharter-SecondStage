@@ -1,5 +1,7 @@
 import React from "react";
 import { ArrowUpRight, Shield } from "lucide-react";
+// @ts-ignore
+import Logo from "../../Components/Logo";
 
 export default function FooterV5() {
   return (
@@ -11,8 +13,8 @@ export default function FooterV5() {
           
           {/* Brand Info */}
           <div className="sm:col-span-2 lg:col-span-4">
-            <img
-              src="/images/Blacklogo.png"
+            <Logo
+              variant="light"
               alt="JustCharter Logo"
               className="h-8 w-auto object-contain mb-6"
             />

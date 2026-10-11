@@ -3,6 +3,7 @@ import { FaAngleDown, FaBars } from "react-icons/fa6";
 import { IoClose } from "react-icons/io5";
 import { useNavigate, useLocation } from "react-router-dom";
 import axios from "../api/axiosInstance";
+import Logo from "./Logo";
 export default function Navbar() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [firstName, setFirstName] = useState("");
@@ -76,7 +77,7 @@ export default function Navbar() {
 
   const location = useLocation();
   const isHome = location.pathname === "/";
-  const showScrolledStyle = !isHome || isScrolled;
+  const showScrolledStyle = !isHome || isScrolled || isMobileMenuOpen;
 
   const initials = (firstName?.charAt(0) || "") + (lastName?.charAt(0) || "");
 
@@ -86,18 +87,24 @@ export default function Navbar() {
 
   return (
     <>
+      {/* Subtle gradient scrim behind transparent header over hero (rgba(0,0,0,0.45) to 0, 120px tall) */}
+      {!showScrolledStyle && (
+        <div
+          aria-hidden="true"
+          className="fixed top-0 left-0 w-full h-[120px] pointer-events-none z-40 transition-opacity duration-300 bg-gradient-to-b from-black/45 to-transparent"
+        />
+      )}
       <nav
         className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${
-          showScrolledStyle ? "bg-white shadow-sm" : "bg-transparent "
+          showScrolledStyle ? "bg-white shadow-sm" : "bg-transparent"
         }`}
       >
         <div className=" mx-auto px-10 flex items-center justify-between h-16 ">
-          <div className="flex items-center space-x-2">
-            {/* <img src="/images/Logo.png" alt="JustCharter Logo" className="h-5" /> */}
-            <img
-              src="/brand/logo.svg"
+          <div className="flex items-center space-x-2 cursor-pointer" onClick={() => navigate("/")}>
+            <Logo
+              variant={showScrolledStyle ? "light" : "dark"}
               alt="JustCharter Logo"
-              className="h-8 sm:h-8 md:h-8 lg:h-9 w-auto object-contain transition duration-300"
+              className="h-8 sm:h-8 md:h-8 lg:h-9 w-auto object-contain transition-all duration-300"
             />
           </div>
 

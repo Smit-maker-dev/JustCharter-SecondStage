@@ -4,6 +4,7 @@ import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import axios from "../api/axiosInstance";
+import Logo from "../Components/Logo";
 
 export default function LoginPage() {
   const [email, setEmail] = useState("");
@@ -64,7 +65,7 @@ export default function LoginPage() {
       <div className="w-full md:w-1/2 flex items-center justify-center bg-white p-6 md:p-12">
         <div className="w-full max-w-md">
           <div className="mb-8">
-            <img src="/images/Blacklogo.png" alt="JustCharter Logo" className="h-11" />
+            <Logo variant="light" alt="JustCharter Logo" className="h-11 w-auto" />
           </div>
 
           <h2 className="text-3xl font-bold text-[#002F5C] mb-8">

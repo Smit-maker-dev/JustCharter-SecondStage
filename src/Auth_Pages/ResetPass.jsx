@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import planimage from "/images/privatejet.png";
-import Logo from "/images/Blacklogo.png";
+import Logo from "../Components/Logo";
 import Chekmark from "/images/checkmark.png";
 import { useNavigate } from "react-router-dom";
 import axios from "../api/axiosInstance";
@@ -90,7 +90,7 @@ export default function ResetPass() {
       <div className="w-full md:w-1/2 flex items-center justify-center bg-white p-6 md:p-12 pt-24">
         <div className="w-full max-w-md">
           <div className="mb-8">
-            <img src={Logo} alt="JustCharter Logo" className="h-10" />
+            <Logo variant="light" alt="JustCharter Logo" className="h-10 w-auto" />
           </div>
 
           <h2 className="text-2xl md:text-3xl font-bold text-[#002F5C] mb-2">

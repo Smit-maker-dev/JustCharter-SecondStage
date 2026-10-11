@@ -3,7 +3,7 @@ import * as Yup from "yup";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "../api/axiosInstance";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
-import Logo from "/images/Blacklogo.png";
+import Logo from "../Components/Logo";
 import PrivateJet from "/images/privatejet.png";
 import Checkmark from "/images/checkmark.png";
 import { toast, ToastContainer } from 'react-toastify';
@@ -124,8 +124,8 @@ export default function SignupPage() {
         <div className="w-full max-w-md">
           <div className="mb-5 h-10 w-full relative">
             <div className="h-full w-full bg-transparent">
-              <img
-                src={Logo}
+              <Logo
+                variant="light"
                 alt="JustCharter Logo"
                 className="h-full w-auto object-contain"
               />

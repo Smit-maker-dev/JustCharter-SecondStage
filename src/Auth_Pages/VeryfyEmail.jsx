@@ -3,7 +3,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import axios from "../api/axiosInstance";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import Logo from "/images/Blacklogo.png";
+import Logo from "../Components/Logo";
 import PrivateJet from "/images/privatejet.png";
 import OTPInput from "../Components/OTPInput";
 export default function VerifyEmail() {
@@ -128,8 +128,8 @@ export default function VerifyEmail() {
         <div className="w-full max-w-lg">
           <div className="mb-6 h-10 w-full relative">
             <div className="h-full w-full bg-transparent">
-              <img
-                src={Logo}
+              <Logo
+                variant="light"
                 alt="JustCharter Logo"
                 className="h-full w-auto object-contain"
               />

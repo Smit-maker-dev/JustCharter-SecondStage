@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import planimage from "/images/privatejet.png";
-import Logo from "/images/Blacklogo.png";
+import Logo from "../Components/Logo";
 import { useNavigate } from "react-router-dom";
 import axios from "../api/axiosInstance";
 import Swal from "sweetalert2";
@@ -57,7 +57,7 @@ export default function ForgetPass() {
       <div className="w-full md:w-1/2 pt-40 flex justify-center items-center bg-white p-5 md:p-10 overflow-y-auto">
         <div className="w-full max-w-lg">
           <div className="flex justify-start mb-6">
-            <img src={Logo} alt="JustCharter Logo" className="h-10" />
+            <Logo variant="light" alt="JustCharter Logo" className="h-10 w-auto" />
           </div>
 
           <h2 className="text-2xl font-bold text-[#002F5C] mb-2">

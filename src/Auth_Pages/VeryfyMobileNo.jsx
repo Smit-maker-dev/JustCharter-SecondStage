@@ -4,6 +4,7 @@ import axios from "../api/axiosInstance";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import OTPInput from "../Components/OTPInput";
+import Logo from "../Components/Logo";
 
 export default function VeryfyMobileNo() {
   const [code, setCode] = useState("");
@@ -112,7 +113,7 @@ export default function VeryfyMobileNo() {
       <div className="w-full md:w-1/2 pt-40 flex justify-center items-center bg-white p-5 md:p-10 overflow-y-auto">
         <div className="w-full max-w-lg">
           <div className="flex justify-start mb-7">
-            <img src="/images/Blacklogo.png" alt="JustCharter Logo" className="h-10" />
+            <Logo variant="light" alt="JustCharter Logo" className="h-10 w-auto" />
           </div>
 
           <h2 className="text-2xl font-bold text-[#002F5C] mb-1">

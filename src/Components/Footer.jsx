@@ -2,14 +2,15 @@ import React from "react";
 import { FaInstagram, FaEnvelope, FaFacebook } from "react-icons/fa";
 import { IoLogoLinkedin } from "react-icons/io5";
 import { Link } from "react-router-dom";
+import Logo from "./Logo";
 
 export default function Footer() {
   return (
     <footer className="bg-stone-50 text-[#002F5C] border-t border-stone-200 px-6 py-10 md:px-16 lg:px-24">
       <div className="flex flex-col lg:flex-row justify-between gap-5">
         <div className="mb-10 lg:mb-0 lg:w-1/4">
-          <img
-            src="/images/Blacklogo.png"
+          <Logo
+            variant="light"
             alt="JustCharter Logo"
             className="h-10 mb-4"
           />
