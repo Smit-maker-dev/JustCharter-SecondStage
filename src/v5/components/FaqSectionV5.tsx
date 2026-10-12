@@ -70,7 +70,10 @@ export default function FaqSectionV5() {
   };
 
   return (
-    <section className="py-24 sm:py-28 bg-white font-sans text-[#002F5C] overflow-hidden border-t border-stone-200/60">
+    <section
+      id="faq"
+      className="py-24 sm:py-28 bg-white font-sans text-[#002F5C] overflow-hidden border-t border-stone-200/60 scroll-mt-20"
+    >
       <div className="max-w-5xl mx-auto px-6 lg:px-12">
         
         {/* Section Header */}

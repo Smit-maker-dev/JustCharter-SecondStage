@@ -92,7 +92,7 @@ export default function Footer() {
 
           <div>
             <h3 className="text-[#FFD200] font-semibold mb-3">Legal</h3>
-            {/* TODO: Terms of Service must state JustCharter acts as an intermediary and the operator is responsible for flight operation — client's lawyer to provide wording. */}
+            {/* TODO: CONFIRM WITH CLIENT — Accessibility policy page (no route/component exists in repo; client to supply if required) */}
             <ul className="space-y-2 text-stone-600">
               <li>
                 <Link to="/terms_conditions" className="hover:text-[#002F5C] transition">
@@ -111,6 +111,11 @@ export default function Footer() {
                 >
                   Cancellation Policy
                 </Link>
+              </li>
+              <li>
+                <a href="/#faq" className="hover:text-[#002F5C] transition">
+                  FAQs
+                </a>
               </li>
             </ul>
           </div>
