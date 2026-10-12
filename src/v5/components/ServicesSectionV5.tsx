@@ -6,26 +6,30 @@ export default function ServicesSectionV5() {
     {
       icon: <PlaneTakeoff className="w-5 h-5 text-[#FFD200]" />,
       title: "Private Charter",
-      desc: "Tailored flight experiences to meet your specific needs, with access to over 5,000 airports worldwide.",
-      tag: "5,000+ Airports",
+      desc: "Tailored flight options to match your needs, with access to over 5,000 airports worldwide.",
+      tag: "5,000+ AIRPORTS",
+      link: "/fleet",
     },
     {
       icon: <Shield className="w-5 h-5 text-[#FFD200]" />,
       title: "Safety First",
-      desc: "Our fleet meets the highest safety standards with rigorous maintenance and experienced flight crews.",
-      tag: "ARGUS & Wyvern",
+      desc: "Every aircraft is verified by our team and flown by vetted partner operators.",
+      tag: "VERIFIED OPERATORS",
+      link: "#safety",
     },
     {
       icon: <Calendar className="w-5 h-5 text-[#FFD200]" />,
       title: "Flexible Scheduling",
       desc: "Fly on your terms with departure times that suit your schedule, avoiding commercial airline constraints.",
-      tag: "24h Availability",
+      tag: "24H SUPPORT",
+      link: "/request-quote",
     },
     {
       icon: <Clock className="w-5 h-5 text-[#FFD200]" />,
       title: "Time Efficiency",
       desc: "Skip long security lines and boarding processes, making your journey faster and more comfortable.",
-      tag: "Zero Delay FBO",
+      tag: "PRIVATE TERMINALS",
+      link: "/fleet",
     },
   ];
 
@@ -78,10 +82,13 @@ export default function ServicesSectionV5() {
                 </p>
               </div>
 
-              <div className="pt-3 mt-4 border-t border-stone-200/60 w-full flex items-center justify-between text-xs font-semibold text-stone-500 group-hover:text-[#002F5C] transition-colors">
+              <a
+                href={service.link}
+                className="pt-3 mt-4 border-t border-stone-200/60 w-full flex items-center justify-between text-xs font-semibold text-stone-500 group-hover:text-[#002F5C] transition-colors cursor-pointer"
+              >
                 <span>Learn More</span>
                 <ArrowRight className="w-3.5 h-3.5 text-[#FFD200] group-hover:translate-x-1 transition-transform" />
-              </div>
+              </a>
             </div>
           ))}
         </div>

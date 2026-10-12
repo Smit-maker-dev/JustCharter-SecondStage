@@ -1,25 +1,47 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Shield } from "lucide-react";
+import { API_BASE_URL } from "../../api/axiosInstance";
 
+// TODO: CONFIRM WITH CLIENT — legal/regulatory wording to be reviewed by the client's lawyer; do not add DGCA or certification claims.
 const commitments = [
-  "Two-pilot operation for all flights, regardless of aircraft size",
-  "Crew experience exceeding 5,000 flight hours on average",
-  "Quarterly safety training and emergency simulations",
-  "24/7 flight monitoring and weather analysis",
-  "Comprehensive maintenance after every flight",
+  "Aircraft verified by our team before listing",
+  "Aircraft documents and pilot credentials reviewed during verification",
+  "Operators remain responsible for operating the flight, crew and maintenance",
+  "24/7 support throughout your trip",
+  "Clear quote with inclusions listed before you confirm",
 ];
 
 const advantages = [
-  "No initiation fees or hidden costs",
-  "Guaranteed availability with just 24 hours notice",
-  "Access to our entire fleet of premium aircraft",
-  "Complimentary catering and ground transportation",
-  "Dedicated concierge service for all your travel needs",
+  "Vetted operators only",
+  "Transparent pricing — no hidden costs",
+  "One point of contact from quote to landing",
+  "24/7 charter support",
+  "Wide choice across turboprops, jets and helicopters",
 ];
 
 export default function MembershipSafetySectionV5() {
+  const [lowestRate, setLowestRate] = useState<number | null>(null);
+
+  useEffect(() => {
+    fetch(`${API_BASE_URL}/settings/fleet`)
+      .then((res) => res.json())
+      .then((resData) => {
+        if (resData.data && Array.isArray(resData.data)) {
+          // Extract valid hourly rates, ignoring obvious test placeholder entries (< 50000)
+          const validRates = resData.data
+            .map((item: any) => Number(item.hourlyRate))
+            .filter((rate: number) => !isNaN(rate) && rate >= 50000);
+
+          if (validRates.length > 0) {
+            setLowestRate(Math.min(...validRates));
+          }
+        }
+      })
+      .catch((err) => console.error("Error fetching rates for badge:", err));
+  }, []);
+
   return (
-    <section className="py-28 bg-stone-50/70 font-sans text-[#002F5C] overflow-hidden border-t border-stone-200/80">
+    <section id="safety" className="py-28 bg-stone-50/70 font-sans text-[#002F5C] overflow-hidden border-t border-stone-200/80">
       <div className="max-w-7xl mx-auto px-6 lg:px-12">
         
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 items-center">
@@ -27,21 +49,21 @@ export default function MembershipSafetySectionV5() {
           {/* Left Column: Clean Vertical Lists with Gold Diamond Bullets */}
           <div className="lg:col-span-7 space-y-12">
             
-            {/* Membership Advantages */}
+            {/* Why Book with JustCharter */}
             <div>
               <div className="inline-flex items-center space-x-2 bg-white px-4 py-1 rounded-full border border-stone-200/80 mb-3 shadow-sm">
                 <span className="w-2 h-2 rounded-full bg-[#FFD200]"></span>
                 <span className="text-[11px] uppercase tracking-[0.2em] font-serif italic text-stone-700">
-                  Membership Advantages
+                  WHY JUSTCHARTER
                 </span>
               </div>
 
               <h3 className="text-3xl sm:text-4xl font-serif font-normal text-[#002F5C] mb-4">
-                Privileged Access & Rates
+                Why Book with JustCharter
               </h3>
 
               <p className="text-stone-600 text-sm sm:text-base font-light leading-relaxed mb-6">
-                Our membership programs provide consistent access to our premium fleet with guaranteed availability and fixed hourly rates.
+                One platform to compare verified operators and charter with confidence.
               </p>
 
               <ul className="space-y-4">
@@ -69,7 +91,7 @@ export default function MembershipSafetySectionV5() {
               </h3>
 
               <p className="text-stone-600 text-sm sm:text-base font-light leading-relaxed mb-6">
-                Every flight operates under the industry's most stringent dual-pilot and maintenance safety protocols.
+                Every aircraft on JustCharter goes through verification before it is listed.
               </p>
 
               <ul className="space-y-4">
@@ -95,12 +117,16 @@ export default function MembershipSafetySectionV5() {
               />
               <div className="absolute inset-0 bg-gradient-to-t from-stone-950/80 via-transparent to-transparent"></div>
 
-              {/* Floating Pricing Badge */}
-              <div className="absolute top-4 right-4 sm:top-6 sm:right-6 bg-white/95 backdrop-blur-md border border-stone-200/80 text-[#002F5C] px-3.5 sm:px-5 py-2.5 sm:py-3 rounded-xl shadow-lg font-bold flex items-center space-x-2 sm:space-x-3 z-30">
-                <span className="text-[9px] sm:text-[10px] uppercase tracking-widest text-stone-500 font-semibold">Starting at</span>
-                <span className="text-base sm:text-2xl font-serif font-normal text-[#FFD200]">₹1,70,000</span>
-                <span className="text-[10px] sm:text-xs font-normal text-stone-500">/ hr</span>
-              </div>
+              {/* Floating Pricing Badge (Driven dynamically from lowest customer-facing API price) */}
+              {lowestRate && (
+                <div className="absolute top-4 right-4 sm:top-6 sm:right-6 bg-white/95 backdrop-blur-md border border-stone-200/80 text-[#002F5C] px-3.5 sm:px-5 py-2.5 sm:py-3 rounded-xl shadow-lg font-bold flex items-center space-x-2 sm:space-x-3 z-30">
+                  <span className="text-[9px] sm:text-[10px] uppercase tracking-widest text-stone-500 font-semibold">Starting at</span>
+                  <span className="text-base sm:text-2xl font-serif font-normal text-[#FFD200]">
+                    ₹{lowestRate.toLocaleString("en-IN")}
+                  </span>
+                  <span className="text-[10px] sm:text-xs font-normal text-stone-500">/ hr</span>
+                </div>
+              )}
             </div>
           </div>
 

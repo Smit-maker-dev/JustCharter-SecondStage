@@ -21,8 +21,8 @@ export default function AboutPageV5() {
     {
       icon: <ShieldCheck className="w-6 h-6 text-[#FFD200]" />,
       title: "Safety",
-      description: "Unwavering commitment to your security with audited standards.",
-      tag: "ARGUS & Wyvern",
+      description: "Unwavering commitment to your security with verified operator standards.",
+      tag: "Verified Partners",
     },
     {
       icon: <Sparkles className="w-6 h-6 text-[#FFD200]" />,
@@ -86,18 +86,11 @@ export default function AboutPageV5() {
 
           <div className="space-y-6 text-stone-700 text-base sm:text-lg font-light leading-relaxed">
             <p>
-              Welcome to JustCharter, where luxury meets the sky. We specialize in
-              providing unparalleled private aviation services tailored to meet
-              the unique needs of discerning clients worldwide. Our mission is to
-              elevate every flight experience with exceptional service,
-              world-class safety standards, and a commitment to excellence.
+              JustCharter brings private aviation together on one platform. We partner with vetted operators so you can compare aircraft, get transparent quotes and charter with a single point of contact. Our team verifies every aircraft before it is listed and supports you from first request to landing.
             </p>
 
             <p>
-              At JustCharter, safety is our highest priority. Our rigorous maintenance
-              protocols, experienced crew selection, and continuous training
-              programs ensure that every flight meets the industry's most
-              stringent safety requirements.
+              Safety and transparency are our highest priorities. Every aircraft listed on JustCharter undergoes rigorous verification, and all flights are operated by certified, licensed partner operators with verified flight crews and maintenance protocols.
             </p>
           </div>
 

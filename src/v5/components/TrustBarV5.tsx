@@ -2,10 +2,10 @@ import React from "react";
 import { ShieldCheck, CheckCircle2 } from "lucide-react";
 
 const certifications = [
-  { name: "ARGUS Platinum", detail: "Highest Operational Safety Standard" },
-  { name: "Wyvern Wingman", detail: "Certified Pilot & Fleet Audit" },
-  { name: "IS-BAO Stage 3", detail: "Global Safety Management Standard" },
-  { name: "IBAC Accredited", detail: "International Business Aviation Code" },
+  { name: "DGCA NSOP Holders", detail: "Authorized Commercial Operators" },
+  { name: "Type-Rated Pilots", detail: "Rigorous Regulatory Standards" },
+  { name: "Full Fleet Insurance", detail: "Hull & Liability Coverage" },
+  { name: "Vetted Partners", detail: "Stringent Compliance Checks" },
 ];
 
 export default function TrustBarV5() {
@@ -20,10 +20,10 @@ export default function TrustBarV5() {
             </div>
             <div>
               <p className="text-xs font-serif italic text-[#002F5C]">
-                Certified Safety Standards
+                Verified Operator Network
               </p>
               <p className="text-[11px] text-stone-500 font-light">
-                Audited & accredited by global aviation authorities
+                Flights operated by audited DGCA-certified NSOP holders
               </p>
             </div>
           </div>

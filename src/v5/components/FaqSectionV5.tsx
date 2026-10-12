@@ -1,43 +1,64 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import { ChevronDown } from "lucide-react";
 
 interface FaqItem {
   q: string;
-  a: string;
+  a: React.ReactNode;
 }
 
 const faqs: FaqItem[] = [
   {
-    q: "How far in advance do I need to book a charter flight?",
-    a: "We can arrange flights with as little as 4 hours' notice depending on aircraft availability, though we recommend booking 24-48 hours ahead for the widest choice of aircraft and the best rates.",
+    q: "What is JustCharter and how does it work?",
+    a: "JustCharter is an online marketplace connecting charter clients directly with verified third-party aircraft operators across India and internationally. We aggregate live availability, negotiate transparent pricing, and coordinate every flight end-to-end through our 24/7 operations team.",
   },
   {
-    q: "What's included in the hourly rate?",
-    a: "Our rates include the aircraft, crew, standard catering, and ground handling fees. Landing fees, international permits, and de-icing (where applicable) are billed separately and itemized in your quote.",
+    q: "Does JustCharter own the aircraft?",
+    a: "No. JustCharter is an aggregator and marketplace, not an air operator. All charter flights are operated by DGCA-certified Non-Scheduled Operators (NSOP holders) who own and manage the aircraft. We curate the network, audit safety and compliance, and manage your booking experience.",
+  },
+  {
+    q: "How are operators verified?",
+    a: "Every operator on JustCharter must hold a valid DGCA Non-Scheduled Operator Permit (NSOP), maintain comprehensive hull and third-party liability insurance, employ type-rated pilots who meet regulatory flight hour minimums, and pass our annual compliance audit before receiving inquiries.",
+  },
+  {
+    q: "How do I get a quote?",
+    a: "You can request a quote online in under two minutes by entering your route, date, and passenger count. Our platform checks operator availability and our operations team returns verified pricing within 4 hours. No upfront payment is required to receive a quote.",
+  },
+  {
+    q: "What's included in the quoted price?",
+    a: "Our quotes are fully transparent and include aircraft charter, crew fees, standard in-flight catering, and airport passenger handling. Landing fees, parking fees, night-parking charges, and GST are clearly itemized so there are never surprises.",
   },
   {
     q: "Can I bring pets on board?",
-    a: "Yes. Unlike commercial airlines, private charter has no pet restrictions — your pet can fly in the cabin with you at no extra charge on most aircraft in our fleet.",
+    a: "Yes, on most partner aircraft. Because aircraft are managed by independent operators, pet policies vary slightly by operator and aircraft type. Let our team know during your request and we will match you with a pet-friendly operator.",
   },
   {
-    q: "How many passengers can your aircraft carry?",
-    a: "Our fleet ranges from 9-passenger midsize jets to 19-passenger ultra-long-range aircraft. Tell us your group size and route, and we'll recommend the right aircraft for your trip.",
+    q: "How far in advance do I need to book?",
+    a: "We can coordinate flights with as little as 4 hours' notice depending on aircraft positioning, though 24-48 hours' notice provides the widest selection of aircraft and the best pricing.",
   },
   {
-    q: "What safety certifications does JustCharter operate under?",
-    a: "Every aircraft in our network operates under ARGUS Platinum, Wyvern Wingman, IS-BAO Stage 3, and IBAC accreditation — the industry's most rigorous safety and operational standards.",
+    q: "Can I cancel or reschedule my flight?",
+    a: "Yes. Cancellation and reschedule terms are set by the operating carrier for each flight and are presented clearly on your booking agreement before payment. Our team manages all change requests directly with the operator on your behalf.",
   },
   {
-    q: "Can I cancel or change my booking?",
-    a: "Yes, subject to our cancellation policy, which varies based on how close to departure the change is requested. Full details are available in our Cancellation Policy page, and your concierge can walk you through options for your specific booking.",
+    q: "What happens if an operator cancels or has a technical issue?",
+    a: "In the rare event of an operational issue, our operations desk immediately activates our network to source equivalent replacement aircraft from other verified operators at no additional cost to you, or provides a full refund.",
   },
   {
-    q: "Do you offer empty leg (discounted) flights?",
-    a: "Yes, empty leg flights let you fly on repositioning aircraft at a significant discount. Availability changes daily based on our fleet's movements — contact our concierge team to check current empty leg opportunities on your route.",
-  },
-  {
-    q: "Is membership required to book with JustCharter?",
-    a: "No, membership is optional. You can book charter flights directly at any time. Membership simply unlocks guaranteed availability, fixed hourly rates, and additional concierge benefits for frequent flyers.",
+    q: "I am an aircraft operator. How do I list my fleet?",
+    a: (
+      <span>
+        DGCA-certified operators can apply to join our network at{" "}
+        <Link
+          to="/for-operators"
+          className="text-[#002F5C] font-semibold underline decoration-[#FFD200] underline-offset-4 hover:text-[#002F5C]/80"
+        >
+          justcharter.in/for-operators
+        </Link>
+        . Once your NSOP, insurance, and fleet documentation are verified, your
+        aircraft become visible to high-intent charter clients across India.
+      </span>
+    ),
   },
 ];
 

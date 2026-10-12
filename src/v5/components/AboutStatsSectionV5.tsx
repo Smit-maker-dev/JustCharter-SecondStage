@@ -1,35 +1,41 @@
-import React from "react";
-import { Calendar, Plane, Globe, Users } from "lucide-react";
+import React, { useState, useEffect } from "react";
+import { Plane, Globe, Clock, ShieldCheck } from "lucide-react";
+import { API_BASE_URL } from "../../api/axiosInstance";
 
 export default function AboutStatsSectionV5() {
-  const chapters = [
-    {
-      num: "Chapter N° 01",
-      stat: "20+",
-      label: "Years Experience",
-      desc: "Two decades of luxury aviation leadership",
-      icon: <Calendar className="w-4 h-4 text-[#FFD200]" />,
-    },
-    {
-      num: "Chapter N° 02",
-      stat: "50+",
-      label: "Luxury Aircraft",
-      desc: "Owned and operated long-range fleet",
+  const [fleetCount, setFleetCount] = useState<number | null>(null);
+
+  useEffect(() => {
+    fetch(`${API_BASE_URL}/settings/fleet`)
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.data && Array.isArray(data.data) && data.data.length > 0) {
+          setFleetCount(data.data.length);
+        }
+      })
+      .catch((err) => console.error("Error fetching fleet count:", err));
+  }, []);
+
+  // Stats items per aggregator positioning
+  // Partner Operators stat is omitted as the public API does not expose operator counts
+  const stats = [
+    ...(fleetCount && fleetCount > 0 ? [{
+      stat: `${fleetCount}+`,
+      label: "Verified Aircraft",
+      desc: "Listed after team verification",
       icon: <Plane className="w-4 h-4 text-[#FFD200]" />,
-    },
+    }] : []),
     {
-      num: "Chapter N° 03",
-      stat: "180+",
-      label: "Global Destinations",
-      desc: "Direct access across 6 continents",
+      stat: "5,000+",
+      label: "Airports Accessible",
+      desc: "Across the globe",
       icon: <Globe className="w-4 h-4 text-[#FFD200]" />,
     },
     {
-      num: "Chapter N° 04",
-      stat: "10K+",
-      label: "Satisfied Clients",
-      desc: "High-net-worth & corporate travelers",
-      icon: <Users className="w-4 h-4 text-[#FFD200]" />,
+      stat: "24/7",
+      label: "Support",
+      desc: "Charter support whenever you need it",
+      icon: <Clock className="w-4 h-4 text-[#FFD200]" />,
     },
   ];
 
@@ -65,47 +71,43 @@ export default function AboutStatsSectionV5() {
               <div className="absolute inset-0 bg-gradient-to-t from-stone-950/60 via-transparent to-transparent"></div>
               <div className="absolute bottom-4 left-4 right-4 sm:bottom-6 sm:left-6 sm:right-6 text-white">
                 <p className="text-[11px] sm:text-xs font-serif italic text-stone-200">
-                  Setting the benchmark for safety, discretion, and operational excellence since 2004
+                  Safety, discretion and service on every flight.
                 </p>
               </div>
             </div>
 
             <p className="text-stone-600 text-sm sm:text-lg font-light leading-relaxed">
-              With over 20 years of experience in luxury aviation, JustCharter
-              has established itself as the premier choice for discerning
-              travelers who demand nothing but the best. Our commitment to
-              excellence, safety, and personalized service sets us apart in the
-              private aviation industry.
+              JustCharter brings private aviation together on one platform. We partner with vetted operators so you can compare aircraft, get transparent quotes and charter with a single point of contact. Our team verifies every aircraft before it is listed and supports you from first request to landing.
             </p>
           </div>
 
-          {/* Right Column: Statistics Styled as Book Chapters with Delicate Gold Dividers */}
+          {/* Right Column: Statistics Spread with Delicate Gold Dividers */}
           <div className="lg:col-span-6 space-y-0">
-            {chapters.map((chap, idx) => (
+            {stats.map((item, idx) => (
               <div
                 key={idx}
                 className="border-t border-[#FFD200]/40 py-5 sm:py-6 transition-all hover:pl-2 group cursor-default"
               >
                 <div className="flex items-center justify-between mb-2">
-                  <span className="text-[10px] sm:text-[11px] uppercase tracking-widest font-serif italic text-[#FFD200]">
-                    {chap.num}
+                  <span className="text-[10px] sm:text-[11px] uppercase tracking-widest font-serif italic text-[#002F5C]/60">
+                    {item.label}
                   </span>
                   <div className="p-1.5 sm:p-2 rounded-full bg-stone-50 border border-stone-200/60">
-                    {chap.icon}
+                    {item.icon}
                   </div>
                 </div>
 
                 <div className="flex flex-wrap items-baseline gap-2 sm:space-x-4">
                   <span className="text-2xl sm:text-4xl font-serif font-normal text-[#002F5C] group-hover:text-[#FFD200] transition-colors">
-                    {chap.stat}
+                    {item.stat}
                   </span>
                   <span className="text-xs sm:text-base font-semibold text-[#002F5C] uppercase tracking-wider">
-                    {chap.label}
+                    {item.label}
                   </span>
                 </div>
 
                 <p className="text-stone-500 text-xs sm:text-sm font-light mt-1">
-                  {chap.desc}
+                  {item.desc}
                 </p>
               </div>
             ))}
