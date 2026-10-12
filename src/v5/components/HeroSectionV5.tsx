@@ -262,7 +262,7 @@ export default function HeroSectionV5() {
       {isHeroInView && (
         <button
           onClick={() => setIsAudioMuted(!isAudioMuted)}
-          className="cursor-pointer fixed bottom-6 right-6 z-50 p-3.5 rounded-full bg-black/40 text-white shadow-md hover:shadow-lg backdrop-blur-md transition-all border border-white/20 hover:bg-black/60"
+          className="cursor-pointer fixed bottom-6 left-6 z-50 p-3.5 rounded-full bg-black/40 text-white shadow-md hover:shadow-lg backdrop-blur-md transition-all border border-white/20 hover:bg-black/60"
           aria-label={isAudioMuted ? "Unmute video" : "Mute video"}
         >
           {isAudioMuted ? (
