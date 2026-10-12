@@ -126,7 +126,7 @@ export default function FleetSectionV5() {
             {/* Filter Meta Row: Count & Clear */}
             <div className="flex items-center justify-between gap-4">
               <span className="text-xs font-semibold text-[#002F5C] bg-white px-3 py-1 rounded-full border border-stone-200/80 shadow-xs">
-                {filteredData.length} {filteredData.length === 1 ? "aircraft" : "aircraft"}
+                Showing {homeDisplayData.length} of {filteredData.length} aircraft
               </span>
               {(activeCategory !== "All Categories" || activeServiceType !== "All Services") && (
                 <button
