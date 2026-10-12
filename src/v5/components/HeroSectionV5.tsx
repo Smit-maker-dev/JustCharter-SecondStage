@@ -368,7 +368,7 @@ export default function HeroSectionV5() {
                   
                   {/* From Field */}
                   <div className={`relative airport-dropdown-container ${tripType === "round-trip" ? "lg:col-span-3" : "lg:col-span-3"}`}>
-                    <div className="bg-stone-50/90 hover:bg-stone-100/80 border border-stone-200/70 rounded-xl p-3 sm:p-3.5 transition-all">
+                    <div className="bg-stone-50/90 hover:bg-stone-100/80 border border-stone-200/70 rounded-xl p-3 sm:p-3.5 transition-all h-[68px] flex flex-col justify-center">
                       <label className="text-[10px] font-bold uppercase tracking-wider text-stone-400 flex items-center space-x-1.5 mb-1">
                         <MapPin className="w-3.5 h-3.5 text-[#FFD200]" />
                         <span>From</span>
@@ -413,7 +413,7 @@ export default function HeroSectionV5() {
 
                   {/* To Field */}
                   <div className={`relative airport-dropdown-container ${tripType === "round-trip" ? "lg:col-span-3" : "lg:col-span-3"}`}>
-                    <div className="bg-stone-50/90 hover:bg-stone-100/80 border border-stone-200/70 rounded-xl p-3 sm:p-3.5 transition-all">
+                    <div className="bg-stone-50/90 hover:bg-stone-100/80 border border-stone-200/70 rounded-xl p-3 sm:p-3.5 transition-all h-[68px] flex flex-col justify-center">
                       <label className="text-[10px] font-bold uppercase tracking-wider text-stone-400 flex items-center space-x-1.5 mb-1">
                         <MapPin className="w-3.5 h-3.5 text-[#FFD200]" />
                         <span>To</span>
@@ -493,7 +493,7 @@ export default function HeroSectionV5() {
                   <div className={`relative guest-stepper-container ${tripType === "round-trip" ? "lg:col-span-2" : "lg:col-span-2"}`}>
                     <div
                       onClick={() => setIsGuestOpen(!isGuestOpen)}
-                      className="bg-stone-50/90 hover:bg-stone-100/80 border border-stone-200/70 rounded-xl p-3 sm:p-3.5 transition-all cursor-pointer"
+                      className="bg-stone-50/90 hover:bg-stone-100/80 border border-stone-200/70 rounded-xl p-3 sm:p-3.5 transition-all cursor-pointer h-[68px] flex flex-col justify-center"
                     >
                       <label className="text-[10px] font-bold uppercase tracking-wider text-stone-400 flex items-center space-x-1.5 mb-1">
                         <Users className="w-3.5 h-3.5 text-[#FFD200]" />
@@ -538,7 +538,9 @@ export default function HeroSectionV5() {
                   <div className={`lg:col-span-2 ${tripType === "round-trip" ? "lg:col-span-12 pt-2 sm:pt-0" : ""}`}>
                     <button
                       type="submit"
-                      className="w-full h-full min-h-[48px] sm:min-h-[52px] bg-[#FFD200] hover:bg-[#e6be00] text-[#002F5C] font-bold text-xs uppercase tracking-wider px-5 py-3.5 rounded-xl transition-all shadow-sm hover:shadow-md flex items-center justify-center space-x-2 cursor-pointer border border-[#FFD200]"
+                      className={`w-full bg-[#FFD200] hover:bg-[#e6be00] text-[#002F5C] font-bold text-xs uppercase tracking-wider px-5 rounded-xl transition-all shadow-sm hover:shadow-md flex items-center justify-center space-x-2 cursor-pointer border border-[#FFD200] ${
+                        tripType === "round-trip" ? "h-[52px]" : "h-[68px]"
+                      }`}
                     >
                       <span>Search Flights</span>
                       <ArrowRight className="w-4 h-4" />

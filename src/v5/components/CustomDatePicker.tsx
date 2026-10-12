@@ -124,7 +124,7 @@ export default function CustomDatePicker({
       {/* Input Field Container - IDENTICAL visual size, padding and position */}
       <div
         onClick={() => setIsOpen(!isOpen)}
-        className="bg-stone-50/90 hover:bg-stone-100/80 border border-stone-200/70 rounded-xl p-3 sm:p-3.5 transition-all cursor-pointer select-none"
+        className="bg-stone-50/90 hover:bg-stone-100/80 border border-stone-200/70 rounded-xl p-3 sm:p-3.5 transition-all cursor-pointer select-none h-[68px] flex flex-col justify-center"
       >
         <label className="text-[10px] font-bold uppercase tracking-wider text-stone-400 flex items-center space-x-1.5 mb-1 cursor-pointer">
           <Calendar className="w-3.5 h-3.5 text-[#FFD200]" />
