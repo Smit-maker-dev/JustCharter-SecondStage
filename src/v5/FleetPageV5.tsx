@@ -1,10 +1,19 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import AircraftCard, { Aircraft } from "./components/AircraftCard";
 import ConciergeBarV5 from "./components/ConciergeBarV5";
 import { Plane, ChevronDown, RotateCcw } from "lucide-react";
 import { API_BASE_URL } from "../api/axiosInstance";
 
-const categories = ["All Categories", "Piston", "Turboprop", "Light Jet", "Midsize Jet", "Super Midsize Jet", "Heavy Jet", "Helicopter"];
+const PREFERRED_CATEGORY_ORDER = [
+  "Light Jet",
+  "Midsize Jet",
+  "Super Midsize Jet",
+  "Heavy Jet",
+  "Ultra Long Range",
+  "Turboprop",
+  "Piston",
+  "Helicopter",
+];
 const serviceTypes = ["All Services", "Charter", "Air Ambulance", "Aerial Survey", "Cargo"];
 const PAGE_SIZE = 6;
 
@@ -57,6 +66,32 @@ export default function FleetPageV5() {
     fetchFleet();
   }, []);
 
+  const dynamicCategories = useMemo(() => {
+    const present = new Map<string, string>();
+    aircraftList.forEach((a) => {
+      const raw = (a.category || "").trim();
+      if (!raw) return;
+      const lower = raw.toLowerCase();
+      if (!present.has(lower)) {
+        const standard = PREFERRED_CATEGORY_ORDER.find(
+          (p) => p.toLowerCase() === lower
+        );
+        present.set(lower, standard || raw);
+      }
+    });
+
+    const sorted = Array.from(present.values()).sort((a, b) => {
+      const idxA = PREFERRED_CATEGORY_ORDER.indexOf(a);
+      const idxB = PREFERRED_CATEGORY_ORDER.indexOf(b);
+      if (idxA !== -1 && idxB !== -1) return idxA - idxB;
+      if (idxA !== -1) return -1;
+      if (idxB !== -1) return 1;
+      return a.localeCompare(b);
+    });
+
+    return ["All Categories", ...sorted];
+  }, [aircraftList]);
+
   const handleCategoryChange = (cat: string) => {
     setActiveCategory(cat);
     setVisibleCount(PAGE_SIZE);
@@ -68,7 +103,7 @@ export default function FleetPageV5() {
   };
 
   const filteredData = aircraftList.filter((a) => {
-    if (activeCategory !== "All Categories" && (a.category || "").toLowerCase() !== activeCategory.toLowerCase()) {
+    if (activeCategory !== "All Categories" && (a.category || "").trim().toLowerCase() !== activeCategory.trim().toLowerCase()) {
       return false;
     }
     if (activeServiceType !== "All Services") {
@@ -163,7 +198,7 @@ export default function FleetPageV5() {
                 Aircraft Category:
               </span>
               <div className="flex items-center space-x-4 sm:space-x-6 overflow-x-auto max-w-full pb-1">
-                {categories.map((cat) => (
+                {dynamicCategories.map((cat) => (
                   <button
                     key={cat}
                     onClick={() => handleCategoryChange(cat)}
