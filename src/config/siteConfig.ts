@@ -30,6 +30,11 @@ export const siteConfig = {
     airportsAccessible: "5,000+",
     support: "24/7",
   },
+  pricing: {
+    // TODO: CONFIRM WITH CLIENT — confirm price field and unit normalization (hourly vs minute vs USD vs INR) before enabling customer-facing price hints
+    showPriceHint: false,
+  },
+  showPriceHint: false,
   legal: {
     // Mandatory aggregator disclosure
     disclosure: "JustCharter is a charter booking platform. Flights are operated by independent, licensed operators.",

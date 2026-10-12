@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { API_BASE_URL } from "../../api/axiosInstance";
+import { siteConfig } from "../../config/siteConfig";
 
 // TODO: CONFIRM WITH CLIENT — legal/regulatory wording to be reviewed by the client's lawyer; do not add DGCA or certification claims.
 const commitments = [
@@ -22,14 +23,16 @@ export default function MembershipSafetySectionV5() {
   const [lowestRate, setLowestRate] = useState<number | null>(null);
 
   useEffect(() => {
+    if (!siteConfig.showPriceHint) return;
+
     fetch(`${API_BASE_URL}/settings/fleet`)
       .then((res) => res.json())
       .then((resData) => {
         if (resData.data && Array.isArray(resData.data)) {
-          // Extract valid hourly rates, ignoring obvious test placeholder entries (< 50000)
+          // Use exact same source as cards: valid positive hourlyRate
           const validRates = resData.data
             .map((item: any) => Number(item.hourlyRate))
-            .filter((rate: number) => !isNaN(rate) && rate >= 50000);
+            .filter((rate: number) => !isNaN(rate) && rate > 0);
 
           if (validRates.length > 0) {
             setLowestRate(Math.min(...validRates));
@@ -103,8 +106,8 @@ export default function MembershipSafetySectionV5() {
               />
               <div className="absolute inset-0 bg-gradient-to-t from-stone-950/80 via-transparent to-transparent"></div>
 
-              {/* Floating Pricing Badge (Driven dynamically from lowest customer-facing API price) */}
-              {lowestRate && (
+              {/* Floating Pricing Badge (hidden when showPriceHint is false) */}
+              {siteConfig.showPriceHint && lowestRate && (
                 <div className="absolute top-4 right-4 sm:top-6 sm:right-6 bg-white/95 backdrop-blur-md border border-stone-200/80 text-[#002F5C] px-3.5 sm:px-5 py-2.5 sm:py-3 rounded-xl shadow-lg font-bold flex items-center space-x-2 sm:space-x-3 z-30">
                   <span className="text-[11px] sm:text-xs uppercase tracking-widest text-stone-600 font-semibold">Starting at</span>
                   <span className="text-base sm:text-2xl font-serif font-normal text-[#FFD200]">

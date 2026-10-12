@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { ArrowUpRight, Plane, Users, MapPin } from "lucide-react";
 import { Link, useNavigate } from "react-router-dom";
 import { getValidSpecs, SpecItem } from "../../utils/specFormatter";
+import { siteConfig } from "../../config/siteConfig";
 
 export interface Spec {
   label: string;
@@ -86,18 +87,20 @@ export default function AircraftCard({ aircraft }: AircraftCardProps) {
             </h3>
           </div>
 
-          {/* Customer Price Hint */}
-          <div className="mt-1 flex items-baseline justify-between text-xs sm:text-sm">
-            <span
-              className={
-                aircraft.hourlyRate && aircraft.hourlyRate > 0
-                  ? "font-semibold text-[#002F5C]"
-                  : "text-stone-600 italic font-medium"
-              }
-            >
-              {formattedPrice}
-            </span>
-          </div>
+          {/* Customer Price Hint (hidden when showPriceHint is false; formatter code preserved) */}
+          {siteConfig.showPriceHint && (
+            <div className="mt-1 flex items-baseline justify-between text-xs sm:text-sm">
+              <span
+                className={
+                  aircraft.hourlyRate && aircraft.hourlyRate > 0
+                    ? "font-semibold text-[#002F5C]"
+                    : "text-stone-600 italic font-medium"
+                }
+              >
+                {formattedPrice}
+              </span>
+            </div>
+          )}
         </div>
 
         {/* Specs Box */}
