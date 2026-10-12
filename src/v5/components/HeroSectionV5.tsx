@@ -293,7 +293,7 @@ export default function HeroSectionV5() {
         <div className="absolute inset-0 z-0 overflow-hidden">
           {skipVideo ? (
             <img
-              src="/images/gulfstrem.jpg"
+              src="/images/hero_video_poster.jpg"
               alt="JustCharter Private Jet"
               className="w-full h-full object-cover object-center scale-105"
             />
@@ -304,7 +304,7 @@ export default function HeroSectionV5() {
               loop
               playsInline
               preload="metadata"
-              poster="/images/gulfstrem.jpg"
+              poster="/images/hero_video_poster.jpg"
               className="w-full h-full object-cover object-center scale-105"
             >
               <source
@@ -319,7 +319,9 @@ export default function HeroSectionV5() {
 
         {/* Hero Central Story Content */}
         <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 text-center text-white my-auto pt-10 pb-16">
-          
+          {/* Subtle localized soft vignette strictly behind the story text */}
+          <div className="absolute inset-0 max-w-3xl mx-auto bg-gradient-to-t from-stone-950/45 via-stone-950/20 to-transparent rounded-3xl blur-2xl -z-10 pointer-events-none"></div>
+
           <div className="inline-flex items-center space-x-2 bg-black/40 backdrop-blur-md px-3.5 sm:px-4 py-1.5 rounded-full border border-white/20 mb-6 shadow-sm">
             <span className="w-2 h-2 rounded-full bg-[#FFD200]"></span>
             <span className="text-[10px] sm:text-xs font-serif italic tracking-widest uppercase text-stone-200">
@@ -327,14 +329,14 @@ export default function HeroSectionV5() {
             </span>
           </div>
 
-          <h1 className="text-3xl sm:text-5xl md:text-7xl lg:text-8xl font-serif font-normal tracking-tight text-white leading-[1.08] mb-6 max-w-4xl mx-auto">
+          <h1 className="text-3xl sm:text-5xl md:text-7xl lg:text-8xl font-serif font-normal tracking-tight text-white leading-[1.08] mb-6 max-w-4xl mx-auto [text-shadow:_0_2px_12px_rgba(0,0,0,0.75)]">
             <span className="text-white">Private Aviation</span> <br className="hidden sm:block" />
             <span className="italic font-serif font-light text-[#FFD200]">
               Made Simple
             </span>
           </h1>
 
-          <p className="text-sm sm:text-xl text-stone-200 font-sans font-light max-w-2xl mx-auto leading-relaxed">
+          <p className="text-sm sm:text-xl text-white/95 font-sans font-normal max-w-2xl mx-auto leading-relaxed [text-shadow:_0_1px_8px_rgba(0,0,0,0.9),_0_2px_14px_rgba(0,0,0,0.6)]">
             Compare and charter aircraft from verified operators — transparent pricing, one point of contact.
           </p>
         </div>
