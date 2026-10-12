@@ -7,28 +7,28 @@ const steps = [
     number: "01",
     title: "Search & Select",
     description:
-      "Browse verified aircraft across India, compare cabin layouts, speeds, and passenger capacities, or enter your custom itinerary.",
+      "Browse verified aircraft, compare cabin layouts, speeds and passenger capacities, or enter your custom itinerary.",
     icon: Search,
   },
   {
     number: "02",
-    title: "Get Verified Pricing",
+    title: "Get Transparent Pricing",
     description:
-      "Receive upfront, transparent quotes with zero hidden fees within 4 hours. Every quote itemizes aircraft, crew, and ground handling.",
+      "Receive clear quotes from operators. Every quote itemizes what is included before you confirm.",
     icon: ShieldCheck,
   },
   {
     number: "03",
     title: "Dedicated Coordination",
     description:
-      "Your dedicated charter operations desk handles passenger manifests, airport slots, ground transport, and customized catering.",
+      "Our charter support team coordinates passenger details, airport slots, ground transport and catering with the operator.",
     icon: Headphones,
   },
   {
     number: "04",
     title: "Wheels Up",
     description:
-      "Arrive at a private terminal (FBO) just 15 minutes before departure. Walk directly to your aircraft and fly on your schedule.",
+      "Arrive at a private terminal shortly before departure and fly on your schedule.",
     icon: Plane,
   },
 ];
@@ -54,8 +54,7 @@ export default function HowItWorksSectionV5() {
           </h2>
 
           <p className="text-stone-600 text-base sm:text-lg font-light leading-relaxed">
-            Experience seamless private aviation. From searching verified aircraft
-            to wheels up in four effortless steps.
+            Experience seamless private aviation — from searching verified aircraft to wheels up in four simple steps.
           </p>
         </div>
 
@@ -79,7 +78,7 @@ export default function HowItWorksSectionV5() {
                     </div>
                   </div>
 
-                  <h3 className="text-xl font-serif font-normal text-[#002F5C] mb-3 group-hover:text-[#002F5C] transition-colors">
+                  <h3 className="text-xl font-serif font-normal text-[#002F5C] mb-3 min-h-[3.5rem] flex items-start group-hover:text-[#002F5C] transition-colors">
                     {step.title}
                   </h3>
 
