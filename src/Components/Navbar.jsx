@@ -80,10 +80,46 @@ export default function Navbar() {
   const showScrolledStyle = !isHome || isScrolled || isMobileMenuOpen;
 
   const initials = (firstName?.charAt(0) || "") + (lastName?.charAt(0) || "");
-
   const navigate = useNavigate();
 
   const toggleMobileMenu = () => setIsMobileMenuOpen(!isMobileMenuOpen);
+
+  const navItems = [
+    { label: "Home", path: "/" },
+    { label: "Fleet", path: "/fleet" },
+    { label: "How It Works", path: "/#how-it-works" },
+    { label: "For Operators", path: "/for-operators" },
+    { label: "About", path: "/about" },
+  ];
+
+  const handleNavClick = (path) => {
+    setIsMobileMenuOpen(false);
+    if (path.startsWith("/#")) {
+      const id = path.replace("/#", "");
+      if (location.pathname === "/") {
+        const el = document.getElementById(id);
+        if (el) {
+          el.scrollIntoView({ behavior: "smooth" });
+          return;
+        }
+      }
+      navigate(path);
+      return;
+    }
+    navigate(path);
+  };
+
+  useEffect(() => {
+    if (location.hash) {
+      const id = location.hash.replace("#", "");
+      const el = document.getElementById(id);
+      if (el) {
+        setTimeout(() => {
+          el.scrollIntoView({ behavior: "smooth" });
+        }, 150);
+      }
+    }
+  }, [location]);
 
   return (
     <>
@@ -99,8 +135,8 @@ export default function Navbar() {
           showScrolledStyle ? "bg-white shadow-sm" : "bg-transparent"
         }`}
       >
-        <div className=" mx-auto px-10 flex items-center justify-between h-16 ">
-          <div className="flex items-center space-x-2 cursor-pointer" onClick={() => navigate("/")}>
+        <div className="mx-auto px-6 sm:px-10 flex items-center justify-between h-16">
+          <div className="flex items-center space-x-2 cursor-pointer flex-shrink-0" onClick={() => navigate("/")}>
             <Logo
               variant={showScrolledStyle ? "light" : "dark"}
               alt="JustCharter Logo"
@@ -108,26 +144,23 @@ export default function Navbar() {
             />
           </div>
 
-          <ul className="hidden lg:flex space-x-6 text-sm relative">
-            {[
-              { label: "Home", path: "/" },
-              { label: "Fleet", path: "/fleet" },
-              { label: "Services", path: "/services" },
-              { label: "About", path: "/about" },
-              { label: "Privacy & Policy", path: "/privacy_policy" },
-            ].map((item) => {
-              const isActive = location.pathname === item.path;
+          <ul className="hidden lg:flex items-center space-x-6 text-sm relative">
+            {navItems.map((item) => {
+              const isActive =
+                item.path.startsWith("/#")
+                  ? location.pathname === "/" && location.hash === item.path.replace("/", "")
+                  : location.pathname === item.path;
               return (
                 <li
                   key={item.label}
-                  className={`cursor-pointer transition-colors duration-300 ${
+                  className={`cursor-pointer transition-colors duration-300 font-medium ${
                     isActive
                       ? "text-[#8A6D00] font-extrabold"
                       : showScrolledStyle
-                      ? "text-[#002F5C]"
-                      : "text-white"
+                      ? "text-[#002F5C] hover:text-[#8A6D00]"
+                      : "text-white hover:text-[#FFD200]"
                   }`}
-                  onClick={() => navigate(item.path)}
+                  onClick={() => handleNavClick(item.path)}
                 >
                   {item.label}
                 </li>
@@ -135,42 +168,55 @@ export default function Navbar() {
             })}
           </ul>
 
-          {firstName && lastName ? (
-            <div
-              onClick={() => navigate("/account")}
-              className="hidden md:flex items-center p-1.5 rounded space-x-2 cursor-pointer hover:bg-gray-400 transition"
+          <div className="hidden lg:flex items-center space-x-3">
+            <button
+              onClick={() => navigate("/request-quote")}
+              className="cursor-pointer text-xs sm:text-sm px-5 py-2 rounded-full font-semibold transition bg-[#FFD200] text-[#002F5C] hover:bg-[#e6be00] shadow-sm whitespace-nowrap"
             >
-              <div className="h-8 w-8 bg-[#FFD200] text-[#1A1A1A] font-bold rounded-full flex items-center justify-center text-sm font-medium">
-                {initials.toUpperCase()}
+              Request Quote
+            </button>
+
+            {firstName && lastName ? (
+              <div
+                onClick={() => navigate("/account")}
+                className="flex items-center p-1.5 rounded-full space-x-2 cursor-pointer hover:bg-stone-100/30 transition"
+              >
+                <div className="h-8 w-8 bg-[#FFD200] text-[#002F5C] font-bold rounded-full flex items-center justify-center text-xs">
+                  {initials.toUpperCase()}
+                </div>
+                <span
+                  className={`text-sm transition-colors duration-300 font-medium ${
+                    showScrolledStyle ? "text-[#002F5C]" : "text-white"
+                  }`}
+                >
+                  {firstName} {lastName}
+                </span>
               </div>
-              <span
-                className={`text-sm transition-colors duration-300 ${
-                  showScrolledStyle ? "text-[#8A6D00]" : "text-[#FFFFFF]"
-                }`}
-              >
-                {firstName} {lastName}
-              </span>
-            </div>
-          ) : (
-            <div className="hidden lg:flex space-x-4">
-              <button
-                onClick={() => navigate("/register")}
-                className={`cursor-pointer text-sm px-6 py-2 rounded-md transition font-medium ${
-                  showScrolledStyle
-                    ? "text-[#002F5C] hover:bg-[#FFFBEA] hover:text-[#1A1A1A]"
-                    : "text-white hover:bg-[#FFD200] hover:text-[#1A1A1A]"
-                }`}
-              >
-                Sign Up
-              </button>
-              <button
-                onClick={() => navigate("/login")}
-                className={`text-sm px-10 py-2 rounded-md transition cursor-pointer font-bold bg-[#FFD200] text-[#1A1A1A] hover:bg-[#E6BC00]`}
-              >
-                Login
-              </button>
-            </div>
-          )}
+            ) : (
+              <div className="flex items-center space-x-2">
+                <button
+                  onClick={() => navigate("/register")}
+                  className={`cursor-pointer text-xs sm:text-sm px-3.5 py-2 rounded-full transition font-medium ${
+                    showScrolledStyle
+                      ? "text-[#002F5C] hover:bg-stone-100"
+                      : "text-white hover:bg-white/10"
+                  }`}
+                >
+                  Sign Up
+                </button>
+                <button
+                  onClick={() => navigate("/login")}
+                  className={`cursor-pointer text-xs sm:text-sm px-4 py-1.5 rounded-full transition font-medium border ${
+                    showScrolledStyle
+                      ? "border-[#002F5C]/30 text-[#002F5C] hover:bg-stone-100"
+                      : "border-white/40 text-white hover:bg-white/10"
+                  }`}
+                >
+                  Login
+                </button>
+              </div>
+            )}
+          </div>
 
           <div className="lg:hidden">
             <button
@@ -178,6 +224,7 @@ export default function Navbar() {
               className={`text-xl transition-colors duration-300 ${
                 showScrolledStyle ? "text-[#002F5C]" : "text-white"
               }`}
+              aria-label="Toggle navigation menu"
             >
               {isMobileMenuOpen ? <IoClose /> : <FaBars />}
             </button>
@@ -185,81 +232,26 @@ export default function Navbar() {
         </div>
 
         <div
-          className={`lg:hidden fixed top-16 left-0 w-full bg-white transition-all duration-500 ease-in-out overflow-hidden shadow-md ${
-            isMobileMenuOpen ? "max-h-screen opacity-100" : "max-h-0 opacity-0"
+          className={`lg:hidden fixed top-16 left-0 w-full bg-white transition-all duration-300 ease-in-out overflow-hidden shadow-lg border-b border-stone-200 ${
+            isMobileMenuOpen ? "max-h-screen opacity-100" : "max-h-0 opacity-0 pointer-events-none"
           }`}
         >
-          <div className="flex flex-col items-center text-sm space-y-4 py-6">
-            {/* <ul className="space-y-4 text-center">
-              <li
-                className="cursor-pointer text-[#FFD200]"
-                onClick={() => navigate("/")}
-              >
-                Home
-              </li>
-              <li
-                className={`cursor-pointer transition-colors duration-300 ${
-                  showScrolledStyle ? "text-[#000000]" : "text-[#002F5C]"
-                }`}
-                onClick={() => navigate("/bookings")}
-              >
-                Bookings
-              </li>
-
-              <li>
-                <div
-                  className={`flex justify-center items-center space-x-1 cursor-pointer transition-colors duration-300 ${
-                    showScrolledStyle ? "text-[#002F5C]" : "text-[#002F5C]"
-                  }`}
-                >
-                  <span>Services</span>
-                </div>
-              </li>
-              <li
-                className={`cursor-pointer transition-colors duration-300 ${
-                  showScrolledStyle ? "text-[#000000]" : "text-[#002F5C]"
-                }`}
-              >
-                Event
-              </li>
-              <li
-                className={`cursor-pointer transition-colors duration-300 ${
-                  showScrolledStyle ? "text-[#000000]" : "text-[#002F5C]"
-                }`}
-              >
-                Buy & Sell
-              </li>
-              <li
-                className={`cursor-pointer transition-colors duration-300 ${
-                  showScrolledStyle ? "text-[#000000]" : "text-[#002F5C]"
-                }`}
-              >
-                About
-              </li>
-            </ul> */}
-            <ul className="space-y-4 text-center">
-              {[
-                { label: "Home", path: "/" },
-                { label: "Fleet", path: "/fleet" },
-                { label: "Services", path: "/services" },
-                { label: "About", path: "/about" },
-                { label: "Privacy & Policy", path: "/privacy_policy" },
-              ].map((item) => {
-                const isActive = location.pathname === item.path;
+          <div className="flex flex-col items-center text-sm space-y-4 py-6 px-6">
+            <ul className="space-y-4 text-center w-full">
+              {navItems.map((item) => {
+                const isActive =
+                  item.path.startsWith("/#")
+                    ? location.pathname === "/" && location.hash === item.path.replace("/", "")
+                    : location.pathname === item.path;
                 return (
                   <li
                     key={item.label}
-                    className={`cursor-pointer transition-colors duration-300 ${
+                    className={`cursor-pointer py-1 transition-colors text-base font-medium ${
                       isActive
-                        ? "text-[#FFD200] font-semibold"
-                        : showScrolledStyle
-                        ? "text-[#002F5C]"
-                        : "text-[#002F5C]"
+                        ? "text-[#FFD200] font-bold"
+                        : "text-[#002F5C] hover:text-[#8A6D00]"
                     }`}
-                    onClick={() => {
-                      setIsMobileMenuOpen(false);
-                      navigate(item.path);
-                    }}
+                    onClick={() => handleNavClick(item.path)}
                   >
                     {item.label}
                   </li>
@@ -267,35 +259,42 @@ export default function Navbar() {
               })}
             </ul>
 
-            <div className="profile-section">
+            <div className="w-full pt-2">
+              <button
+                onClick={() => {
+                  setIsMobileMenuOpen(false);
+                  navigate("/request-quote");
+                }}
+                className="w-full py-3 rounded-full text-sm font-semibold bg-[#FFD200] text-[#002F5C] hover:bg-[#e6be00] shadow-sm transition"
+              >
+                Request Quote
+              </button>
+            </div>
+
+            <div className="profile-section w-full pt-2">
               {firstName && lastName ? (
                 <div
                   onClick={() => {
                     setIsMobileMenuOpen(false);
                     navigate("/account");
                   }}
-                  className="flex items-center p-2 rounded space-x-2 cursor-pointer hover:bg-gray-100 transition"
+                  className="flex items-center justify-center p-2 rounded-full space-x-2 cursor-pointer bg-stone-50 hover:bg-stone-100 transition"
                 >
-                  <div className="h-8 w-8 bg-[#FF6B6B] rounded-full flex items-center justify-center text-white text-sm font-medium">
+                  <div className="h-8 w-8 bg-[#002F5C] text-[#FFD200] font-bold rounded-full flex items-center justify-center text-xs">
                     {initials.toUpperCase()}
                   </div>
-                  <span
-                    className={`text-sm transition-colors duration-300 ${
-                      showScrolledStyle ? "text-[#FFD200]" : "text-[#002F5C]"
-                    }`}
-                  >
+                  <span className="text-sm font-medium text-[#002F5C]">
                     {firstName} {lastName}
                   </span>
                 </div>
               ) : (
-                <div className="flex space-x-4">
+                <div className="flex space-x-3 justify-center">
                   <button
-                    onClick={() => navigate("/register")}
-                    className={`text-sm px-4 py-2 rounded transition ${
-                      showScrolledStyle
-                        ? "text-[#002F5C] hover:bg-[#FFD200] border"
-                        : "text-[#002F5C] hover:bg-[#FFD200] border hover:text-white"
-                    }`}
+                    onClick={() => {
+                      setIsMobileMenuOpen(false);
+                      navigate("/register");
+                    }}
+                    className="flex-1 text-sm py-2.5 rounded-full border border-stone-300 text-[#002F5C] hover:bg-stone-50 transition font-medium"
                   >
                     Sign Up
                   </button>
@@ -305,11 +304,7 @@ export default function Navbar() {
                       setIsMobileMenuOpen(false);
                       navigate("/login");
                     }}
-                    className={`text-sm px-4 py-2 rounded transition ${
-                      showScrolledStyle
-                        ? "text-white shadow-md bg-[#FFD200] hover:bg-[#e6be00]"
-                        : "text-white shadow-md bg-[#FFD200] hover:bg-[#e6be00]"
-                    }`}
+                    className="flex-1 text-sm py-2.5 rounded-full border border-[#002F5C] bg-[#002F5C] text-white hover:bg-[#002447] transition font-medium"
                   >
                     Login
                   </button>
