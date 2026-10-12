@@ -1,11 +1,15 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { FaAngleDown, FaBars } from "react-icons/fa6";
 import { IoClose } from "react-icons/io5";
 import { useNavigate, useLocation } from "react-router-dom";
 import axios from "../api/axiosInstance";
 import Logo from "./Logo";
+import { siteConfig } from "../config/siteConfig";
+
 export default function Navbar() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isLoginDropdownOpen, setIsLoginDropdownOpen] = useState(false);
+  const loginDropdownRef = useRef(null);
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [isScrolled, setIsScrolled] = useState(false);
@@ -21,6 +25,16 @@ export default function Navbar() {
 
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  useEffect(() => {
+    const handleOutsideClick = (e) => {
+      if (loginDropdownRef.current && !loginDropdownRef.current.contains(e.target)) {
+        setIsLoginDropdownOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handleOutsideClick);
+    return () => document.removeEventListener("mousedown", handleOutsideClick);
   }, []);
 
   // useEffect(() => {
@@ -193,27 +207,68 @@ export default function Navbar() {
                 </span>
               </div>
             ) : (
-              <div className="flex items-center space-x-2">
+              <div className="relative" ref={loginDropdownRef}>
                 <button
-                  onClick={() => navigate("/register")}
-                  className={`cursor-pointer text-xs sm:text-sm px-3.5 py-2 rounded-full transition font-medium ${
-                    showScrolledStyle
-                      ? "text-[#002F5C] hover:bg-stone-100"
-                      : "text-white hover:bg-white/10"
-                  }`}
-                >
-                  Sign Up
-                </button>
-                <button
-                  onClick={() => navigate("/login")}
-                  className={`cursor-pointer text-xs sm:text-sm px-4 py-1.5 rounded-full transition font-medium border ${
+                  type="button"
+                  onClick={() => setIsLoginDropdownOpen(!isLoginDropdownOpen)}
+                  className={`cursor-pointer text-xs sm:text-sm px-4 py-2 rounded-full transition font-medium border flex items-center space-x-1.5 ${
                     showScrolledStyle
                       ? "border-[#002F5C]/30 text-[#002F5C] hover:bg-stone-100"
                       : "border-white/40 text-white hover:bg-white/10"
                   }`}
+                  aria-expanded={isLoginDropdownOpen}
                 >
-                  Login
+                  <span>Login</span>
+                  <FaAngleDown className={`text-xs transition-transform duration-200 ${isLoginDropdownOpen ? "rotate-180" : ""}`} />
                 </button>
+
+                {isLoginDropdownOpen && (
+                  <div className="absolute right-0 mt-2 w-52 bg-white rounded-2xl shadow-xl border border-stone-200/80 p-2 z-50 text-xs">
+                    <div className="px-3 py-1 text-[10px] uppercase font-bold text-stone-400 tracking-wider">
+                      Charter Clients
+                    </div>
+                    <button
+                      onClick={() => {
+                        setIsLoginDropdownOpen(false);
+                        navigate("/login");
+                      }}
+                      className="w-full text-left px-3 py-2 rounded-xl text-stone-700 hover:text-[#002F5C] hover:bg-stone-100 transition-colors font-medium cursor-pointer"
+                    >
+                      Customer Login
+                    </button>
+                    <button
+                      onClick={() => {
+                        setIsLoginDropdownOpen(false);
+                        navigate("/register");
+                      }}
+                      className="w-full text-left px-3 py-2 rounded-xl text-stone-700 hover:text-[#002F5C] hover:bg-stone-100 transition-colors font-medium cursor-pointer"
+                    >
+                      Customer Sign Up
+                    </button>
+
+                    <div className="border-t border-stone-100 my-1"></div>
+
+                    <div className="px-3 py-1 text-[10px] uppercase font-bold text-stone-400 tracking-wider">
+                      Aircraft Operators
+                    </div>
+                    <a
+                      href={siteConfig.operatorPortal.loginUrl || "https://operator.justcharter.in"}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="w-full block text-left px-3 py-2 rounded-xl text-stone-700 hover:text-[#002F5C] hover:bg-stone-100 transition-colors font-medium cursor-pointer"
+                    >
+                      Operator Login
+                    </a>
+                    <a
+                      href={siteConfig.operatorPortal.signupUrl || "https://operator.justcharter.in/register"}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="w-full block text-left px-3 py-2 rounded-xl text-stone-700 hover:text-[#002F5C] hover:bg-stone-100 transition-colors font-medium cursor-pointer"
+                    >
+                      Operator Sign Up
+                    </a>
+                  </div>
+                )}
               </div>
             )}
           </div>
@@ -288,26 +343,52 @@ export default function Navbar() {
                   </span>
                 </div>
               ) : (
-                <div className="flex space-x-3 justify-center">
-                  <button
-                    onClick={() => {
-                      setIsMobileMenuOpen(false);
-                      navigate("/register");
-                    }}
-                    className="flex-1 text-sm py-2.5 rounded-full border border-stone-300 text-[#002F5C] hover:bg-stone-50 transition font-medium"
-                  >
-                    Sign Up
-                  </button>
+                <div className="flex flex-col space-y-2 w-full pt-2 border-t border-stone-100">
+                  <div className="text-[10px] uppercase font-bold text-stone-400 tracking-wider text-left px-1">
+                    Charter Clients
+                  </div>
+                  <div className="flex space-x-2">
+                    <button
+                      onClick={() => {
+                        setIsMobileMenuOpen(false);
+                        navigate("/login");
+                      }}
+                      className="flex-1 text-xs py-2.5 rounded-xl border border-[#002F5C] bg-[#002F5C] text-white hover:bg-[#002447] transition font-medium"
+                    >
+                      Customer Login
+                    </button>
+                    <button
+                      onClick={() => {
+                        setIsMobileMenuOpen(false);
+                        navigate("/register");
+                      }}
+                      className="flex-1 text-xs py-2.5 rounded-xl border border-stone-300 text-[#002F5C] hover:bg-stone-50 transition font-medium"
+                    >
+                      Customer Sign Up
+                    </button>
+                  </div>
 
-                  <button
-                    onClick={() => {
-                      setIsMobileMenuOpen(false);
-                      navigate("/login");
-                    }}
-                    className="flex-1 text-sm py-2.5 rounded-full border border-[#002F5C] bg-[#002F5C] text-white hover:bg-[#002447] transition font-medium"
-                  >
-                    Login
-                  </button>
+                  <div className="text-[10px] uppercase font-bold text-stone-400 tracking-wider text-left px-1 pt-2">
+                    Aircraft Operators
+                  </div>
+                  <div className="flex space-x-2">
+                    <a
+                      href={siteConfig.operatorPortal.loginUrl || "https://operator.justcharter.in"}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex-1 text-center text-xs py-2.5 rounded-xl border border-stone-200 bg-stone-50 text-stone-700 hover:bg-stone-100 transition font-medium"
+                    >
+                      Operator Login
+                    </a>
+                    <a
+                      href={siteConfig.operatorPortal.signupUrl || "https://operator.justcharter.in/register"}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex-1 text-center text-xs py-2.5 rounded-xl border border-stone-200 bg-stone-50 text-stone-700 hover:bg-stone-100 transition font-medium"
+                    >
+                      Operator Sign Up
+                    </a>
+                  </div>
                 </div>
               )}
             </div>
