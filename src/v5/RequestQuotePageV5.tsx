@@ -71,6 +71,7 @@ export default function RequestQuotePageV5() {
   const [editDate, setEditDate] = useState(departureDate);
   const [editReturnDate, setEditReturnDate] = useState(returnDate);
   const [editGuests, setEditGuests] = useState(guestCount);
+  const [failedJetImages, setFailedJetImages] = useState<Record<number, boolean>>({});
 
   // Airports list from API
   const [airports, setAirports] = useState<AirportOption[]>([]);
@@ -424,13 +425,23 @@ export default function RequestQuotePageV5() {
                 >
                   <div>
                     {/* Image */}
-                    <div className="relative mb-5 rounded-xl overflow-hidden bg-stone-900 h-56">
-                      <img
-                        src={jet.imageUrl}
-                        alt={jet.name}
-                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
-                      />
-                      <span className="absolute top-3 right-3 bg-stone-950/80 backdrop-blur-md text-[#FFD200] text-[10px] uppercase tracking-widest font-semibold px-3 py-1 rounded-full border border-white/10">
+                    <div className="relative mb-5 rounded-xl overflow-hidden bg-stone-100 border border-stone-200/70 h-56 flex items-center justify-center">
+                      {!failedJetImages[jet.id] && jet.imageUrl ? (
+                        <img
+                          src={jet.imageUrl}
+                          alt={jet.name}
+                          onError={() => setFailedJetImages((prev) => ({ ...prev, [jet.id]: true }))}
+                          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                        />
+                      ) : (
+                        <div className="w-full h-full flex flex-col items-center justify-center bg-gradient-to-b from-stone-50 to-stone-100 text-stone-400 p-4 text-center select-none">
+                          <div className="w-12 h-12 rounded-full bg-white border border-stone-200/80 flex items-center justify-center text-[#002F5C]/40 mb-1.5 shadow-xs">
+                            <Plane className="w-6 h-6 stroke-[1.5]" />
+                          </div>
+                          <span className="text-xs font-serif italic text-stone-500">Photo coming soon</span>
+                        </div>
+                      )}
+                      <span className="absolute top-3 right-3 bg-white/95 backdrop-blur-md text-[#002F5C] text-[10px] uppercase tracking-widest font-semibold px-3 py-1 rounded-full border border-stone-200/80 shadow-xs">
                         {jet.category}
                       </span>
                     </div>

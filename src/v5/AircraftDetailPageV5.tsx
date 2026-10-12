@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useParams, Link, useNavigate } from "react-router-dom";
-import { ArrowLeft, ArrowUpRight, Gauge, Navigation, Users, Maximize, Luggage, ShieldCheck, CheckCircle2 } from "lucide-react";
+import { ArrowLeft, ArrowUpRight, Gauge, Navigation, Users, Maximize, Luggage, ShieldCheck, CheckCircle2, Plane } from "lucide-react";
 import ConciergeBarV5 from "./components/ConciergeBarV5";
 import { API_BASE_URL } from "../api/axiosInstance";
 import { formatSpecValue } from "../utils/specFormatter";
@@ -209,6 +209,8 @@ export default function AircraftDetailPageV5() {
   const [recommendedAircraft, setRecommendedAircraft] = useState<AircraftDetailData[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [activeImageIndex, setActiveImageIndex] = useState(0);
+  const [failedImages, setFailedImages] = useState<Record<number, boolean>>({});
+  const [failedRecImages, setFailedRecImages] = useState<Record<number, boolean>>({});
 
   useEffect(() => {
     setActiveImageIndex(0);
@@ -276,13 +278,23 @@ export default function AircraftDetailPageV5() {
           
           {/* Photo Gallery (Left 7 Cols) */}
           <div className="lg:col-span-7">
-            <div className="relative rounded-2xl overflow-hidden bg-stone-900 h-80 sm:h-[420px] shadow-lg border border-stone-200/80 mb-4 group">
-              <img
-                src={aircraft.images[activeImageIndex]}
-                alt={aircraft.name}
-                className="w-full h-full object-cover transition-all duration-500"
-              />
-              <span className="absolute top-4 right-4 bg-stone-950/85 backdrop-blur-md text-[#FFD200] text-xs uppercase tracking-widest font-semibold px-4 py-1.5 rounded-full border border-white/10">
+            <div className="relative rounded-2xl overflow-hidden bg-stone-100 h-80 sm:h-[420px] shadow-sm border border-stone-200/80 mb-4 group flex items-center justify-center">
+              {!failedImages[activeImageIndex] && aircraft.images[activeImageIndex] ? (
+                <img
+                  src={aircraft.images[activeImageIndex]}
+                  alt={aircraft.name}
+                  onError={() => setFailedImages((prev) => ({ ...prev, [activeImageIndex]: true }))}
+                  className="w-full h-full object-cover transition-all duration-500"
+                />
+              ) : (
+                <div className="w-full h-full flex flex-col items-center justify-center bg-gradient-to-b from-stone-50 to-stone-100 text-stone-400 p-8 text-center select-none">
+                  <div className="w-16 h-16 rounded-full bg-white border border-stone-200/80 flex items-center justify-center text-[#002F5C]/40 mb-3 shadow-xs">
+                    <Plane className="w-8 h-8 stroke-[1.5]" />
+                  </div>
+                  <span className="text-sm font-serif italic text-stone-500">Photo coming soon</span>
+                </div>
+              )}
+              <span className="absolute top-4 right-4 bg-white/95 backdrop-blur-md text-[#002F5C] text-xs uppercase tracking-widest font-semibold px-4 py-1.5 rounded-full border border-stone-200/80 shadow-xs">
                 {aircraft.category}
               </span>
             </div>
@@ -293,17 +305,24 @@ export default function AircraftDetailPageV5() {
                 <button
                   key={idx}
                   onClick={() => setActiveImageIndex(idx)}
-                  className={`relative rounded-xl overflow-hidden bg-stone-900 h-20 sm:h-24 border-2 transition-all cursor-pointer ${
+                  className={`relative rounded-xl overflow-hidden bg-stone-100 h-20 sm:h-24 border-2 transition-all cursor-pointer flex items-center justify-center ${
                     activeImageIndex === idx
                       ? "border-[#FFD200] ring-2 ring-[#FFD200]/30"
-                      : "border-transparent opacity-70 hover:opacity-100"
+                      : "border-stone-200/70 opacity-80 hover:opacity-100"
                   }`}
                 >
-                  <img
-                    src={imgUrl}
-                    alt={`${aircraft.name} view ${idx + 1}`}
-                    className="w-full h-full object-cover"
-                  />
+                  {!failedImages[idx] && imgUrl ? (
+                    <img
+                      src={imgUrl}
+                      alt={`${aircraft.name} view ${idx + 1}`}
+                      onError={() => setFailedImages((prev) => ({ ...prev, [idx]: true }))}
+                      className="w-full h-full object-cover"
+                    />
+                  ) : (
+                    <div className="w-full h-full flex items-center justify-center bg-stone-50 text-stone-400">
+                      <Plane className="w-4 h-4 text-stone-400" />
+                    </div>
+                  )}
                 </button>
               ))}
             </div>
@@ -438,13 +457,23 @@ export default function AircraftDetailPageV5() {
                 key={item.id}
                 className="bg-white border border-stone-200/70 rounded-2xl p-6 relative flex flex-col justify-between group shadow-sm hover:shadow-md transition-all duration-500"
               >
-                <div className="relative mb-6 rounded-xl overflow-hidden bg-stone-900 h-52">
-                  <img
-                    src={item.images[0]}
-                    alt={item.name}
-                    className="w-full h-full object-cover opacity-95 group-hover:scale-105 transition-transform duration-700"
-                  />
-                  <span className="absolute top-3 right-3 bg-stone-950/80 backdrop-blur-md text-[#FFD200] text-[10px] uppercase tracking-widest font-semibold px-3 py-1 rounded-full border border-white/10">
+                <div className="relative mb-6 rounded-xl overflow-hidden bg-stone-100 border border-stone-200/70 h-52 flex items-center justify-center">
+                  {!failedRecImages[item.id] && item.images[0] ? (
+                    <img
+                      src={item.images[0]}
+                      alt={item.name}
+                      onError={() => setFailedRecImages((prev) => ({ ...prev, [item.id]: true }))}
+                      className="w-full h-full object-cover opacity-95 group-hover:scale-105 transition-transform duration-700"
+                    />
+                  ) : (
+                    <div className="w-full h-full flex flex-col items-center justify-center bg-gradient-to-b from-stone-50 to-stone-100 text-stone-400 p-4 text-center select-none">
+                      <div className="w-12 h-12 rounded-full bg-white border border-stone-200/80 flex items-center justify-center text-[#002F5C]/40 mb-1.5 shadow-xs">
+                        <Plane className="w-6 h-6 stroke-[1.5]" />
+                      </div>
+                      <span className="text-xs font-serif italic text-stone-500">Photo coming soon</span>
+                    </div>
+                  )}
+                  <span className="absolute top-3 right-3 bg-white/95 backdrop-blur-md text-[#002F5C] text-[10px] uppercase tracking-widest font-semibold px-3 py-1 rounded-full border border-stone-200/80 shadow-xs">
                     {item.category}
                   </span>
                 </div>

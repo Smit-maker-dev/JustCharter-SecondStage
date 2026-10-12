@@ -1,5 +1,5 @@
-import React from "react";
-import { ArrowUpRight } from "lucide-react";
+import React, { useState } from "react";
+import { ArrowUpRight, Plane } from "lucide-react";
 import { Link, useNavigate } from "react-router-dom";
 import { getValidSpecs, SpecItem } from "../../utils/specFormatter";
 
@@ -23,18 +23,29 @@ interface AircraftCardProps {
 
 export default function AircraftCard({ aircraft }: AircraftCardProps) {
   const navigate = useNavigate();
+  const [imageError, setImageError] = useState(false);
   const validSpecs: SpecItem[] = getValidSpecs(aircraft.specs);
 
   return (
     <div className="bg-white border border-stone-200/70 rounded-2xl p-6 relative flex flex-col justify-between group shadow-sm hover:shadow-md transition-all duration-500 h-full">
-      {/* Large Beautifully Cropped Image Container */}
-      <div className="relative mb-6 rounded-xl overflow-hidden bg-stone-900 h-60">
-        <img
-          src={aircraft.imageUrl}
-          alt={aircraft.name}
-          className="w-full h-full object-cover opacity-95 group-hover:scale-105 transition-transform duration-700"
-        />
-        <span className="absolute top-3 right-3 bg-stone-950/80 backdrop-blur-md text-[#FFD200] text-[10px] uppercase tracking-widest font-semibold px-3 py-1 rounded-full border border-white/10">
+      {/* Large Beautifully Cropped Image Container with Light Neutral Fallback */}
+      <div className="relative mb-6 rounded-xl overflow-hidden bg-stone-100 border border-stone-200/70 h-60 flex items-center justify-center">
+        {!imageError && aircraft.imageUrl ? (
+          <img
+            src={aircraft.imageUrl}
+            alt={aircraft.name}
+            onError={() => setImageError(true)}
+            className="w-full h-full object-cover opacity-95 group-hover:scale-105 transition-transform duration-700"
+          />
+        ) : (
+          <div className="w-full h-full flex flex-col items-center justify-center bg-gradient-to-b from-stone-50 to-stone-100/90 text-stone-400 p-6 text-center select-none">
+            <div className="w-14 h-14 rounded-full bg-white border border-stone-200/80 flex items-center justify-center text-[#002F5C]/40 mb-2 shadow-xs group-hover:scale-105 transition-transform">
+              <Plane className="w-7 h-7 stroke-[1.5]" />
+            </div>
+            <span className="text-xs font-serif italic text-stone-500">Photo coming soon</span>
+          </div>
+        )}
+        <span className="absolute top-3 right-3 bg-white/95 backdrop-blur-md text-[#002F5C] text-[10px] uppercase tracking-widest font-semibold px-3 py-1 rounded-full border border-stone-200/80 shadow-xs">
           {aircraft.tag}
         </span>
       </div>
