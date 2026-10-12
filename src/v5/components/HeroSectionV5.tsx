@@ -65,6 +65,19 @@ export default function HeroSectionV5() {
 
   const quoteResultsRef = useRef<HTMLDivElement>(null);
 
+  const [skipVideo, setSkipVideo] = useState(false);
+
+  useEffect(() => {
+    const checkSkipVideo = () => {
+      const isMobile = window.innerWidth <= 768;
+      const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      setSkipVideo(isMobile || prefersReduced);
+    };
+    checkSkipVideo();
+    window.addEventListener("resize", checkSkipVideo);
+    return () => window.removeEventListener("resize", checkSkipVideo);
+  }, []);
+
   // Track hero visibility in viewport to show/hide floating mute button
   useEffect(() => {
     const el = heroSectionRef.current;
@@ -258,8 +271,8 @@ export default function HeroSectionV5() {
   return (
     <div className="relative font-sans bg-white text-[#002F5C] overflow-hidden">
       
-      {/* Floating Audio Control Pill (rendered only when hero is in viewport) */}
-      {isHeroInView && (
+      {/* Floating Audio Control Pill (rendered only when hero is in viewport and video is active) */}
+      {isHeroInView && !skipVideo && (
         <button
           onClick={() => setIsAudioMuted(!isAudioMuted)}
           className="cursor-pointer fixed bottom-6 left-6 z-50 p-3.5 rounded-full bg-black/40 text-white shadow-md hover:shadow-lg backdrop-blur-md transition-all border border-white/20 hover:bg-black/60"
@@ -276,20 +289,30 @@ export default function HeroSectionV5() {
       {/* Hero Full Screen Viewport */}
       <section ref={heroSectionRef} className="relative min-h-[85vh] lg:min-h-[90vh] flex flex-col justify-between pt-28 pb-16 bg-white">
         
-        {/* Background Video Media with Seamless Gradient Transition */}
+        {/* Background Video Media or Static Poster with Seamless Gradient Transition */}
         <div className="absolute inset-0 z-0 overflow-hidden">
-          <video
-            autoPlay
-            muted={isAudioMuted}
-            loop
-            playsInline
-            className="w-full h-full object-cover object-center scale-105"
-          >
-            <source
-              src="/images/Paradigm Shift_ The Next-Gen Gulfstream Fleet (2023).mp4"
-              type="video/mp4"
+          {skipVideo ? (
+            <img
+              src="/images/gulfstrem.jpg"
+              alt="JustCharter Private Jet"
+              className="w-full h-full object-cover object-center scale-105"
             />
-          </video>
+          ) : (
+            <video
+              autoPlay
+              muted={isAudioMuted}
+              loop
+              playsInline
+              preload="metadata"
+              poster="/images/gulfstrem.jpg"
+              className="w-full h-full object-cover object-center scale-105"
+            >
+              <source
+                src="/images/Paradigm Shift_ The Next-Gen Gulfstream Fleet (2023).mp4"
+                type="video/mp4"
+              />
+            </video>
+          )}
           {/* Top-dark video overlay fading seamlessly into white at the bottom edge */}
           <div className="absolute inset-0 bg-gradient-to-b from-stone-950/80 via-stone-950/50 via-[65%] to-white"></div>
         </div>

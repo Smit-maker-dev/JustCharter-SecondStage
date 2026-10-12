@@ -98,6 +98,7 @@ export default function MembershipSafetySectionV5() {
               <img
                 src="/images/oskar-kadaksoo.jpg"
                 alt="Luxury Aviation Interior"
+                loading="lazy"
                 className="w-full h-full object-cover opacity-90 group-hover:scale-105 transition-transform duration-700"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-stone-950/80 via-transparent to-transparent"></div>

@@ -59,6 +59,7 @@ export default function AboutStatsSectionV5() {
               <img
                 src="/images/gulfstrem.jpg"
                 alt="Luxury Gulfstream Aircraft"
+                loading="lazy"
                 className="w-full h-full object-cover"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-stone-950/60 via-transparent to-transparent"></div>
