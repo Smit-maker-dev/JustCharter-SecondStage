@@ -89,21 +89,17 @@ export default function AboutStatsSectionV5() {
                 className="border-t border-[#FFD200]/40 py-5 sm:py-6 transition-all hover:pl-2 group cursor-default"
               >
                 <div className="flex items-center justify-between mb-2">
-                  <span className="text-[10px] sm:text-[11px] uppercase tracking-widest font-serif italic text-[#002F5C]/60">
-                    {item.label}
-                  </span>
-                  <div className="p-1.5 sm:p-2 rounded-full bg-stone-50 border border-stone-200/60">
+                  <div className="flex flex-wrap items-baseline gap-2 sm:space-x-4">
+                    <span className="text-2xl sm:text-4xl font-serif font-normal text-[#002F5C] group-hover:text-[#FFD200] transition-colors">
+                      {item.stat}
+                    </span>
+                    <span className="text-xs sm:text-base font-semibold text-[#002F5C] uppercase tracking-wider">
+                      {item.label}
+                    </span>
+                  </div>
+                  <div className="p-1.5 sm:p-2 rounded-full bg-stone-50 border border-stone-200/60 flex-shrink-0">
                     {item.icon}
                   </div>
-                </div>
-
-                <div className="flex flex-wrap items-baseline gap-2 sm:space-x-4">
-                  <span className="text-2xl sm:text-4xl font-serif font-normal text-[#002F5C] group-hover:text-[#FFD200] transition-colors">
-                    {item.stat}
-                  </span>
-                  <span className="text-xs sm:text-base font-semibold text-[#002F5C] uppercase tracking-wider">
-                    {item.label}
-                  </span>
                 </div>
 
                 <p className="text-stone-500 text-xs sm:text-sm font-light mt-1">
