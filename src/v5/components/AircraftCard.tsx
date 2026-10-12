@@ -92,7 +92,7 @@ export default function AircraftCard({ aircraft }: AircraftCardProps) {
               className={
                 aircraft.hourlyRate && aircraft.hourlyRate > 0
                   ? "font-semibold text-[#002F5C]"
-                  : "text-stone-500 italic font-medium"
+                  : "text-stone-600 italic font-medium"
               }
             >
               {formattedPrice}
@@ -105,7 +105,7 @@ export default function AircraftCard({ aircraft }: AircraftCardProps) {
           <div className="grid grid-cols-2 gap-3 mb-6 bg-stone-50 p-4 rounded-xl border border-stone-200/60 text-xs">
             {validSpecs.map((spec, idx) => (
               <div key={idx} className="flex flex-col">
-                <span className="text-stone-500 font-medium text-[10px] uppercase tracking-wider flex items-center space-x-1">
+                <span className="text-stone-600 font-semibold text-[11px] uppercase tracking-wider flex items-center space-x-1">
                   {spec.label.toLowerCase().includes("passenger") && (
                     <Users className="w-3 h-3 text-[#002F5C] mr-0.5 inline flex-shrink-0" />
                   )}

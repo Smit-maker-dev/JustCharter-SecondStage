@@ -86,10 +86,6 @@ export default function HowItWorksSectionV5() {
                     {step.description}
                   </p>
                 </div>
-
-                <div className="mt-6 pt-4 border-t border-stone-100 flex items-center text-xs font-semibold text-stone-400 group-hover:text-[#002F5C] transition-colors">
-                  <span>Step {idx + 1} of 4</span>
-                </div>
               </div>
             );
           })}

@@ -90,12 +90,12 @@ export default function AboutStatsSectionV5() {
                       {item.label}
                     </span>
                   </div>
-                  <div className="p-1.5 sm:p-2 rounded-full bg-stone-50 border border-stone-200/60 flex-shrink-0">
+                  <div className="p-1.5 sm:p-2 rounded-full bg-stone-100 border border-stone-300 text-[#002F5C] flex-shrink-0">
                     {item.icon}
                   </div>
                 </div>
 
-                <p className="text-stone-500 text-xs sm:text-sm font-light mt-1">
+                <p className="text-stone-600 text-xs sm:text-sm font-normal mt-1">
                   {item.desc}
                 </p>
               </div>

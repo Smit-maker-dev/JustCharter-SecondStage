@@ -49,7 +49,7 @@ export default function Footer() {
 
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-20 text-sm">
           <div>
-            <h3 className="text-[#FFD200] font-semibold mb-3">Services</h3>
+            <h3 className="text-[#002F5C] font-bold text-xs uppercase tracking-wider mb-3">Services</h3>
             <ul className="space-y-2 text-stone-600">
               <li>
                 <Link to="/fleet" className="hover:text-[#002F5C] transition">
@@ -75,7 +75,7 @@ export default function Footer() {
           </div>
 
           <div>
-            <h3 className="text-[#FFD200] font-semibold mb-3">Company</h3>
+            <h3 className="text-[#002F5C] font-bold text-xs uppercase tracking-wider mb-3">Company</h3>
             <ul className="space-y-2 text-stone-600">
               <li>
                 <Link to="/about" className="hover:text-[#002F5C] transition">
@@ -91,7 +91,7 @@ export default function Footer() {
           </div>
 
           <div>
-            <h3 className="text-[#FFD200] font-semibold mb-3">Legal</h3>
+            <h3 className="text-[#002F5C] font-bold text-xs uppercase tracking-wider mb-3">Legal</h3>
             {/* TODO: CONFIRM WITH CLIENT — Accessibility policy page (no route/component exists in repo; client to supply if required) */}
             <ul className="space-y-2 text-stone-600">
               <li>
@@ -124,9 +124,9 @@ export default function Footer() {
 
       <hr className="my-8 border-stone-300" />
 
-      <div className="flex flex-col md:flex-row justify-between items-center text-xs text-stone-500 space-y-3 md:space-y-0">
+      <div className="flex flex-col md:flex-row justify-between items-center text-xs text-stone-600 space-y-3 md:space-y-0">
         <p>© {new Date().getFullYear()} JustCharter. All rights reserved.</p>
-        <p className="text-stone-500 font-light text-center md:text-right max-w-lg">
+        <p className="text-stone-600 font-light text-center md:text-right max-w-lg">
           JustCharter is a charter booking platform. Flights are operated by independent, licensed operators.
         </p>
       </div>

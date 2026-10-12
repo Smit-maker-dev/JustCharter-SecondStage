@@ -803,25 +803,6 @@ useEffect(() => {
                   </li>
                 ))}
               </ul>
-              <a
-                href="#"
-                className="inline-flex items-center font-semibold text-[#002F5C] hover:underline transition"
-              >
-                Learn More
-                <svg
-                  className="ml-2 w-4 h-4"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M9 5l7 7-7 7"
-                  />
-                </svg>
-              </a>
             </div>
 
             <div className="relative w-full max-w-[600px] mx-auto p-5">

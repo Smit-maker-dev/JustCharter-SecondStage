@@ -46,15 +46,6 @@ export default function TestimonialsSectionV5() {
   return (
     <section className="py-20 sm:py-32 bg-white font-sans text-[#002F5C] overflow-hidden border-t border-stone-200/60">
       <div className="max-w-5xl mx-auto px-6 lg:px-12 text-center">
-        
-        {/* Tag Header */}
-        <div className="inline-flex items-center space-x-2 bg-stone-100 px-4 py-1.5 rounded-full border border-stone-200/80 mb-8 sm:mb-10">
-          <span className="w-2 h-2 rounded-full bg-[#FFD200]"></span>
-          <span className="text-xs uppercase tracking-[0.2em] font-serif italic text-stone-700">
-            CLIENT REVIEWS
-          </span>
-        </div>
-
         {/* Pure Serif Centered Quote */}
         <div key={currentIndex} className="relative mb-10 sm:mb-14 min-h-[180px] sm:min-h-[200px] flex flex-col justify-center items-center transition-all duration-500">
           <Quote className="w-8 sm:w-12 h-8 sm:h-12 text-[#FFD200]/25 mb-4 sm:mb-6" />

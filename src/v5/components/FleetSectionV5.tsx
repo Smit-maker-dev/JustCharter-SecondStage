@@ -144,7 +144,7 @@ export default function FleetSectionV5() {
 
             {/* Aircraft Category Pills */}
             <div className="flex items-center space-x-2 overflow-x-auto no-scrollbar py-0.5 max-w-full">
-              <span className="text-[11px] uppercase font-bold tracking-wider text-stone-500 mr-1 flex-shrink-0">
+              <span className="text-xs uppercase font-bold tracking-wider text-stone-600 mr-1 flex-shrink-0">
                 Category
               </span>
               {dynamicCategories.map((cat) => (
@@ -164,7 +164,7 @@ export default function FleetSectionV5() {
 
             {/* Service Type Pills */}
             <div className="flex items-center space-x-2 overflow-x-auto no-scrollbar py-0.5 max-w-full">
-              <span className="text-[11px] uppercase font-bold tracking-wider text-stone-500 mr-1 flex-shrink-0">
+              <span className="text-xs uppercase font-bold tracking-wider text-stone-600 mr-1 flex-shrink-0">
                 Service
               </span>
               {serviceTypes.map((st) => (

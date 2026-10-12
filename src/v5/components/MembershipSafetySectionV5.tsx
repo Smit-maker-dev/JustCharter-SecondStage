@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { Shield } from "lucide-react";
 import { API_BASE_URL } from "../../api/axiosInstance";
 
 // TODO: CONFIRM WITH CLIENT — legal/regulatory wording to be reviewed by the client's lawyer; do not add DGCA or certification claims.
@@ -51,13 +50,6 @@ export default function MembershipSafetySectionV5() {
             
             {/* Why Book with JustCharter */}
             <div>
-              <div className="inline-flex items-center space-x-2 bg-white px-4 py-1 rounded-full border border-stone-200/80 mb-3 shadow-sm">
-                <span className="w-2 h-2 rounded-full bg-[#FFD200]"></span>
-                <span className="text-[11px] uppercase tracking-[0.2em] font-serif italic text-stone-700">
-                  WHY JUSTCHARTER
-                </span>
-              </div>
-
               <h3 className="text-3xl sm:text-4xl font-serif font-normal text-[#002F5C] mb-4">
                 Why Book with JustCharter
               </h3>
@@ -79,13 +71,6 @@ export default function MembershipSafetySectionV5() {
 
             {/* Safety Commitments */}
             <div className="pt-8 border-t border-stone-200/60">
-              <div className="inline-flex items-center space-x-2 bg-white px-4 py-1 rounded-full border border-stone-200/80 mb-3 shadow-sm">
-                <Shield className="w-3.5 h-3.5 text-[#FFD200]" />
-                <span className="text-[11px] uppercase tracking-[0.2em] font-serif italic text-stone-700">
-                  Safety Commitments
-                </span>
-              </div>
-
               <h3 className="text-3xl sm:text-4xl font-serif font-normal text-[#002F5C] mb-4">
                 Uncompromising Protection
               </h3>
@@ -120,11 +105,11 @@ export default function MembershipSafetySectionV5() {
               {/* Floating Pricing Badge (Driven dynamically from lowest customer-facing API price) */}
               {lowestRate && (
                 <div className="absolute top-4 right-4 sm:top-6 sm:right-6 bg-white/95 backdrop-blur-md border border-stone-200/80 text-[#002F5C] px-3.5 sm:px-5 py-2.5 sm:py-3 rounded-xl shadow-lg font-bold flex items-center space-x-2 sm:space-x-3 z-30">
-                  <span className="text-[9px] sm:text-[10px] uppercase tracking-widest text-stone-500 font-semibold">Starting at</span>
+                  <span className="text-[11px] sm:text-xs uppercase tracking-widest text-stone-600 font-semibold">Starting at</span>
                   <span className="text-base sm:text-2xl font-serif font-normal text-[#FFD200]">
                     ₹{lowestRate.toLocaleString("en-IN")}
                   </span>
-                  <span className="text-[10px] sm:text-xs font-normal text-stone-500">/ hr</span>
+                  <span className="text-xs font-normal text-stone-600">/ hr</span>
                 </div>
               )}
             </div>
