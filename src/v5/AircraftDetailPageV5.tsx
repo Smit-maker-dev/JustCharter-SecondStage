@@ -263,7 +263,7 @@ export default function AircraftDetailPageV5() {
         {/* 1. Back Link */}
         <div className="mb-8">
           <Link
-            to="/"
+            to="/fleet"
             className="inline-flex items-center space-x-2 text-xs font-semibold uppercase tracking-wider text-stone-500 hover:text-[#002F5C] transition-colors group"
           >
             <ArrowLeft className="w-4 h-4 text-[#FFD200] group-hover:-translate-x-1 transition-transform" />
@@ -417,14 +417,14 @@ export default function AircraftDetailPageV5() {
           <div className="flex items-center justify-between mb-8">
             <div>
               <span className="text-[10px] uppercase tracking-[0.2em] font-semibold text-[#FFD200] block mb-1">
-                Explore More Fleet
+                Explore More Aircraft
               </span>
               <h2 className="text-3xl sm:text-4xl font-serif font-normal text-[#002F5C]">
                 You Might Also Like
               </h2>
             </div>
             <Link
-              to="/"
+              to="/fleet"
               className="text-xs font-semibold uppercase tracking-wider text-stone-600 hover:text-[#002F5C] flex items-center space-x-1"
             >
               <span>View All</span>

@@ -101,7 +101,7 @@ export default function FleetPageV5() {
         <div className="absolute inset-0 z-0 overflow-hidden">
           <img
             src="/images/gulfstrem.jpg"
-            alt="JustCharter Private Fleet"
+            alt="JustCharter Verified Aircraft Network"
             className="w-full h-full object-cover object-center filter brightness-[0.4] scale-105"
           />
           <div className="absolute inset-0 bg-gradient-to-b from-stone-950/80 via-stone-950/50 to-stone-900"></div>
@@ -112,16 +112,16 @@ export default function FleetPageV5() {
           <div className="inline-flex items-center space-x-2 bg-white/10 backdrop-blur-md px-4 py-1.5 rounded-full border border-white/20 mb-6">
             <span className="w-2 h-2 rounded-full bg-[#FFD200]"></span>
             <span className="text-xs font-serif italic tracking-widest uppercase text-stone-100 flex items-center gap-1.5">
-              <Plane className="w-3.5 h-3.5 text-[#FFD200]" /> Private Fleet Selection
+              <Plane className="w-3.5 h-3.5 text-[#FFD200]" /> Verified Aircraft Network
             </span>
           </div>
 
           <h1 className="text-4xl sm:text-6xl lg:text-7xl font-serif font-normal tracking-tight text-white leading-tight mb-4">
-            Our Private Fleet
+            The Fleet
           </h1>
 
           <p className="text-base sm:text-xl text-stone-300 font-sans font-light max-w-2xl mx-auto leading-relaxed">
-            Explore our curated lineup of world-class jets designed for ultimate comfort, range, and aerodynamic performance.
+            Explore verified aircraft from certified operators across India, curated for uncompromising safety, range, and cabin comfort.
           </p>
         </div>
       </section>
@@ -135,7 +135,7 @@ export default function FleetPageV5() {
             <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
               <div>
                 <h2 className="text-2xl sm:text-4xl font-serif font-normal text-[#002F5C]">
-                  Explore All Fleet Models
+                  Explore Available Aircraft
                 </h2>
                 <p className="text-sm text-stone-500 font-light mt-1">
                   Showing {displayedAircraft.length} of {filteredData.length} available aircraft
@@ -256,7 +256,7 @@ export default function FleetPageV5() {
                 </div>
               ) : (
                 <div className="mt-16 text-center text-xs uppercase tracking-widest text-stone-400 font-semibold">
-                  Showing all {filteredData.length} aircraft in fleet
+                  Showing all {filteredData.length} available aircraft
                 </div>
               )}
             </>
