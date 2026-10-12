@@ -1,11 +1,13 @@
 import React from "react";
 import HeroSectionV5 from "./components/HeroSectionV5";
 import ServicesSectionV5 from "./components/ServicesSectionV5";
+import HowItWorksSectionV5 from "./components/HowItWorksSectionV5";
 import FleetSectionV5 from "./components/FleetSectionV5";
 import AboutStatsSectionV5 from "./components/AboutStatsSectionV5";
 import TestimonialsSectionV5 from "./components/TestimonialsSectionV5";
 import MembershipSafetySectionV5 from "./components/MembershipSafetySectionV5";
 import FaqSectionV5 from "./components/FaqSectionV5";
+import OperatorStripV5 from "./components/OperatorStripV5";
 import ConciergeBarV5 from "./components/ConciergeBarV5";
 
 export default function LandingPageV5() {
@@ -17,20 +19,26 @@ export default function LandingPageV5() {
       {/* 2. Premium Aviation Services (Spacious 2x2 Grid) */}
       <ServicesSectionV5 />
 
+      {/* 2b. How JustCharter Works (4-Step Transparent Marketplace Process) */}
+      <HowItWorksSectionV5 />
+
       {/* 3. Exceptional Aircraft Selection (Lookbook Gallery & Text Tab System) */}
       <FleetSectionV5 />
 
       {/* 4. About & Editorial Book-Chapter Statistics Spread */}
       <AboutStatsSectionV5 />
 
-      {/* 6. Centered Oversized Serif Quote Testimonials Section */}
+      {/* 5. Centered Oversized Serif Quote Testimonials Section */}
       <TestimonialsSectionV5 />
 
-      {/* 7. Membership Advantages & Safety Commitments (Vertical Lists & Floating Price Tag) */}
+      {/* 6. Membership Advantages & Safety Commitments (Vertical Lists & Floating Price Tag) */}
       <MembershipSafetySectionV5 />
 
-      {/* 8. Frequently Asked Questions Section */}
+      {/* 7. Frequently Asked Questions Section */}
       <FaqSectionV5 />
+
+      {/* 8. Operator Partnership Banner */}
+      <OperatorStripV5 />
 
       {/* 9. 24/7 Global Concierge Resort-Style Support Bar */}
       <ConciergeBarV5 />
