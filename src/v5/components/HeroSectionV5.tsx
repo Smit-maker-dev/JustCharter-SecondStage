@@ -318,7 +318,7 @@ export default function HeroSectionV5() {
 
         {/* Grounded Embedded Booking Bar (Overlapping Hero Bottom Edge) */}
         <div className="relative z-20 max-w-6xl mx-auto px-4 sm:px-6 w-full -mb-36 sm:-mb-28 lg:-mb-24">
-          <div className="bg-white/98 backdrop-blur-2xl rounded-2xl p-4 sm:p-6 lg:p-8 shadow-[0_25px_60px_rgba(0,0,0,0.06)] border border-stone-200/80">
+          <div id="hero-search-card" className="bg-white/98 backdrop-blur-2xl rounded-2xl p-4 sm:p-6 lg:p-8 shadow-[0_25px_60px_rgba(0,0,0,0.06)] border border-stone-200/80">
             
             {/* Top Bar: Minimalist Trip Selector & Direct Quote Badge */}
             <div className="flex flex-col sm:flex-row items-center justify-between gap-3 pb-4 sm:pb-5 mb-4 sm:mb-5 border-b border-stone-100">
