@@ -24,16 +24,16 @@ export default function HeroSectionV5() {
   const todayStr = getLocalTodayStr();
 
   // Form Fields State (initialized to local today)
-  const [fromLocation, setFromLocation] = useState("New Delhi (DEL)");
-  const [toLocation, setToLocation] = useState("Paris Le Bourget (LBG)");
+  const [fromLocation, setFromLocation] = useState("");
+  const [toLocation, setToLocation] = useState("");
   const [departureDate, setDepartureDate] = useState(todayStr);
   const [returnDate, setReturnDate] = useState(todayStr);
   const [guestCount, setGuestCount] = useState(4);
 
   // Multi-city legs
   const [multiLegs, setMultiLegs] = useState([
-    { from: "New Delhi (DEL)", to: "Paris Le Bourget (LBG)", date: todayStr },
-    { from: "Paris Le Bourget (LBG)", to: "London Luton (LTN)", date: todayStr },
+    { from: "", to: "", date: todayStr },
+    { from: "", to: "", date: todayStr },
   ]);
 
   // Autocomplete Dropdown State
@@ -224,9 +224,9 @@ export default function HeroSectionV5() {
     e.preventDefault();
     if (validateSearch()) {
       const params = new URLSearchParams({
-        from: fromLocation || "London (EGLF / FAB)",
-        to: toLocation || "New York (KTEB / TEB)",
-        date: departureDate || new Date().toISOString().split("T")[0],
+        from: fromLocation || "",
+        to: toLocation || "",
+        date: departureDate || todayStr,
         returnDate: returnDate || "",
         guests: guestCount.toString(),
         tripType: tripType
@@ -344,20 +344,27 @@ export default function HeroSectionV5() {
                 ))}
               </div>
 
-              {/* Direct Charter Quote Badge */}
-              <button
-                type="button"
-                onClick={() => {
-                  setIsQuickQuoteOpen(true);
-                  setQuickQuoteSubmitted(false);
-                }}
-                className="inline-flex items-center space-x-2 bg-stone-50 hover:bg-stone-100 border border-stone-200/80 px-3.5 sm:px-4 py-1.5 sm:py-2 rounded-full cursor-pointer transition-colors"
-              >
-                <ShieldCheck className="w-3.5 sm:w-4 h-3.5 sm:h-4 text-[#FFD200]" />
-                <span className="text-[10px] sm:text-xs font-serif italic text-[#002F5C]">
-                  Direct Charter Quote
-                </span>
-              </button>
+              {/* Direct Charter Quote Badge with Custom Tooltip */}
+              <div className="relative group/pill">
+                <button
+                  type="button"
+                  onClick={() => {
+                    setIsQuickQuoteOpen(true);
+                    setQuickQuoteSubmitted(false);
+                  }}
+                  className="inline-flex items-center space-x-2 bg-stone-50 hover:bg-stone-100 border border-stone-200/80 px-3.5 sm:px-4 py-1.5 sm:py-2 rounded-full cursor-pointer transition-colors"
+                >
+                  <ShieldCheck className="w-3.5 sm:w-4 h-3.5 sm:h-4 text-[#FFD200]" />
+                  <span className="text-[10px] sm:text-xs font-serif italic text-[#002F5C]">
+                    Direct Charter Quote
+                  </span>
+                </button>
+                {/* Custom Popover Tooltip */}
+                <div className="pointer-events-none absolute bottom-full sm:bottom-auto sm:top-full left-1/2 sm:left-auto sm:right-0 -translate-x-1/2 sm:translate-x-0 mb-2 sm:mb-0 sm:mt-2 w-64 bg-stone-900 text-stone-100 text-[11px] leading-snug rounded-xl p-2.5 shadow-xl opacity-0 group-hover/pill:opacity-100 transition-opacity duration-200 z-50 text-center sm:text-left">
+                  Request a quote directly — our team coordinates with the operator.
+                  <div className="hidden sm:block absolute -top-1 right-6 w-2 h-2 bg-stone-900 rotate-45"></div>
+                </div>
+              </div>
             </div>
 
             {/* Input Controls */}
@@ -381,7 +388,7 @@ export default function HeroSectionV5() {
                           setAirportSearchQuery(fromLocation);
                         }}
                         onChange={(e) => setAirportSearchQuery(e.target.value)}
-                        placeholder="Search origin airport..."
+                        placeholder="Departure city or airport"
                         className="w-full bg-transparent text-xs sm:text-sm font-semibold text-[#002F5C] focus:outline-none"
                       />
                     </div>
@@ -426,7 +433,7 @@ export default function HeroSectionV5() {
                           setAirportSearchQuery(toLocation);
                         }}
                         onChange={(e) => setAirportSearchQuery(e.target.value)}
-                        placeholder="Search destination..."
+                        placeholder="Arrival city or airport"
                         className="w-full bg-transparent text-xs sm:text-sm font-semibold text-[#002F5C] focus:outline-none"
                       />
                     </div>
@@ -569,6 +576,7 @@ export default function HeroSectionV5() {
                               setAirportSearchQuery(leg.from);
                             }}
                             onChange={(e) => setAirportSearchQuery(e.target.value)}
+                            placeholder="Departure city or airport"
                             className="w-full bg-transparent text-xs font-semibold text-[#002F5C] focus:outline-none"
                           />
                         </div>
@@ -612,6 +620,7 @@ export default function HeroSectionV5() {
                               setAirportSearchQuery(leg.to);
                             }}
                             onChange={(e) => setAirportSearchQuery(e.target.value)}
+                            placeholder="Arrival city or airport"
                             className="w-full bg-transparent text-xs font-semibold text-[#002F5C] focus:outline-none"
                           />
                         </div>
@@ -730,6 +739,11 @@ export default function HeroSectionV5() {
 
                 </div>
               )}
+
+              {/* Helper text under Search button row */}
+              <p className="text-center text-xs text-stone-500 font-light pt-1">
+                No payment needed — compare quotes first.
+              </p>
 
             </form>
           </div>
