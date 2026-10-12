@@ -54,7 +54,10 @@ export default function AircraftCard({ aircraft }: AircraftCardProps) {
       <div className="flex-1 flex flex-col justify-between">
         {/* Title container with fixed min-height for uniform row alignment */}
         <div className="min-h-[3.75rem] flex items-start mb-4">
-          <h3 className="text-2xl font-serif font-normal text-[#002F5C] group-hover:text-[#FFD200] transition-colors leading-snug line-clamp-2">
+          <h3
+            title={aircraft.name}
+            className="text-2xl font-serif font-normal text-[#002F5C] group-hover:text-[#FFD200] transition-colors leading-snug line-clamp-2"
+          >
             {aircraft.name}
           </h3>
         </div>
