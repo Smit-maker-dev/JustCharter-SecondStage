@@ -23,36 +23,29 @@ export default function AboutStatsSectionV5() {
       stat: `${fleetCount}+`,
       label: "Verified Aircraft",
       desc: "Listed after team verification",
-      icon: <Plane className="w-4 h-4 text-[#FFD200]" />,
+      icon: <Plane className="w-4 h-4 text-[#002F5C]" />,
     }] : []),
     {
       stat: "5,000+",
       label: "Airports Accessible",
       desc: "Across the globe",
-      icon: <Globe className="w-4 h-4 text-[#FFD200]" />,
+      icon: <Globe className="w-4 h-4 text-[#002F5C]" />,
     },
     {
       stat: "24/7",
       label: "Support",
       desc: "Charter support whenever you need it",
-      icon: <Clock className="w-4 h-4 text-[#FFD200]" />,
+      icon: <Clock className="w-4 h-4 text-[#002F5C]" />,
     },
   ];
 
   return (
-    <section className="py-28 bg-white font-sans text-[#002F5C] relative overflow-hidden">
+    <section className="py-16 sm:py-20 bg-white font-sans text-[#002F5C] relative overflow-hidden">
       <div className="max-w-7xl mx-auto px-6 lg:px-12">
         
         {/* Header */}
-        <div className="max-w-3xl mb-16">
-          <div className="inline-flex items-center space-x-2 bg-stone-100 px-4 py-1.5 rounded-full border border-stone-200/80 mb-4">
-            <span className="w-2 h-2 rounded-full bg-[#FFD200]"></span>
-            <span className="text-xs uppercase tracking-[0.2em] font-serif italic text-stone-700">
-              About JustCharter
-            </span>
-          </div>
-
-          <h2 className="text-4xl sm:text-5xl lg:text-6xl font-serif font-normal tracking-tight text-[#002F5C] leading-tight">
+        <div className="max-w-3xl mb-10">
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-serif font-normal tracking-tight text-[#002F5C] leading-tight">
             The Premier Choice for Private Aviation
           </h2>
         </div>
