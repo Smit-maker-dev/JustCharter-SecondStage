@@ -122,18 +122,39 @@ export default function FleetSectionV5() {
             </h2>
           </div>
 
-          <div className="flex flex-col gap-3">
+          <div className="flex flex-col gap-3.5 w-full lg:w-auto">
+            {/* Filter Meta Row: Count & Clear */}
+            <div className="flex items-center justify-between gap-4">
+              <span className="text-xs font-semibold text-[#002F5C] bg-white px-3 py-1 rounded-full border border-stone-200/80 shadow-xs">
+                {filteredData.length} {filteredData.length === 1 ? "aircraft" : "aircraft"}
+              </span>
+              {(activeCategory !== "All Categories" || activeServiceType !== "All Services") && (
+                <button
+                  onClick={() => {
+                    setActiveCategory("All Categories");
+                    setActiveServiceType("All Services");
+                  }}
+                  className="text-xs font-medium text-stone-600 hover:text-[#002F5C] flex items-center space-x-1 cursor-pointer transition-colors"
+                >
+                  <RotateCcw className="w-3 h-3" />
+                  <span>Clear filters</span>
+                </button>
+              )}
+            </div>
+
             {/* Aircraft Category Pills */}
-            <div className="flex items-center space-x-4 overflow-x-auto max-w-full pb-1">
-              <span className="text-[10px] uppercase font-bold tracking-widest text-stone-400 mr-1">Category:</span>
+            <div className="flex items-center space-x-2 overflow-x-auto no-scrollbar py-0.5 max-w-full">
+              <span className="text-[11px] uppercase font-bold tracking-wider text-stone-500 mr-1 flex-shrink-0">
+                Category
+              </span>
               {dynamicCategories.map((cat) => (
                 <button
                   key={cat}
                   onClick={() => setActiveCategory(cat)}
-                  className={`text-xs font-semibold uppercase tracking-wider transition-all cursor-pointer whitespace-nowrap pb-1 border-b-2 ${
+                  className={`px-3.5 py-1.5 rounded-full text-xs transition-all cursor-pointer whitespace-nowrap flex-shrink-0 ${
                     activeCategory === cat
-                      ? "text-[#002F5C] border-[#FFD200]"
-                      : "text-stone-400 border-transparent hover:text-stone-700"
+                      ? "bg-[#FFD200] text-[#002F5C] font-semibold shadow-xs"
+                      : "bg-white text-stone-600 font-medium border border-stone-200/80 hover:border-stone-400"
                   }`}
                 >
                   {cat}
@@ -142,16 +163,18 @@ export default function FleetSectionV5() {
             </div>
 
             {/* Service Type Pills */}
-            <div className="flex items-center space-x-4 overflow-x-auto max-w-full pb-1">
-              <span className="text-[10px] uppercase font-bold tracking-widest text-stone-400 mr-1">Service:</span>
+            <div className="flex items-center space-x-2 overflow-x-auto no-scrollbar py-0.5 max-w-full">
+              <span className="text-[11px] uppercase font-bold tracking-wider text-stone-500 mr-1 flex-shrink-0">
+                Service
+              </span>
               {serviceTypes.map((st) => (
                 <button
                   key={st}
                   onClick={() => setActiveServiceType(st)}
-                  className={`text-xs font-semibold uppercase tracking-wider transition-all cursor-pointer whitespace-nowrap pb-1 border-b-2 ${
+                  className={`px-3.5 py-1.5 rounded-full text-xs transition-all cursor-pointer whitespace-nowrap flex-shrink-0 ${
                     activeServiceType === st
-                      ? "text-[#002F5C] border-[#FFD200]"
-                      : "text-stone-400 border-transparent hover:text-stone-700"
+                      ? "bg-[#FFD200] text-[#002F5C] font-semibold shadow-xs"
+                      : "bg-white text-stone-600 font-medium border border-stone-200/80 hover:border-stone-400"
                   }`}
                 >
                   {st}
@@ -165,15 +188,16 @@ export default function FleetSectionV5() {
         {isLoading ? (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {[1, 2, 3, 4, 5, 6].map((i) => (
-              <div key={i} className="bg-white rounded-2xl p-6 border border-stone-200/70 animate-pulse h-96">
-                <div className="bg-stone-200 h-60 rounded-xl mb-4"></div>
-                <div className="bg-stone-200 h-6 w-3/4 rounded mb-2"></div>
-                <div className="bg-stone-100 h-16 rounded-xl"></div>
+              <div key={i} className="bg-white rounded-2xl p-6 border border-stone-200/70 animate-pulse">
+                <div className="bg-stone-100 aspect-[16/10] rounded-xl mb-4"></div>
+                <div className="bg-stone-100 h-6 w-3/4 rounded mb-2"></div>
+                <div className="bg-stone-50 h-20 rounded-xl mb-4"></div>
+                <div className="bg-stone-100 h-9 rounded-xl"></div>
               </div>
             ))}
           </div>
         ) : isError ? (
-          <div className="text-center py-16 px-6 bg-white rounded-2xl border border-red-100 shadow-sm max-w-lg mx-auto">
+          <div className="text-center py-16 px-6 bg-white rounded-2xl border border-stone-200/80 shadow-sm max-w-lg mx-auto">
             <p className="text-base font-medium text-stone-800 mb-2">Unable to load fleet aircraft</p>
             <p className="text-xs text-stone-500 mb-6">Please check your internet connection or try again.</p>
             <button
@@ -185,9 +209,31 @@ export default function FleetSectionV5() {
             </button>
           </div>
         ) : homeDisplayData.length === 0 ? (
-          <div className="text-center py-16 px-6 bg-white rounded-2xl border border-stone-200/70 max-w-lg mx-auto">
-            <p className="text-base font-medium text-stone-800 mb-1">No Aircraft Found</p>
-            <p className="text-xs text-stone-500">No fleet models available under the selected filters.</p>
+          <div className="text-center py-16 px-6 bg-white rounded-2xl border border-stone-200/80 max-w-lg mx-auto shadow-xs">
+            <div className="w-12 h-12 rounded-full bg-stone-100 flex items-center justify-center text-stone-400 mx-auto mb-3">
+              <RotateCcw className="w-5 h-5 stroke-[1.5]" />
+            </div>
+            <p className="text-base font-serif font-normal text-[#002F5C] mb-1">No Matching Aircraft Found</p>
+            <p className="text-xs text-stone-500 mb-6">
+              No aircraft currently match your selected filters. Try clearing your filters or submit a custom charter request.
+            </p>
+            <div className="flex flex-wrap items-center justify-center gap-3">
+              <button
+                onClick={() => {
+                  setActiveCategory("All Categories");
+                  setActiveServiceType("All Services");
+                }}
+                className="px-4 py-2 rounded-xl border border-stone-300 text-xs font-semibold uppercase tracking-wider text-stone-700 hover:bg-stone-50 transition-colors cursor-pointer"
+              >
+                Clear filters
+              </button>
+              <Link
+                to="/request-quote"
+                className="px-4 py-2 rounded-xl bg-stone-900 hover:bg-[#FFD200] hover:text-[#002F5C] text-white text-xs font-semibold uppercase tracking-wider transition-colors"
+              >
+                Request a custom quote
+              </Link>
+            </div>
           </div>
         ) : (
           <>
