@@ -10,7 +10,7 @@ interface FaqItem {
 const faqs: FaqItem[] = [
   {
     q: "What is JustCharter and how does it work?",
-    a: "JustCharter is an online marketplace connecting charter clients directly with verified third-party aircraft operators across India and internationally. We aggregate live availability, negotiate transparent pricing, and coordinate every flight end-to-end through our 24/7 operations team.",
+    a: "JustCharter is an online marketplace connecting charter clients directly with verified third-party aircraft operators across India and internationally. We help you compare options, provide transparent pricing, and coordinate your booking with our support team.",
   },
   {
     q: "Does JustCharter own the aircraft?",
@@ -18,7 +18,7 @@ const faqs: FaqItem[] = [
   },
   {
     q: "How are operators verified?",
-    a: "Every operator on JustCharter must hold a valid DGCA Non-Scheduled Operator Permit (NSOP), maintain comprehensive hull and third-party liability insurance, employ type-rated pilots who meet regulatory flight hour minimums, and pass our annual compliance audit before receiving inquiries.",
+    a: "Before any aircraft is approved on our marketplace, our operations team verifies its valid Certificate of Registration, Certificate of Airworthiness, active insurance documentation, and maintenance records. We also inspect flight crew credentials including pilot type ratings, licenses, and logged flight hours for the specific aircraft.",
   },
   {
     q: "How do I get a quote?",

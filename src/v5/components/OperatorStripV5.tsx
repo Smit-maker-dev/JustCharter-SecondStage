@@ -20,16 +20,14 @@ export default function OperatorStripV5() {
                 <span className="text-xs uppercase tracking-[0.18em] font-serif italic text-stone-500">
                   Operator Network
                 </span>
-                <span className="inline-flex items-center text-[10px] bg-amber-50 text-amber-800 font-medium px-2 py-0.5 rounded-full border border-amber-200/60">
-                  <ShieldCheck className="w-3 h-3 mr-1 text-[#FFD200]" />
-                  DGCA Verified
-                </span>
               </div>
               <h3 className="text-lg sm:text-xl font-serif font-normal text-[#002F5C] mt-0.5">
                 Are you an aircraft operator?
               </h3>
+              {/* TODO: CONFIRM WITH CLIENT — Restore "with zero listing fees" if client confirms operators list for free without subscription or onboarding fees:
+                  Original: "Expand your charter bookings with zero listing fees. Connect your fleet with qualified charter clients across India." */}
               <p className="text-stone-600 text-xs sm:text-sm font-light mt-0.5">
-                Expand your charter bookings with zero listing fees. Connect your fleet with qualified charter clients across India.
+                Expand your charter bookings. Connect your aircraft with qualified charter clients.
               </p>
             </div>
           </div>
