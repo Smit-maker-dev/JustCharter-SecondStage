@@ -4,6 +4,7 @@ import { IoVolumeHighOutline, IoVolumeMuteOutline } from "react-icons/io5";
 import { aircraftDetails } from "../AircraftDetailPageV5";
 import { useNavigate } from "react-router-dom";
 import axiosInstance from "../../api/axiosInstance";
+import CustomDatePicker, { getLocalTodayStr } from "./CustomDatePicker";
 
 export interface Airport {
   code: string;
@@ -12,24 +13,27 @@ export interface Airport {
   full: string;
 }
 
-
-
 export default function HeroSectionV5() {
   const navigate = useNavigate();
   const [isAudioMuted, setIsAudioMuted] = useState(true);
+  const [isHeroInView, setIsHeroInView] = useState(true);
+  const heroSectionRef = useRef<HTMLElement>(null);
+
   const [tripType, setTripType] = useState<"one-way" | "round-trip" | "multi-city">("one-way");
 
-  // Form Fields State
+  const todayStr = getLocalTodayStr();
+
+  // Form Fields State (initialized to local today)
   const [fromLocation, setFromLocation] = useState("New Delhi (DEL)");
   const [toLocation, setToLocation] = useState("Paris Le Bourget (LBG)");
-  const [departureDate, setDepartureDate] = useState("2026-09-28");
-  const [returnDate, setReturnDate] = useState("2026-10-05");
+  const [departureDate, setDepartureDate] = useState(todayStr);
+  const [returnDate, setReturnDate] = useState(todayStr);
   const [guestCount, setGuestCount] = useState(4);
 
   // Multi-city legs
   const [multiLegs, setMultiLegs] = useState([
-    { from: "New Delhi (DEL)", to: "Paris Le Bourget (LBG)", date: "2026-09-28" },
-    { from: "Paris Le Bourget (LBG)", to: "London Luton (LTN)", date: "2026-10-02" },
+    { from: "New Delhi (DEL)", to: "Paris Le Bourget (LBG)", date: todayStr },
+    { from: "Paris Le Bourget (LBG)", to: "London Luton (LTN)", date: todayStr },
   ]);
 
   // Autocomplete Dropdown State
@@ -56,11 +60,24 @@ export default function HeroSectionV5() {
     name: "",
     phone: "",
     route: "New Delhi (DEL) to Paris Le Bourget (LBG)",
-    date: "2026-09-28",
+    date: todayStr,
   });
 
   const quoteResultsRef = useRef<HTMLDivElement>(null);
-  const todayStr = new Date().toISOString().split("T")[0];
+
+  // Track hero visibility in viewport to show/hide floating mute button
+  useEffect(() => {
+    const el = heroSectionRef.current;
+    if (!el) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setIsHeroInView(entry.isIntersecting);
+      },
+      { threshold: 0.1 }
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
 
   // Close dropdowns on outside click
   useEffect(() => {
@@ -241,21 +258,23 @@ export default function HeroSectionV5() {
   return (
     <div className="relative font-sans bg-white text-[#002F5C] overflow-hidden">
       
-      {/* Floating Audio Control Pill */}
-      <button
-        onClick={() => setIsAudioMuted(!isAudioMuted)}
-        className="cursor-pointer fixed bottom-6 right-6 z-50 p-3.5 rounded-full bg-black/40 text-white shadow-md hover:shadow-lg backdrop-blur-md transition-all border border-white/20 hover:bg-black/60"
-        aria-label={isAudioMuted ? "Unmute video" : "Mute video"}
-      >
-        {isAudioMuted ? (
-          <IoVolumeMuteOutline size={20} />
-        ) : (
-          <IoVolumeHighOutline size={20} />
-        )}
-      </button>
+      {/* Floating Audio Control Pill (rendered only when hero is in viewport) */}
+      {isHeroInView && (
+        <button
+          onClick={() => setIsAudioMuted(!isAudioMuted)}
+          className="cursor-pointer fixed bottom-6 right-6 z-50 p-3.5 rounded-full bg-black/40 text-white shadow-md hover:shadow-lg backdrop-blur-md transition-all border border-white/20 hover:bg-black/60"
+          aria-label={isAudioMuted ? "Unmute video" : "Mute video"}
+        >
+          {isAudioMuted ? (
+            <IoVolumeMuteOutline size={20} />
+          ) : (
+            <IoVolumeHighOutline size={20} />
+          )}
+        </button>
+      )}
 
       {/* Hero Full Screen Viewport */}
-      <section className="relative min-h-[85vh] lg:min-h-[90vh] flex flex-col justify-between pt-28 pb-16 bg-white">
+      <section ref={heroSectionRef} className="relative min-h-[85vh] lg:min-h-[90vh] flex flex-col justify-between pt-28 pb-16 bg-white">
         
         {/* Background Video Media with Seamless Gradient Transition */}
         <div className="absolute inset-0 z-0 overflow-hidden">
@@ -281,7 +300,7 @@ export default function HeroSectionV5() {
           <div className="inline-flex items-center space-x-2 bg-black/40 backdrop-blur-md px-3.5 sm:px-4 py-1.5 rounded-full border border-white/20 mb-6 shadow-sm">
             <span className="w-2 h-2 rounded-full bg-[#FFD200]"></span>
             <span className="text-[10px] sm:text-xs font-serif italic tracking-widest uppercase text-stone-200">
-              Over 500+ Destinations Worldwide
+              5,000+ AIRPORTS WORLDWIDE
             </span>
           </div>
 
@@ -293,7 +312,7 @@ export default function HeroSectionV5() {
           </h1>
 
           <p className="text-sm sm:text-xl text-stone-200 font-sans font-light max-w-2xl mx-auto leading-relaxed">
-            Experience seamless corporate travel with our premium fleet.
+            Compare and charter aircraft from verified operators — transparent pricing, one point of contact.
           </p>
         </div>
 
@@ -439,48 +458,34 @@ export default function HeroSectionV5() {
 
                   {/* Departure Date */}
                   <div className={`relative ${tripType === "round-trip" ? "lg:col-span-2" : "lg:col-span-2"}`}>
-                    <div className="bg-stone-50/90 hover:bg-stone-100/80 border border-stone-200/70 rounded-xl p-3 sm:p-3.5 transition-all">
-                      <label className="text-[10px] font-bold uppercase tracking-wider text-stone-400 flex items-center space-x-1.5 mb-1">
-                        <Calendar className="w-3.5 h-3.5 text-[#FFD200]" />
-                        <span>Date</span>
-                      </label>
-                      <input
-                        type="date"
-                        min={todayStr}
-                        value={departureDate}
-                        onChange={(e) => {
-                          setDepartureDate(e.target.value);
-                          if (returnDate && e.target.value > returnDate) {
-                            setReturnDate(e.target.value);
-                          }
-                          setErrors((prev) => ({ ...prev, date: "" }));
-                        }}
-                        className="w-full bg-transparent text-xs font-semibold text-[#002F5C] focus:outline-none cursor-pointer"
-                      />
-                    </div>
-                    {errors["date"] && <span className="text-[10px] text-red-500 mt-1 block px-1">{errors["date"]}</span>}
+                    <CustomDatePicker
+                      label="Date"
+                      value={departureDate}
+                      minDate={todayStr}
+                      onChange={(val) => {
+                        setDepartureDate(val);
+                        if (returnDate && val > returnDate) {
+                          setReturnDate(val);
+                        }
+                        setErrors((prev) => ({ ...prev, date: "" }));
+                      }}
+                      error={errors["date"]}
+                    />
                   </div>
 
                   {/* Return Date (Round Trip Only) */}
                   {tripType === "round-trip" && (
                     <div className="relative lg:col-span-2">
-                      <div className="bg-stone-50/90 hover:bg-stone-100/80 border border-stone-200/70 rounded-xl p-3 sm:p-3.5 transition-all">
-                        <label className="text-[10px] font-bold uppercase tracking-wider text-stone-400 flex items-center space-x-1.5 mb-1">
-                          <Calendar className="w-3.5 h-3.5 text-[#FFD200]" />
-                          <span>Return Date</span>
-                        </label>
-                        <input
-                          type="date"
-                          min={departureDate || todayStr}
-                          value={returnDate}
-                          onChange={(e) => {
-                            setReturnDate(e.target.value);
-                            setErrors((prev) => ({ ...prev, returnDate: "" }));
-                          }}
-                          className="w-full bg-transparent text-xs font-semibold text-[#002F5C] focus:outline-none cursor-pointer"
-                        />
-                      </div>
-                      {errors["returnDate"] && <span className="text-[10px] text-red-500 mt-1 block px-1">{errors["returnDate"]}</span>}
+                      <CustomDatePicker
+                        label="Return Date"
+                        value={returnDate}
+                        minDate={departureDate || todayStr}
+                        onChange={(val) => {
+                          setReturnDate(val);
+                          setErrors((prev) => ({ ...prev, returnDate: "" }));
+                        }}
+                        error={errors["returnDate"]}
+                      />
                     </div>
                   )}
 
@@ -635,24 +640,16 @@ export default function HeroSectionV5() {
 
                       {/* Date Leg */}
                       <div className="lg:col-span-3">
-                        <div className="bg-white border border-stone-200/70 rounded-xl p-2.5">
-                          <label className="text-[9px] font-bold uppercase tracking-wider text-stone-400 flex items-center space-x-1 mb-0.5">
-                            <Calendar className="w-3 h-3 text-[#FFD200]" />
-                            <span>Date</span>
-                          </label>
-                          <input
-                            type="date"
-                            min={idx === 0 ? todayStr : multiLegs[idx - 1].date || todayStr}
-                            value={leg.date}
-                            onChange={(e) => {
-                              const newDate = e.target.value;
-                              setMultiLegs((prev) =>
-                                prev.map((l, i) => (i === idx ? { ...l, date: newDate } : l))
-                              );
-                            }}
-                            className="w-full bg-transparent text-xs font-semibold text-[#002F5C] focus:outline-none cursor-pointer"
-                          />
-                        </div>
+                        <CustomDatePicker
+                          label="Date"
+                          value={leg.date}
+                          minDate={idx === 0 ? todayStr : (multiLegs[idx - 1]?.date || todayStr)}
+                          onChange={(newDate) => {
+                            setMultiLegs((prev) =>
+                              prev.map((l, i) => (i === idx ? { ...l, date: newDate } : l))
+                            );
+                          }}
+                        />
                       </div>
 
                       {/* Remove Leg Button */}

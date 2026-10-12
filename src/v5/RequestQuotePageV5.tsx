@@ -12,9 +12,10 @@ import {
   Sparkles,
   Plane
 } from "lucide-react";
-import FooterV5 from "./components/FooterV5";
 import { API_BASE_URL } from "../api/axiosInstance";
 import ConciergeBarV5 from "./components/ConciergeBarV5";
+import CustomDatePicker, { getLocalTodayStr } from "./components/CustomDatePicker";
+import { getValidSpecs } from "../utils/specFormatter";
 
 interface AircraftSpec {
   range: string;
@@ -322,12 +323,11 @@ export default function RequestQuotePageV5() {
               </div>
 
               <div className="lg:col-span-2">
-                <label className="text-[10px] font-bold uppercase tracking-wider text-stone-400 block mb-1">Date</label>
-                <input
-                  type="date"
+                <CustomDatePicker
+                  label="Date"
                   value={editDate}
-                  onChange={(e) => setEditDate(e.target.value)}
-                  className="w-full bg-stone-50 border border-stone-200 rounded-xl px-3 py-2 text-xs font-semibold text-[#002F5C] focus:outline-none focus:border-[#FFD200]"
+                  minDate={getLocalTodayStr()}
+                  onChange={(val) => setEditDate(val)}
                 />
               </div>
 
@@ -445,24 +445,25 @@ export default function RequestQuotePageV5() {
                     </p>
 
                     {/* Specs Grid */}
-                    <div className="grid grid-cols-2 gap-3 mb-6 bg-stone-50 p-4 rounded-xl border border-stone-200/60 text-xs">
-                      <div className="flex flex-col">
-                        <span className="text-stone-400 font-medium text-[10px] uppercase tracking-wider">Max Range</span>
-                        <span className="text-[#002F5C] font-bold mt-0.5">{jet.specs.range}</span>
-                      </div>
-                      <div className="flex flex-col">
-                        <span className="text-stone-400 font-medium text-[10px] uppercase tracking-wider">Speed</span>
-                        <span className="text-[#002F5C] font-bold mt-0.5">{jet.specs.speed}</span>
-                      </div>
-                      <div className="flex flex-col">
-                        <span className="text-stone-400 font-medium text-[10px] uppercase tracking-wider">Capacity</span>
-                        <span className="text-[#002F5C] font-bold mt-0.5">{jet.specs.passengers}</span>
-                      </div>
-                      <div className="flex flex-col">
-                        <span className="text-stone-400 font-medium text-[10px] uppercase tracking-wider">Height</span>
-                        <span className="text-[#002F5C] font-bold mt-0.5">{jet.specs.height}</span>
-                      </div>
-                    </div>
+                    {(() => {
+                      const validSpecs = getValidSpecs([
+                        { label: "Max Range", value: jet.specs?.range },
+                        { label: "Speed", value: jet.specs?.speed },
+                        { label: "Capacity", value: jet.specs?.passengers },
+                        { label: "Height", value: jet.specs?.height },
+                      ]);
+                      if (validSpecs.length === 0) return null;
+                      return (
+                        <div className="grid grid-cols-2 gap-3 mb-6 bg-stone-50 p-4 rounded-xl border border-stone-200/60 text-xs">
+                          {validSpecs.map((spec, idx) => (
+                            <div key={idx} className="flex flex-col">
+                              <span className="text-stone-400 font-medium text-[10px] uppercase tracking-wider">{spec.label}</span>
+                              <span className="text-[#002F5C] font-bold mt-0.5">{spec.value}</span>
+                            </div>
+                          ))}
+                        </div>
+                      );
+                    })()}
                   </div>
 
                   {/* Actions */}
@@ -619,9 +620,14 @@ export default function RequestQuotePageV5() {
                 <ArrowRight className="w-4 h-4" />
               </button>
 
-              <div className="flex items-center justify-center space-x-2 text-[11px] text-stone-500 font-light pt-2">
-                <ShieldCheck className="w-4 h-4 text-[#FFD200]" />
-                <span>Your details are kept strictly confidential. Response expected within 2 hours.</span>
+              <div className="flex flex-col items-center justify-center space-y-2 text-[11px] text-stone-500 font-light pt-2 text-center">
+                <div className="flex items-center space-x-2">
+                  <ShieldCheck className="w-4 h-4 text-[#FFD200]" />
+                  <span>Your details are kept strictly confidential. Response expected within 2 hours.</span>
+                </div>
+                <p className="text-stone-400 text-[10px] max-w-md">
+                  JustCharter is a charter booking platform. Flights are operated by independent, licensed operators.
+                </p>
               </div>
 
             </form>
@@ -657,7 +663,6 @@ export default function RequestQuotePageV5() {
       </div>
 
       <ConciergeBarV5 />
-      <FooterV5 />
     </div>
   );
 }

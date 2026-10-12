@@ -3,6 +3,7 @@ import { useParams, Link, useNavigate } from "react-router-dom";
 import { ArrowLeft, ArrowUpRight, Gauge, Navigation, Users, Maximize, Luggage, ShieldCheck, CheckCircle2 } from "lucide-react";
 import ConciergeBarV5 from "./components/ConciergeBarV5";
 import { API_BASE_URL } from "../api/axiosInstance";
+import { formatSpecValue } from "../utils/specFormatter";
 
 export interface AircraftDetailData {
   id: number;
@@ -342,7 +343,7 @@ export default function AircraftDetailPageV5() {
 
               <div className="flex items-center justify-center space-x-2 text-xs text-stone-500 font-light pt-2">
                 <ShieldCheck className="w-4 h-4 text-[#FFD200]" />
-                <span>ARGUS Platinum & Wyvern Certified Operator</span>
+                <span>Verified Partner Aircraft</span>
               </div>
             </div>
 
@@ -351,75 +352,40 @@ export default function AircraftDetailPageV5() {
         </div>
 
         {/* 3. Key Specs Strip */}
-        <div className="mb-20">
-          <h2 className="text-2xl font-serif font-normal text-[#002F5C] mb-6">
-            Technical Specifications
-          </h2>
+        {(() => {
+          const specItems = [
+            { label: "Max Range", icon: <Navigation className="w-4 h-4 text-[#FFD200]" />, val: formatSpecValue("Max Range", aircraft.specs?.range) },
+            { label: "Max Speed", icon: <Gauge className="w-4 h-4 text-[#FFD200]" />, val: formatSpecValue("Max Speed", aircraft.specs?.speed) },
+            { label: "Passengers", icon: <Users className="w-4 h-4 text-[#FFD200]" />, val: formatSpecValue("Passengers", aircraft.specs?.passengers || (aircraft.capacity ? `up to ${aircraft.capacity}` : null)) },
+            { label: "Cabin Height", icon: <Maximize className="w-4 h-4 text-[#FFD200]" />, val: formatSpecValue("Cabin Height", aircraft.specs?.height) },
+            { label: "Cabin Length", icon: <Maximize className="w-4 h-4 text-[#FFD200]" />, val: formatSpecValue("Cabin Length", aircraft.specs?.length) },
+            { label: "Baggage", icon: <Luggage className="w-4 h-4 text-[#FFD200]" />, val: formatSpecValue("Baggage", aircraft.specs?.baggage) },
+          ].filter(s => s.val !== null);
 
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4 bg-stone-50/90 p-6 sm:p-8 rounded-2xl border border-stone-200/80 shadow-sm">
-            
-            <div className="flex flex-col">
-              <div className="flex items-center space-x-1.5 text-stone-400 mb-1">
-                <Navigation className="w-4 h-4 text-[#FFD200]" />
-                <span className="text-[10px] font-bold uppercase tracking-wider">Max Range</span>
+          if (specItems.length === 0) return null;
+
+          return (
+            <div className="mb-20">
+              <h2 className="text-2xl font-serif font-normal text-[#002F5C] mb-6">
+                Technical Specifications
+              </h2>
+
+              <div className={`grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-${Math.min(specItems.length, 6)} gap-4 bg-stone-50/90 p-6 sm:p-8 rounded-2xl border border-stone-200/80 shadow-sm`}>
+                {specItems.map((spec, idx) => (
+                  <div key={idx} className="flex flex-col">
+                    <div className="flex items-center space-x-1.5 text-stone-400 mb-1">
+                      {spec.icon}
+                      <span className="text-[10px] font-bold uppercase tracking-wider">{spec.label}</span>
+                    </div>
+                    <span className="text-lg sm:text-xl font-serif font-semibold text-[#002F5C]">
+                      {spec.val}
+                    </span>
+                  </div>
+                ))}
               </div>
-              <span className="text-lg sm:text-xl font-serif font-semibold text-[#002F5C]">
-                {aircraft.specs.range}
-              </span>
             </div>
-
-            <div className="flex flex-col">
-              <div className="flex items-center space-x-1.5 text-stone-400 mb-1">
-                <Gauge className="w-4 h-4 text-[#FFD200]" />
-                <span className="text-[10px] font-bold uppercase tracking-wider">Max Speed</span>
-              </div>
-              <span className="text-lg sm:text-xl font-serif font-semibold text-[#002F5C]">
-                {aircraft.specs.speed}
-              </span>
-            </div>
-
-            <div className="flex flex-col">
-              <div className="flex items-center space-x-1.5 text-stone-400 mb-1">
-                <Users className="w-4 h-4 text-[#FFD200]" />
-                <span className="text-[10px] font-bold uppercase tracking-wider">Passengers</span>
-              </div>
-              <span className="text-lg sm:text-xl font-serif font-semibold text-[#002F5C]">
-                {aircraft.specs.passengers}
-              </span>
-            </div>
-
-            <div className="flex flex-col">
-              <div className="flex items-center space-x-1.5 text-stone-400 mb-1">
-                <Maximize className="w-4 h-4 text-[#FFD200]" />
-                <span className="text-[10px] font-bold uppercase tracking-wider">Cabin Height</span>
-              </div>
-              <span className="text-lg sm:text-xl font-serif font-semibold text-[#002F5C]">
-                {aircraft.specs.height}
-              </span>
-            </div>
-
-            <div className="flex flex-col">
-              <div className="flex items-center space-x-1.5 text-stone-400 mb-1">
-                <Maximize className="w-4 h-4 text-[#FFD200]" />
-                <span className="text-[10px] font-bold uppercase tracking-wider">Cabin Length</span>
-              </div>
-              <span className="text-lg sm:text-xl font-serif font-semibold text-[#002F5C]">
-                {aircraft.specs.length}
-              </span>
-            </div>
-
-            <div className="flex flex-col">
-              <div className="flex items-center space-x-1.5 text-stone-400 mb-1">
-                <Luggage className="w-4 h-4 text-[#FFD200]" />
-                <span className="text-[10px] font-bold uppercase tracking-wider">Baggage</span>
-              </div>
-              <span className="text-lg sm:text-xl font-serif font-semibold text-[#002F5C]">
-                {aircraft.specs.baggage}
-              </span>
-            </div>
-
-          </div>
-        </div>
+          );
+        })()}
 
         {/* 4. Highlights Section */}
         <div className="mb-20 bg-white border border-stone-200/80 rounded-2xl p-8 sm:p-10 shadow-sm">
@@ -521,7 +487,7 @@ export default function AircraftDetailPageV5() {
                     onClick={() => navigate(`/aircraft/${item.id}`)}
                     className="bg-stone-900 hover:bg-[#FFD200] hover:text-[#002F5C] text-white text-xs font-semibold uppercase tracking-wider px-5 py-2 rounded-xl transition-all cursor-pointer"
                   >
-                    Book Now
+                    Request Quote
                   </button>
                 </div>
               </div>

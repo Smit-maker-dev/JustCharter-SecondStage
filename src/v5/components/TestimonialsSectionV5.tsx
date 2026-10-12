@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Star, ChevronLeft, ChevronRight, Quote } from "lucide-react";
 
+// TODO: CONFIRM WITH CLIENT — replace with real reviews
 const testimonials = [
   {
     name: "Jonathan Harrington",
@@ -50,7 +51,7 @@ export default function TestimonialsSectionV5() {
         <div className="inline-flex items-center space-x-2 bg-stone-100 px-4 py-1.5 rounded-full border border-stone-200/80 mb-8 sm:mb-10">
           <span className="w-2 h-2 rounded-full bg-[#FFD200]"></span>
           <span className="text-xs uppercase tracking-[0.2em] font-serif italic text-stone-700">
-            Verified Client Reviews
+            CLIENT REVIEWS
           </span>
         </div>
 

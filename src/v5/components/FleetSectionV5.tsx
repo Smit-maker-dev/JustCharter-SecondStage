@@ -32,10 +32,10 @@ export default function FleetSectionV5() {
             imageUrl: item.imageUrl || "/images/gulfstrem.jpg",
             tag: item.tag || item.category,
             specs: [
-              { label: "Max Range", value: item.specs?.range || "7,500 nm" },
-              { label: "Max Speed", value: item.specs?.speed || "516 kts" },
-              { label: "Passengers", value: item.specs?.passengers || `up to ${item.capacity || 19}` },
-              { label: "Cabin Height", value: item.specs?.height || "6 ft 3 in" },
+              { label: "Max Range", value: item.specs?.range },
+              { label: "Max Speed", value: item.specs?.speed },
+              { label: "Passengers", value: item.specs?.passengers || (item.capacity ? `up to ${item.capacity}` : null) },
+              { label: "Cabin Height", value: item.specs?.height },
             ]
           }));
           setAircraftList(mapped);
@@ -73,10 +73,10 @@ export default function FleetSectionV5() {
         {/* Section Header & Minimalist Text Tab Navigation */}
         <div className="flex flex-col lg:flex-row lg:items-end justify-between mb-14 sm:mb-20 gap-6 sm:gap-8 border-b border-stone-200/80 pb-6">
           <div>
-            <div className="inline-flex items-center space-x-2 bg-white px-4 py-1.5 rounded-full border border-stone-200/80 mb-3 shadow-sm">
+            <div className="inline-flex items-center space-x-2 bg-white px-4 py-1.5 rounded-full border border-stone-200/80 mb-3 shadow-sm whitespace-nowrap">
               <span className="w-2 h-2 rounded-full bg-[#FFD200]"></span>
-              <span className="text-xs uppercase tracking-[0.2em] font-serif italic text-stone-700">
-                Out-Of-Bounds Engineering
+              <span className="text-xs uppercase tracking-[0.2em] font-serif italic text-stone-700 whitespace-nowrap">
+                Verified Aircraft
               </span>
             </div>
             <h2 className="text-3xl sm:text-5xl lg:text-6xl font-serif font-normal tracking-tight text-[#002F5C]">

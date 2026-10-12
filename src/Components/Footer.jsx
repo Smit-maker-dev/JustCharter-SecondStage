@@ -51,11 +51,26 @@ export default function Footer() {
           <div>
             <h3 className="text-[#FFD200] font-semibold mb-3">Services</h3>
             <ul className="space-y-2 text-stone-600">
-              <li>Private Charter</li>
-              <li>Membership Programs</li>
-              <li>Aircraft Management</li>
-              <li>Aircraft Sales & Acquisition</li>
-              <li>Concierge Services</li>
+              <li>
+                <Link to="/fleet" className="hover:text-[#002F5C] transition">
+                  Private Charter
+                </Link>
+              </li>
+              <li>
+                <a href="/#how-it-works" className="hover:text-[#002F5C] transition">
+                  How It Works
+                </a>
+              </li>
+              <li>
+                <Link to="/for-operators" className="hover:text-[#002F5C] transition">
+                  For Operators
+                </Link>
+              </li>
+              <li>
+                <Link to="/request-quote" className="hover:text-[#002F5C] transition">
+                  Request a Quote
+                </Link>
+              </li>
             </ul>
           </div>
 
@@ -67,15 +82,17 @@ export default function Footer() {
                   About Us
                 </Link>
               </li>
-              <li>Safety Standards</li>
-              <li>Careers</li>
-              <li>Press & Media</li>
-              <li>Sustainability</li>
+              <li>
+                <Link to="/about#safety" className="hover:text-[#002F5C] transition">
+                  Safety Standards
+                </Link>
+              </li>
             </ul>
           </div>
 
           <div>
             <h3 className="text-[#FFD200] font-semibold mb-3">Legal</h3>
+            {/* TODO: Terms of Service must state JustCharter acts as an intermediary and the operator is responsible for flight operation — client's lawyer to provide wording. */}
             <ul className="space-y-2 text-stone-600">
               <li>
                 <Link to="/terms_conditions" className="hover:text-[#002F5C] transition">
@@ -95,19 +112,6 @@ export default function Footer() {
                   Cancellation Policy
                 </Link>
               </li>
-              <li>
-                <Link
-                  to="/accessibility"
-                  className="hover:text-[#002F5C] transition"
-                >
-                  Accessibility
-                </Link>
-              </li>
-              <li>
-                <Link to="/faqs" className="hover:text-[#002F5C] transition">
-                  FAQs
-                </Link>
-              </li>
             </ul>
           </div>
         </div>
@@ -115,13 +119,11 @@ export default function Footer() {
 
       <hr className="my-8 border-stone-300" />
 
-      <div className="flex flex-col md:flex-row justify-between items-center text-xs text-stone-500 space-y-2 md:space-y-0">
-        <p>© 2025 JustCharter. All rights reserved.</p>
-        <div className="flex gap-4">
-          <span>ARG/US Platinum Rated</span>
-          <span>Wyvern Wingman</span>
-          <span>IS-BAO Stage 3</span>
-        </div>
+      <div className="flex flex-col md:flex-row justify-between items-center text-xs text-stone-500 space-y-3 md:space-y-0">
+        <p>© {new Date().getFullYear()} JustCharter. All rights reserved.</p>
+        <p className="text-stone-500 font-light text-center md:text-right max-w-lg">
+          JustCharter is a charter booking platform. Flights are operated by independent, licensed operators.
+        </p>
       </div>
     </footer>
   );

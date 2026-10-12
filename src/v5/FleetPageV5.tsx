@@ -35,10 +35,10 @@ export default function FleetPageV5() {
             imageUrl: item.imageUrl || "/images/gulfstrem.jpg",
             tag: item.tag || item.category,
             specs: [
-              { label: "Max Range", value: item.specs?.range || "7,500 nm" },
-              { label: "Max Speed", value: item.specs?.speed || "516 kts" },
-              { label: "Passengers", value: item.specs?.passengers || `up to ${item.capacity || 19}` },
-              { label: "Cabin Height", value: item.specs?.height || "6 ft 3 in" },
+              { label: "Max Range", value: item.specs?.range },
+              { label: "Max Speed", value: item.specs?.speed },
+              { label: "Passengers", value: item.specs?.passengers || (item.capacity ? `up to ${item.capacity}` : null) },
+              { label: "Cabin Height", value: item.specs?.height },
             ]
           }));
           setAircraftList(mapped);
