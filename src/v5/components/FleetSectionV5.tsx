@@ -205,7 +205,7 @@ export default function FleetSectionV5() {
               className="inline-flex items-center space-x-2 bg-[#002F5C] hover:bg-[#002347] text-white text-xs font-semibold uppercase tracking-wider px-6 py-3 rounded-xl transition-all cursor-pointer"
             >
               <RotateCcw className="w-4 h-4" />
-              <span>Retry Loading</span>
+              <span>Try again</span>
             </button>
           </div>
         ) : homeDisplayData.length === 0 ? (
