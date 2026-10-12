@@ -13,6 +13,7 @@ import {
   Plane
 } from "lucide-react";
 import { API_BASE_URL } from "../api/axiosInstance";
+import { siteConfig } from "../config/siteConfig";
 import ConciergeBarV5 from "./components/ConciergeBarV5";
 import CustomDatePicker, { getLocalTodayStr } from "./components/CustomDatePicker";
 import { getValidSpecs } from "../utils/specFormatter";
@@ -57,8 +58,8 @@ export default function RequestQuotePageV5() {
   const navigate = useNavigate();
 
   // Search parameters state
-  const [fromLocation, setFromLocation] = useState(searchParams.get("from") || "London (EGLF / FAB)");
-  const [toLocation, setToLocation] = useState(searchParams.get("to") || "New York (KTEB / TEB)");
+  const [fromLocation, setFromLocation] = useState(searchParams.get("from") || "");
+  const [toLocation, setToLocation] = useState(searchParams.get("to") || "");
   const [departureDate, setDepartureDate] = useState(searchParams.get("date") || new Date().toISOString().split("T")[0]);
   const [returnDate, setReturnDate] = useState(searchParams.get("returnDate") || "");
   const [guestCount, setGuestCount] = useState<number>(parseInt(searchParams.get("guests") || "4", 10));
@@ -83,15 +84,21 @@ export default function RequestQuotePageV5() {
   const [isLoadingFleet, setIsLoadingFleet] = useState(true);
   const [selectedAircraft, setSelectedAircraft] = useState<Aircraft | null>(null);
 
-  // Contact form state
+  // Contact form state & validation
   const [contactForm, setContactForm] = useState({
     name: "",
     email: "",
     phone: "",
     notes: ""
   });
+  const [formErrors, setFormErrors] = useState<{
+    name?: string;
+    email?: string;
+    phone?: string;
+  }>({});
   const [isSubmittingQuote, setIsSubmittingQuote] = useState(false);
   const [quoteSubmitted, setQuoteSubmitted] = useState(false);
+  const [submissionRefId, setSubmissionRefId] = useState<string | null>(null);
 
   // Fetch airports dynamically
   useEffect(() => {
@@ -105,7 +112,9 @@ export default function RequestQuotePageV5() {
       .catch((err) => console.error("Error fetching airports:", err));
   }, []);
 
-  // Fetch fleet dynamically from API
+  // Fetch fleet dynamically from API and prefill aircraft if passed in URL
+  const targetAircraftId = searchParams.get("aircraftId") || searchParams.get("aircraft");
+
   const fetchFleetFromAPI = (guests: number) => {
     setIsLoadingFleet(true);
     fetch(`${API_BASE_URL}/settings/fleet?seat_count=${guests}`)
@@ -113,6 +122,14 @@ export default function RequestQuotePageV5() {
       .then((resData) => {
         if (resData.data && Array.isArray(resData.data)) {
           setFleet(resData.data);
+          if (targetAircraftId && !selectedAircraft) {
+            const matched = resData.data.find(
+              (item: any) => String(item.id) === String(targetAircraftId)
+            );
+            if (matched) {
+              setSelectedAircraft(matched);
+            }
+          }
         } else {
           setFleet([]);
         }
@@ -144,21 +161,40 @@ export default function RequestQuotePageV5() {
       date: editDate,
       returnDate: editReturnDate,
       guests: editGuests.toString(),
-      tripType: tripType
+      tripType: tripType,
+      ...(selectedAircraft ? { aircraftId: selectedAircraft.id.toString() } : {})
     });
 
     setIsEditingSearch(false);
     fetchFleetFromAPI(editGuests);
   };
 
-  // Handle Quote Form Submit
+  // Handle Quote Form Submit with Custom Inline Validation
   const handleQuoteSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!contactForm.name || !contactForm.phone) return;
+
+    const errors: typeof formErrors = {};
+    if (!contactForm.name.trim()) {
+      errors.name = "Please enter your full name.";
+    }
+    if (!contactForm.email.trim()) {
+      errors.email = "Please enter your email address.";
+    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(contactForm.email.trim())) {
+      errors.email = "Please enter a valid email address.";
+    }
+    if (!contactForm.phone.trim()) {
+      errors.phone = "Please enter your phone number.";
+    }
+
+    if (Object.keys(errors).length > 0) {
+      setFormErrors(errors);
+      return;
+    }
+    setFormErrors({});
 
     setIsSubmittingQuote(true);
     try {
-      await fetch(`${API_BASE_URL}/settings/quote-request`, {
+      const response = await fetch(`${API_BASE_URL}/settings/quote-request`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -167,14 +203,21 @@ export default function RequestQuotePageV5() {
           phone: contactForm.phone,
           notes: contactForm.notes,
           aircraft_id: selectedAircraft?.id || null,
-          from: fromLocation,
-          to: toLocation,
+          from: fromLocation || "Custom Route",
+          to: toLocation || "Custom Route",
           date: departureDate,
           returnDate: returnDate,
           guests: guestCount,
           tripType: tripType
         })
       });
+
+      if (response.ok) {
+        const resData = await response.json();
+        if (resData?.data?.id) {
+          setSubmissionRefId(String(resData.data.id));
+        }
+      }
       setQuoteSubmitted(true);
     } catch (err) {
       console.error("Quote submission error:", err);
@@ -513,7 +556,7 @@ export default function RequestQuotePageV5() {
         <div id="quote-form-section" className="max-w-3xl mx-auto bg-white rounded-2xl border border-stone-200/80 p-8 sm:p-12 shadow-sm">
           
           {!quoteSubmitted ? (
-            <form onSubmit={handleQuoteSubmit} className="space-y-6">
+            <form noValidate onSubmit={handleQuoteSubmit} className="space-y-6">
               
               <div>
                 <div className="inline-flex items-center space-x-2 bg-stone-100 px-3.5 py-1 rounded-full border border-stone-200/80 mb-3">
@@ -528,7 +571,7 @@ export default function RequestQuotePageV5() {
                 </h2>
 
                 <p className="text-xs sm:text-sm text-stone-500 font-light">
-                  Please share your details below. Our concierge team will review aircraft availability and respond with a confirmed itinerary and pricing.
+                  Please share your details below. Our charter team will review aircraft availability and coordinate a verified quote with the operator.
                 </p>
               </div>
 
@@ -537,14 +580,14 @@ export default function RequestQuotePageV5() {
                   <div className="flex items-center space-x-3">
                     <img src={selectedAircraft.imageUrl} alt={selectedAircraft.name} className="w-16 h-10 object-cover rounded-lg" />
                     <div>
-                      <span className="text-[9px] uppercase font-bold text-[#FFD200] block">Selected Aircraft</span>
+                      <span className="text-[9px] uppercase font-bold text-[#002F5C] block">Selected Aircraft</span>
                       <span className="text-sm font-semibold text-[#002F5C]">{selectedAircraft.name}</span>
                     </div>
                   </div>
                   <button
                     type="button"
                     onClick={() => setSelectedAircraft(null)}
-                    className="text-[10px] font-bold text-stone-400 hover:text-[#002F5C] uppercase"
+                    className="text-[10px] font-bold text-stone-500 hover:text-[#002F5C] uppercase cursor-pointer"
                   >
                     Change
                   </button>
@@ -553,51 +596,72 @@ export default function RequestQuotePageV5() {
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
-                  <label className="text-[10px] font-bold uppercase tracking-wider text-stone-400 block mb-1.5">
+                  <label className="text-[10px] font-bold uppercase tracking-wider text-stone-500 block mb-1.5">
                     Full Name *
                   </label>
                   <input
                     type="text"
-                    required
                     value={contactForm.name}
-                    onChange={(e) => setContactForm({ ...contactForm, name: e.target.value })}
+                    onChange={(e) => {
+                      setContactForm({ ...contactForm, name: e.target.value });
+                      if (formErrors.name) setFormErrors({ ...formErrors, name: undefined });
+                    }}
                     placeholder="e.g. Eleanor Vance"
-                    className="w-full bg-stone-50 border border-stone-200 rounded-xl px-4 py-3 text-xs font-semibold text-[#002F5C] focus:outline-none focus:border-[#FFD200]"
+                    className={`w-full bg-stone-50 border rounded-xl px-4 py-3 text-xs font-semibold text-[#002F5C] focus:outline-none ${
+                      formErrors.name ? "border-red-400 bg-red-50/20" : "border-stone-200 focus:border-[#FFD200]"
+                    }`}
                   />
+                  {formErrors.name && (
+                    <p className="text-xs text-red-600 mt-1 font-medium">{formErrors.name}</p>
+                  )}
                 </div>
 
                 <div>
-                  <label className="text-[10px] font-bold uppercase tracking-wider text-stone-400 block mb-1.5">
+                  <label className="text-[10px] font-bold uppercase tracking-wider text-stone-500 block mb-1.5">
                     Email Address *
                   </label>
                   <input
                     type="email"
-                    required
                     value={contactForm.email}
-                    onChange={(e) => setContactForm({ ...contactForm, email: e.target.value })}
+                    onChange={(e) => {
+                      setContactForm({ ...contactForm, email: e.target.value });
+                      if (formErrors.email) setFormErrors({ ...formErrors, email: undefined });
+                    }}
                     placeholder="name@company.com"
-                    className="w-full bg-stone-50 border border-stone-200 rounded-xl px-4 py-3 text-xs font-semibold text-[#002F5C] focus:outline-none focus:border-[#FFD200]"
+                    className={`w-full bg-stone-50 border rounded-xl px-4 py-3 text-xs font-semibold text-[#002F5C] focus:outline-none ${
+                      formErrors.email ? "border-red-400 bg-red-50/20" : "border-stone-200 focus:border-[#FFD200]"
+                    }`}
                   />
+                  {formErrors.email && (
+                    <p className="text-xs text-red-600 mt-1 font-medium">{formErrors.email}</p>
+                  )}
                 </div>
               </div>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
-                  <label className="text-[10px] font-bold uppercase tracking-wider text-stone-400 block mb-1.5">
+                  <label className="text-[10px] font-bold uppercase tracking-wider text-stone-500 block mb-1.5">
                     Phone Number *
                   </label>
                   <input
                     type="tel"
-                    required
                     value={contactForm.phone}
-                    onChange={(e) => setContactForm({ ...contactForm, phone: e.target.value })}
-                    placeholder="+1 (555) 000-0000"
-                    className="w-full bg-stone-50 border border-stone-200 rounded-xl px-4 py-3 text-xs font-semibold text-[#002F5C] focus:outline-none focus:border-[#FFD200]"
+                    onChange={(e) => {
+                      setContactForm({ ...contactForm, phone: e.target.value });
+                      if (formErrors.phone) setFormErrors({ ...formErrors, phone: undefined });
+                    }}
+                    placeholder="+91 98765 43210"
+                    className={`w-full bg-stone-50 border rounded-xl px-4 py-3 text-xs font-semibold text-[#002F5C] focus:outline-none ${
+                      formErrors.phone ? "border-red-400 bg-red-50/20" : "border-stone-200 focus:border-[#FFD200]"
+                    }`}
                   />
+                  {formErrors.phone && (
+                    <p className="text-xs text-red-600 mt-1 font-medium">{formErrors.phone}</p>
+                  )}
                 </div>
 
                 <div>
-                  <label className="text-[10px] font-bold uppercase tracking-wider text-stone-400 block mb-1.5">
+                  <label className="text-[10px] font-bold uppercase tracking-wider text-stone-500 block mb-1.5">
                     Trip Type
                   </label>
                   <input
@@ -610,7 +674,7 @@ export default function RequestQuotePageV5() {
               </div>
 
               <div>
-                <label className="text-[10px] font-bold uppercase tracking-wider text-stone-400 block mb-1.5">
+                <label className="text-[10px] font-bold uppercase tracking-wider text-stone-500 block mb-1.5">
                   Special Notes / Preferences (Optional)
                 </label>
                 <textarea
@@ -622,6 +686,11 @@ export default function RequestQuotePageV5() {
                 />
               </div>
 
+              {/* Platform Disclosure Line directly near the submit button */}
+              <p className="text-stone-500 text-xs text-center leading-relaxed">
+                {siteConfig.legal.disclosure}
+              </p>
+
               <button
                 type="submit"
                 disabled={isSubmittingQuote}
@@ -631,33 +700,66 @@ export default function RequestQuotePageV5() {
                 <ArrowRight className="w-4 h-4" />
               </button>
 
-              <div className="flex flex-col items-center justify-center space-y-2 text-[11px] text-stone-500 font-light pt-2 text-center">
-                <div className="flex items-center space-x-2">
-                  <ShieldCheck className="w-4 h-4 text-[#FFD200]" />
-                  <span>Your details are kept strictly confidential. Response expected within 2 hours.</span>
-                </div>
-                <p className="text-stone-400 text-[10px] max-w-md">
-                  JustCharter is a charter booking platform. Flights are operated by independent, licensed operators.
-                </p>
+              <div className="flex items-center justify-center space-x-2 text-xs text-stone-500 pt-1 text-center">
+                <ShieldCheck className="w-4 h-4 text-[#FFD200]" />
+                <span>Your details are kept strictly confidential.</span>
               </div>
 
             </form>
           ) : (
             /* Submission Confirmation Message State */
             <div className="py-8 text-center space-y-4">
-              <div className="w-16 h-16 bg-[#FFD200]/15 text-[#FFD200] rounded-full flex items-center justify-center mx-auto border border-[#FFD200]/30">
-                <CheckCircle2 className="w-8 h-8" />
+              <div className="w-16 h-16 bg-[#FFD200]/20 text-[#002F5C] rounded-full flex items-center justify-center mx-auto border border-[#FFD200]/40 shadow-xs">
+                <CheckCircle2 className="w-8 h-8 text-[#002F5C]" />
               </div>
 
               <h3 className="text-2xl sm:text-3xl font-serif font-normal text-[#002F5C]">
-                Thanks — our concierge team will reach out within 2 hours
+                Trip Request Received
               </h3>
 
+              {submissionRefId && (
+                <p className="text-xs uppercase tracking-wider font-semibold text-stone-500">
+                  Request Reference ID: <span className="text-[#002F5C] font-mono font-bold">#{submissionRefId}</span>
+                </p>
+              )}
+
               <p className="text-sm text-stone-600 font-serif italic max-w-lg mx-auto leading-relaxed">
-                We have received your trip request from {fromLocation} to {toLocation} for {guestCount} passenger{guestCount > 1 ? "s" : ""}. One of our private aviation advisors is now preparing your bespoke flight itinerary and charter pricing.
+                We have received your trip request {fromLocation && toLocation ? `from ${fromLocation} to ${toLocation}` : ""} for {guestCount} passenger{guestCount > 1 ? "s" : ""}.
               </p>
 
-              <div className="pt-6">
+              {/* What happens next 3-line list */}
+              <div className="bg-stone-50 rounded-2xl p-6 border border-stone-200/80 text-left max-w-md mx-auto my-6 shadow-xs">
+                <h4 className="text-xs uppercase font-bold tracking-wider text-stone-500 mb-3.5">
+                  What happens next
+                </h4>
+                <ol className="space-y-3 text-xs sm:text-sm text-[#002F5C]">
+                  <li className="flex items-start space-x-3">
+                    <span className="w-5 h-5 rounded-full bg-[#002F5C] text-white flex items-center justify-center text-[10px] font-bold flex-shrink-0 mt-0.5">
+                      1
+                    </span>
+                    <span>Our charter team reviews your request.</span>
+                  </li>
+                  <li className="flex items-start space-x-3">
+                    <span className="w-5 h-5 rounded-full bg-[#002F5C] text-white flex items-center justify-center text-[10px] font-bold flex-shrink-0 mt-0.5">
+                      2
+                    </span>
+                    <span>We coordinate with the operator.</span>
+                  </li>
+                  <li className="flex items-start space-x-3">
+                    <span className="w-5 h-5 rounded-full bg-[#002F5C] text-white flex items-center justify-center text-[10px] font-bold flex-shrink-0 mt-0.5">
+                      3
+                    </span>
+                    <span>You receive your quote to review and confirm.</span>
+                  </li>
+                </ol>
+                {siteConfig.operations?.expectedResponseTime && (
+                  <p className="mt-4 pt-3 border-t border-stone-200 text-xs text-stone-500 italic">
+                    Response expected {siteConfig.operations.expectedResponseTime}.
+                  </p>
+                )}
+              </div>
+
+              <div className="pt-4">
                 <button
                   type="button"
                   onClick={() => navigate("/")}

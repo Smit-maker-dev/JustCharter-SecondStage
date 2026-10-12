@@ -10,13 +10,21 @@ export const siteConfig = {
     phone: "", 
     // TODO: CONFIRM WITH CLIENT — client to provide real support email under justcharter.in domain
     email: "", 
+    // TODO: CONFIRM WITH CLIENT — client to provide real WhatsApp contact number (e.g. "+919876543210")
+    whatsappNumber: "", 
+  },
+  operations: {
+    // TODO: CONFIRM WITH CLIENT — expected response time (e.g. "within 2 hours" or "within 24 hours"). Empty = hidden.
+    expectedResponseTime: "",
   },
   operatorPortal: {
     // Operator portal endpoints identified from existing codebase and email service config
     // TODO: CONFIRM WITH CLIENT — verify operator signup URL
     signupUrl: "https://operator.justcharter.in/register",
+    register: "https://operator.justcharter.in/register",
     // TODO: CONFIRM WITH CLIENT — verify operator login URL
     loginUrl: "https://operator.justcharter.in",
+    login: "https://operator.justcharter.in",
   },
   stats: {
     airportsAccessible: "5,000+",
