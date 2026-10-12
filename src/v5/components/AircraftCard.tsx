@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { ArrowUpRight, Plane } from "lucide-react";
+import { ArrowUpRight, Plane, Users, MapPin } from "lucide-react";
 import { Link, useNavigate } from "react-router-dom";
 import { getValidSpecs, SpecItem } from "../../utils/specFormatter";
 
@@ -15,6 +15,11 @@ export interface Aircraft {
   imageUrl: string;
   specs: Spec[];
   tag: string;
+  hourlyRate?: number;
+  capacity?: number | null;
+  base_city?: string;
+  year?: number | string;
+  registration?: string;
 }
 
 interface AircraftCardProps {
@@ -26,15 +31,26 @@ export default function AircraftCard({ aircraft }: AircraftCardProps) {
   const [imageError, setImageError] = useState(false);
   const validSpecs: SpecItem[] = getValidSpecs(aircraft.specs);
 
+  const formattedPrice =
+    aircraft.hourlyRate && aircraft.hourlyRate > 0
+      ? `From ₹${Number(aircraft.hourlyRate).toLocaleString("en-IN")}/hr`
+      : "Price on request";
+
   return (
-    <div className="bg-white border border-stone-200/70 rounded-2xl p-6 relative flex flex-col justify-between group shadow-sm hover:shadow-md transition-all duration-500 h-full">
-      {/* Large Beautifully Cropped Image Container with Light Neutral Fallback */}
-      <div className="relative mb-6 rounded-xl overflow-hidden bg-stone-100 border border-stone-200/70 h-60 flex items-center justify-center">
+    <div
+      tabIndex={0}
+      role="region"
+      aria-label={`Aircraft details for ${aircraft.name}`}
+      className="bg-white border border-stone-200/70 rounded-2xl p-6 relative flex flex-col justify-between group shadow-sm hover:shadow-md transition-all duration-300 h-full focus:outline-none focus:ring-2 focus:ring-[#002F5C] focus:ring-offset-2"
+    >
+      {/* Large Beautifully Cropped Image Container with Fixed Aspect Ratio & Light Fallback */}
+      <div className="relative mb-6 rounded-xl overflow-hidden bg-stone-100 border border-stone-200/70 aspect-[16/10] w-full flex items-center justify-center flex-shrink-0">
         {!imageError && aircraft.imageUrl ? (
           <img
             src={aircraft.imageUrl}
             alt={aircraft.name}
             onError={() => setImageError(true)}
+            loading="lazy"
             className="w-full h-full object-cover opacity-95 group-hover:scale-105 transition-transform duration-700"
           />
         ) : (
@@ -50,24 +66,50 @@ export default function AircraftCard({ aircraft }: AircraftCardProps) {
         </span>
       </div>
 
-      {/* Title & Specs */}
+      {/* Title & Metadata */}
       <div className="flex-1 flex flex-col justify-between">
-        {/* Title container with fixed min-height for uniform row alignment */}
-        <div className="min-h-[3.75rem] flex items-start mb-4">
-          <h3
-            title={aircraft.name}
-            className="text-2xl font-serif font-normal text-[#002F5C] group-hover:text-[#FFD200] transition-colors leading-snug line-clamp-2"
-          >
-            {aircraft.name}
-          </h3>
+        <div className="mb-4">
+          {/* Base location line if returned by API */}
+          {aircraft.base_city && (
+            <div className="flex items-center space-x-1 text-xs text-stone-500 mb-1">
+              <MapPin className="w-3 h-3 text-[#FFD200] flex-shrink-0" />
+              <span>Based in {aircraft.base_city}</span>
+            </div>
+          )}
+
+          <div className="min-h-[3rem] flex items-start">
+            <h3
+              title={aircraft.name}
+              className="text-xl sm:text-2xl font-serif font-normal text-[#002F5C] group-hover:text-[#FFD200] transition-colors leading-snug line-clamp-2"
+            >
+              {aircraft.name}
+            </h3>
+          </div>
+
+          {/* Customer Price Hint */}
+          <div className="mt-1 flex items-baseline justify-between text-xs sm:text-sm">
+            <span
+              className={
+                aircraft.hourlyRate && aircraft.hourlyRate > 0
+                  ? "font-semibold text-[#002F5C]"
+                  : "text-stone-500 italic font-medium"
+              }
+            >
+              {formattedPrice}
+            </span>
+          </div>
         </div>
 
+        {/* Specs Box */}
         {validSpecs.length > 0 && (
           <div className="grid grid-cols-2 gap-3 mb-6 bg-stone-50 p-4 rounded-xl border border-stone-200/60 text-xs">
             {validSpecs.map((spec, idx) => (
               <div key={idx} className="flex flex-col">
-                <span className="text-stone-400 font-medium text-[10px] uppercase tracking-wider">
-                  {spec.label}
+                <span className="text-stone-500 font-medium text-[10px] uppercase tracking-wider flex items-center space-x-1">
+                  {spec.label.toLowerCase().includes("passenger") && (
+                    <Users className="w-3 h-3 text-[#002F5C] mr-0.5 inline flex-shrink-0" />
+                  )}
+                  <span>{spec.label}</span>
                 </span>
                 <span className="text-[#002F5C] font-bold mt-0.5">
                   {spec.value}
@@ -89,7 +131,7 @@ export default function AircraftCard({ aircraft }: AircraftCardProps) {
         </Link>
 
         <button
-          onClick={() => navigate(`/aircraft/${aircraft.id}`)}
+          onClick={() => navigate(`/request-quote?aircraftId=${aircraft.id}`)}
           className="bg-stone-900 hover:bg-[#FFD200] hover:text-[#002F5C] text-white text-xs font-semibold uppercase tracking-wider px-5 py-2.5 rounded-xl transition-all cursor-pointer"
         >
           Request Quote
@@ -98,4 +140,5 @@ export default function AircraftCard({ aircraft }: AircraftCardProps) {
     </div>
   );
 }
+
 

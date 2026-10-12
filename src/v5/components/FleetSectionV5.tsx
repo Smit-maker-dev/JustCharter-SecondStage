@@ -40,6 +40,9 @@ export default function FleetSectionV5() {
             service_types: Array.isArray(item.service_types) ? item.service_types : [item.service_types || "Charter"],
             imageUrl: item.imageUrl || "/images/gulfstrem.jpg",
             tag: item.tag || item.category,
+            hourlyRate: item.hourlyRate,
+            capacity: item.capacity,
+            base_city: item.base_city || item.location,
             specs: [
               { label: "Max Range", value: item.specs?.range },
               { label: "Max Speed", value: item.specs?.speed },
