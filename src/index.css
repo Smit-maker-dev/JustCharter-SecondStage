@@ -1,4 +1,6 @@
 @import "tailwindcss";
+@import "@fontsource/bricolage-grotesque/600.css";
+@import "@fontsource/bricolage-grotesque/700.css";
 
 @theme {
   --color-brand-500: #FFD200;
@@ -21,6 +23,8 @@
   --brand-50: #FFFBEA;
   --brand-ink: #1A1A1A;
   --brand-text: #8A6D00;
+  --primary: #002F5C;
+  --accent: #FFD200;
 }
 
 /* Brand Utility Classes */
@@ -43,6 +47,36 @@
 @layer base {
   body {
     color: #002F5C;
+  }
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+@keyframes dash {
+  to {
+    stroke-dashoffset: -100;
+  }
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+.animate-dash {
+  animation: dash 20s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-float,
+  .animate-dash {
+    animation: none !important;
   }
 }
 

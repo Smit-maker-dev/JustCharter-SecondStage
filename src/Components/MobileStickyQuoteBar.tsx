@@ -30,8 +30,11 @@ export default function MobileStickyQuoteBar() {
     };
   }, [location.pathname]);
 
-  // Hidden on /request-quote itself or while the hero search card is in the viewport
-  if (location.pathname === "/request-quote" || isHeroSearchVisible) {
+  const isOperatorPage =
+    location.pathname === "/for-operators" || location.pathname === "/for_operators";
+
+  // Hidden on /request-quote itself, operator pages, or while the hero search card is in the viewport
+  if (location.pathname === "/request-quote" || isOperatorPage || isHeroSearchVisible) {
     return null;
   }
 

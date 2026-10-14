@@ -16,11 +16,7 @@ export default function Navbar() {
 
   useEffect(() => {
     const handleScroll = () => {
-      if (window.scrollY > 10) {
-        setIsScrolled(true);
-      } else {
-        setIsScrolled(false);
-      }
+      setIsScrolled(window.scrollY > 10);
     };
 
     window.addEventListener("scroll", handleScroll);
@@ -80,7 +76,7 @@ export default function Navbar() {
           setLastName(last_name);
         }
       } catch (error) {
-        if (process.env.NODE_ENV === "development") {
+        if (import.meta.env?.DEV) {
           console.error("Failed to fetch user data:", error);
         }
       }
@@ -91,6 +87,8 @@ export default function Navbar() {
 
   const location = useLocation();
   const isHome = location.pathname === "/";
+  const isOperatorPage =
+    location.pathname === "/for-operators" || location.pathname === "/for_operators";
   const showScrolledStyle = !isHome || isScrolled || isMobileMenuOpen;
 
   const initials = (firstName?.charAt(0) || "") + (lastName?.charAt(0) || "");
@@ -183,12 +181,23 @@ export default function Navbar() {
           </ul>
 
           <div className="hidden lg:flex items-center space-x-3">
-            <button
-              onClick={() => navigate("/request-quote")}
-              className="cursor-pointer text-xs sm:text-sm px-5 py-2 rounded-full font-semibold transition bg-[#FFD200] text-[#002F5C] hover:bg-[#e6be00] shadow-sm whitespace-nowrap"
-            >
-              Request Quote
-            </button>
+            {isOperatorPage ? (
+              <a
+                href={siteConfig.operatorPortal.register}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="cursor-pointer text-xs sm:text-sm px-5 py-2 rounded-full font-semibold transition bg-[#FFD200] text-[#002F5C] hover:bg-[#e6be00] shadow-sm whitespace-nowrap inline-flex items-center space-x-1.5"
+              >
+                <span>Become a Partner</span>
+              </a>
+            ) : (
+              <button
+                onClick={() => navigate("/request-quote")}
+                className="cursor-pointer text-xs sm:text-sm px-5 py-2 rounded-full font-semibold transition bg-[#FFD200] text-[#002F5C] hover:bg-[#e6be00] shadow-sm whitespace-nowrap"
+              >
+                Request Quote
+              </button>
+            )}
 
             {firstName && lastName ? (
               <div
@@ -315,15 +324,27 @@ export default function Navbar() {
             </ul>
 
             <div className="w-full pt-2">
-              <button
-                onClick={() => {
-                  setIsMobileMenuOpen(false);
-                  navigate("/request-quote");
-                }}
-                className="w-full py-3 rounded-full text-sm font-semibold bg-[#FFD200] text-[#002F5C] hover:bg-[#e6be00] shadow-sm transition"
-              >
-                Request Quote
-              </button>
+              {isOperatorPage ? (
+                <a
+                  href={siteConfig.operatorPortal.register}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  className="w-full block text-center py-3 rounded-full text-sm font-semibold bg-[#FFD200] text-[#002F5C] hover:bg-[#e6be00] shadow-sm transition"
+                >
+                  Become a Partner
+                </a>
+              ) : (
+                <button
+                  onClick={() => {
+                    setIsMobileMenuOpen(false);
+                    navigate("/request-quote");
+                  }}
+                  className="w-full py-3 rounded-full text-sm font-semibold bg-[#FFD200] text-[#002F5C] hover:bg-[#e6be00] shadow-sm transition"
+                >
+                  Request Quote
+                </button>
+              )}
             </div>
 
             <div className="profile-section w-full pt-2">
