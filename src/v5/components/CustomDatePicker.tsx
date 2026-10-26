@@ -121,9 +121,17 @@ export default function CustomDatePicker({
 
   return (
     <div ref={containerRef} className={`relative ${className}`}>
-      {/* Input Field Container - IDENTICAL visual size, padding and position */}
+      {/* Input Field Container */}
       <div
+        role="button"
+        tabIndex={0}
         onClick={() => setIsOpen(!isOpen)}
+        onKeyDown={(e) => {
+          if (e.key === "Enter" || e.key === " ") {
+            e.preventDefault();
+            setIsOpen(!isOpen);
+          }
+        }}
         className="bg-stone-50/90 hover:bg-stone-100/80 border border-stone-200/70 rounded-xl p-3 sm:p-3.5 transition-all cursor-pointer select-none h-[68px] flex flex-col justify-center"
       >
         <label className="text-[10px] font-bold uppercase tracking-wider text-stone-400 flex items-center space-x-1.5 mb-1 cursor-pointer">

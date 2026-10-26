@@ -89,6 +89,8 @@ export default function Navbar() {
   const isHome = location.pathname === "/";
   const isOperatorPage =
     location.pathname === "/for-operators" || location.pathname === "/for_operators";
+  const isAirAmbulanceFlow = location.pathname.startsWith("/air-ambulance");
+  const isAirAmbulanceRequest = location.pathname === "/air-ambulance/request";
   const showScrolledStyle = !isHome || isScrolled || isMobileMenuOpen;
 
   const initials = (firstName?.charAt(0) || "") + (lastName?.charAt(0) || "");
@@ -99,6 +101,7 @@ export default function Navbar() {
   const navItems = [
     { label: "Home", path: "/" },
     { label: "Fleet", path: "/fleet" },
+    { label: "Air Ambulance", path: "/air-ambulance" },
     { label: "How It Works", path: "/#how-it-works" },
     { label: "For Operators", path: "/for-operators" },
     { label: "About", path: "/about" },
@@ -181,7 +184,14 @@ export default function Navbar() {
           </ul>
 
           <div className="hidden lg:flex items-center space-x-3">
-            {isOperatorPage ? (
+            {isAirAmbulanceRequest ? null : isAirAmbulanceFlow ? (
+              <button
+                onClick={() => navigate("/air-ambulance/request")}
+                className="cursor-pointer text-xs sm:text-sm px-5 py-2 rounded-full font-semibold transition bg-[#FFD200] text-[#002F5C] hover:bg-[#e6be00] shadow-sm whitespace-nowrap"
+              >
+                Request an air ambulance
+              </button>
+            ) : isOperatorPage ? (
               <a
                 href={siteConfig.operatorPortal.register}
                 target="_blank"
@@ -324,7 +334,17 @@ export default function Navbar() {
             </ul>
 
             <div className="w-full pt-2">
-              {isOperatorPage ? (
+              {isAirAmbulanceRequest ? null : isAirAmbulanceFlow ? (
+                <button
+                  onClick={() => {
+                    setIsMobileMenuOpen(false);
+                    navigate("/air-ambulance/request");
+                  }}
+                  className="w-full py-3 rounded-full text-sm font-semibold bg-[#FFD200] text-[#002F5C] hover:bg-[#e6be00] shadow-sm transition cursor-pointer"
+                >
+                  Request an air ambulance
+                </button>
+              ) : isOperatorPage ? (
                 <a
                   href={siteConfig.operatorPortal.register}
                   target="_blank"
@@ -340,7 +360,7 @@ export default function Navbar() {
                     setIsMobileMenuOpen(false);
                     navigate("/request-quote");
                   }}
-                  className="w-full py-3 rounded-full text-sm font-semibold bg-[#FFD200] text-[#002F5C] hover:bg-[#e6be00] shadow-sm transition"
+                  className="w-full py-3 rounded-full text-sm font-semibold bg-[#FFD200] text-[#002F5C] hover:bg-[#e6be00] shadow-sm transition cursor-pointer"
                 >
                   Request Quote
                 </button>

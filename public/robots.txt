@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+Disallow: /air-ambulance/status/
+Disallow: /air-ambulance/status/*
+Disallow: /account
+Disallow: /bookings
+
+Sitemap: https://justcharter.in/sitemap.xml

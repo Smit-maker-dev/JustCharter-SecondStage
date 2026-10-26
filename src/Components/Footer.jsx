@@ -57,6 +57,11 @@ export default function Footer() {
                 </Link>
               </li>
               <li>
+                <Link to="/air-ambulance" className="hover:text-[#002F5C] transition">
+                  Air Ambulance
+                </Link>
+              </li>
+              <li>
                 <a href="/#how-it-works" className="hover:text-[#002F5C] transition">
                   How It Works
                 </a>

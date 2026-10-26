@@ -1,7 +1,11 @@
 import React from "react";
 import { Phone, Mail, Clock, ArrowRight } from "lucide-react";
+import { siteConfig, isValidContactValue } from "../../config/siteConfig";
 
 export default function ConciergeBarV3() {
+  const hasPhone = isValidContactValue(siteConfig.contact.phone);
+  const hasEmail = isValidContactValue(siteConfig.contact.email);
+
   return (
     <section className="bg-stone-50 border-y border-stone-200 text-[#002F5C] font-sans py-16 px-6 lg:px-12 relative overflow-hidden">
       
@@ -14,7 +18,7 @@ export default function ConciergeBarV3() {
           <div className="inline-flex items-center space-x-2 bg-stone-200/80 px-3.5 py-1 rounded-full border border-stone-300 mb-3">
             <Clock className="w-3.5 h-3.5 text-[#FFD200]" />
             <span className="text-[10px] font-bold uppercase tracking-widest text-slate-700">
-              24/7 Global Fleet Ops & Concierge
+              Global Fleet Ops & Concierge
             </span>
           </div>
 
@@ -29,21 +33,25 @@ export default function ConciergeBarV3() {
 
         {/* Contact Pills */}
         <div className="flex flex-wrap items-center gap-4">
-          <a
-            href="tel:+1800555538"
-            className="bg-white hover:bg-stone-100 text-[#002F5C] border border-stone-300 px-5 py-3 rounded-full flex items-center space-x-3 text-xs font-bold transition-all shadow-sm"
-          >
-            <Phone className="w-4 h-4 text-[#FFD200]" />
-            <span>+1 (800) 555-JET</span>
-          </a>
+          {hasPhone && (
+            <a
+              href={`tel:${siteConfig.contact.phone.replace(/\D/g, "")}`}
+              className="bg-white hover:bg-stone-100 text-[#002F5C] border border-stone-300 px-5 py-3 rounded-full flex items-center space-x-3 text-xs font-bold transition-all shadow-sm"
+            >
+              <Phone className="w-4 h-4 text-[#FFD200]" />
+              <span>{siteConfig.contact.phone}</span>
+            </a>
+          )}
 
-          <a
-            href="mailto:concierge@justcharter.com"
-            className="bg-white hover:bg-stone-100 text-[#002F5C] border border-stone-300 px-5 py-3 rounded-full flex items-center space-x-3 text-xs font-bold transition-all shadow-sm"
-          >
-            <Mail className="w-4 h-4 text-[#FFD200]" />
-            <span>concierge@justcharter.com</span>
-          </a>
+          {hasEmail && (
+            <a
+              href={`mailto:${siteConfig.contact.email}`}
+              className="bg-white hover:bg-stone-100 text-[#002F5C] border border-stone-300 px-5 py-3 rounded-full flex items-center space-x-3 text-xs font-bold transition-all shadow-sm"
+            >
+              <Mail className="w-4 h-4 text-[#FFD200]" />
+              <span>{siteConfig.contact.email}</span>
+            </a>
+          )}
 
           <a
             href="/bookings"
